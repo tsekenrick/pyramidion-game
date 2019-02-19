@@ -2,33 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Phase {Mulligan, Play, Resolution};
 public class Board : MonoBehaviour
 {
-
+    public Phase curPhase;
+    
+    // "entity" fields
     public static Board me;
     public GameObject player;
     public GameObject[] enemies;
 
-    GameObject enemy;
-    enum Phase {Mulligan, Play, Resolution};
-    Phase curPhase;
-
+    // card manipulating fields
     public GameObject cardPrefab;
     private List<GameObject> pool = new List<GameObject>();
     public Dictionary<string, Vector3> cardAnchors = new Dictionary<string, Vector3>();
 
     public List<Card> deck = new List<Card>();
     public List<Card> discard = new List<Card>();
-    public List<Card> hand = new List<Card>();
+    public List<GameObject> hand = new List<GameObject>();
     public int turn;
-
 
     void Awake(){
         me=this;
     }
 
     void Start(){
-        Phase curPhase = Phase.Mulligan;
+        curPhase = Phase.Mulligan;
 
         // get anchor positions
         cardAnchors.Add("Deck Anchor", GameObject.Find("_DeckAnchor").transform.position);
@@ -43,7 +42,15 @@ public class Board : MonoBehaviour
             curCard.SetActive(false);
         }
 
-        // TODO: draw cards lol
+        // find inactive gameobjects in pool, activate then and set state to inhand
+        for(int i = 0; i < 20 && hand.Count < 5; i++){
+            GameObject curCard = pool[i];
+            if(!curCard.activeSelf){
+                curCard.SetActive(true);
+                curCard.GetComponent<Card>().thisState = CardState.InHand;
+                hand.Add(curCard);
+            }
+        }
     }
     void Update(){
         switch(curPhase){

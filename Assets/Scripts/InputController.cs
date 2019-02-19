@@ -15,4 +15,8 @@ public class InputController : MonoBehaviour
     {
         
     }
+
+    void OnMouseOver(){
+        
+    }
 }
