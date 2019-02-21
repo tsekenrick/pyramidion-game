@@ -1,0 +1,16 @@
+{
+    "deckList": [
+        {
+            "cardName": "Strike",
+            "cost": 1,
+            "description": "6 Damage",
+            "artPath": "./artThing.jpg"
+        },
+        {
+            "cardName": "Defend",
+            "cost": 1,
+            "description": "5 Block",
+            "artPath": "./anotherThing.jpg"
+        }
+    ]
+}

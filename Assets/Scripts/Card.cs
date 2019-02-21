@@ -4,19 +4,27 @@ using UnityEngine;
 using DG.Tweening;
 
 public enum CardState {InDeck, InHand, InDiscard}; 
+
+[System.Serializable]
 public class Card : MonoBehaviour
 {
-    
-    public CardState thisState;
+    public string cardName;
+    public int cost;
+    public string desc;
+
+    public CardState curState;
     Transform tr;
     private Board board = Board.me;
     SpriteRenderer[] cardParts;
     public Sprite[] cardSprites;
+    Sequence tweenSequence;
+
 
     void Awake(){
+        tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         tr = this.gameObject.transform;
-        thisState = CardState.InDeck;
+        curState = CardState.InDeck;
     }
 
     void Start(){
@@ -25,7 +33,7 @@ public class Card : MonoBehaviour
 
     void Update(){
         // draw card iff in hand
-        if(thisState == CardState.InHand){
+        if(curState == CardState.InHand){
             // turn on each sprite renderer in children then draw the assigned sprite
             for(int i = 0; i < cardParts.Length; i++){
                 cardParts[i].enabled = true;
@@ -38,9 +46,8 @@ public class Card : MonoBehaviour
             for(int i = 0; i < 5; i++){
                 Transform anchor = GameObject.Find($"Hand{i}").transform;
                 if(anchor.childCount == 0){
-                    Debug.Log($"anchor position is {anchor.position}");
                     tr.parent = anchor;
-                    tr.transform.DOMove(anchor.position, 1);
+                    tr.DOMove(anchor.position, 1);
                 }
             }
         } else {
@@ -55,6 +62,30 @@ public class Card : MonoBehaviour
 
     void defend(int amount, Target target){
 
+    }
+
+    void OnMouseEnter(){
+        tweenSequence.Append(tr.DOScale(1.25f * Vector3.one, .5f).SetId("zoomIn"));
+        tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
+    }
+
+    void OnMouseExit(){
+        DOTween.Pause("zoomIn");
+        tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
+    }
+
+    void OnMouseDown(){
+        switch(board.curPhase){
+            case Phase.Mulligan:
+                curState = CardState.InDiscard;
+                tr.parent = board.cardAnchors["Discard Anchor"];
+                break;
+            case Phase.Play:
+                break;
+            default:
+                Debug.Log("error");
+                break;
+        }
     }
 
     
