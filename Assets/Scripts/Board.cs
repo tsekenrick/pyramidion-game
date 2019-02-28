@@ -75,7 +75,7 @@ public class Board : MonoBehaviour
 
         // TODO: populate deck by parsing the CardData list - as we instantiate card objects set their respective name, desc and cost,
         // then enqueue the object into the ACTUAL deck, then call a shuffle function at the end of the loop
-        for(int i = 0; i < deckList.Count; i++){
+        for(int i = 0; i < 20; i++){ // change to deckList.Count later
             GameObject curCard = Instantiate(cardPrefab, cardAnchors["Deck Anchor"].position, Quaternion.identity);
             pool.Add(curCard);
             curCard.SetActive(false);

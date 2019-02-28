@@ -8,9 +8,6 @@ public enum CardState {InDeck, InHand, InDiscard};
 [System.Serializable]
 public class Card : MonoBehaviour
 {
-    public string cardName;
-    public int cost;
-    public string desc;
 
     public CardState curState;
     Transform tr;
