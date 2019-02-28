@@ -1,0 +1,40 @@
+{
+    "deckList": [
+       {
+            "cardName": "Parry",
+            "cost": 3,
+            "desc": "",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Outmanuver",
+            "cost": 20,
+            "desc": "",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Revenge",
+            "cost": 3,
+            "desc": "Deal 15 damage each time you take damage this turn",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Counter",
+            "cost": 1,
+            "desc": "Do one thing if enemy attacks while this card is being played, do another thing if its defending",
+            "artPath": "../Sprites/Card_art/ph_cardart_recklessswing_1.png"
+        },
+        {
+            "cardName": "Scorpion's Veil",
+            "cost": 2,
+            "desc": "",
+            "artPath": "../Sprites/Card_art/ph_cardart_recklessswing_1.png"
+        },
+        {
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 24 block, Decrease this card's block by 4 this combat",
+            "artPath": "../Sprites/Card_art/ph_cardart_sandcloak_1.png"
+        }
+    ]
+}
