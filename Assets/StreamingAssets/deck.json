@@ -76,7 +76,7 @@
             "cardName": "Hidden Blades",
             "cost": 1,
             "desc": "Deal 3 damage, deal 3 additional damage for every block card in your hand",
-            "artPath": "../Sprites/Card_art/ph_cardart_recklessswing_1.png"
+            "artPath": "../Sprites/Card_art/ph_cardart_hiddenblades_1.png"
         },
         {
             "cardName": "Bide",
