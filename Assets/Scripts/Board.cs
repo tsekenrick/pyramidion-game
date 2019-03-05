@@ -6,7 +6,7 @@ using System.IO;
 public enum Phase {Mulligan, Play, Resolution};
 public class Board : MonoBehaviour
 {
-    public string deckFileName = "deck.json";
+    private string deckFileName = "deck.json";
 
     public Phase curPhase;
     
@@ -25,6 +25,11 @@ public class Board : MonoBehaviour
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
     public int turn;
+    public int deckCount;
+
+    private IEnumerator Delay(float delayTime) {
+        yield return new WaitForSeconds(delayTime);
+    }
 
     [System.Serializable]
     public class DeckList{
@@ -42,6 +47,47 @@ public class Board : MonoBehaviour
         public string artPath;
     }
 
+    public void ToDiscard(Card card) {
+        if(hand.Contains(card.gameObject)) {
+            card.isSettled = false;
+            card.curState = CardState.InDiscard;
+            discard.Add(card.gameObject);
+            hand.Remove(card.gameObject);
+            card.transform.parent = cardAnchors["Discard Anchor"];
+        } else {
+            Debug.LogError("attempted to discard card that was not in hand");
+        }
+    }
+    
+    public void DrawCard() {
+        if(deck.Count == 0) Reshuffle();
+
+        GameObject curCard = deck.Dequeue();
+        curCard.GetComponent<Card>().curState = CardState.InHand;
+        hand.Add(curCard);
+        // find empty hand anchor
+        for(int i = 0; i < 5; i++) {
+            Transform anchor = GameObject.Find($"Hand{i}").transform;
+                if(anchor.childCount == 0){
+                    curCard.transform.parent = anchor;
+                    curCard.GetComponent<Card>().isSettled = false;
+                }
+        }
+    }
+
+    public void Reshuffle() {
+        discard = FisherYatesShuffle(discard);
+        foreach(GameObject card in discard) {
+            deck.Enqueue(card);
+            Card curCard = card.GetComponent<Card>();
+            curCard.isSettled = false;
+            curCard.curState = CardState.InDeck;
+            curCard.transform.parent = cardAnchors["Deck Anchor"];
+            StartCoroutine(Delay(.15f));
+        }
+        discard.Clear();
+    }
+
     private void GetAnchors() {
         cardAnchors.Add("Deck Anchor", GameObject.Find("_DeckAnchor").transform);
         for(int i = 0; i < 5; i++){
@@ -50,7 +96,7 @@ public class Board : MonoBehaviour
         cardAnchors.Add("Discard Anchor", GameObject.Find("_DiscardAnchor").transform);
     }
 
-    private DeckList loadDeckData(){
+    private DeckList LoadDeckData(){
         string path = Path.Combine(Application.streamingAssetsPath, deckFileName);
         
         if(File.Exists(path)){
@@ -75,7 +121,6 @@ public class Board : MonoBehaviour
             list[i] = list[randIdx];
             list[randIdx] = temp;
         }
-
         return list;
     }
 
@@ -85,18 +130,18 @@ public class Board : MonoBehaviour
 
     void Start(){
 
-        List<CardData> deckList = loadDeckData().deckList;
+        List<CardData> deckList = LoadDeckData().deckList;
         curPhase = Phase.Mulligan;
         GetAnchors(); // get anchor positions
         
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
-            Debug.Log(path);
             LoadCardArt(path, card.cardName);
 
             // create card gameobject and populate its properties
             GameObject curCard = Instantiate(cardPrefab, cardAnchors["Deck Anchor"].position, Quaternion.identity);
+            curCard.transform.parent = cardAnchors["Deck Anchor"];
             Card cardScript = curCard.GetComponent<Card>();
             cardScript.cardName = card.cardName;
             cardScript.cost = card.cost;
@@ -113,15 +158,16 @@ public class Board : MonoBehaviour
 
         // dequeue from deck to draw
         // TODO: add shuffling logic for if deck is empty
-        for(int i = 0; hand.Count < 5; i++){
-            GameObject curCard = deck.Dequeue();
-            curCard.GetComponent<Card>().curState = CardState.InHand;
-            hand.Add(curCard);
+        while(hand.Count < 5){
+            DrawCard();
         }
     }
+
     void Update(){
+        deckCount = deck.Count; // debug
         switch(curPhase){
             case Phase.Mulligan:
+                int mulTurn;
                 break;
             case Phase.Play:
                 break;
