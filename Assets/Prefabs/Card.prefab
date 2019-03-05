@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6026960791917942513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 6331844338736468083}
@@ -214,11 +214,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e582168c17f6e64e9433d8be8cfd631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisState: 0
+  curState: 0
   cardSprites:
   - {fileID: 21300000, guid: 36417119f95a51e4b8b74266187fa0b1, type: 3}
   - {fileID: 0}
   - {fileID: 21300000, guid: ce7f62d093cbee8428c867f12b346a08, type: 3}
+  cardName: 
+  cost: 0
+  desc: 
+  cardArt: {fileID: 0}
 --- !u!61 &4469470340819908445
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8217064750278426749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.05}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 6331844338736468083}

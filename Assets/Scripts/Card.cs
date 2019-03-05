@@ -10,12 +10,19 @@ public class Card : MonoBehaviour
 {
 
     public CardState curState;
-    Transform tr;
     private Board board = Board.me;
-    SpriteRenderer[] cardParts;
-    public Sprite[] cardSprites;
-    Sequence tweenSequence;
 
+    private SpriteRenderer[] cardParts;
+    [SerializeField]
+    private Sprite[] cardSprites;
+
+    private Sequence tweenSequence;
+    private Transform tr;
+
+    public string cardName;
+    public int cost;
+    public string desc;
+    public Sprite cardArt;
 
     void Awake(){
         tweenSequence = DOTween.Sequence();
@@ -29,6 +36,7 @@ public class Card : MonoBehaviour
     }
 
     void Update(){
+        cardParts[1].sprite = cardArt;
         // draw card iff in hand
         if(curState == CardState.InHand){
             // turn on each sprite renderer in children then draw the assigned sprite
@@ -47,6 +55,8 @@ public class Card : MonoBehaviour
                     tr.DOMove(anchor.position, 1);
                 }
             }
+
+        // may require changing depending on implementation
         } else {
             foreach(SpriteRenderer sr in cardParts){
                 sr.enabled = false;
@@ -62,7 +72,7 @@ public class Card : MonoBehaviour
     }
 
     void OnMouseEnter(){
-        tweenSequence.Append(tr.DOScale(1.25f * Vector3.one, .5f).SetId("zoomIn"));
+        tweenSequence.Append(tr.DOScale(1.45f * Vector3.one, .4f).SetId("zoomIn"));
         tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
     }
 
