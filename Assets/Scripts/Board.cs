@@ -24,12 +24,12 @@ public class Board : MonoBehaviour
     public Queue<GameObject> deck = new Queue<GameObject>();
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
-    public int turn;
     public int deckCount;
 
-    private IEnumerator Delay(float delayTime) {
-        yield return new WaitForSeconds(delayTime);
-    }
+    // MULLIGAN PHASE VARIABLES //
+    public int turn;
+    public int mullsThisTurn;
+    public List<GameObject> toMul = new List<GameObject>();
 
     [System.Serializable]
     public class DeckList{
@@ -47,13 +47,14 @@ public class Board : MonoBehaviour
         public string artPath;
     }
 
-    public void ToDiscard(Card card) {
+    public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
             card.isSettled = false;
             card.curState = CardState.InDiscard;
             discard.Add(card.gameObject);
             hand.Remove(card.gameObject);
             card.transform.parent = cardAnchors["Discard Anchor"];
+            mullsThisTurn++;
         } else {
             Debug.LogError("attempted to discard card that was not in hand");
         }
@@ -83,7 +84,6 @@ public class Board : MonoBehaviour
             curCard.isSettled = false;
             curCard.curState = CardState.InDeck;
             curCard.transform.parent = cardAnchors["Deck Anchor"];
-            StartCoroutine(Delay(.15f));
         }
         discard.Clear();
     }
@@ -131,8 +131,9 @@ public class Board : MonoBehaviour
     void Start(){
 
         List<CardData> deckList = LoadDeckData().deckList;
-        curPhase = Phase.Mulligan;
         GetAnchors(); // get anchor positions
+        curPhase = Phase.Mulligan;
+        turn = 0;
         
         foreach(CardData card in deckList){
             // load card art into dictionary
@@ -156,8 +157,6 @@ public class Board : MonoBehaviour
             deck.Enqueue(card);
         }
 
-        // dequeue from deck to draw
-        // TODO: add shuffling logic for if deck is empty
         while(hand.Count < 5){
             DrawCard();
         }
@@ -166,8 +165,14 @@ public class Board : MonoBehaviour
     void Update(){
         deckCount = deck.Count; // debug
         switch(curPhase){
+            // TODO: Change Card.cs to add the card to toMul on click, and then execute a Mulligan routine and lock cards in hand, then begin next turn
             case Phase.Mulligan:
-                int mulTurn;
+                int mulLimit = 4 - turn;
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    mullsThisTurn = 0;
+                    turn++;
+                }
+
                 break;
             case Phase.Play:
                 break;

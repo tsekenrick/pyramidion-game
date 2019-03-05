@@ -41,6 +41,7 @@ public class Card : MonoBehaviour
 
     }
 
+    // TODO: try having second param, and iterating delay for each subsequent call to get staggering effect
     private IEnumerator ReshuffleAnim(Transform tr) {
         // cardParts[0].sprite = cardSprites[0];
         // cardParts[2].sprite = cardSprites[2];
@@ -77,7 +78,6 @@ public class Card : MonoBehaviour
                 }
                 break;
 
-
             case CardState.InDiscard:
                 if(!isSettled) {
                     StartCoroutine(MulliganAnim(tr));
@@ -94,11 +94,11 @@ public class Card : MonoBehaviour
         }
 
     }
-    void attack(int amount, Target target){
+    void Attack(int amount, Target target){
 
     }
 
-    void defend(int amount, Target target){
+    void Defend(int amount, Target target){
 
     }
 
@@ -122,7 +122,7 @@ public class Card : MonoBehaviour
         switch(board.curPhase){
             case Phase.Mulligan:
                 if(curState == CardState.InHand) {
-                    board.ToDiscard(this);
+                    board.Mulligan(this);
                     board.DrawCard();  
                 }        
                 break;
