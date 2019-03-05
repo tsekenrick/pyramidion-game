@@ -3,14 +3,123 @@
         {
             "cardName": "Strike",
             "cost": 1,
-            "description": "6 Damage",
-            "artPath": "./artThing.jpg"
+            "desc": "Deal 6 Damage",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Strike",
+            "cost": 1,
+            "desc": "Deal 6 Damage",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Strike",
+            "cost": 1,
+            "desc": "Deal 6 Damage",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Strike",
+            "cost": 1,
+            "desc": "Deal 6 Damage",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
+        },
+        {
+            "cardName": "Strike",
+            "cost": 1,
+            "desc": "Deal 6 Damage",
+            "artPath": "../Sprites/Card_art/ph_cardart_strike_1.png"
         },
         {
             "cardName": "Defend",
             "cost": 1,
-            "description": "5 Block",
-            "artPath": "./anotherThing.jpg"
+            "desc": "Gain 5 Block",
+            "artPath": "../Sprites/Card_art/ph_cardart_defend_1.png"
+        },
+        {
+            "cardName": "Defend",
+            "cost": 1,
+            "desc": "Gain 5 Block",
+            "artPath": "../Sprites/Card_art/ph_cardart_defend_1.png"
+        },
+        {
+            "cardName": "Defend",
+            "cost": 1,
+            "desc": "Gain 5 Block",
+            "artPath": "../Sprites/Card_art/ph_cardart_defend_1.png"
+        },
+        {
+            "cardName": "Defend",
+            "cost": 1,
+            "desc": "Gain 5 Block",
+            "artPath": "../Sprites/Card_art/ph_cardart_defend_1.png"
+        },
+        {
+            "cardName": "Defend",
+            "cost": 1,
+            "desc": "Gain 5 Block",
+            "artPath": "../Sprites/Card_art/ph_cardart_defend_1.png"
+        },
+        {
+            "cardName": "Calculated Strike",
+            "cost": 1,
+            "desc": "Deal 3 Damage, gain 5 damage if mulligan'd",
+            "artPath": "../Sprites/Card_art/ph_cardart_calcstrike_1.png"
+        },
+        {
+            "cardName": "Reckless Swing",
+            "cost": 1,
+            "desc": "Deal 10 Damage, deal 3 damage to self",
+            "artPath": "../Sprites/Card_art/ph_cardart_recklessswing_1.png"
+        },
+        {
+            "cardName": "Hidden Blades",
+            "cost": 1,
+            "desc": "Deal 3 damage, deal 3 additional damage for every block card in your hand",
+            "artPath": "../Sprites/Card_art/ph_cardart_hiddenblades_1.png"
+        },
+        {
+            "cardName": "Bide",
+            "cost": 2,
+            "desc": "Deal X Damage, X being the Time Unit this card is played on",
+            "artPath": "../Sprites/Card_art/ph_cardart_bide_1.png"
+        },
+        {
+            "cardName": "Focus Attack",
+            "cost": 4,
+            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
+            "artPath": "../Sprites/Card_art/ph_cardart_focusattack_1.png"
+        },
+        {
+            "cardName": "Armageddon",
+            "cost": 10,
+            "desc": "Deal 30 damage, decrease this card's cost by 2 every time it's mulligan'd",
+            "artPath": "../Sprites/Card_art/ph_cardart_armageddon_1.png"
+        },
+        {
+            "cardName": "Preparation",
+            "cost": 1,
+            "desc": "Gain 8 Block, gain 3 block if mulligan'd",
+            "artPath": "../Sprites/Card_art/ph_cardart_preparation_1.png"
+        },
+        {
+            "cardName": "Entrench",
+            "cost": 2,
+            "desc": "Gain 8 block, gain an additional 8 block every time a copy of this card is played consecutively",
+            "artPath": "../Sprites/Card_art/ph_cardart_entrench_1.png"
+        },
+   		{
+            "cardName": "Entrench",
+            "cost": 2,
+            "desc": "Gain 8 block, gain an additional 8 block every time a copy of this card is played consecutively",
+            "artPath": "../Sprites/Card_art/ph_cardart_entrench_1.png"
+        },
+        {
+            "cardName": "Iron Will",
+            "cost": 4,
+            "desc": "Gain 30 block, Lock in an additional random card if this card is not mulligan'd",
+            "artPath": "../Sprites/Card_art/ph_cardart_ironwill_1.png"
         }
+        
     ]
 }
