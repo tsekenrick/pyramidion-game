@@ -24,7 +24,22 @@ public class Card : MonoBehaviour
     public int cost;
     public string desc;
     public Sprite cardArt;
-    
+
+    // FMOD variables
+    [FMODUnity.EventRef]
+    public string drawSoundEvent;
+    [FMODUnity.EventRef]
+    public string hoverSoundEvent;
+    [FMODUnity.EventRef]
+    public string discardSoundEvent;
+    [FMODUnity.EventRef]
+    public string shuffleSoundEvent;
+
+    FMOD.Studio.EventInstance drawSound;
+    FMOD.Studio.EventInstance hoverSound;
+    FMOD.Studio.EventInstance discardSound;
+    FMOD.Studio.EventInstance shuffleSound;
+
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
         tr.DOMove(tr.parent.position, .3f);
@@ -60,6 +75,12 @@ public class Card : MonoBehaviour
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         tr = this.gameObject.transform;
         curState = CardState.InDeck;
+
+        // FMOD object init
+        drawSound = FMODUnity.RuntimeManager.CreateInstance(drawSoundEvent);
+        hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
+        discardSound = FMODUnity.RuntimeManager.CreateInstance(discardSoundEvent);
+        shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
     }
 
     void Update(){
@@ -75,6 +96,8 @@ public class Card : MonoBehaviour
                             cardParts[i].sprite = cardSprites[i];
                         }
                     }
+                    // FMOD Draw Event
+                    drawSound.start();
                 }
                 break;
 
@@ -82,6 +105,8 @@ public class Card : MonoBehaviour
                 if(!isSettled) {
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
+                    // FMOD Discard Event
+                    discardSound.start();
                 }
                 break;
             
@@ -89,6 +114,8 @@ public class Card : MonoBehaviour
                 if(!isSettled) {
                     StartCoroutine(ReshuffleAnim(tr));
                     isSettled = true;
+                    // FMOD Shuffle Event
+                    shuffleSound.start();
                 }
                 break;
         }
@@ -106,6 +133,8 @@ public class Card : MonoBehaviour
         if(curState == CardState.InHand) {
             tweenSequence.Append(tr.DOScale(1.45f * Vector3.one, .4f).SetId("zoomIn"));
             tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
+            // FMOD Hover Event
+            hoverSound.start();
         }
         
     }
