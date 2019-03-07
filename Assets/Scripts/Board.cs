@@ -28,8 +28,9 @@ public class Board : MonoBehaviour
 
     // MULLIGAN PHASE VARIABLES //
     public int turn;
-    public int mullsThisTurn;
-    public List<GameObject> toMul = new List<GameObject>();
+    public int mulLimit;
+    public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
+    public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
 
     [System.Serializable]
     public class DeckList{
@@ -47,6 +48,7 @@ public class Board : MonoBehaviour
         public string artPath;
     }
 
+    
     public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
             card.isSettled = false;
@@ -54,7 +56,6 @@ public class Board : MonoBehaviour
             discard.Add(card.gameObject);
             hand.Remove(card.gameObject);
             card.transform.parent = cardAnchors["Discard Anchor"];
-            mullsThisTurn++;
         } else {
             Debug.LogError("attempted to discard card that was not in hand");
         }
@@ -133,6 +134,7 @@ public class Board : MonoBehaviour
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
         curPhase = Phase.Mulligan;
+        mulLimit = 4;
         turn = 0;
         
         foreach(CardData card in deckList){
@@ -163,16 +165,30 @@ public class Board : MonoBehaviour
     }
 
     void Update(){
-        deckCount = deck.Count; // debug
+        deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
             // TODO: Change Card.cs to add the card to toMul on click, and then execute a Mulligan routine and lock cards in hand, then begin next turn
             case Phase.Mulligan:
-                int mulLimit = 4 - turn;
-                if(Input.GetKeyDown(KeyCode.E)) {
-                    mullsThisTurn = 0;
+                if(mulLimit == 0) {
+                    Debug.Log("now in play phase");
+                    curPhase = Phase.Play;
+                    turn = 0;
+                } else if(Input.GetKeyDown(KeyCode.E)) {
                     turn++;
-                }
+                    foreach(GameObject card in hand) {
+                        if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
+                            lockedHand.Add(card);
+                        }
+                    }
 
+                    foreach(GameObject card in toMul) {
+                        Mulligan(card.GetComponent<Card>()); 
+                        DrawCard();
+                    }
+                    mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
+                    toMul.Clear();
+
+                }
                 break;
             case Phase.Play:
                 break;
