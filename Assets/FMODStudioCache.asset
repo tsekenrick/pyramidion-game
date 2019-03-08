@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114483677391586480}
-  - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   EditorEvents:
   - {fileID: 114281458955926936}
   - {fileID: 114384427825569212}
@@ -22,9 +22,10 @@ MonoBehaviour:
   - {fileID: 114618107168077184}
   MasterBanks:
   - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636874837528371113
+  stringsBankWriteTime: 636875020177776304
   cacheVersion: 3
 --- !u!114 &114176059810486954
 MonoBehaviour:
@@ -44,7 +45,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 92896
-  Exists: 1
+  Exists: 0
 --- !u!114 &114281458955926936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/HoverCard
   guid: 04e74ed530d715498265bd0d9cf6327c
   Banks:
-  - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -83,7 +84,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DrawCard
   guid: 4b60242b0c28fe46855ab0e8888dee82
   Banks:
-  - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636874837528371113
+  lastModified: 636875020177776304
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -148,7 +149,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
   guid: b2bca5a4e126fe42b9650441d2341f03
   Banks:
-  - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -156,6 +157,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 145
+--- !u!114 &114762604080103410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
+  lastModified: 636875020177766143
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 92896
+  Exists: 1
 --- !u!114 &114769885454504620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +191,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
   guid: 7ddfa111613a4e449fe8bd5006747236
   Banks:
-  - {fileID: 114176059810486954}
+  - {fileID: 114762604080103410}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

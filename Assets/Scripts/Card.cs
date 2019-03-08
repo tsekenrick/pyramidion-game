@@ -84,12 +84,14 @@ public class Card : MonoBehaviour
     }
 
     void Update(){
+        cardParts[3].enabled = board.lockedHand.Contains(this.gameObject) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
+        
         switch(curState) {
             case CardState.InHand:
                 if(!isSettled) {
                     StartCoroutine(DrawAnim(tr));
                     isSettled = true;
-                    for(int i = 0; i < cardParts.Length; i++){
+                    for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
                         if(cardSprites[i] != null){
@@ -131,7 +133,10 @@ public class Card : MonoBehaviour
 
     void OnMouseEnter(){
         if(curState == CardState.InHand) {
-            tweenSequence.Append(tr.DOScale(1.45f * Vector3.one, .4f).SetId("zoomIn"));
+            foreach(SpriteRenderer sr in cardParts) {
+                sr.sortingLayerName = "UI High";
+            }
+            tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
             tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
             hoverSound.start();
@@ -141,6 +146,9 @@ public class Card : MonoBehaviour
 
     void OnMouseExit(){
         if(curState == CardState.InHand) {
+            foreach(SpriteRenderer sr in cardParts) {
+                sr.sortingLayerName = "UI Low";
+            }
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
         }
@@ -150,10 +158,15 @@ public class Card : MonoBehaviour
     void OnMouseDown(){
         switch(board.curPhase){
             case Phase.Mulligan:
-                if(curState == CardState.InHand) {
-                    board.Mulligan(this);
-                    board.DrawCard();  
-                }        
+                // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
+                if(curState == CardState.InHand && !board.toMul.Contains(this.gameObject) && 
+                board.toMul.Count < board.mulLimit && !board.lockedHand.Contains(this.gameObject)) {
+                    board.toMul.Add(this.gameObject);
+                    tr.DOMoveY(tr.position.y + .5f, .1f);
+                } else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
+                    board.toMul.Remove(this.gameObject);
+                    tr.DOMoveY(tr.position.y - .5f, .1f);
+                }
                 break;
             case Phase.Play:
                 break;

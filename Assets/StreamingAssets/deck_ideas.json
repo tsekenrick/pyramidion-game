@@ -27,13 +27,31 @@
         {
             "cardName": "Scorpion's Veil",
             "cost": 2,
-            "desc": "",
+            "desc": "Thorns/ poison + block",
             "artPath": "../Sprites/Card_art/ph_cardart_recklessswing_1.png"
         },
         {
             "cardName": "Sand Cloak",
             "cost": 3,
             "desc": "Gain 24 block, Decrease this card's block by 4 this combat",
+            "artPath": "../Sprites/Card_art/ph_cardart_sandcloak_1.png"
+        }
+        {
+            "cardName": "asdf",
+            "cost": 3,
+            "desc": "do something, unlock and discard a card in your hand",
+            "artPath": "../Sprites/Card_art/ph_cardart_sandcloak_1.png"
+        }
+        {
+            "cardName": "asdsdsd",
+            "cost": 3,
+            "desc": "positional effect in hand",
+            "artPath": "../Sprites/Card_art/ph_cardart_sandcloak_1.png"
+        }
+        {
+            "cardName": "asdf",
+            "cost": 3,
+            "desc": "bleed/poison that ticks per time unit",
             "artPath": "../Sprites/Card_art/ph_cardart_sandcloak_1.png"
         }
     ]
