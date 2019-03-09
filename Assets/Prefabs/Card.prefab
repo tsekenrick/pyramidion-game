@@ -308,6 +308,9 @@ MonoBehaviour:
   hoverSoundEvent: event:/UI/Gameplay UI/Card Actions/HoverCard
   discardSoundEvent: event:/UI/Gameplay UI/Card Actions/DiscardCard
   shuffleSoundEvent: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
+  selectSoundEvent: event:/UI/Gameplay UI/Card Actions/SelectCard
+  deselectSoundEvent: event:/UI/Gameplay UI/Card Actions/DeselectCard
+  lockSoundObject: {fileID: 9177023500929685846}
 --- !u!61 &4469470340819908445
 BoxCollider2D:
   m_ObjectHideFlags: 0
