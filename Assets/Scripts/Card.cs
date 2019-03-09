@@ -34,11 +34,17 @@ public class Card : MonoBehaviour
     public string discardSoundEvent;
     [FMODUnity.EventRef]
     public string shuffleSoundEvent;
+    [FMODUnity.EventRef]
+    public string selectSoundEvent;
+    [FMODUnity.EventRef]
+    public string deselectSoundEvent;
 
     FMOD.Studio.EventInstance drawSound;
     FMOD.Studio.EventInstance hoverSound;
     FMOD.Studio.EventInstance discardSound;
     FMOD.Studio.EventInstance shuffleSound;
+    FMOD.Studio.EventInstance selectSound;
+    FMOD.Studio.EventInstance deselectSound;
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
@@ -81,6 +87,8 @@ public class Card : MonoBehaviour
         hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
         discardSound = FMODUnity.RuntimeManager.CreateInstance(discardSoundEvent);
         shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
+        selectSound = FMODUnity.RuntimeManager.CreateInstance(selectSoundEvent);
+        deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
     }
 
     void Update(){
@@ -163,9 +171,14 @@ public class Card : MonoBehaviour
                 board.toMul.Count < board.mulLimit && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Add(this.gameObject);
                     tr.DOMoveY(tr.position.y + .5f, .1f);
-                } else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
+                    // FMOD Card Select Event
+                    selectSound.start();
+                }
+                else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Remove(this.gameObject);
                     tr.DOMoveY(tr.position.y - .5f, .1f);
+                    // FMOD Card Deselect Event
+                    deselectSound.start();
                 }
                 break;
             case Phase.Play:

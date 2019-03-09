@@ -48,7 +48,13 @@ public class Board : MonoBehaviour
         public string artPath;
     }
 
-    
+    // FMOD variables
+    [FMODUnity.EventRef]
+    public string lockSoundEvent;
+
+    FMOD.Studio.EventInstance lockSound;
+
+
     public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
             card.isSettled = false;
@@ -162,6 +168,9 @@ public class Board : MonoBehaviour
         while(hand.Count < 5){
             DrawCard();
         }
+
+        // FMOD object init
+        lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
     }
 
     void Update(){
@@ -184,6 +193,9 @@ public class Board : MonoBehaviour
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
                         DrawCard();
+
+                        // FMOD Play Lock Sound
+                        lockSound.start();
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();

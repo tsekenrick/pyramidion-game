@@ -2,14 +2,13 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=11011 (100047), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=8, nSamplesPerSec=48000, nAvgBytesPerSec=1536000, nBlockAlign=32, wBitsPerSample=32, cbSize=22.
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x0000063F, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
-[LOG] DownMix::init                            : dspbuffersize: 1024  rate: 48000. output speaker mode: 7, input speaker mode 3
-[LOG] DownMix::init                            : done.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000000004A17E078 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000000003EA0EAA8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -17,9 +16,81 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] SoundI::release                          :  (000000004224E358)
+[LOG] SoundI::release                          :     Card Discard 1 (000000004C130A48)
+[LOG] SoundI::release                          :  (000000004224F8E8)
+[LOG] SoundI::release                          :     Card Discard 2 (000000004C132108)
+[LOG] SoundI::release                          :  (00000000174815C8)
+[LOG] SoundI::release                          :     Card Discard 3 (000000004C132928)
+[LOG] SoundI::release                          :  (000000004BDF83A8)
+[LOG] SoundI::release                          :     Card Discard 4 (000000004C131DC8)
+[LOG] SoundI::release                          :  (0000000017482CC8)
+[LOG] SoundI::release                          :     Card Discard 5 (000000004C131748)
+[LOG] SoundI::release                          :  (000000004224F498)
+[LOG] SoundI::release                          :     Card Draw_1 (000000004C1318E8)
+[LOG] SoundI::release                          :  (0000000017481FD8)
+[LOG] SoundI::release                          :     Card Draw_2 (000000004C132C68)
+[LOG] SoundI::release                          :  (0000000017483288)
+[LOG] SoundI::release                          :     Card Draw_3 (000000004C131408)
+[LOG] SoundI::release                          :  (0000000054AD81C8)
+[LOG] SoundI::release                          :     Card Draw_4 (0000000054B39808)
+[LOG] SoundI::release                          :  (000000004224E918)
+[LOG] SoundI::release                          :     Card Draw_5 (000000004C133628)
+[LOG] SoundI::release                          :  (0000000017482B58)
+[LOG] SoundI::release                          :     Card Draw 2_1 (000000004C130D88)
+[LOG] SoundI::release                          :  (0000000054AD8788)
+[LOG] SoundI::release                          :     Card Draw 2_2 (0000000054B39328)
+[LOG] SoundI::release                          :  (000000004BDF7C78)
+[LOG] SoundI::release                          :     Card Draw 2_3 (000000004C1325E8)
+[LOG] SoundI::release                          :  (000000004224FA58)
+[LOG] SoundI::release                          :     Card Draw 2_4 (000000004C133148)
+[LOG] SoundI::release                          :  (0000000054AD7368)
+[LOG] SoundI::release                          :     Card Draw 2_5 (0000000054B37448)
+[LOG] SoundI::release                          :  (000000004224F328)
+[LOG] SoundI::release                          :     Card Hover_1 (000000004C130708)
+[LOG] SoundI::release                          :  (000000004BDF80C8)
+[LOG] SoundI::release                          :     Card Hover_2 (000000004C12FEE8)
+[LOG] SoundI::release                          :  (0000000014360DE8)
+[LOG] SoundI::release                          :     Card Hover_3 (000000004C1308A8)
+[LOG] SoundI::release                          :  (000000004BDF7DE8)
+[LOG] SoundI::release                          :     Card Hover_4 (000000004C1310C8)
+[LOG] SoundI::release                          :  (000000004BDF7B08)
+[LOG] SoundI::release                          :     Card Cancel_1 (000000004C1322A8)
+[LOG] SoundI::release                          :  (000000004BDF7828)
+[LOG] SoundI::release                          :     Card Cancel_2 (000000004C131F68)
+[LOG] SoundI::release                          :  (00000000174818A8)
+[LOG] SoundI::release                          :     Card Cancel_3 (000000004C132AC8)
+[LOG] SoundI::release                          :  (000000004224E078)
+[LOG] SoundI::release                          :     Card Cancel_4 (000000004C133488)
+[LOG] SoundI::release                          :  (000000003E530508)
+[LOG] SoundI::release                          :     Card Cancel_5 (000000004C133968)
+[LOG] SoundI::release                          :  (0000000054AD84A8)
+[LOG] SoundI::release                          :     TempLockShort (0000000054B39B48)
+[LOG] SoundI::release                          :  (0000000054AD8618)
+[LOG] SoundI::release                          :     Card Stuff_1 (0000000054B38968)
+[LOG] SoundI::release                          :  (000000004224F048)
+[LOG] SoundI::release                          :     Card Stuff_2 (000000004C130F28)
+[LOG] SoundI::release                          :  (000000003E52E848)
+[LOG] SoundI::release                          :     Card Stuff_3 (000000004C133CA8)
+[LOG] SoundI::release                          :  (000000003E52F818)
+[LOG] SoundI::release                          :     Card Stuff_4 (000000004C133B08)
+[LOG] SoundI::release                          :  (000000004BDF8238)
+[LOG] SoundI::release                          :     Card Click_1 (000000004C1315A8)
+[LOG] SoundI::release                          :  (000000004BDF76B8)
+[LOG] SoundI::release                          :     Card Click_2 (000000004C130228)
+[LOG] SoundI::release                          :  (000000004BDF7998)
+[LOG] SoundI::release                          :     Card Click_3 (000000004C132448)
+[LOG] SoundI::release                          :  (0000000017481458)
+[LOG] SoundI::release                          :     Card Click_4 (000000004C131A88)
+[LOG] SoundI::release                          :  (000000004BDF7F58)
+[LOG] SoundI::release                          :     Card Click_5 (000000004C131268)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
