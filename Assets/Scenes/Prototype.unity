@@ -163,8 +163,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3f58f66001b74ca4b8dc6b88ac18e4ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -352,8 +352,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7939523228288b348b48972ad13fa8d5, type: 3}
   m_Color: {r: 0.8584906, g: 0.44139376, b: 0.44139376, a: 1}
@@ -462,8 +462,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1cb069039c1039549bdf67d3131524e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -744,7 +744,6 @@ MonoBehaviour:
   mulLimit: 0
   toMul: []
   lockedHand: []
-  lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
@@ -854,8 +853,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7939523228288b348b48972ad13fa8d5, type: 3}
   m_Color: {r: 0.8584906, g: 0.44139376, b: 0.44139376, a: 1}
@@ -934,8 +933,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f7b8eebde68393740aa0529fdaf45e08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1057,7 +1056,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6206c9a258e9a2740989203b67898367, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1135,8 +1134,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -737954065
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dd2c2f32a9282434f8203df9c5685bde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1215,8 +1214,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -84788881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ec1b47fef45ddeb468490b6a61a5e0f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1296,7 +1295,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1973838493
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a72a9d37ff541054689b492297694595, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1390,8 +1389,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -737954065
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 623d0aff0e70f6d47be10a2c893b4653, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1470,8 +1469,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1187399757
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6b70c4746a4e5348be2b729a1e3569e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

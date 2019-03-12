@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public enum CardState {InDeck, InHand, InDiscard}; 
+public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue}; 
 
 [System.Serializable]
 public class Card : MonoBehaviour
@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
 
     private Sequence tweenSequence;
     private Transform tr;
+    private Transform prevParent;
     public bool isSettled = true;
 
     public string cardName;
@@ -94,6 +95,7 @@ public class Card : MonoBehaviour
     void Update(){
         cardParts[3].enabled = board.lockedHand.Contains(this.gameObject) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
         
+        // tween to the correct pile depending on state
         switch(curState) {
             case CardState.InHand:
                 if(!isSettled) {
@@ -128,6 +130,23 @@ public class Card : MonoBehaviour
                     shuffleSound.start();
                 }
                 break;
+            
+            case CardState.InPlay:
+                Vector3 mousePos = Input.mousePosition;
+                tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
+                break;
+
+            case CardState.InQueue:
+                if(!isSettled) {
+                    StartCoroutine(DrawAnim(tr));
+                    isSettled = true;
+                    foreach(SpriteRenderer sr in cardParts){
+                        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
+                        sr.sortingLayerName = "UI Low"; 
+                    } 
+                }
+                break;
+
         }
 
     }
@@ -163,7 +182,7 @@ public class Card : MonoBehaviour
         
     }
 
-    void OnMouseDown(){
+    void OnMouseDown() {
         switch(board.curPhase){
             case Phase.Mulligan:
                 // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
@@ -182,6 +201,11 @@ public class Card : MonoBehaviour
                 }
                 break;
             case Phase.Play:
+                if(curState == CardState.InHand) {
+                    curState = CardState.InPlay;
+                    prevParent = tr.parent;
+                    tr.parent = null;  
+                }
                 break;
             default:
                 Debug.Log("reached unknown phase on click");
@@ -189,6 +213,23 @@ public class Card : MonoBehaviour
         }
     }
 
-    
+    void OnMouseUpAsButton() {
+        if(curState == CardState.InPlay) {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
+            foreach(Collider2D collider in colliders) {
+                if(collider.GetComponent<SpriteRenderer>() == null) continue;
+                if(collider.GetComponent<SpriteRenderer>().sortingLayerName == "Targets") {
+                    Debug.Log("hit");
+                    board.playSequence.Enqueue(new Board.Action(this, collider.gameObject));
+                    curState = CardState.InQueue;
+                }
+            }
+            // reanchor to old hand pos
+            tr.parent = prevParent;
+            prevParent = null;
+            curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
+            isSettled = false; // initiates tween back to hand pos
+        }
+    }
     
 }
