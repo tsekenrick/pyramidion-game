@@ -32,8 +32,12 @@ public class Board : MonoBehaviour
     public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
     public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
 
+    // PLAY PHASE VARIABLES //
+    public Queue<Action> playSequence = new Queue<Action>();
+    
+
     [System.Serializable]
-    public class DeckList{
+    public class DeckList {
         public List<CardData> deckList;
         public DeckList(){
             deckList = new List<CardData>();
@@ -41,20 +45,22 @@ public class Board : MonoBehaviour
     }
     
     [System.Serializable]
-    public class CardData{
+    public class CardData {
         public string cardName;
         public int cost;
         public string desc;
         public string artPath;
     }
 
-    // FMOD variables
-    [FMODUnity.EventRef]
-    public string lockSoundEvent;
-
-    FMOD.Studio.EventInstance lockSound;
-
-
+    public class Action {
+        public Action(Card card, GameObject target) {
+            this.card = card;
+            this.target = target;
+        }
+        public Card card;
+        public GameObject target;
+    }
+    
     public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
             card.isSettled = false;
@@ -168,9 +174,6 @@ public class Board : MonoBehaviour
         while(hand.Count < 5){
             DrawCard();
         }
-
-        // FMOD object init
-        lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
     }
 
     void Update(){
@@ -193,9 +196,6 @@ public class Board : MonoBehaviour
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
                         DrawCard();
-
-                        // FMOD Play Lock Sound
-                        lockSound.start();
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
