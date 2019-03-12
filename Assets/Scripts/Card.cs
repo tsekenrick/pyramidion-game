@@ -219,8 +219,7 @@ public class Card : MonoBehaviour
             foreach(Collider2D collider in colliders) {
                 if(collider.GetComponent<SpriteRenderer>() == null) continue;
                 if(collider.GetComponent<SpriteRenderer>().sortingLayerName == "Targets") {
-                    Debug.Log("hit");
-                    board.playSequence.Enqueue(new Board.Action(this, collider.gameObject));
+                    board.playSequence.Add(new Board.Action(this, collider.gameObject, cost));
                     curState = CardState.InQueue;
                 }
             }
