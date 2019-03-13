@@ -774,6 +774,7 @@ MonoBehaviour:
   mulLimit: 0
   toMul: []
   lockedHand: []
+  lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
