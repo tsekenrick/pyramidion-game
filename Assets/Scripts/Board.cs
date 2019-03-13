@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public enum Phase {Mulligan, Play, Resolution};
-public class Board : MonoBehaviour
-{
+public enum Phase { Mulligan, Play, Resolution };
+public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
-
     public Phase curPhase;
     
     // "entity" fields
@@ -15,7 +13,7 @@ public class Board : MonoBehaviour
     public GameObject player;
     public GameObject[] enemies;
 
-    // card manipulating fields
+    // CARD MANIPULATING FIELDS //
     public GameObject cardPrefab;
     private List<GameObject> pool = new List<GameObject>();
     private Dictionary<string, Sprite> cardArtDict = new Dictionary<string, Sprite>();
@@ -32,8 +30,12 @@ public class Board : MonoBehaviour
     public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
     public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
 
+    // PLAY PHASE VARIABLES //
+    public PlaySequence<Action> playSequence = new PlaySequence<Action>();
+    
+
     [System.Serializable]
-    public class DeckList{
+    public class DeckList {
         public List<CardData> deckList;
         public DeckList(){
             deckList = new List<CardData>();
@@ -41,20 +43,57 @@ public class Board : MonoBehaviour
     }
     
     [System.Serializable]
-    public class CardData{
+    public class CardData {
         public string cardName;
         public int cost;
         public string desc;
         public string artPath;
     }
 
-    // FMOD variables
-    [FMODUnity.EventRef]
-    public string lockSoundEvent;
+    // Action describes an action that can be enqueued during the play phase.
+    // This includes the card to be played for the action, its target(s), and
+    // the time cost of the action.
+    public class Action {
+        public Card card;
+        public GameObject target;
+        public int cost;
 
-    FMOD.Studio.EventInstance lockSound;
+        public Action(Card card, GameObject target, int cost) {
+            this.card = card;
+            this.target = target;
+            this.cost = cost;
+        }
+        
+    }
 
+    // Extension of List, used to model the sequence of actions created
+    // during the play phase, and executed during the resolution phase.
+    public class PlaySequence<T> : List<T> {
+        public List<Action> sequence;
+        public int totalTime;
 
+        public PlaySequence() {
+            sequence = new List<Action>();
+            totalTime = 0;
+        }
+
+        public new void Add(T item) {
+            base.Add(item);
+            if(item.GetType() == typeof(Board.Action)) {
+                Board.Action action = item as Action;
+                totalTime += action.cost;
+            }
+        }
+
+        public new void Remove(T item) {
+            base.Remove(item);
+            if(item.GetType() == typeof(Board.Action)) {
+                Board.Action action = item as Action;
+                totalTime -= action.cost;
+            }
+        }
+    }
+    
     public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
             card.isSettled = false;
@@ -168,15 +207,11 @@ public class Board : MonoBehaviour
         while(hand.Count < 5){
             DrawCard();
         }
-
-        // FMOD object init
-        lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
     }
 
     void Update(){
         deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
-            // TODO: Change Card.cs to add the card to toMul on click, and then execute a Mulligan routine and lock cards in hand, then begin next turn
             case Phase.Mulligan:
                 if(mulLimit == 0) {
                     Debug.Log("now in play phase");
@@ -193,9 +228,6 @@ public class Board : MonoBehaviour
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
                         DrawCard();
-
-                        // FMOD Play Lock Sound
-                        lockSound.start();
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
