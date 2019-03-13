@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114483677391586480}
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   EditorEvents:
   - {fileID: 114281458955926936}
   - {fileID: 114384427825569212}
@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636879049598183378
+  stringsBankWriteTime: 636876636474895223
   cacheVersion: 3
 --- !u!114 &114176059810486954
 MonoBehaviour:
@@ -64,7 +64,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DeselectCard
   guid: 01a7b2be99bb0a448ede2f120cdbf6a6
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/HoverCard
   guid: 04e74ed530d715498265bd0d9cf6327c
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DrawCard
   guid: 4b60242b0c28fe46855ab0e8888dee82
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -173,11 +173,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636879049598183378
+  lastModified: 636876636474895223
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1256
+  Exists: 1
+--- !u!114 &114484637976093496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
+  lastModified: 636876636474865223
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 125952
   Exists: 1
 --- !u!114 &114618107168077184
 MonoBehaviour:
@@ -194,7 +213,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
   guid: b2bca5a4e126fe42b9650441d2341f03
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -217,7 +236,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/SelectCard
   guid: fd58c0f09c53a94782af5875257eaf5a
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -259,7 +278,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
   guid: 7ddfa111613a4e449fe8bd5006747236
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -282,7 +301,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/LockCard
   guid: 221feecf6a51924988ea41ee23101046
   Banks:
-  - {fileID: 114317601092181686}
+  - {fileID: 114484637976093496}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
