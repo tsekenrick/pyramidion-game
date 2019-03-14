@@ -534,10 +534,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 784934630}
+  - component: {fileID: 784934631}
   m_Layer: 0
   m_Name: Actions
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -549,12 +550,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784934629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.4, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1871161701}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784934631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784934629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf71bdfa3fcc10419cdc48a5f246bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  actionPrefab: {fileID: 8186636157685298803, guid: 62c29701fcc750b449d984d3dd999f31,
+    type: 3}
 --- !u!1 &792269249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1782965257}
   - component: {fileID: 1782965258}
+  - component: {fileID: 1782965259}
   m_Layer: 0
   m_Name: ProgressBar
   m_TagString: Untagged
@@ -1219,7 +1236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782965256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.39, y: 0, z: 0}
+  m_LocalPosition: {x: -8.4, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1871161701}
@@ -1273,6 +1290,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1782965259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782965256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e4525768663604a8b4ea38f3ecde17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1871161699
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,8 +39,6 @@ public class Card : MonoBehaviour
     public string selectSoundEvent;
     [FMODUnity.EventRef]
     public string deselectSoundEvent;
-    [FMODUnity.EventRef]
-    public string confirmCardSoundEvent;
 
     FMOD.Studio.EventInstance drawSound;
     FMOD.Studio.EventInstance hoverSound;
@@ -48,7 +46,6 @@ public class Card : MonoBehaviour
     FMOD.Studio.EventInstance shuffleSound;
     FMOD.Studio.EventInstance selectSound;
     FMOD.Studio.EventInstance deselectSound;
-    FMOD.Studio.EventInstance confirmCardSound;
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
@@ -93,7 +90,6 @@ public class Card : MonoBehaviour
         shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
         selectSound = FMODUnity.RuntimeManager.CreateInstance(selectSoundEvent);
         deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
-        confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
     }
 
     void Update(){
@@ -113,10 +109,7 @@ public class Card : MonoBehaviour
                         }
                     }
                     // FMOD Draw Event
-                    if (board.curPhase == Phase.Mulligan)
-                        drawSound.start();
-                    else if (board.curPhase == Phase.Play)
-                        deselectSound.start();
+                    drawSound.start();
                 }
                 break;
 
@@ -212,8 +205,6 @@ public class Card : MonoBehaviour
                     curState = CardState.InPlay;
                     prevParent = tr.parent;
                     tr.parent = null;
-                    // FMOD Pick-up Card Sound
-                    drawSound.start();
                 }
                 break;
             default:
@@ -228,10 +219,10 @@ public class Card : MonoBehaviour
             foreach(Collider2D collider in colliders) {
                 if(collider.GetComponent<SpriteRenderer>() == null) continue;
                 if(collider.GetComponent<SpriteRenderer>().sortingLayerName == "Targets") {
-                    board.playSequence.Add(new Board.Action(this, collider.gameObject, cost));
+                    Action toInsert = new Action(this, collider.gameObject);
+                    toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
+                    board.playSequence.Add(toInsert);
                     curState = CardState.InQueue;
-                    // FMOD Card Play Confrimation Sound
-                    confirmCardSound.start();
                 }
             }
             // reanchor to old hand pos
