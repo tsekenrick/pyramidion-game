@@ -59,18 +59,6 @@ public class Board : MonoBehaviour {
     // Action describes an action that can be enqueued during the play phase.
     // This includes the card to be played for the action, its target(s), and
     // the time cost of the action.
-    public class Action {
-        public Card card;
-        public GameObject target;
-        public int cost;
-
-        public Action(Card card, GameObject target, int cost) {
-            this.card = card;
-            this.target = target;
-            this.cost = cost;
-        }
-        
-    }
 
     // Extension of List, used to model the sequence of actions created
     // during the play phase, and executed during the resolution phase.
@@ -85,17 +73,17 @@ public class Board : MonoBehaviour {
 
         public new void Add(T item) {
             base.Add(item);
-            if(item.GetType() == typeof(Board.Action)) {
-                Board.Action action = item as Action;
-                totalTime += action.cost;
+            if(item.GetType() == typeof(Action)) {
+                Action action = item as Action;
+                totalTime += action.card.cost;
             }
         }
 
         public new void Remove(T item) {
             base.Remove(item);
-            if(item.GetType() == typeof(Board.Action)) {
-                Board.Action action = item as Action;
-                totalTime -= action.cost;
+            if(item.GetType() == typeof(Action)) {
+                Action action = item as Action;
+                totalTime -= action.card.cost;
             }
         }
     }
