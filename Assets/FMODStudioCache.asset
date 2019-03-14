@@ -23,12 +23,15 @@ MonoBehaviour:
   - {fileID: 114234470221598048}
   - {fileID: 114751484784182310}
   - {fileID: 114802406324676206}
+  - {fileID: 114300806716117782}
+  - {fileID: 114926892759526928}
+  - {fileID: 114551310871361558}
   MasterBanks:
   - {fileID: 114176059810486954}
   - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636876636474895223
+  stringsBankWriteTime: 636880982645423819
   cacheVersion: 3
 --- !u!114 &114176059810486954
 MonoBehaviour:
@@ -95,6 +98,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 98
+--- !u!114 &114300806716117782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/Ambiences/GenericWorldAtmos
+  guid: 23c13dd9335e9b42b4d11ed832e971d7
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 60799
 --- !u!114 &114317601092181686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,11 +199,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636876636474895223
+  lastModified: 636880982645423819
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1256
+    Value: 1534
   Exists: 1
 --- !u!114 &114484637976093496
 MonoBehaviour:
@@ -192,12 +218,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
-  lastModified: 636876636474865223
+  lastModified: 636880982645393697
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 125952
+    Value: 1509664
   Exists: 1
+--- !u!114 &114551310871361558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
+  guid: 49296243a838f4498d989167dc159739
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 921
 --- !u!114 &114618107168077184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,3 +377,26 @@ MonoBehaviour:
   - Name: Desktop
     Value: 125952
   Exists: 1
+--- !u!114 &114926892759526928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/CardPlayHover
+  guid: 4508e00cc2ebb34a9d7e3c686ed264c6
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 98
