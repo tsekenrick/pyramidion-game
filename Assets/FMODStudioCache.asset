@@ -24,14 +24,14 @@ MonoBehaviour:
   - {fileID: 114751484784182310}
   - {fileID: 114802406324676206}
   - {fileID: 114300806716117782}
-  - {fileID: 114926892759526928}
   - {fileID: 114551310871361558}
+  - {fileID: 114435355136386718}
   MasterBanks:
   - {fileID: 114176059810486954}
   - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636880982645423819
+  stringsBankWriteTime: 636887031107680734
   cacheVersion: 3
 --- !u!114 &114176059810486954
 MonoBehaviour:
@@ -163,6 +163,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 154
+--- !u!114 &114435355136386718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/MullToPlayPhase
+  guid: bd286a6247448446a8cad704d20ff04a
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 6000
 --- !u!114 &114438530890357584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,11 +222,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636880982645423819
+  lastModified: 636887031107680734
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1534
+    Value: 1536
   Exists: 1
 --- !u!114 &114484637976093496
 MonoBehaviour:
@@ -218,11 +241,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
-  lastModified: 636880982645393697
+  lastModified: 636887031107650741
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1509664
+    Value: 1547104
   Exists: 1
 --- !u!114 &114551310871361558
 MonoBehaviour:
@@ -357,7 +380,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 6000
+  Length: 440
 --- !u!114 &114916574459861292
 MonoBehaviour:
   m_ObjectHideFlags: 0
