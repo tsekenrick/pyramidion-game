@@ -39,6 +39,8 @@ public class Card : MonoBehaviour
     public string selectSoundEvent;
     [FMODUnity.EventRef]
     public string deselectSoundEvent;
+    [FMODUnity.EventRef]
+    public string confirmCardSoundEvent;
 
     FMOD.Studio.EventInstance drawSound;
     FMOD.Studio.EventInstance hoverSound;
@@ -46,6 +48,7 @@ public class Card : MonoBehaviour
     FMOD.Studio.EventInstance shuffleSound;
     FMOD.Studio.EventInstance selectSound;
     FMOD.Studio.EventInstance deselectSound;
+    FMOD.Studio.EventInstance confirmCardSound;
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
@@ -90,6 +93,7 @@ public class Card : MonoBehaviour
         shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
         selectSound = FMODUnity.RuntimeManager.CreateInstance(selectSoundEvent);
         deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
+        confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
     }
 
     void Update(){
@@ -223,6 +227,8 @@ public class Card : MonoBehaviour
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
                     curState = CardState.InQueue;
+                    // FMOD Card Play Confrimation Sound
+                    confirmCardSound.start();
                 }
             }
             // reanchor to old hand pos

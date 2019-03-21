@@ -36,8 +36,11 @@ public class Board : MonoBehaviour {
     // FMOD variables
     [FMODUnity.EventRef]
     public string lockSoundEvent;
+    [FMODUnity.EventRef]
+    public string toPlayPhaseSoundEvent;
 
     FMOD.Studio.EventInstance lockSound;
+    FMOD.Studio.EventInstance toPlayPhaseSound;
 
 
     [System.Serializable]
@@ -204,6 +207,7 @@ public class Board : MonoBehaviour {
 
         // FMOD object init
         lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
+        toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
     }
 
     void Update(){
@@ -214,6 +218,9 @@ public class Board : MonoBehaviour {
                     Debug.Log("now in play phase");
                     curPhase = Phase.Play;
                     turn = 0;
+
+                    // FMOD Phase Transition Sound
+                    toPlayPhaseSound.start();
                 } else if(Input.GetKeyDown(KeyCode.E)) {
                     turn++;
                     foreach(GameObject card in hand) {

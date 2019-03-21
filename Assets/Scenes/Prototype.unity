@@ -791,6 +791,7 @@ MonoBehaviour:
   toMul: []
   lockedHand: []
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
+  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Card Actions/MullToPlayPhase
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
