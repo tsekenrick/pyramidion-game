@@ -56,3 +56,6 @@ TagManager:
   - name: UI High
     uniqueID: 1973838493
     locked: 0
+  - name: Text
+    uniqueID: 3978926175
+    locked: 0

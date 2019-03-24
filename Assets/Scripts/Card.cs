@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue}; 
 
@@ -12,7 +13,9 @@ public class Card : MonoBehaviour
     public CardState curState;
     private Board board = Board.me;
 
+    public Sprite[] costSprites;
     private SpriteRenderer[] cardParts;
+    private TextMeshPro[] textParts;
     [SerializeField]
     private Sprite[] cardSprites;
 
@@ -63,7 +66,7 @@ public class Card : MonoBehaviour
         tr.DOScale(.1f * Vector3.one, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) { sr.enabled = false; }
-
+        foreach(TextMeshPro tmp in textParts) tmp.text = "";
     }
 
     // TODO: try having second param, and iterating delay for each subsequent call to get staggering effect
@@ -78,11 +81,21 @@ public class Card : MonoBehaviour
         tr.DOScale(.1f * Vector3.one, .3f);
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
+        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+    }
+
+    void Attack(int amount, Target target) {
+
+    }
+
+    void Defend(int amount, Target target) {
+
     }
 
     void Awake(){
         tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
+        textParts = GetComponentsInChildren<TextMeshPro>();
         tr = this.gameObject.transform;
         curState = CardState.InDeck;
 
@@ -105,9 +118,12 @@ public class Card : MonoBehaviour
                 if(!isSettled) {
                     StartCoroutine(DrawAnim(tr));
                     isSettled = true;
+                    textParts[0].text = cardName;
+                    textParts[1].text = desc;
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
+                        cardParts[4].sprite = costSprites[cost]; // TODO: will not work with cost > 9
                         if(cardSprites[i] != null){
                             cardParts[i].sprite = cardSprites[i];
                         }
@@ -148,27 +164,25 @@ public class Card : MonoBehaviour
                         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
                         sr.sortingLayerName = "UI Low"; 
                     } 
+                    cardParts[4].sortingLayerName = "Text";
                 }
                 break;
 
         }
 
     }
-    void Attack(int amount, Target target){
-
-    }
-
-    void Defend(int amount, Target target){
-
-    }
+    
 
     void OnMouseEnter(){
         if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
-            }
+                sr.sortingOrder = 6;
+            } 
+            cardParts[4].sortingLayerName = "Text";
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 10;
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
-            tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
+            //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
             hoverSound.start();
         }
@@ -177,9 +191,9 @@ public class Card : MonoBehaviour
 
     void OnMouseExit(){
         if(curState == CardState.InHand) {
-            foreach(SpriteRenderer sr in cardParts) {
-                sr.sortingLayerName = "UI Low";
-            }
+            foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
+            cardParts[4].sortingLayerName = "Text";
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 3;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
         }
