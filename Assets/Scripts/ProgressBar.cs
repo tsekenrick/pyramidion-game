@@ -15,7 +15,7 @@ public class ProgressBar : MonoBehaviour
 
     void Update() {
         if(board.curPhase == Phase.Play || board.curPhase == Phase.Resolution) {
-            transform.DOScaleX(board.playSequence.totalTime, .2f * board.playSequence.totalTime);
+            transform.DOScaleX(board.playSequence.totalTime * 1.03f, .2f * board.playSequence.totalTime);
         }
     }
 }
