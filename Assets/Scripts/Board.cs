@@ -214,7 +214,7 @@ public class Board : MonoBehaviour {
         deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
             case Phase.Mulligan:
-                if(mulLimit == 0) {
+                if(lockedHand.Count == 5 || mulLimit == 0) {
                     Debug.Log("now in play phase");
                     curPhase = Phase.Play;
                     turn = 0;
@@ -232,7 +232,6 @@ public class Board : MonoBehaviour {
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
                         DrawCard();
-
                         // FMOD Play Lock Sound
                         lockSound.start();
                     }
@@ -242,8 +241,15 @@ public class Board : MonoBehaviour {
                 }
                 break;
             case Phase.Play:
+                if(Input.GetKeyDown(KeyCode.E) && playSequence.Count == 5) {
+                    curPhase = Phase.Resolution;
+                    Debug.Log("now in resolution");
+                }
                 break;
             case Phase.Resolution:
+                foreach(Action action in playSequence) {
+                    // run coroutines
+                }
                 break;
         }
             
