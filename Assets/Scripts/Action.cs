@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Action : MonoBehaviour
+public class Action
 {
-    public Card card;
     public int completeTime;
     public GameObject target;
     public GameObject instance;
 
-    public Action(Card card, GameObject target) {
-        this.card = card;
+    public Action() {
+        this.target = GameObject.Find("Player");
+    }
+
+    public Action(GameObject target) {
         this.target = target;
     }
 

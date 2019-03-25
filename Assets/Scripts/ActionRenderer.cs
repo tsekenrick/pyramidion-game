@@ -16,17 +16,20 @@ public class ActionRenderer : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        foreach(Action action in board.playSequence) {
-            if(!action.instance) {
-                action.instance = Instantiate(actionPrefab, 
-                    action.target.transform.position, Quaternion.identity, this.transform);
-                action.instance.GetComponent<SpriteRenderer>().size = new Vector2(action.card.cost * OFFSET, .45f);
-                action.instance.GetComponentInChildren<TextMeshPro>().text = $"{action.card.cost}: {action.card.cardName}";
-                action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
-                action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
+        foreach(Action entry in board.playSequence) {
+            if(entry.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = entry as PlayerAction;
+                if(!action.instance) {
+                    action.instance = Instantiate(actionPrefab, action.target.transform.position, Quaternion.identity, this.transform);
+                    action.instance.GetComponent<SpriteRenderer>().size = new Vector2(action.card.cost * OFFSET, .45f);
+                    action.instance.GetComponentInChildren<TextMeshPro>().text = $"{action.card.cost}: {action.card.cardName}";
+                    action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
+                    action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 
-                // TODO: Add dequeueing functionality
+                    // TODO: Add dequeueing functionality
+                }
             }
+            
         }
     }
 }

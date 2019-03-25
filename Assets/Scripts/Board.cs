@@ -73,19 +73,24 @@ public class Board : MonoBehaviour {
             sequence = new List<Action>();
             totalTime = 0;
         }
-
+        public int IndexOfCompleteTime(int targetTime) {
+            foreach(Action action in this.sequence){
+                if(action.completeTime == targetTime) return sequence.IndexOf(action);
+            }
+            return -1;
+        }
         public new void Add(T item) {
             base.Add(item);
-            if(item.GetType() == typeof(Action)) {
-                Action action = item as Action;
+            if(item.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = item as PlayerAction;
                 totalTime += action.card.cost;
             }
         }
 
         public new void Remove(T item) {
             base.Remove(item);
-            if(item.GetType() == typeof(Action)) {
-                Action action = item as Action;
+            if(item.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = item as PlayerAction;
                 totalTime -= action.card.cost;
             }
         }

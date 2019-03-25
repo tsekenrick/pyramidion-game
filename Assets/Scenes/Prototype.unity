@@ -1438,7 +1438,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1973838493
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a72a9d37ff541054689b492297694595, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1491,6 +1491,7 @@ GameObject:
   - component: {fileID: 2047535046}
   - component: {fileID: 2047535045}
   - component: {fileID: 2047535047}
+  - component: {fileID: 2047535048}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1587,6 +1588,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.01, y: 8.97}
   m_EdgeRadius: 0
+--- !u!114 &2047535048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047535044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96886c92a54dbdf4dbba5f4186960963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2088215219
 GameObject:
   m_ObjectHideFlags: 0
