@@ -237,7 +237,7 @@ public class Card : MonoBehaviour
             foreach(Collider2D collider in colliders) {
                 if(collider.GetComponent<SpriteRenderer>() == null) continue;
                 if(collider.GetComponent<SpriteRenderer>().sortingLayerName == "Targets") {
-                    Action toInsert = new Action(this, collider.gameObject);
+                    PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
                     curState = CardState.InQueue;
