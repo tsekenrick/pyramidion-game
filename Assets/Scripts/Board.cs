@@ -57,6 +57,7 @@ public class Board : MonoBehaviour {
         public int cost;
         public string desc;
         public string artPath;
+        public string[] cardProps;
     }
 
     // Action describes an action that can be enqueued during the play phase.
@@ -76,30 +77,10 @@ public class Board : MonoBehaviour {
 
         public int IndexOfCompleteTime(int targetTime) {
             for(int i = 0; i < this.Count; i++) {
-                if(this[i].GetType() == typeof(Action)) {
-                    Action action = this[i] as Action;
-                    if(action.completeTime == targetTime) return i;
-                } 
+                Action action = this[i] as Action;
+                if(action.completeTime == targetTime) return i; 
             }
             return -1;
-        }
-
-        public new void Add(T item) {
-            base.Add(item);
-            if(item.GetType() == typeof(PlayerAction)) {
-                PlayerAction action = item as PlayerAction;
-                totalTime += action.card.cost;
-            }
-        }
-
-        public new void Remove(T item) {
-            if(item.GetType() == typeof(PlayerAction)) {
-                PlayerAction action = item as PlayerAction;
-                int idx = this.IndexOfCompleteTime(action.completeTime);
-                this.RecalculateCompleteTime(idx, action.card.cost);
-                totalTime -= action.card.cost;
-            }
-            base.Remove(item);
         }
 
         // adjusts the completeTime by amount speicfied in `offset` for each action starting with the specified `index`
@@ -110,6 +91,39 @@ public class Board : MonoBehaviour {
                 action.completeTime -= offset; 
             }
         }
+        
+        // helper function for enqueueing enemy actions between play and resolution phase
+        public bool ContainsEnemyAction() {
+            foreach(T entry in this) {
+                if(entry is EnemyAction) return false;
+            }
+
+            return true;
+        }
+
+        public new void Add(T item) {
+            base.Add(item);
+            if(item.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = item as PlayerAction;
+                this.totalTime += action.card.cost;
+            }
+        }
+
+        public new void Remove(T item) {
+            if(item.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = item as PlayerAction;
+                int idx = this.IndexOfCompleteTime(action.completeTime);
+                Debug.Log("action complete time is  " + action.completeTime);
+                if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
+                this.totalTime -= action.card.cost;
+                action.card.curState = CardState.InHand;
+                Board.me.Mulligan(action.card); // jank
+                Destroy(action.instance);
+            }
+            base.Remove(item);
+        }
+
+        
     }
     
     public void Mulligan(Card card) {
@@ -126,7 +140,7 @@ public class Board : MonoBehaviour {
     
     public void DrawCard() {
         if(deck.Count == 0) Reshuffle();
-
+        
         GameObject curCard = deck.Dequeue();
         curCard.GetComponent<Card>().curState = CardState.InHand;
         hand.Add(curCard);
@@ -152,22 +166,26 @@ public class Board : MonoBehaviour {
         discard.Clear();
     }
 
-    // INCOMPLETE
-    public IEnumerator ExecuteAction(Action action) {
-        switch(action.GetType().ToString()) {
-            case "PlayerAction":
-                PlayerAction playerAction = action as PlayerAction;
-                playerAction.resolveAction();
-                yield return new WaitForSeconds(1f);
-                playSequence.Remove(action);
-                break;
-            
-            case "EnemyAction":
-                EnemyAction enemyAction = action as EnemyAction;
-                enemyAction.resolveAction();
-                yield return new WaitForSeconds(1f);
-                break;
+    public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
+        while(playSequence.Count != 0) {
+            Debug.Log("length of queue is " + playSequence.Count);
+            switch(playSequence[0].GetType().ToString()) {
+                case "PlayerAction":
+                    PlayerAction playerAction = playSequence[0] as PlayerAction;
+                    playerAction.resolveAction();
+                    yield return new WaitForSeconds(1f);
+                    playSequence.Remove(playSequence[0]);
+                    break;
+                
+                case "EnemyAction":
+                    EnemyAction enemyAction = playSequence[0] as EnemyAction;
+                    enemyAction.resolveAction();
+                    yield return new WaitForSeconds(1f);
+                    playSequence.Remove(playSequence[0]);
+                    break;
+            }
         }
+        
     }
 
     private void GetAnchors() {
@@ -211,6 +229,8 @@ public class Board : MonoBehaviour {
     }
 
     void Start(){
+        player = GameObject.Find("Player");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
@@ -230,6 +250,7 @@ public class Board : MonoBehaviour {
             cardScript.cardName = card.cardName;
             cardScript.cost = card.cost;
             cardScript.desc = card.desc;
+            cardScript.cardProps = card.cardProps;
             cardScript.cardArt = cardArtDict[cardScript.cardName]; 
             pool.Add(curCard);
         }
@@ -238,10 +259,6 @@ public class Board : MonoBehaviour {
         // now that all the preloading is done, actually put cards into the deck
         foreach(GameObject card in pool) {
             deck.Enqueue(card);
-        }
-
-        while(hand.Count < 5){
-            DrawCard();
         }
 
         // FMOD object init
@@ -253,9 +270,13 @@ public class Board : MonoBehaviour {
         deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
             case Phase.Mulligan:
+                while(hand.Count < 5){
+                    DrawCard();
+                }
+
                 if(lockedHand.Count == 5 || mulLimit == 0) {
-                    Debug.Log("now in play phase");
                     curPhase = Phase.Play;
+                    lockedHand.Clear();
                     turn = 0;
 
                     // FMOD Phase Transition Sound
@@ -265,14 +286,13 @@ public class Board : MonoBehaviour {
                     foreach(GameObject card in hand) {
                         if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
                             lockedHand.Add(card);
+                            // FMOD Play Lock Sound
+                            lockSound.start();
                         }
                     }
 
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
-                        DrawCard();
-                        // FMOD Play Lock Sound
-                        lockSound.start();
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
@@ -280,14 +300,46 @@ public class Board : MonoBehaviour {
                 }
                 break;
             case Phase.Play:
-                if(Input.GetKeyDown(KeyCode.E) && playSequence.Count == 5) {
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    // discard the cards that were not enqueue'd
+                    foreach(GameObject card in hand) {
+                        if(card.GetComponent<Card>().curState != CardState.InQueue) {
+                            toMul.Add(card);
+                        }
+                    }
+                    foreach(GameObject card in toMul) {
+                        Mulligan(card.GetComponent<Card>()); 
+                    }
+
                     curPhase = Phase.Resolution;
-                    Debug.Log("now in resolution");
+                    if(!playSequence.ContainsEnemyAction()) {
+                        foreach(GameObject enemy in enemies) {
+                            Enemy enemyScript = enemy.GetComponent<Enemy>();
+                            foreach(EnemyAction actionToAdd in enemyScript.curActions) {
+                                if(!playSequence.Contains(actionToAdd)) {
+                                    int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
+                                    playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
+                                }
+                            }
+                            enemyScript.prevActions = enemyScript.curActions;
+                            enemyScript.curActions.Clear();
+                        }
+                    }
+                    StartCoroutine(ExecuteAction(playSequence));
                 }
+                
                 break;
+
             case Phase.Resolution:
-                foreach(Action action in playSequence) {
-                    // run coroutines
+                
+                if(playSequence.Count == 0) {
+                    curPhase = Phase.Mulligan;
+                    mulLimit = 4;
+                    turn = 0;
+
+                    // reset block
+                    player.GetComponent<Target>().block = 0;
+                    foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
                 }
                 break;
         }

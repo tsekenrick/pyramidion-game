@@ -28,7 +28,7 @@ public class Card : MonoBehaviour
     public int cost;
     public string desc;
     public Sprite cardArt;
-    public string[][] cardProps;
+    public string[] cardProps;
 
     // FMOD variables
     [FMODUnity.EventRef]
@@ -88,14 +88,9 @@ public class Card : MonoBehaviour
     // this currently does not factor any sort of status modifier pressent on `target`
     public void Attack(int amount, GameObject target) {
         Target t = target.GetComponent<Target>();
-        if(t.block > amount) {
-            t.block -= amount;
-        } else if (t.block < amount) {
-            int tmpBlock = t.block;
-            t.block = Mathf.Max(t.block - amount, 0);
-            amount = Mathf.Max(amount - tmpBlock, 0);
-            t.health -= amount;
-        }
+        int tmpBlock = t.block;
+        t.block = Mathf.Max(t.block - amount, 0);
+        t.health -= Mathf.Max(amount - tmpBlock, 0);
     }
 
     public void Defend(int amount, GameObject target) {
@@ -122,7 +117,12 @@ public class Card : MonoBehaviour
 
     void Update(){
         cardParts[3].enabled = board.lockedHand.Contains(this.gameObject) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
-        
+        if(curState != CardState.InQueue) {
+            foreach(SpriteRenderer sr in cardParts){
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+            }
+        }
+         
         // tween to the correct pile depending on state
         switch(curState) {
             case CardState.InHand:

@@ -5,140 +5,140 @@
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Strike",
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": [["Attack", "6"]]
+            "cardProps": ["Attack", "6"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         },
         {
             "cardName": "Defend",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": [["Defend", "5"]]
+            "cardProps": ["Defend", "5"]
         }
         
         

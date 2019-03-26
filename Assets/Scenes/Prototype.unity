@@ -1141,6 +1141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1736742228}
   - component: {fileID: 1736742227}
+  - component: {fileID: 1736742229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1211,6 +1212,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1736742229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736742226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eea16ac51a7c5144bb2e2541cc46a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  block: 0
 --- !u!1 &1782965256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e4525768663604a8b4ea38f3ecde17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barLength: 0
 --- !u!1 &1871161699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1510,7 @@ GameObject:
   - component: {fileID: 2047535048}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1600,6 +1616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96886c92a54dbdf4dbba5f4186960963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  block: 0
 --- !u!1 &2088215219
 GameObject:
   m_ObjectHideFlags: 0

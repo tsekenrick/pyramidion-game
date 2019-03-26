@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Target
 {
-    public int health;
-    void Start()
-    {
+
+    void Start() {
         health = 100;
+        block = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
