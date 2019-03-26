@@ -6,6 +6,7 @@ using DG.Tweening;
 public class ProgressBar : MonoBehaviour
 {
     private Board board;
+    public int barLength;
 
     void Start() {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -14,8 +15,6 @@ public class ProgressBar : MonoBehaviour
     }
 
     void Update() {
-        if(board.curPhase == Phase.Play || board.curPhase == Phase.Resolution) {
-            transform.DOScaleX(board.playSequence.totalTime * 1.03f, .2f * board.playSequence.totalTime);
-        }
+        transform.DOScaleX(board.playSequence.totalTime * 1.03f, .2f + (.05f * board.playSequence.totalTime));
     }
 }
