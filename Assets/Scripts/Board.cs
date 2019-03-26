@@ -66,19 +66,24 @@ public class Board : MonoBehaviour {
     // Extension of List, used to model the sequence of actions created
     // during the play phase, and executed during the resolution phase.
     public class PlaySequence<T> : List<T> {
-        public List<Action> sequence;
+        // public List<Action> sequence; // this field might not be necessary - an instance of PlaySequence itself is a List
         public int totalTime;
 
         public PlaySequence() {
-            sequence = new List<Action>();
+            // sequence = new List<Action>();
             totalTime = 0;
         }
+
         public int IndexOfCompleteTime(int targetTime) {
-            foreach(Action action in this.sequence){
-                if(action.completeTime == targetTime) return sequence.IndexOf(action);
+            for(int i = 0; i < this.Count; i++) {
+                if(this[i].GetType() == typeof(Action)) {
+                    Action action = this[i] as Action;
+                    if(action.completeTime == targetTime) return i;
+                } 
             }
             return -1;
         }
+
         public new void Add(T item) {
             base.Add(item);
             if(item.GetType() == typeof(PlayerAction)) {
@@ -88,10 +93,21 @@ public class Board : MonoBehaviour {
         }
 
         public new void Remove(T item) {
-            base.Remove(item);
             if(item.GetType() == typeof(PlayerAction)) {
                 PlayerAction action = item as PlayerAction;
+                int idx = this.IndexOfCompleteTime(action.completeTime);
+                this.RecalculateCompleteTime(idx, action.card.cost);
                 totalTime -= action.card.cost;
+            }
+            base.Remove(item);
+        }
+
+        // adjusts the completeTime by amount speicfied in `offset` for each action starting with the specified `index`
+        // this is used when dequeueing actions during play phase, and during resolution phase
+        public void RecalculateCompleteTime(int index, int offset) {
+            for(int i = index; i < this.Count; i++) {
+                Action action = this[i] as Action;
+                action.completeTime -= offset; 
             }
         }
     }
@@ -134,6 +150,24 @@ public class Board : MonoBehaviour {
             curCard.transform.parent = cardAnchors["Deck Anchor"];
         }
         discard.Clear();
+    }
+
+    // INCOMPLETE
+    public IEnumerator ExecuteAction(Action action) {
+        switch(action.GetType().ToString()) {
+            case "PlayerAction":
+                PlayerAction playerAction = action as PlayerAction;
+                playerAction.resolveAction();
+                yield return new WaitForSeconds(1f);
+                playSequence.Remove(action);
+                break;
+            
+            case "EnemyAction":
+                EnemyAction enemyAction = action as EnemyAction;
+                enemyAction.resolveAction();
+                yield return new WaitForSeconds(1f);
+                break;
+        }
     }
 
     private void GetAnchors() {

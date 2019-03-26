@@ -28,6 +28,7 @@ public class Card : MonoBehaviour
     public int cost;
     public string desc;
     public Sprite cardArt;
+    public string[][] cardProps;
 
     // FMOD variables
     [FMODUnity.EventRef]
@@ -84,12 +85,22 @@ public class Card : MonoBehaviour
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
     }
 
-    void Attack(int amount, Target target) {
-
+    // this currently does not factor any sort of status modifier pressent on `target`
+    public void Attack(int amount, GameObject target) {
+        Target t = target.GetComponent<Target>();
+        if(t.block > amount) {
+            t.block -= amount;
+        } else if (t.block < amount) {
+            int tmpBlock = t.block;
+            t.block = Mathf.Max(t.block - amount, 0);
+            amount = Mathf.Max(amount - tmpBlock, 0);
+            t.health -= amount;
+        }
     }
 
-    void Defend(int amount, Target target) {
-
+    public void Defend(int amount, GameObject target) {
+        Target t = target.GetComponent<Target>();
+        t.block += amount;
     }
 
     void Awake(){
