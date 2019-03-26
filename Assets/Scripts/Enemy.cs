@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Target
 {
     private Board board;
 
@@ -10,14 +10,13 @@ public class Enemy : MonoBehaviour
     private List<EnemyAction> prevActions;
     private List<EnemyAction> curActions;
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        prevActions = new List<EnemyAction>();
+        curActions = new List<EnemyAction>();
         board = Board.me;
     }
 
-    // Update is called once per frame
     void Update() {
         switch(board.curPhase) {
             case Phase.Mulligan:

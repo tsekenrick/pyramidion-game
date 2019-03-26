@@ -27,6 +27,8 @@ public class ActionRenderer : MonoBehaviour
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 
                     // TODO: Add dequeueing functionality
+                } else {
+                    action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
                 }
             }
             
