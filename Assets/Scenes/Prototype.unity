@@ -831,6 +831,8 @@ MonoBehaviour:
   board: {fileID: 0}
   actionPrefab: {fileID: 8186636157685298803, guid: 62c29701fcc750b449d984d3dd999f31,
     type: 3}
+  strikeSoundEvent: 
+  blockSoundEvent: 
 --- !u!1 &792269249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1053,9 @@ MonoBehaviour:
   toMul: []
   lockedHand: []
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
-  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Card Actions/MullToPlayPhase
+  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
+  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToCombatPhase
+  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/CombatToMullPhase
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
