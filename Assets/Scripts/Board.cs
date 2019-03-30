@@ -38,10 +38,15 @@ public class Board : MonoBehaviour {
     public string lockSoundEvent;
     [FMODUnity.EventRef]
     public string toPlayPhaseSoundEvent;
+    [FMODUnity.EventRef]
+    public string toResolutionPhaseSoundEvent;
+    [FMODUnity.EventRef]
+    public string toMulliganPhaseSoundEvent;
 
     FMOD.Studio.EventInstance lockSound;
     FMOD.Studio.EventInstance toPlayPhaseSound;
-
+    FMOD.Studio.EventInstance toResolutionPhaseSound;
+    FMOD.Studio.EventInstance toMulliganPhaseSound;
 
     [System.Serializable]
     public class DeckList {
@@ -264,6 +269,8 @@ public class Board : MonoBehaviour {
         // FMOD object init
         lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
         toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
+        toResolutionPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toResolutionPhaseSoundEvent);
+        toMulliganPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toMulliganPhaseSoundEvent);
     }
 
     void Update(){
@@ -279,7 +286,7 @@ public class Board : MonoBehaviour {
                     lockedHand.Clear();
                     turn = 0;
 
-                    // FMOD Phase Transition Sound
+                    // FMOD Play Phase Transition Sound
                     toPlayPhaseSound.start();
                 } else if(Input.GetKeyDown(KeyCode.E)) {
                     turn++;
@@ -312,7 +319,10 @@ public class Board : MonoBehaviour {
                     }
 
                     curPhase = Phase.Resolution;
-                    if(!playSequence.ContainsEnemyAction()) {
+
+                    // FMOD Resolution Phase Transition Sound
+                    toResolutionPhaseSound.start();
+                    if (!playSequence.ContainsEnemyAction()) {
                         foreach(GameObject enemy in enemies) {
                             Enemy enemyScript = enemy.GetComponent<Enemy>();
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
@@ -340,6 +350,9 @@ public class Board : MonoBehaviour {
                     // reset block
                     player.GetComponent<Target>().block = 0;
                     foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
+
+                    // FMOD Mulligan Phase Transition Sound
+                    toMulliganPhaseSound.start();
                 }
                 break;
         }
