@@ -12,6 +12,7 @@ public class Board : MonoBehaviour {
     public static Board me;
     public GameObject player;
     public GameObject[] enemies;
+    public bool actionButtonPressed;
 
     // CARD MANIPULATING FIELDS //
     public GameObject cardPrefab;
@@ -274,6 +275,7 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
             case Phase.Mulligan:
@@ -288,7 +290,7 @@ public class Board : MonoBehaviour {
 
                     // FMOD Play Phase Transition Sound
                     toPlayPhaseSound.start();
-                } else if(Input.GetKeyDown(KeyCode.E)) {
+                } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     turn++;
                     foreach(GameObject card in hand) {
                         if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
@@ -303,11 +305,11 @@ public class Board : MonoBehaviour {
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
-
+                    GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
                 }
                 break;
             case Phase.Play:
-                if(Input.GetKeyDown(KeyCode.E)) {
+                if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     // discard the cards that were not enqueue'd
                     foreach(GameObject card in hand) {
                         if(card.GetComponent<Card>().curState != CardState.InQueue) {
@@ -322,6 +324,7 @@ public class Board : MonoBehaviour {
 
                     // FMOD Resolution Phase Transition Sound
                     toResolutionPhaseSound.start();
+                    // enqueue enemy actions
                     if (!playSequence.ContainsEnemyAction()) {
                         foreach(GameObject enemy in enemies) {
                             Enemy enemyScript = enemy.GetComponent<Enemy>();
@@ -335,6 +338,7 @@ public class Board : MonoBehaviour {
                             enemyScript.curActions.Clear();
                         }
                     }
+                    GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
                     StartCoroutine(ExecuteAction(playSequence));
                 }
                 

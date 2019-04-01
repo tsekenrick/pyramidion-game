@@ -831,8 +831,6 @@ MonoBehaviour:
   board: {fileID: 0}
   actionPrefab: {fileID: 8186636157685298803, guid: 62c29701fcc750b449d984d3dd999f31,
     type: 3}
-  strikeSoundEvent: 
-  blockSoundEvent: 
 --- !u!1 &792269249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1041,7 @@ MonoBehaviour:
   curPhase: 0
   player: {fileID: 0}
   enemies: []
+  actionButtonPressed: 0
   cardPrefab: {fileID: 6331844338736468087, guid: 00d90514217f4eb448b4d3b4bac6d5d8,
     type: 3}
   discard: []
@@ -1054,8 +1053,8 @@ MonoBehaviour:
   lockedHand: []
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
   toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
-  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToCombatPhase
-  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/CombatToMullPhase
+  toResolutionPhaseSoundEvent: 
+  toMulliganPhaseSoundEvent: 
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
@@ -2075,6 +2074,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1978727989}
   - component: {fileID: 1978727990}
+  - component: {fileID: 1978727991}
+  - component: {fileID: 1978727992}
   m_Layer: 0
   m_Name: ActionButtonTop
   m_TagString: Untagged
@@ -2138,12 +2139,47 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.79, y: 1.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1978727991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978727988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37062f24577a6404291aa6b6ed1d3e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mulliganButtons:
+  - {fileID: 21300000, guid: 21107620a48484f47871f2787c505137, type: 3}
+  - {fileID: 21300000, guid: a29a52d6bb49a7c4fad899f8b7d496dd, type: 3}
+  executeButtons:
+  - {fileID: 21300000, guid: 1db11ede5d15ce54da92168b6d88d2af, type: 3}
+  - {fileID: 21300000, guid: b04c4f7010e01824d96a75704a3d7e8f, type: 3}
+  buttonPressed: 0
+--- !u!58 &1978727992
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978727988}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.9
 --- !u!1 &2047535044
 GameObject:
   m_ObjectHideFlags: 0
