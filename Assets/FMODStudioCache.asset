@@ -25,13 +25,17 @@ MonoBehaviour:
   - {fileID: 114802406324676206}
   - {fileID: 114300806716117782}
   - {fileID: 114551310871361558}
-  - {fileID: 114435355136386718}
+  - {fileID: 114937079333522944}
+  - {fileID: 114191487038992168}
+  - {fileID: 114277813604844722}
+  - {fileID: 114480279032842180}
+  - {fileID: 114823210945589298}
   MasterBanks:
   - {fileID: 114176059810486954}
   - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636887031107680734
+  stringsBankWriteTime: 636894819861165786
   cacheVersion: 3
 --- !u!114 &114176059810486954
 MonoBehaviour:
@@ -52,6 +56,29 @@ MonoBehaviour:
   - Name: Desktop
     Value: 92896
   Exists: 0
+--- !u!114 &114191487038992168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Phase Transitions/CombatToMullPhase
+  guid: 59490f66c5569642be2034e570dad581
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2699
 --- !u!114 &114234470221598048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +102,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 90
+--- !u!114 &114277813604844722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
+  guid: bd286a6247448446a8cad704d20ff04a
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 6000
 --- !u!114 &114281458955926936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +259,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &114480279032842180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/Generic Block Card
+  guid: d22dfffabdead147b483b70d741fcdbf
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 990
 --- !u!114 &114483677391586480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,11 +295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636887031107680734
+  lastModified: 636894819861165786
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1536
+    Value: 1828
   Exists: 1
 --- !u!114 &114484637976093496
 MonoBehaviour:
@@ -241,11 +314,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
-  lastModified: 636887031107650741
+  lastModified: 636894819861135799
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1547104
+    Value: 1604864
   Exists: 1
 --- !u!114 &114551310871361558
 MonoBehaviour:
@@ -381,6 +454,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 440
+--- !u!114 &114823210945589298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Phase Transitions/PlayToCombatPhase
+  guid: f881f9cc28a277448726a242dd2982a3
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1248
 --- !u!114 &114916574459861292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,3 +519,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 98
+--- !u!114 &114937079333522944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/Generic Attack Card
+  guid: 05986b0be9a2ac4cae6f984c1f37ee14
+  Banks:
+  - {fileID: 114484637976093496}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 586
