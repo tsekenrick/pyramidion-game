@@ -22,14 +22,14 @@ public class ActionButton : MonoBehaviour
 
     void Update() {
         glow.enabled = (board.curPhase != Phase.Resolution);
-        
+
         switch(board.curPhase) {
             case Phase.Mulligan:
                 sr.sprite = buttonPressed ? mulliganButtons[1] : mulliganButtons[0];
                 break;
 
             case Phase.Play:
-                sr.sprite = buttonPressed ? executeButtons[1] :  executeButtons[0];
+                sr.sprite = buttonPressed ? executeButtons[1] : executeButtons[0];
                 break;
 
         }
