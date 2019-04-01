@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Enemy : Target
 {
@@ -8,6 +9,11 @@ public class Enemy : Target
 
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
+
+    public Transform healthBar;
+    public SpriteRenderer[] srs;
+    public SpriteRenderer[] blockOverlay;
+    private const int MAX_HEALTH = 60;
 
     void Start() {
         board = Board.me;
@@ -17,9 +23,20 @@ public class Enemy : Target
 
         prevActions = new List<EnemyAction>();
         curActions = new List<EnemyAction>();
+
+        srs = this.GetComponentsInChildren<SpriteRenderer>();
+        blockOverlay = new SpriteRenderer[2]{
+            srs[2], srs[3]
+        };
+
+        foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
     }
 
     void Update() {
+        // healthbar/block overlay logic
+        foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
+        healthBar.DOScaleX(Mathf.Max(0, health/MAX_HEALTH), .3f);
+
         switch(board.curPhase) {
             case Phase.Mulligan:               
                 // roll for action type and display non-numerical intent
