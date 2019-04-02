@@ -372,6 +372,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &314070933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314070935}
+  - component: {fileID: 314070934}
+  m_Layer: 0
+  m_Name: _SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &314070934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314070933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867b5853c9ca6054e832bafe5ba2388f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttackSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Attack
+  enemyDefendSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Block
+  playerAttackSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Attack
+  playerDefendSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Block
+--- !u!4 &314070935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314070933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &512781529
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +878,9 @@ MonoBehaviour:
   board: {fileID: 0}
   actionPrefab: {fileID: 8186636157685298803, guid: 62c29701fcc750b449d984d3dd999f31,
     type: 3}
+  enemyActionPrefab: {fileID: 4877192346789300867, guid: 77de0bbcca3795644825a4b4aa743a93,
+    type: 3}
+  enemies: []
 --- !u!1 &792269249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curPhase: 0
+  borrowedTime: 0
+  round: 0
   player: {fileID: 0}
   enemies: []
   actionButtonPressed: 0
@@ -1053,8 +1105,8 @@ MonoBehaviour:
   lockedHand: []
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
   toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
-  toResolutionPhaseSoundEvent: 
-  toMulliganPhaseSoundEvent: 
+  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
+  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
@@ -2167,6 +2219,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1db11ede5d15ce54da92168b6d88d2af, type: 3}
   - {fileID: 21300000, guid: b04c4f7010e01824d96a75704a3d7e8f, type: 3}
   buttonPressed: 0
+  actionButtonDownSoundEvent: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
+  actionButtonUpSoundEvent: event:/UI/Gameplay UI/Board Actions/Action Button Up
 --- !u!58 &1978727992
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2308,6 +2362,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   srs: []
   blockOverlay: []
+  mulliganIntentIcons: []
 --- !u!1 &2088215219
 GameObject:
   m_ObjectHideFlags: 0

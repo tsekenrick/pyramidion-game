@@ -13,6 +13,22 @@ public class ActionButton : MonoBehaviour
     public bool buttonPressed;
     private bool renderPressed;
 
+    // FMOD variables
+    [FMODUnity.EventRef]
+    public string actionButtonDownSoundEvent;
+    [FMODUnity.EventRef]
+    public string actionButtonUpSoundEvent;
+
+    FMOD.Studio.EventInstance actionButtonDownSound;
+    FMOD.Studio.EventInstance actionButtonUpSound;
+
+    private void Awake()
+    {
+        // FMOD object init
+        actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
+        actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
+    }
+
     void Start() {
         buttonPressed = false;
         board = Board.me;
@@ -42,6 +58,9 @@ public class ActionButton : MonoBehaviour
 
     void OnMouseDown() {
         renderPressed = true;
+
+        // FMOD Action Button Down Sound Event
+        actionButtonDownSound.start();
     }
 
 
@@ -58,5 +77,8 @@ public class ActionButton : MonoBehaviour
                 renderPressed = false;
                 break;
         }
+
+        // FMOD Action Button Up Sound Event
+        actionButtonUpSound.start();
     }
 }

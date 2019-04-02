@@ -10,6 +10,7 @@ public class EnemyAction: Action
     public ActionType actionType;
     public int actionVal;
     public string statusType;
+    public SoundManager sm;
 
     public EnemyAction(ActionType actionType, GameObject target, GameObject owner) : base(target) {
         this.actionType = actionType;
@@ -26,14 +27,20 @@ public class EnemyAction: Action
         Target target = this.target.GetComponent<Target>();
         switch(actionType) {
             case ActionType.Attack:
-                // play attack sound
+                // FMOD Enemy Attack Sound
+                sm = SoundManager.me;
+                sm.PlayEnemyAttackSound();
+
                 int tmpBlock = target.block;
                 target.block = Mathf.Max(target.block - actionVal, 0);
                 target.health -= Mathf.Max(actionVal - tmpBlock, 0);
                 break;
 
             case ActionType.Defense:
-                // play defend sound
+                // FMOD Enemy Defense Sound
+                sm = SoundManager.me;
+                sm.PlayEnemyDefendSound();
+
                 target.block += actionVal;
                 break;
         }
