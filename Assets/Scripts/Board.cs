@@ -7,7 +7,9 @@ public enum Phase { Mulligan, Play, Resolution };
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
     public Phase curPhase;
-    
+    public int borrowedTime; // offset time carryover if overplay/underplay
+    public int round; // the number of mul-play-res cycles
+
     // "entity" fields
     public static Board me;
     public GameObject player;
@@ -26,7 +28,7 @@ public class Board : MonoBehaviour {
     public int deckCount;
 
     // MULLIGAN PHASE VARIABLES //
-    public int turn;
+    public int turn; // number of mulligan "sets" completed
     public int mulLimit;
     public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
     public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
@@ -101,10 +103,20 @@ public class Board : MonoBehaviour {
         // helper function for enqueueing enemy actions between play and resolution phase
         public bool ContainsEnemyAction() {
             foreach(T entry in this) {
-                if(entry is EnemyAction) return false;
+                if(entry is EnemyAction) return true;
             }
+            return false;
+        }
 
-            return true;
+        public int GetLastEnemyActionTime() {
+            int finalTime = 0;
+            foreach(T entry in this) {
+                if(entry is EnemyAction) {
+                    EnemyAction enemyAction = entry as EnemyAction;
+                    finalTime = enemyAction.completeTime;
+                }
+            }
+            return finalTime;
         }
 
         public new void Add(T item) {
@@ -119,11 +131,13 @@ public class Board : MonoBehaviour {
             if(item.GetType() == typeof(PlayerAction)) {
                 PlayerAction action = item as PlayerAction;
                 int idx = this.IndexOfCompleteTime(action.completeTime);
-                Debug.Log("action complete time is  " + action.completeTime);
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
                 Board.me.Mulligan(action.card); // jank
+                Destroy(action.instance);
+            } else if (item is EnemyAction) {
+                EnemyAction action = item as EnemyAction;
                 Destroy(action.instance);
             }
             base.Remove(item);
@@ -240,9 +254,14 @@ public class Board : MonoBehaviour {
 
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
+
+        // initialize phase variables
         curPhase = Phase.Mulligan;
         mulLimit = 4;
         turn = 0;
+
+        if(turn == 0) borrowedTime = 0;
+        round = 0;
         
         foreach(CardData card in deckList){
             // load card art into dictionary
@@ -330,26 +349,35 @@ public class Board : MonoBehaviour {
                             Enemy enemyScript = enemy.GetComponent<Enemy>();
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
                                 if(!playSequence.Contains(actionToAdd)) {
+                                    Debug.Log($"enemy action was at time ${actionToAdd.completeTime}");
                                     int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
-                                    playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
+                                    if(idx != -1) {
+                                        playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
+                                    } else {
+                                        playSequence.Add(actionToAdd); // add to end if the scheduled play time is after the last player action
+                                    }
                                 }
                             }
                             enemyScript.prevActions = enemyScript.curActions;
                             enemyScript.curActions.Clear();
                         }
                     }
+                    
+                    // calculate borrowed time for next round                    
+                    borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
+
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                    StartCoroutine(ExecuteAction(playSequence));
+                    StartCoroutine(ExecuteAction(playSequence)); // resolve all enqueued actions
                 }
                 
                 break;
 
             case Phase.Resolution:
-                
                 if(playSequence.Count == 0) {
                     curPhase = Phase.Mulligan;
                     mulLimit = 4;
-                    turn = 0;
+                    round++;
+                    // turn = 0;
 
                     // reset block
                     player.GetComponent<Target>().block = 0;
