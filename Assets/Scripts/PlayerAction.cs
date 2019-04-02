@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAction: Action 
 {
     public Card card;
+    public SoundManager sm;
 
     public PlayerAction(Card card, GameObject target) : base(target) {
         this.card = card;
@@ -15,10 +16,14 @@ public class PlayerAction: Action
         MethodInfo mi = this.card.GetType().GetMethod(this.card.cardProps[0]);
         switch(card.cardProps[0]) {
             case "Attack":
-                // play attack sound
+                // FMOD Player Attack Sound
+                sm = SoundManager.me;
+                sm.PlayPlayerAttackSound();
                 break;
             case "Defend":
-                // play defend sound
+                // FMOD Player Defend Sound
+                sm = SoundManager.me;
+                sm.PlayPlayerDefendSound();
                 break;
         }
         mi.Invoke(this.card, new object[]{int.Parse(this.card.cardProps[1]), this.target});
