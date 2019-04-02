@@ -26,12 +26,14 @@ public class EnemyAction: Action
         Target target = this.target.GetComponent<Target>();
         switch(actionType) {
             case ActionType.Attack:
+                // play attack sound
                 int tmpBlock = target.block;
                 target.block = Mathf.Max(target.block - actionVal, 0);
                 target.health -= Mathf.Max(actionVal - tmpBlock, 0);
                 break;
 
             case ActionType.Defense:
+                // play defend sound
                 target.block += actionVal;
                 break;
         }
