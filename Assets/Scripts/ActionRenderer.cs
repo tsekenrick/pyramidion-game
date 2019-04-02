@@ -55,7 +55,7 @@ public class ActionRenderer : MonoBehaviour
                     action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 
-                    // TODO: Add dequeueing functionality
+                // TODO: Add dequeueing functionality
                 } else {
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
                 }
