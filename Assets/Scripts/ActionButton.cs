@@ -11,6 +11,7 @@ public class ActionButton : MonoBehaviour
     private SpriteRenderer glow;
     private CircleCollider2D collider;
     public bool buttonPressed;
+    private bool renderPressed;
 
     void Start() {
         buttonPressed = false;
@@ -25,14 +26,22 @@ public class ActionButton : MonoBehaviour
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-                sr.sprite = buttonPressed ? mulliganButtons[1] : mulliganButtons[0];
+                sr.sprite = renderPressed ? mulliganButtons[1] : mulliganButtons[0];
                 break;
 
             case Phase.Play:
-                sr.sprite = buttonPressed ? executeButtons[1] : executeButtons[0];
+                sr.sprite = renderPressed ? executeButtons[1] : executeButtons[0];
+                break;
+
+            case Phase.Resolution:
+                sr.sprite = executeButtons[0];
                 break;
 
         }
+    }
+
+    void OnMouseDown() {
+        renderPressed = true;
     }
 
 
@@ -41,10 +50,12 @@ public class ActionButton : MonoBehaviour
             case Phase.Mulligan:
                 Debug.Log("hit");
                 buttonPressed = true;
+                renderPressed = false;
                 break;
             
             case Phase.Play:
                 buttonPressed = true;
+                renderPressed = false;
                 break;
         }
     }

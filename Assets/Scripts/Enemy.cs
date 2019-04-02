@@ -10,11 +10,12 @@ public class Enemy : Target
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
 
+    // view related
     public Transform healthBar;
     public SpriteRenderer[] srs;
     public SpriteRenderer[] blockOverlay;
-    private const int MAX_HEALTH = 60;
-
+    public Sprite[] mulliganIntentIcons;
+    private const float MAX_HEALTH = 60f;
     void Start() {
         board = Board.me;
 
@@ -26,8 +27,10 @@ public class Enemy : Target
 
         srs = this.GetComponentsInChildren<SpriteRenderer>();
         blockOverlay = new SpriteRenderer[2]{
-            srs[2], srs[3]
+            srs[3], srs[4]
         };
+
+        healthBar = srs[2].GetComponent<Transform>();
 
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
     }
@@ -35,17 +38,17 @@ public class Enemy : Target
     void Update() {
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
-        healthBar.DOScaleX(Mathf.Max(0, health/MAX_HEALTH), .3f);
+        healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
 
         switch(board.curPhase) {
             case Phase.Mulligan:               
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
-                    for(int i = 0; i < Random.Range(0, 2); i++) { 
+                    for(int i = 0; i < Random.Range(2, 3); i++) { 
                         ActionType actionType = (ActionType)Random.Range(0, 2); // change to max 3 when we added statuses
                         // temporary cheeky one-liner - will not work for ActionType.Status
                         GameObject target = actionType == ActionType.Attack ? GameObject.Find("Player") : this.gameObject;
-                        curActions.Add(new EnemyAction(actionType, target));
+                        curActions.Add(new EnemyAction(actionType, target, this.gameObject));
                         Debug.Log($"enemy will take action of type: {curActions[i].actionType}");
                     }
                 }
