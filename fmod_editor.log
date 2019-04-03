@@ -1,15 +1,17 @@
-[LOG] System::create                           : Header version = 1.10.11. Current version = 1.10.11.
-[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
-[LOG] SystemI::init                            : Initialize version=11011 (100047), maxchannels=256, flags=0x00020000
-[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=8, nSamplesPerSec=48000, nAvgBytesPerSec=1536000, nBlockAlign=32, wBitsPerSample=32, cbSize=22.
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x0000063F, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
-[LOG] DownMix::init                            : dspbuffersize: 1024  rate: 48000. output speaker mode: 7, input speaker mode 3
-[LOG] DownMix::init                            : done.
+[LOG] System::create                           :     Header version = 1.10.11. Current version = 1.10.11.
+[LOG] Manager::init                            :     maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            :     Initialize version=11011 (100047), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               :     Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       :     Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       :     Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000001AA0A1C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000001AA0B968
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000001AA0B968
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000000004C2BCBE8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000000058F039C8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -22,18 +24,134 @@
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] SoundI::release                          : WaterLoop (000000001AA0B0F8)
+[LOG] SoundI::release                          :     WaterLoop (000000004277D588)
+[LOG] SoundI::release                          :     WaterLoop (000000001AA0A1C8)
+[LOG] SoundI::release                          : WindLoop (000000001AA0AD98)
+[LOG] SoundI::release                          :     WindLoop (000000004277F948)
+[LOG] SoundI::release                          :     WindLoop (000000001AA0B968)
+[LOG] SoundI::release                          :  (000000005923F098)
+[LOG] SoundI::release                          :     Marimba_1 (000000004316FA68)
+[LOG] SoundI::release                          :  (00000000440DFA88)
+[LOG] SoundI::release                          :     Marimba_2 (000000004E198A28)
+[LOG] SoundI::release                          :  (000000005923F7C8)
+[LOG] SoundI::release                          :     Marimba_3 (00000000431705C8)
+[LOG] SoundI::release                          :  (000000005923EF28)
+[LOG] SoundI::release                          :     Marimba_4 (0000000043170DE8)
+[LOG] SoundI::release                          :  (00000000440DF4C8)
+[LOG] SoundI::release                          :     Marimba_5 (000000004E19A908)
+[LOG] SoundI::release                          :  (00000000440DE0A8)
+[LOG] SoundI::release                          :     Marimba_6 (000000004E19A768)
+[LOG] SoundI::release                          :  (00000000440DF1E8)
+[LOG] SoundI::release                          :     Marimba_7 (0000000043171C88)
+[LOG] SoundI::release                          :  (00000000440DFBF8)
+[LOG] SoundI::release                          :     Marimba_8 (000000004E1986E8)
+[LOG] SoundI::release                          :  (0000000040DC41C8)
+[LOG] SoundI::release                          :     Temp Mul Phase Transition (000000004E199DA8)
+[LOG] SoundI::release                          :  (0000000040DC4EB8)
+[LOG] SoundI::release                          :     Lock_1 (000000004E198D68)
+[LOG] SoundI::release                          :  (00000000440DFD68)
+[LOG] SoundI::release                          :     Lock_2 (000000004316E068)
+[LOG] SoundI::release                          :  (000000005923E7F8)
+[LOG] SoundI::release                          :     Lock_3 (0000000043171AE8)
+[LOG] SoundI::release                          :  (000000005923E968)
+[LOG] SoundI::release                          :     Lock_4 (0000000042780168)
+[LOG] SoundI::release                          :  (00000000440DFED8)
+[LOG] SoundI::release                          :     Lock_5 (000000004E199728)
+[LOG] SoundI::release                          :  (000000005923E688)
+[LOG] SoundI::release                          :     Lock_6 (0000000043170C48)
+[LOG] SoundI::release                          :  (000000005923F4E8)
+[LOG] SoundI::release                          :     Lock_7 (000000004316FF48)
+[LOG] SoundI::release                          :  (00000000440DF358)
+[LOG] SoundI::release                          :     Lock_8 (000000004316E548)
+[LOG] SoundI::release                          :  (0000000040DC3EE8)
+[LOG] SoundI::release                          :     Card Stuff_1 (000000004E19A5C8)
+[LOG] SoundI::release                          :  (0000000059241BB8)
+[LOG] SoundI::release                          :     Card Stuff_2 (000000004316F8C8)
+[LOG] SoundI::release                          :  (00000000440DEF08)
+[LOG] SoundI::release                          :     Card Stuff_3 (000000004316F728)
+[LOG] SoundI::release                          :  (00000000440DEC28)
+[LOG] SoundI::release                          :     Card Stuff_4 (0000000043171608)
+[LOG] SoundI::release                          :  (00000000440DEAB8)
+[LOG] SoundI::release                          :     Card Click_1 (000000004E19A288)
+[LOG] SoundI::release                          :  (00000000440DE7D8)
+[LOG] SoundI::release                          :     Card Click_2 (0000000043170288)
+[LOG] SoundI::release                          :  (00000000440DF918)
+[LOG] SoundI::release                          :     Card Click_3 (000000004E19AF88)
+[LOG] SoundI::release                          :  (00000000592418D8)
+[LOG] SoundI::release                          :     Card Click_4 (0000000043170768)
+[LOG] SoundI::release                          :  (00000000440DE948)
+[LOG] SoundI::release                          :     Card Click_5 (000000004316E6E8)
+[LOG] SoundI::release                          :  (000000005923F658)
+[LOG] SoundI::release                          :     Card Discard 1 (000000004316F588)
+[LOG] SoundI::release                          :  (000000005923F208)
+[LOG] SoundI::release                          :     Card Discard 2 (000000004316E208)
+[LOG] SoundI::release                          :  (0000000059241E98)
+[LOG] SoundI::release                          :     Card Discard 3 (000000004316EA28)
+[LOG] SoundI::release                          :  (00000000440DF638)
+[LOG] SoundI::release                          :     Card Discard 4 (000000004E1998C8)
+[LOG] SoundI::release                          :  (00000000592411A8)
+[LOG] SoundI::release                          :     Card Discard 5 (0000000043170F88)
+[LOG] SoundI::release                          :  (0000000059242008)
+[LOG] SoundI::release                          :     Card Draw_1 (000000004316F0A8)
+[LOG] SoundI::release                          :  (00000000592401D8)
+[LOG] SoundI::release                          :     Card Draw_2 (0000000043171128)
+[LOG] SoundI::release                          :  (000000005923FC18)
+[LOG] SoundI::release                          :     Card Draw_3 (000000004316FC08)
+[LOG] SoundI::release                          :  (0000000040DC4338)
+[LOG] SoundI::release                          :     Card Draw_4 (000000004E198F08)
+[LOG] SoundI::release                          :  (0000000059241318)
+[LOG] SoundI::release                          :     Card Draw_5 (0000000043170908)
+[LOG] SoundI::release                          :  (0000000059240068)
+[LOG] SoundI::release                          :     Card Draw 2_1 (00000000431712C8)
+[LOG] SoundI::release                          :  (0000000040DC3C08)
+[LOG] SoundI::release                          :     Card Draw 2_2 (000000004E19AAA8)
+[LOG] SoundI::release                          :  (0000000040DC4618)
+[LOG] SoundI::release                          :     Card Draw 2_3 (000000004E19A0E8)
+[LOG] SoundI::release                          :  (000000005923EC48)
+[LOG] SoundI::release                          :     Card Draw 2_4 (000000004316F3E8)
+[LOG] SoundI::release                          :  (0000000040DC3D78)
+[LOG] SoundI::release                          :     Card Draw 2_5 (000000004E198BC8)
+[LOG] SoundI::release                          :  (000000005923EAD8)
+[LOG] SoundI::release                          :     Card Hover_1 (000000004316ED68)
+[LOG] SoundI::release                          :  (00000000440DE388)
+[LOG] SoundI::release                          :     Card Hover_2 (0000000043171E28)
+[LOG] SoundI::release                          :  (00000000440DF078)
+[LOG] SoundI::release                          :     Card Hover_3 (0000000043171948)
+[LOG] SoundI::release                          :  (00000000440DE668)
+[LOG] SoundI::release                          :     Card Hover_4 (000000004316E3A8)
+[LOG] SoundI::release                          :  (0000000040DC37B8)
+[LOG] SoundI::release                          :     Card Cancel_1 (000000004E199F48)
+[LOG] SoundI::release                          :  (00000000440DF7A8)
+[LOG] SoundI::release                          :     Card Cancel_2 (000000004E19AC48)
+[LOG] SoundI::release                          :  (0000000059240BE8)
+[LOG] SoundI::release                          :     Card Cancel_3 (0000000043170428)
+[LOG] SoundI::release                          :  (0000000059241A48)
+[LOG] SoundI::release                          :     Card Cancel_4 (000000004316FDA8)
+[LOG] SoundI::release                          :  (00000000440DED98)
+[LOG] SoundI::release                          :     Card Cancel_5 (0000000043171468)
+[LOG] SoundI::release                          :  (0000000040DC4788)
+[LOG] SoundI::release                          :     TempLockShort (000000004E19ADE8)
+[LOG] SoundI::release                          :  (0000000059240628)
+[LOG] SoundI::release                          :     Temp Attack Phase Transition (000000004316EF08)
+[LOG] SoundI::release                          :  (000000005923FD88)
+[LOG] SoundI::release                          :     Temp Attack Sound (0000000042783228)
+[LOG] SoundI::release                          :  (0000000059241768)
+[LOG] SoundI::release                          :     Temp Block Card (000000004277D3E8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
