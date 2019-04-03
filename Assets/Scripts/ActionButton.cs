@@ -19,14 +19,14 @@ public class ActionButton : MonoBehaviour
     [FMODUnity.EventRef]
     public string actionButtonUpSoundEvent;
 
-    // FMOD.Studio.EventInstance actionButtonDownSound;
-    // FMOD.Studio.EventInstance actionButtonUpSound;
+    FMOD.Studio.EventInstance actionButtonDownSound;
+    FMOD.Studio.EventInstance actionButtonUpSound;
 
     private void Awake()
     {
         // FMOD object init
-        // actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
-        // actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
+        actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
+        actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
     }
 
     void Start() {
@@ -60,7 +60,7 @@ public class ActionButton : MonoBehaviour
         renderPressed = true;
 
         // FMOD Action Button Down Sound Event
-        // actionButtonDownSound.start();
+        actionButtonDownSound.start();
     }
 
 
@@ -77,6 +77,6 @@ public class ActionButton : MonoBehaviour
                 break;
         }
         // FMOD Action Button Up Sound Event
-        // actionButtonUpSound.start();
+        actionButtonUpSound.start();
     }
 }
