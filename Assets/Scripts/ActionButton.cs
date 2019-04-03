@@ -9,7 +9,7 @@ public class ActionButton : MonoBehaviour
     public Sprite[] executeButtons;
     private SpriteRenderer sr;
     private SpriteRenderer glow;
-    private CircleCollider2D collider;
+    private CircleCollider2D col;
     public bool buttonPressed;
     private bool renderPressed;
 
@@ -19,20 +19,20 @@ public class ActionButton : MonoBehaviour
     [FMODUnity.EventRef]
     public string actionButtonUpSoundEvent;
 
-    FMOD.Studio.EventInstance actionButtonDownSound;
-    FMOD.Studio.EventInstance actionButtonUpSound;
+    // FMOD.Studio.EventInstance actionButtonDownSound;
+    // FMOD.Studio.EventInstance actionButtonUpSound;
 
     private void Awake()
     {
         // FMOD object init
-        actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
-        actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
+        // actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
+        // actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
     }
 
     void Start() {
         buttonPressed = false;
         board = Board.me;
-        collider = this.GetComponent<CircleCollider2D>();
+        col = this.GetComponent<CircleCollider2D>();
         sr = this.GetComponent<SpriteRenderer>();
         glow = GameObject.Find("ActionBtnGlow").GetComponent<SpriteRenderer>();
     }
@@ -60,14 +60,13 @@ public class ActionButton : MonoBehaviour
         renderPressed = true;
 
         // FMOD Action Button Down Sound Event
-        actionButtonDownSound.start();
+        // actionButtonDownSound.start();
     }
 
 
     void OnMouseUpAsButton() {
         switch(board.curPhase){
             case Phase.Mulligan:
-                Debug.Log("hit");
                 buttonPressed = true;
                 renderPressed = false;
                 break;
@@ -77,8 +76,7 @@ public class ActionButton : MonoBehaviour
                 renderPressed = false;
                 break;
         }
-
         // FMOD Action Button Up Sound Event
-        actionButtonUpSound.start();
+        // actionButtonUpSound.start();
     }
 }
