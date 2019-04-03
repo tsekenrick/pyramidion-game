@@ -2108,15 +2108,15 @@ SpriteRenderer:
   m_SortingLayerID: 1821969777
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 60fc67541f9437a48ac75e335500bf47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.51, y: 0.38}
+  m_Size: {x: 3.34, y: 0.21}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1978727988
@@ -2186,8 +2186,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -84788881
-  m_SortingLayer: 4
+  m_SortingLayerID: 1973838493
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2219,8 +2219,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1db11ede5d15ce54da92168b6d88d2af, type: 3}
   - {fileID: 21300000, guid: b04c4f7010e01824d96a75704a3d7e8f, type: 3}
   buttonPressed: 0
-  actionButtonDownSoundEvent: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
-  actionButtonUpSoundEvent: event:/UI/Gameplay UI/Board Actions/Action Button Up
+  actionButtonDownSoundEvent: 
+  actionButtonUpSoundEvent: 
 --- !u!58 &1978727992
 CircleCollider2D:
   m_ObjectHideFlags: 0

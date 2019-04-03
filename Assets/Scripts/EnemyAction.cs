@@ -19,7 +19,7 @@ public class EnemyAction: Action
         } // later an else block to account for ActionType.Status
 
         // assign resolution time for action at a random range, offset by the time carryover from last turn
-        this.completeTime = Random.Range(2, 8) - Board.me.borrowedTime;
+        this.completeTime = Random.Range(2, 8) + Board.me.borrowedTime;
         this.owner = owner;
     }
 

@@ -75,11 +75,9 @@ public class Board : MonoBehaviour {
     // Extension of List, used to model the sequence of actions created
     // during the play phase, and executed during the resolution phase.
     public class PlaySequence<T> : List<T> {
-        // public List<Action> sequence; // this field might not be necessary - an instance of PlaySequence itself is a List
         public int totalTime;
 
         public PlaySequence() {
-            // sequence = new List<Action>();
             totalTime = 0;
         }
 
@@ -188,7 +186,6 @@ public class Board : MonoBehaviour {
 
     public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         while(playSequence.Count != 0) {
-            Debug.Log("length of queue is " + playSequence.Count);
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
@@ -349,7 +346,6 @@ public class Board : MonoBehaviour {
                             Enemy enemyScript = enemy.GetComponent<Enemy>();
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
                                 if(!playSequence.Contains(actionToAdd)) {
-                                    Debug.Log($"enemy action was at time ${actionToAdd.completeTime}");
                                     int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
                                     if(idx != -1) {
                                         playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
@@ -365,7 +361,7 @@ public class Board : MonoBehaviour {
                     
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
-
+                    Debug.Log($"borrowed time of {borrowedTime}");
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
                     StartCoroutine(ExecuteAction(playSequence)); // resolve all enqueued actions
                 }
