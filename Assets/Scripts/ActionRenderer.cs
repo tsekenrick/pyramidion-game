@@ -13,6 +13,12 @@ public class ActionRenderer : MonoBehaviour
     private List<EnemyAction>[] enemyActions;
     
     private const float OFFSET = 1.2f;
+
+    public IEnumerator AdjustForBorrowedTime(EnemyAction enemyAction) {
+        yield return new WaitForSeconds(1f);
+        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.completeTime) * 1.14f, .98f, 0), .2f);
+        GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+    }
     // Start is called before the first frame update
     void Start() {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -37,7 +43,11 @@ public class ActionRenderer : MonoBehaviour
                     if(!enemyAction.instance) {
                         enemyAction.instance = Instantiate(enemyActionPrefab, enemyAction.owner.transform.position, Quaternion.identity, this.transform);
                         enemyAction.instance.GetComponent<EnemyIntentRenderer>().action = enemyAction;
-                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.completeTime) * 1.14f, .98f, 0), .2f);
+                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .2f);
+                        if(board.borrowedTime != 0) {
+                            StartCoroutine(AdjustForBorrowedTime(enemyAction));
+                        }
+                        enemyAction.instance.GetComponent<EnemyIntentRenderer>().isSettled = true;
                     }
                 }
             }

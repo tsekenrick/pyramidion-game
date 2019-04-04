@@ -5,9 +5,7 @@ using DG.Tweening;
 
 public class Player : Target
 {
-    public Transform healthBar;
-    public SpriteRenderer[] srs;
-    public SpriteRenderer[] blockOverlay;
+    
     private const float MAX_HEALTH = 100.0f;
 
     void Start() {
@@ -17,15 +15,23 @@ public class Player : Target
         };
 
         healthBar = srs[2].GetComponent<Transform>();
-
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
+        
         health = 100;
+        prevHealth = 100;
         block = 0;
     }
 
     void Update() {
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
-        healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);    
+        healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
+        if(health < prevHealth) {
+            StartCoroutine(InjuryEffect());
+        }
+
+        if(Board.me.curPhase == Phase.Mulligan) {
+            this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
+        }
     }
 
 

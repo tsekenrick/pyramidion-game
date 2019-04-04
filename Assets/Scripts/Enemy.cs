@@ -10,16 +10,15 @@ public class Enemy : Target
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
 
-    // view related
-    public Transform healthBar;
-    public SpriteRenderer[] srs;
-    public SpriteRenderer[] blockOverlay;
-    public Sprite[] mulliganIntentIcons;
+    public SpriteRenderer[] mulliganIntents;
+
     private const float MAX_HEALTH = 60f;
+    
     void Start() {
         board = Board.me;
 
         health = 60;
+        prevHealth = 60;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -39,9 +38,15 @@ public class Enemy : Target
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
+        if(health < prevHealth) {
+            StartCoroutine(InjuryEffect());
+        }
 
         switch(board.curPhase) {
-            case Phase.Mulligan:               
+            case Phase.Mulligan:
+                if(Board.me.curPhase == Phase.Mulligan) {
+                    this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
+                }
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
                     for(int i = 0; i < Random.Range(2, 3); i++) { 
@@ -49,12 +54,16 @@ public class Enemy : Target
                         // temporary cheeky one-liner - will not work for ActionType.Status
                         GameObject target = actionType == ActionType.Attack ? GameObject.Find("Player") : this.gameObject;
                         curActions.Add(new EnemyAction(actionType, target, this.gameObject));
-                        Debug.Log($"enemy will take action of type: {curActions[i].actionType}");
                     }
+                }
+                curActions.Sort((a, b) => a.completeTime.CompareTo(b.completeTime));
+                foreach(EnemyAction action in curActions) {
+                    mulliganIntents[(int)action.actionType].enabled = true;
                 }
                 break;
 
             case Phase.Play:
+                foreach(SpriteRenderer sr in mulliganIntents) sr.enabled = false;
                 break;
             
             case Phase.Resolution:
@@ -70,8 +79,6 @@ public class Enemy : Target
                 //     prevActions = curActions;
                 //     curActions.Clear();
                 // }
-                
-
                 break;
         }
     }

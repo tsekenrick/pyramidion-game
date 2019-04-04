@@ -116,7 +116,7 @@ public class Card : MonoBehaviour
     }
 
     void Update(){
-        cardParts[3].enabled = board.lockedHand.Contains(this.gameObject) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
+        cardParts[3].enabled = (board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
         if(curState != CardState.InQueue) {
             foreach(SpriteRenderer sr in cardParts){
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
@@ -131,10 +131,10 @@ public class Card : MonoBehaviour
                     isSettled = true;
                     textParts[0].text = cardName;
                     textParts[1].text = desc;
+                    textParts[2].text = cost.ToString();
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
-                        cardParts[4].sprite = costSprites[cost]; // TODO: will not work with cost > 9
                         if(cardSprites[i] != null){
                             cardParts[i].sprite = cardSprites[i];
                         }
@@ -175,7 +175,6 @@ public class Card : MonoBehaviour
                         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
                         sr.sortingLayerName = "UI Low"; 
                     } 
-                    cardParts[4].sortingLayerName = "Text";
                 }
                 break;
 
@@ -190,7 +189,6 @@ public class Card : MonoBehaviour
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
             } 
-            cardParts[4].sortingLayerName = "Text";
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 10;
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
@@ -203,7 +201,6 @@ public class Card : MonoBehaviour
     void OnMouseExit(){
         if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
-            cardParts[4].sortingLayerName = "Text";
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 3;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
