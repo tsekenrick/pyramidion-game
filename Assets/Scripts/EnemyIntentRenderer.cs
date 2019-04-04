@@ -12,10 +12,8 @@ public class EnemyIntentRenderer : MonoBehaviour
     private TextMeshPro textMesh;
     private SpriteRenderer sr;
     public EnemyAction action;
-    public bool isSettled;
     // Start is called before the first frame update
     void Start() {
-        isSettled = false;
         sr = this.GetComponent<SpriteRenderer>();
         textMesh = this.GetComponentInChildren<TextMeshPro>();
     }
@@ -27,7 +25,7 @@ public class EnemyIntentRenderer : MonoBehaviour
         textMesh.text = action.actionVal.ToString();
         sr.sprite = intentIcons[(int)action.actionType];
         float xPos = Mathf.Max(0, action.completeTime * 1.14f);
-        if(isSettled) this.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+        if(Board.me.curPhase == Phase.Resolution) this.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
 
     }
 }
