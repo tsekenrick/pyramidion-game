@@ -9,6 +9,7 @@ public class EnemyAction: Action
     public GameObject owner;
     public ActionType actionType;
     public int actionVal;
+    public int baseCompleteTime; // complete time without borrowed time offset - used for animation
     public string statusType;
     public SoundManager sm;
 
@@ -19,7 +20,15 @@ public class EnemyAction: Action
         } // later an else block to account for ActionType.Status
 
         // assign resolution time for action at a random range, offset by the time carryover from last turn
-        this.completeTime = Random.Range(2, 8) + Board.me.borrowedTime;
+        // also makes sure that there aren't multiple actions at the same time
+        int choice = Random.Range(2, 8);
+        List<int> existingTimes = new List<int>();
+        if(owner.GetComponent<Enemy>().curActions.Count > 0) {
+            foreach(Action action in owner.GetComponent<Enemy>().curActions) existingTimes.Add(action.completeTime);
+            while (existingTimes.Contains(choice)) choice = Random.Range(2, 8); 
+        }
+        this.baseCompleteTime = choice;
+        this.completeTime = baseCompleteTime - Board.me.borrowedTime;
         this.owner = owner;
     }
 
