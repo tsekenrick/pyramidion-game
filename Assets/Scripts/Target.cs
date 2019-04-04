@@ -6,7 +6,6 @@ using DG.Tweening;
 public class Target : MonoBehaviour
 {
     public int health;
-    protected int prevHealth;
     public int block;
 
     public Transform healthBar;
@@ -15,6 +14,7 @@ public class Target : MonoBehaviour
     public SpriteRenderer[] blockOverlay;
 
     protected IEnumerator InjuryEffect() {
+        yield return new WaitForSeconds(1f);
         srs[srs.Length -1].enabled = true;
         yield return new WaitForSeconds(.5f);
         srs[srs.Length - 1].enabled = false;

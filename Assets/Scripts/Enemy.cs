@@ -18,7 +18,6 @@ public class Enemy : Target
         board = Board.me;
 
         health = 60;
-        prevHealth = 60;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -38,9 +37,7 @@ public class Enemy : Target
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
-        if(health < prevHealth) {
-            StartCoroutine(InjuryEffect());
-        }
+        
 
         switch(board.curPhase) {
             case Phase.Mulligan:

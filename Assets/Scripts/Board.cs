@@ -319,7 +319,7 @@ public class Board : MonoBehaviour {
                 }
 
                 if(lockedHand.Count == 5 || mulLimit == 0) {
-                    Invoke("MulToPlayPhase", 1f);
+                    Invoke("MulToPlayPhase", .7f);
                     
                 } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     turn++;
