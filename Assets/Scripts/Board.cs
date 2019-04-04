@@ -188,23 +188,42 @@ public class Board : MonoBehaviour {
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
+                    // sinful code
+                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
+
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.resolveAction();
                     yield return new WaitForSeconds(1f);
                     playSequence.Remove(playSequence[0]);
+                    player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     break;
                 
                 case "EnemyAction":
+                    // sinful code
+                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
+
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
                     yield return new WaitForSeconds(1f);
                     playSequence.Remove(playSequence[0]);
+                    enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     break;
             }
         }
+        if(borrowedTime != 0) GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
         
     }
 
+    public void MulToPlayPhase() {
+        curPhase = Phase.Play;
+        lockedHand.Clear();
+        turn = 0;
+        // FMOD Play Phase Transition Sound           
+        toPlayPhaseSound.start();
+    }
+    
     private void GetAnchors() {
         cardAnchors.Add("Deck Anchor", GameObject.Find("_DeckAnchor").transform);
         for(int i = 0; i < 5; i++){
@@ -300,12 +319,8 @@ public class Board : MonoBehaviour {
                 }
 
                 if(lockedHand.Count == 5 || mulLimit == 0) {
-                    curPhase = Phase.Play;
-                    lockedHand.Clear();
-                    turn = 0;
-
-                    // FMOD Play Phase Transition Sound
-                    toPlayPhaseSound.start();
+                    Invoke("MulToPlayPhase", .7f);
+                    
                 } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     turn++;
                     foreach(GameObject card in hand) {
@@ -335,6 +350,7 @@ public class Board : MonoBehaviour {
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>()); 
                     }
+                    toMul.Clear();
 
                     curPhase = Phase.Resolution;
 
