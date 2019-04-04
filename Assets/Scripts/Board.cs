@@ -184,31 +184,34 @@ public class Board : MonoBehaviour {
         discard.Clear();
     }
 
+    public IEnumerator ResetEnemySprites() {
+        yield return new WaitForSeconds(.5f);
+        foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+    }
+
+    public IEnumerator ResetPlayerSprites() {
+        yield return new WaitForSeconds(.5f);
+        player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
+    }
     public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
-                    // sinful code
-                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
-                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
-
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.resolveAction();
                     yield return new WaitForSeconds(1f);
                     playSequence.Remove(playSequence[0]);
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
+                    StartCoroutine(ResetPlayerSprites());
                     break;
                 
                 case "EnemyAction":
-                    // sinful code
-                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
-                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
-
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
                     yield return new WaitForSeconds(1f);
                     playSequence.Remove(playSequence[0]);
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
+                    StartCoroutine(ResetEnemySprites());
                     break;
             }
         }
@@ -386,17 +389,19 @@ public class Board : MonoBehaviour {
 
             case Phase.Resolution:
                 if(playSequence.Count == 0) {
-                    curPhase = Phase.Mulligan;
                     mulLimit = 4;
                     round++;
-                    // turn = 0;
 
                     // reset block
                     player.GetComponent<Target>().block = 0;
                     foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
 
+                    // reset sprites to default stances
+                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
                     // FMOD Mulligan Phase Transition Sound
                     toMulliganPhaseSound.start();
+                    curPhase = Phase.Mulligan;
                 }
                 break;
         }

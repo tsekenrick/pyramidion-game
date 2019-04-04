@@ -25,9 +25,9 @@ public class Player : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
 
-        if(Board.me.curPhase == Phase.Mulligan) {
-            this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-        }
+        // if(Board.me.curPhase == Phase.Mulligan) {
+        //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
+        // }
     }
 
 

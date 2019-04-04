@@ -41,9 +41,9 @@ public class Enemy : Target
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-                if(Board.me.curPhase == Phase.Mulligan) {
-                    this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-                }
+                // if(Board.me.curPhase == Phase.Mulligan) {
+                //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
+                // }
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
                     for(int i = 0; i < Random.Range(2, 3); i++) { 
