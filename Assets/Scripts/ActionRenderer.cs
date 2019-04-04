@@ -47,7 +47,6 @@ public class ActionRenderer : MonoBehaviour
                         if(board.borrowedTime != 0) {
                             StartCoroutine(AdjustForBorrowedTime(enemyAction));
                         }
-                        enemyAction.instance.GetComponent<EnemyIntentRenderer>().isSettled = true;
                     }
                 }
             }
