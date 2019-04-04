@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
         srs[srs.Length -1].enabled = true;
         yield return new WaitForSeconds(.5f);
         srs[srs.Length - 1].enabled = false;
-        prevHealth = health;
+        // prevHealth = health;
     }
 
 }
