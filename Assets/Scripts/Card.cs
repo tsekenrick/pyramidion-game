@@ -94,7 +94,8 @@ public class Card : MonoBehaviour
     }
 
     public void Defend(int amount, GameObject target) {
-        Target t = target.GetComponent<Target>();
+        // Target t = target.GetComponent<Target>();
+        Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
         t.block += amount;
     }
 
