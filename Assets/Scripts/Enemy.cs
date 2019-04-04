@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class Enemy : Target
 {
@@ -9,13 +10,14 @@ public class Enemy : Target
 
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
-
+    public TextMeshPro healthText;
     public SpriteRenderer[] mulliganIntents;
 
     private const float MAX_HEALTH = 60f;
     
     void Start() {
         board = Board.me;
+        healthText = GetComponentInChildren<TextMeshPro>();
 
         health = 60;
         block = 0;
@@ -38,6 +40,8 @@ public class Enemy : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
         
+        // health text
+        healthText.text = $"{health}/{MAX_HEALTH}";
 
         switch(board.curPhase) {
             case Phase.Mulligan:
