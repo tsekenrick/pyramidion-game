@@ -6369,6 +6369,7 @@ MonoBehaviour:
   mulLimit: 0
   toMul: []
   lockedHand: []
+  TimelineResolutionPS: {fileID: 1981891906}
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
   toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
   toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
