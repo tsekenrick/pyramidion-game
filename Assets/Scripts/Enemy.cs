@@ -10,14 +10,14 @@ public class Enemy : Target
 
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
-    public TextMeshPro healthText;
+    public TextMeshPro[] healthText;
     public SpriteRenderer[] mulliganIntents;
 
     private const float MAX_HEALTH = 60f;
     
     void Start() {
         board = Board.me;
-        healthText = GetComponentInChildren<TextMeshPro>();
+        healthText = GetComponentsInChildren<TextMeshPro>();
 
         health = 60;
         block = 0;
@@ -41,7 +41,8 @@ public class Enemy : Target
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
         
         // health text
-        healthText.text = $"{health}/{MAX_HEALTH}";
+        healthText[0].text = $"{health}/{MAX_HEALTH}";
+        if(block > 0) healthText[1].text = block > 0 ? block.ToString() : "";
 
         switch(board.curPhase) {
             case Phase.Mulligan:
