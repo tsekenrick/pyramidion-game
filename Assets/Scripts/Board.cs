@@ -36,6 +36,9 @@ public class Board : MonoBehaviour {
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
 
+    //Particle Systems
+    public ParticleSystem TimelineResolutionPS;
+
     // FMOD variables
     [FMODUnity.EventRef]
     public string lockSoundEvent;
@@ -200,6 +203,7 @@ public class Board : MonoBehaviour {
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.resolveAction();
                     yield return new WaitForSeconds(1f);
+                    TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     StartCoroutine(ResetPlayerSprites());
