@@ -13,8 +13,10 @@ public class Board : MonoBehaviour {
     // "entity" fields
     public static Board me;
     public GameObject player;
+    public GameObject phaseBanner;
     public GameObject[] enemies;
     public bool actionButtonPressed;
+    
 
     // CARD MANIPULATING FIELDS //
     public GameObject cardPrefab;
@@ -225,6 +227,8 @@ public class Board : MonoBehaviour {
 
     public void MulToPlayPhase() {
         curPhase = Phase.Play;
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
+        phaseBanner.GetComponent<PhaseBanner>().isSettled = false;
         lockedHand.Clear();
         turn = 0;
         // FMOD Play Phase Transition Sound           
@@ -274,6 +278,7 @@ public class Board : MonoBehaviour {
     void Start(){
         player = GameObject.Find("Player");
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        phaseBanner = GameObject.Find("PhaseBanner");
 
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
@@ -344,6 +349,7 @@ public class Board : MonoBehaviour {
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
+                    
                 }
                 break;
             case Phase.Play:
@@ -370,7 +376,9 @@ public class Board : MonoBehaviour {
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
                                 if(!playSequence.Contains(actionToAdd)) {
                                     int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
-                                    if(idx != -1) {
+                                    if(actionToAdd.completeTime == 0) {
+                                        playSequence.Insert(0, actionToAdd);
+                                    } else if(idx != -1) {
                                         playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
                                     } else {
                                         playSequence.Add(actionToAdd); // add to end if the scheduled play time is after the last player action
@@ -395,8 +403,10 @@ public class Board : MonoBehaviour {
                 if(playSequence.Count == 0) {
                     mulLimit = 4;
                     round++;
+                    phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+                    phaseBanner.GetComponent<PhaseBanner>().isSettled = false;
 
-                    // reset block
+                    // reset block values
                     player.GetComponent<Target>().block = 0;
                     foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
 

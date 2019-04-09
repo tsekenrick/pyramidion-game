@@ -28,7 +28,7 @@ public class EnemyAction: Action
             while (existingTimes.Contains(choice)) choice = Random.Range(2, 8); 
         }
         this.baseCompleteTime = choice;
-        this.completeTime = baseCompleteTime - Board.me.borrowedTime;
+        this.completeTime = Mathf.Max(0, baseCompleteTime - Board.me.borrowedTime);
         this.owner = owner;
     }
 

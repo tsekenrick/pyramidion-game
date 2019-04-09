@@ -42,7 +42,7 @@ public class Enemy : Target
         
         // health text
         healthText[0].text = $"{health}/{MAX_HEALTH}";
-        if(block > 0) healthText[1].text = block > 0 ? block.ToString() : "";
+        healthText[1].text = block > 0 ? block.ToString() : " ";
 
         switch(board.curPhase) {
             case Phase.Mulligan:
