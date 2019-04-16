@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using DG.Tweening;
 
 public enum Phase { Mulligan, Play, Resolution };
 public class Board : MonoBehaviour {
@@ -15,6 +16,7 @@ public class Board : MonoBehaviour {
     public GameObject player;
     public GameObject phaseBanner;
     public GameObject[] enemies;
+    public GameObject perspectiveCamera;
     public bool actionButtonPressed;
     
 
@@ -191,55 +193,96 @@ public class Board : MonoBehaviour {
 
     public IEnumerator ResetEnemySprites() {
         yield return new WaitForSeconds(.5f);
-        foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+        foreach(GameObject enemy in enemies) {
+            enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
+            enemy.transform.position = enemy.GetComponent<Target>().startPos;
+        }
     }
 
     public IEnumerator ResetPlayerSprites() {
         yield return new WaitForSeconds(.5f);
         player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
+        player.transform.position = player.GetComponent<Target>().startPos;
     }
+
     public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
+        if(playSequence.Count == 0) yield return new WaitForSeconds(1f);
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.resolveAction();
-                    yield return new WaitForSeconds(1f);
+
+                    // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-1.5f, 0, -5), .5f);
+                    perspectiveCamera.transform.DOLocalRotate(new Vector3(0, -2.5f, 0), .5f);
+                    player.transform.DOMoveX(-1.6f, .5f);
+                    enemies[0].transform.DOMoveX(1.6f, .5f);
+
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     if(playerAction.card.cardProps[0] == "Defend") {
                         player.GetComponent<ParticleSystem>().Play();
                     }
                     StartCoroutine(ResetPlayerSprites());
+                    yield return new WaitForSeconds(1.5f);
                     break;
                 
                 case "EnemyAction":
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
-                    yield return new WaitForSeconds(1f);
+                    
+                    // anims
                     playSequence.Remove(playSequence[0]);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(1.5f, 0, -5), .5f);
+                    perspectiveCamera.transform.DOLocalRotate(new Vector3(0, 2.5f, 0), .5f);
+                    player.transform.DOMoveX(-1.6f, .5f);
+                    enemies[0].transform.DOMoveX(1.6f, .5f);
+
                     if(enemyAction.actionType == ActionType.Defense) {
                         enemyAction.owner.GetComponent<ParticleSystem>().Play();
                     }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     StartCoroutine(ResetEnemySprites());
+                    yield return new WaitForSeconds(1.5f);
                     break;
             }
         }
         if(borrowedTime != 0) GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
-        
     }
 
-    public void MulToPlayPhase() {
-        curPhase = Phase.Play;
+    private void MulToPlayPhase() {  
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
-        phaseBanner.GetComponent<PhaseBanner>().isSettled = false;
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+
         lockedHand.Clear();
         turn = 0;
         // FMOD Play Phase Transition Sound           
         toPlayPhaseSound.start();
+        curPhase = Phase.Play;
+    }
+
+    private void ResToMulPhase() {
+        mulLimit = 4;
+        round++;
+
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+
+        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, -18), .5f);
+        perspectiveCamera.transform.DOLocalRotate(Vector3.zero, .5f);
+
+        // reset block values
+        player.GetComponent<Target>().block = 0;
+        foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
+
+        // FMOD Mulligan Phase Transition Sound
+        toMulliganPhaseSound.start();
+        curPhase = Phase.Mulligan;
     }
     
     private void GetAnchors() {
@@ -286,6 +329,7 @@ public class Board : MonoBehaviour {
         player = GameObject.Find("Player");
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
+        perspectiveCamera = GameObject.Find("Perspective Camera");
 
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
@@ -333,12 +377,16 @@ public class Board : MonoBehaviour {
         deckCount = deck.Count; // exposes variable for debug
         switch(curPhase){
             case Phase.Mulligan:
+                StartCoroutine(ResetEnemySprites());
+                StartCoroutine(ResetPlayerSprites());
+                
+
                 while(hand.Count < 5){
                     DrawCard();
                 }
 
                 if(lockedHand.Count == 5 || mulLimit == 0) {
-                    Invoke("MulToPlayPhase", .7f);
+                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);
                     
                 } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     turn++;
@@ -399,7 +447,6 @@ public class Board : MonoBehaviour {
                     
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
-                    Debug.Log($"borrowed time of {borrowedTime}");
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
                     StartCoroutine(ExecuteAction(playSequence)); // resolve all enqueued actions
                 }
@@ -407,22 +454,9 @@ public class Board : MonoBehaviour {
                 break;
 
             case Phase.Resolution:
+                // waits for ExecuteAction coroutine to finish
                 if(playSequence.Count == 0) {
-                    mulLimit = 4;
-                    round++;
-                    phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-                    phaseBanner.GetComponent<PhaseBanner>().isSettled = false;
-
-                    // reset block values
-                    player.GetComponent<Target>().block = 0;
-                    foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
-
-                    // reset sprites to default stances
-                    foreach(GameObject enemy in enemies) enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
-                    player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
-                    // FMOD Mulligan Phase Transition Sound
-                    toMulliganPhaseSound.start();
-                    curPhase = Phase.Mulligan;
+                    if(!IsInvoking()) Invoke("ResToMulPhase", .7f);
                 }
                 break;
         }

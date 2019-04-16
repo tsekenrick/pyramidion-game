@@ -10,6 +10,7 @@ public class Player : Target
     private const float MAX_HEALTH = 100.0f;
 
     void Start() {
+        startPos = this.transform.position;
         healthText = GetComponentsInChildren<TextMeshPro>();
         srs = this.GetComponentsInChildren<SpriteRenderer>();
         blockOverlay = new SpriteRenderer[2]{

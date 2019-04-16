@@ -26,6 +26,7 @@ public class ProgressBar : MonoBehaviour
         foreach(int time in enemyActionTimes) {
             if(time > finalEnemyActionTime) finalEnemyActionTime = time;
         }
-        sr.color = board.playSequence.totalTime > finalEnemyActionTime && board.curPhase == Phase.Play ? new Color(1, 0, 0, .5f) : new Color(0, 1, 0, .5f);
+
+        sr.color = board.playSequence.totalTime > finalEnemyActionTime && board.curPhase == Phase.Play ? new Color(.8f, .05f, 0, .5f) : new Color(0, 1, 0, .5f);
     }
 }

@@ -12,13 +12,14 @@ public class Target : MonoBehaviour
     public Sprite[] combatStates;
     public SpriteRenderer[] srs;
     public SpriteRenderer[] blockOverlay;
+    public Vector3 startPos;
 
     protected IEnumerator InjuryEffect() {
         yield return new WaitForSeconds(1f);
         srs[srs.Length -1].enabled = true;
         yield return new WaitForSeconds(.5f);
         srs[srs.Length - 1].enabled = false;
-        // prevHealth = health;
+
     }
 
 }
