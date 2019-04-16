@@ -7,10 +7,10 @@ public class PlayerAction: Action
 {
     public Card card;
     public SoundManager sm;
-
     public PlayerAction(Card card, GameObject target) : base(target) {
         this.card = card;
     }
+
 
     public void resolveAction() {
         MethodInfo mi = this.card.GetType().GetMethod(this.card.cardProps[0]);
@@ -23,6 +23,8 @@ public class PlayerAction: Action
             case "Defend":
                 // FMOD Player Defend Sound
                 sm = SoundManager.me;
+
+
                 sm.PlayPlayerDefendSound();
                 break;
         }

@@ -207,7 +207,11 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(1f);
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
+                    // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
+                    if(playerAction.card.cardProps[0] == "Defend") {
+                        player.GetComponent<ParticleSystem>().Play();
+                    }
                     StartCoroutine(ResetPlayerSprites());
                     break;
                 
@@ -216,6 +220,9 @@ public class Board : MonoBehaviour {
                     enemyAction.resolveAction();
                     yield return new WaitForSeconds(1f);
                     playSequence.Remove(playSequence[0]);
+                    if(enemyAction.actionType == ActionType.Defense) {
+                        enemyAction.owner.GetComponent<ParticleSystem>().Play();
+                    }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     StartCoroutine(ResetEnemySprites());
                     break;
