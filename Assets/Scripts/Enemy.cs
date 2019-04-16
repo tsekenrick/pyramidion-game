@@ -16,6 +16,8 @@ public class Enemy : Target
     private const float MAX_HEALTH = 60f;
     
     void Start() {
+        startPos = this.transform.position;
+        
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 

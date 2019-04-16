@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 37026248}
   - component: {fileID: 37026249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CombatParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63196443}
   - component: {fileID: 63196442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackIntent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 268433782}
   - component: {fileID: 268433783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthBarBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 60fc67541f9437a48ac75e335500bf47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -453,6 +453,88 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &284189130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284189131}
+  - component: {fileID: 284189133}
+  - component: {fileID: 284189132}
+  m_Layer: 0
+  m_Name: Perspective Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284189131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284189130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -17.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &284189132
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284189130}
+  m_Enabled: 1
+--- !u!20 &284189133
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284189130}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 18
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &314070933
 GameObject:
   m_ObjectHideFlags: 0
@@ -10123,7 +10205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 457668112}
   - component: {fileID: 457668113}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CombatParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10202,7 +10284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512781530}
   - component: {fileID: 512781531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShieldIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10320,7 +10402,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -10337,11 +10419,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.81
-  m_Depth: -1
+  orthographic size: 5.4
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -10363,7 +10445,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 284189131}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10509,8 +10592,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7bbdbc20ad55a459d2d37202f6ffe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSettled: 0
   phaseName: {fileID: 0}
+  phaseBannerPrefab: {fileID: 95875143678111403, guid: f387d080af133404491a90ab11b62353,
+    type: 3}
+  canBanner: 0
 --- !u!1 &713271906
 GameObject:
   m_ObjectHideFlags: 0
@@ -10634,7 +10719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718701318}
   - component: {fileID: 718701319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthBarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10649,7 +10734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718701317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.665, y: 0, z: -1}
+  m_LocalPosition: {x: -1.665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1932387134}
@@ -10691,7 +10776,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 797eabb1a9b92144da9d0a15f2355d1e, type: 3}
   m_Color: {r: 1, g: 0.019607844, b: 0, a: 1}
   m_FlipX: 0
@@ -10846,7 +10931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 823480501}
   - component: {fileID: 823480502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StatusIntent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10928,7 +11013,7 @@ GameObject:
   - component: {fileID: 913467083}
   - component: {fileID: 913467082}
   - component: {fileID: 913467081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11166,7 +11251,7 @@ GameObject:
   - component: {fileID: 961791122}
   - component: {fileID: 961791121}
   - component: {fileID: 961791120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11442,6 +11527,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhaseBanner
       objectReference: {fileID: 0}
+    - target: {fileID: 95875143678111403, guid: f387d080af133404491a90ab11b62353,
+        type: 3}
+      propertyPath: m_TagString
+      value: Banner
+      objectReference: {fileID: 0}
     - target: {fileID: 6602197499237595497, guid: f387d080af133404491a90ab11b62353,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11629,6 +11719,7 @@ MonoBehaviour:
   player: {fileID: 0}
   phaseBanner: {fileID: 0}
   enemies: []
+  perspectiveCamera: {fileID: 0}
   actionButtonPressed: 0
   cardPrefab: {fileID: 6331844338736468087, guid: 00d90514217f4eb448b4d3b4bac6d5d8,
     type: 3}
@@ -16375,7 +16466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125500504}
   - component: {fileID: 1125500505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthBarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16390,7 +16481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125500503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.665, y: 0, z: -1}
+  m_LocalPosition: {x: -1.665, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 268433782}
@@ -16432,7 +16523,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 797eabb1a9b92144da9d0a15f2355d1e, type: 3}
   m_Color: {r: 1, g: 0.019607844, b: 0, a: 1}
   m_FlipX: 0
@@ -16487,7 +16578,7 @@ GameObject:
   - component: {fileID: 1279629676}
   - component: {fileID: 1279629675}
   - component: {fileID: 1279629674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16786,7 +16877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451677342}
   - component: {fileID: 1451677343}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShieldOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16801,7 +16892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451677341}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 268433782}
@@ -21756,7 +21847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1546543532}
   - component: {fileID: 1546543533}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShieldIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21917,7 +22008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686559333}
   - component: {fileID: 1686559334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DefendIntent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21999,7 +22090,7 @@ GameObject:
   - component: {fileID: 1736742229}
   - component: {fileID: 1736742231}
   - component: {fileID: 1736742230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22062,7 +22153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736742226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.32, y: 0.92, z: 0}
+  m_LocalPosition: {x: -6.32, y: 0.92, z: 9.3}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 268433782}
@@ -26835,7 +26926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1740923214}
   - component: {fileID: 1740923215}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShieldOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27010,7 +27101,7 @@ GameObject:
   - component: {fileID: 1809769307}
   - component: {fileID: 1809769306}
   - component: {fileID: 1809769305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31995,7 +32086,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932387134}
   - component: {fileID: 1932387135}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyHealthBarBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32057,7 +32148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 60fc67541f9437a48ac75e335500bf47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -36958,7 +37049,7 @@ GameObject:
   - component: {fileID: 2047535048}
   - component: {fileID: 2047535050}
   - component: {fileID: 2047535049}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -37021,7 +37112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047535044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.14, y: 1.5899999, z: 0}
+  m_LocalPosition: {x: 6.14, y: 1.5899999, z: 9.3}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 1932387134}
@@ -41827,7 +41918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088215221}
   - component: {fileID: 2088215220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41890,8 +41981,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088215219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 37.8}
+  m_LocalScale: {x: 1.7139, y: 1.7139, z: 0}
   m_Children:
   - {fileID: 2121358008}
   m_Father: {fileID: 0}
@@ -41907,7 +41998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2121358008}
   - component: {fileID: 2121358009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FMODPlaceholderAmbienceEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
