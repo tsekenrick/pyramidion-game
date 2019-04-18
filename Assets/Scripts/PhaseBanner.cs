@@ -29,7 +29,7 @@ public class PhaseBanner : MonoBehaviour {
 
         // create new sequence and append desired movement behavior
         moveBanner = DOTween.Sequence();
-        moveBanner.Append(transform.DOMoveX(0f, 1.15f).SetEase(Ease.OutElastic));
+        moveBanner.Append(transform.DOMoveX(0f, 1.15f).SetEase(Ease.OutExpo));
         moveBanner.Append(transform.DOMoveX(20f, .7f).SetEase(Ease.OutCubic));
         moveBanner.Append(transform.DOScale(Vector3.one * .01f, .01f));
         moveBanner.Append(transform.DOMoveX(-20f, .1f));

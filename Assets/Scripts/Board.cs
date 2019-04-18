@@ -224,18 +224,31 @@ public class Board : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
         foreach(GameObject enemy in enemies) {
             enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
-            enemy.transform.position = enemy.GetComponent<Target>().startPos;
+            // enemy.transform.position = enemy.GetComponent<Target>().startPos;
         }
     }
 
     public IEnumerator ResetPlayerSprites() {
         yield return new WaitForSeconds(.5f);
         player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
-        player.transform.position = player.GetComponent<Target>().startPos;
+        // player.transform.position = player.GetComponent<Target>().startPos;
+    }
+
+    public IEnumerator ResetActionCamera() {
+        yield return new WaitForSeconds(.5f);
+        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
     }
 
     public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
-        if(playSequence.Count == 0) yield return new WaitForSeconds(1f);
+        if(playSequence.Count == 0) {
+            yield return new WaitForSeconds(1f);
+        }
+
+        // move actors closer together (resets at end of coroutine)
+        player.transform.DOMoveX(-4.5f, .5f);
+        enemies[0].transform.DOMoveX(4.5f, .5f);
+        // GameObject.Find("Main Camera").GetComponent<Camera>().cullingMask = 0;
+
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
@@ -245,16 +258,22 @@ public class Board : MonoBehaviour {
                     // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(-1.5f, 0, -5), .5f);
-                    perspectiveCamera.transform.DOLocalRotate(new Vector3(0, -2.5f, 0), .5f);
-                    player.transform.DOMoveX(-1.6f, .5f);
-                    enemies[0].transform.DOMoveX(1.6f, .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-3.5f, 0, 8), .5f);
+                    
+                    // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
+                    // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
 
+                    // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
+                    // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
+                    
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     if(playerAction.card.cardProps[0] == "Defend") {
                         player.GetComponent<ParticleSystem>().Play();
                     }
+                    yield return new WaitForSeconds(.2f);
+
+                    // StartCoroutine(ResetActionCamera());
                     StartCoroutine(ResetPlayerSprites());
                     yield return new WaitForSeconds(1.5f);
                     break;
@@ -265,20 +284,28 @@ public class Board : MonoBehaviour {
                     
                     // anims
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(1.5f, 0, -5), .5f);
-                    perspectiveCamera.transform.DOLocalRotate(new Vector3(0, 2.5f, 0), .5f);
-                    player.transform.DOMoveX(-1.6f, .5f);
-                    enemies[0].transform.DOMoveX(1.6f, .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(3.5f, 0, 8), .5f);
+                    
+                    // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
+                    // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
+                    // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
+                    // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
                     if(enemyAction.actionType == ActionType.Defense) {
                         enemyAction.owner.GetComponent<ParticleSystem>().Play();
                     }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
+                    yield return new WaitForSeconds(.2f);
+
                     StartCoroutine(ResetEnemySprites());
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
         }
+        player.transform.DOMoveX(-10, .5f);
+        enemies[0].transform.DOMoveX(10, .5f);
+        EnableUIView();
+
         if(borrowedTime != 0) GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
     }
 
@@ -302,8 +329,7 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
 
-        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, -18), .5f);
-        perspectiveCamera.transform.DOLocalRotate(Vector3.zero, .5f);
+        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
 
         // reset block values
         player.GetComponent<Target>().block = 0;
