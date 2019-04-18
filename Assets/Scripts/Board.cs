@@ -92,6 +92,7 @@ public class Board : MonoBehaviour {
             for(int i = 0; i < this.Count; i++) {
                 Action action = this[i] as Action;
                 if(action.completeTime == targetTime) return i; 
+                else if (action.completeTime > targetTime) return i-1;
             }
             return -1;
         }
@@ -146,6 +147,34 @@ public class Board : MonoBehaviour {
                 Destroy(action.instance);
             }
             base.Remove(item);
+        }
+
+        public void DequeuePlayerAction(T item) {
+            if(item.GetType() == typeof(PlayerAction)) {
+                PlayerAction action = item as PlayerAction;
+                int idx = this.IndexOfCompleteTime(action.completeTime);
+                if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
+                this.totalTime -= action.card.cost;
+                action.card.curState = CardState.InHand;
+                Destroy(action.instance);
+            }
+            base.Remove(item);
+        
+        }
+
+        public new string ToString() {
+            string retStr = "";
+            foreach(T entry in this) {
+                if(entry is PlayerAction) {
+                    PlayerAction action = entry as PlayerAction;
+                    retStr += $"Player action of {action.card.cardName} at time {action.completeTime}\n";
+                } else if (entry is EnemyAction) {
+                    EnemyAction action = entry as EnemyAction;
+                    retStr += $"Enemy action of {action.actionType} at time {action.completeTime}\n";
+                }
+            }
+
+            return retStr;
         }
 
         
@@ -444,6 +473,7 @@ public class Board : MonoBehaviour {
                             enemyScript.curActions.Clear();
                         }
                     }
+                    Debug.Log($"Play sequence is: \n{playSequence.ToString()}");
                     
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
