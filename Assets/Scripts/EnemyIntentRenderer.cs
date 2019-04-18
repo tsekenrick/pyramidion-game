@@ -12,6 +12,7 @@ public class EnemyIntentRenderer : MonoBehaviour
     private TextMeshPro textMesh;
     private SpriteRenderer sr;
     public EnemyAction action;
+
     // Start is called before the first frame update
     void Start() {
         sr = this.GetComponent<SpriteRenderer>();

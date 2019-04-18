@@ -57,9 +57,10 @@ public class ActionRenderer : MonoBehaviour
                 PlayerAction action = entry as PlayerAction;
                 if(!action.instance) {
                     action.instance = Instantiate(actionPrefab, action.target.transform.position, Quaternion.identity, this.transform);
+                    action.instance.GetComponent<ActionInstance>().thisAction = action;
                     action.instance.GetComponent<SpriteRenderer>().size = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.GetComponent<BoxCollider2D>().size = new Vector2(action.card.cost * OFFSET, .45f);
-                    action.instance.GetComponent<BoxCollider2D>().offset = new Vector2(action.card.cost * OFFSET, 0f);
+                    action.instance.GetComponent<BoxCollider2D>().offset = new Vector2(action.card.cost * .5f * OFFSET, 0f);
                     action.instance.GetComponentInChildren<TextMeshPro>().text = $"{action.card.cost}: {action.card.cardName}";
                     action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);

@@ -62,6 +62,14 @@ public class Card : MonoBehaviour
 
     }
 
+    private void PlayAnim(Transform tr) {
+        GetComponent<TrailRenderer>().enabled = false;
+        tr.localScale = Vector3.zero;
+        tr.position = tr.parent.position;
+        tr.localScale = Vector3.one;
+        GetComponent<TrailRenderer>().enabled = true;
+    }
+
     private IEnumerator MulliganAnim(Transform tr) {
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(.1f * Vector3.one, .3f);
@@ -121,17 +129,15 @@ public class Card : MonoBehaviour
             foreach(SpriteRenderer sr in cardParts) {
                 sr.color = new Color(.5f, .5f, .5f, 1f);
             }
-            cardParts[3].enabled = true;
             cardParts[4].enabled = false; // kill glow
-        } else {
+        } else if(!(curState == CardState.InQueue)) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.color = Color.white;
             }
-            cardParts[3].enabled = false;
             cardParts[4].enabled = true;
         }
-        // cardParts[3].enabled = (board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
 
+        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue);
         cardParts[5].sortingOrder = 15;
         cardParts[5].sortingLayerName = "UI High";
         
@@ -187,12 +193,13 @@ public class Card : MonoBehaviour
 
             case CardState.InQueue:
                 if(!isSettled) {
-                    StartCoroutine(DrawAnim(tr));
+                    PlayAnim(tr);
                     isSettled = true;
                     foreach(SpriteRenderer sr in cardParts){
                         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
                         sr.sortingLayerName = "UI Low"; 
                     } 
+                    cardParts[4].enabled = false;
                 }
                 break;
 
