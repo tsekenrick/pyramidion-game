@@ -245,7 +245,7 @@ SpriteRenderer:
   m_SortingLayerID: -84788881
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39db043d145b37e46aa75ab03ab87349, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d2e927e98c740840a688a55ada86270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 63196441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4, y: 2.3999994, z: 0}
-  m_LocalScale: {x: 0.29999995, y: 0.29999995, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2047535046}
   m_RootOrder: 1
@@ -10947,7 +10947,7 @@ Transform:
   m_GameObject: {fileID: 823480500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.08, y: 2.4, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2047535046}
   m_RootOrder: 3
@@ -22024,7 +22024,7 @@ Transform:
   m_GameObject: {fileID: 1686559332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.5, y: 2.4, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2047535046}
   m_RootOrder: 2
@@ -22066,7 +22066,7 @@ SpriteRenderer:
   m_SortingLayerID: 1821969777
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ef9a2ae55bf16234098859c6204cc149, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b8bdea6b237841844ba0720ded509dbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22182,6 +22182,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ee24517c44f24594bbb2f565abeb4f60, type: 3}
   srs: []
   blockOverlay: []
+  startPos: {x: 0, y: 0, z: 0}
   healthText: []
 --- !u!199 &1736742230
 ParticleSystemRenderer:
@@ -37170,6 +37171,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fbe6e154451c44e4ebd9f5b6cb5567fd, type: 3}
   srs: []
   blockOverlay: []
+  startPos: {x: 0, y: 0, z: 0}
   healthText: []
   mulliganIntents:
   - {fileID: 63196442}
