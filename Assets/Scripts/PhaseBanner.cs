@@ -26,7 +26,8 @@ public class PhaseBanner : MonoBehaviour {
     public void doBanner() {
         if (!canBanner) return;
         canBanner = false;
-        Debug.Log("hi");
+
+        // create new sequence and append desired movement behavior
         moveBanner = DOTween.Sequence();
         moveBanner.Append(transform.DOMoveX(0f, 1.15f).SetEase(Ease.OutElastic));
         moveBanner.Append(transform.DOMoveX(20f, .7f).SetEase(Ease.OutCubic));
@@ -46,8 +47,4 @@ public class PhaseBanner : MonoBehaviour {
         phaseName.text = "Mulligan Phase";
     }
 
-    void Update() {     
-       
-    
-    }
 }
