@@ -114,6 +114,9 @@ public class Card : MonoBehaviour
         tr = this.gameObject.transform;
         curState = CardState.InDeck;
 
+        foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
+        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+
         // FMOD object init
         drawSound = FMODUnity.RuntimeManager.CreateInstance(drawSoundEvent);
         hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
@@ -130,7 +133,7 @@ public class Card : MonoBehaviour
                 sr.color = new Color(.5f, .5f, .5f, 1f);
             }
             cardParts[4].enabled = false; // kill glow
-        } else if(!(curState == CardState.InQueue)) {
+        } else if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.color = Color.white;
             }

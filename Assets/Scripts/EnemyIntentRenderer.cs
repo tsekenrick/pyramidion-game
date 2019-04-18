@@ -12,8 +12,18 @@ public class EnemyIntentRenderer : MonoBehaviour
     private TextMeshPro textMesh;
     private SpriteRenderer sr;
     public EnemyAction action;
+    private Sequence hoverSeq;
 
-    // Start is called before the first frame update
+    private void hover() {
+
+
+        // create new sequence and append desired movement behavior
+        // hoverSeq = DOTween.Sequence();
+        // hoverSeq.Append(transform.DOMoveY(0f, 1.15f).SetEase(Ease.OutSine));
+        // hoverSeq.Append(this.transform.DOMove(20f, .7f).SetEase(Ease.OutSine));
+       
+    }
+
     void Start() {
         sr = this.GetComponent<SpriteRenderer>();
         textMesh = this.GetComponentInChildren<TextMeshPro>();

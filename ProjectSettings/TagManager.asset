@@ -46,14 +46,14 @@ TagManager:
   - name: Game
     uniqueID: 1187399757
     locked: 0
-  - name: Targets
-    uniqueID: 3557013231
-    locked: 0
   - name: UI Low
     uniqueID: 1821969777
     locked: 0
   - name: UI Mid
     uniqueID: 4210178415
+    locked: 0
+  - name: Targets
+    uniqueID: 3557013231
     locked: 0
   - name: UI High
     uniqueID: 1973838493
