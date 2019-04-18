@@ -117,7 +117,24 @@ public class Card : MonoBehaviour
     }
 
     void Update(){
-        cardParts[3].enabled = (board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
+        if((board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan) {
+            foreach(SpriteRenderer sr in cardParts) {
+                sr.color = new Color(.5f, .5f, .5f, 1f);
+            }
+            cardParts[3].enabled = true;
+            cardParts[4].enabled = false; // kill glow
+        } else {
+            foreach(SpriteRenderer sr in cardParts) {
+                sr.color = Color.white;
+            }
+            cardParts[3].enabled = false;
+            cardParts[4].enabled = true;
+        }
+        // cardParts[3].enabled = (board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan; // render a lock icon if the card is locked
+
+        cardParts[5].sortingOrder = 15;
+        cardParts[5].sortingLayerName = "UI High";
+        
         if(curState != CardState.InQueue) {
             foreach(SpriteRenderer sr in cardParts){
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
@@ -180,7 +197,6 @@ public class Card : MonoBehaviour
                 break;
 
         }
-
     }
     
 
@@ -189,7 +205,8 @@ public class Card : MonoBehaviour
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
-            } 
+            }
+            cardParts[4].sortingOrder = 3; // set glow below the rest
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 10;
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
@@ -216,13 +233,13 @@ public class Card : MonoBehaviour
                 if(curState == CardState.InHand && !board.toMul.Contains(this.gameObject) && 
                 board.toMul.Count < board.mulLimit && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Add(this.gameObject);
-                    tr.DOMoveY(tr.position.y + .5f, .1f);
+                    cardParts[5].enabled = true;
                     // FMOD Card Select Event
                     selectSound.start();
                 }
                 else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Remove(this.gameObject);
-                    tr.DOMoveY(tr.position.y - .5f, .1f);
+                    cardParts[5].enabled = false;
                     // FMOD Card Deselect Event
                     deselectSound.start();
                 }
