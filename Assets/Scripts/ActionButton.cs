@@ -63,6 +63,9 @@ public class ActionButton : MonoBehaviour
         actionButtonDownSound.start();
     }
 
+    void OnMouseExit() {
+        
+    }
 
     void OnMouseUpAsButton() {
         switch(board.curPhase){
