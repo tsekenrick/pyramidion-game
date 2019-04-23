@@ -5,142 +5,39 @@
             "cost": 2,
             "desc": "Deal 6 Damage",
             "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
+            "cardProps": ["Attack", "6"],
+            "superclass": ""
         },
         {
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
             "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
+            "cardProps": ["Defend", "5"],
+            "superclass": ""
         },
         {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
+            "cardName": "Focus Attack",
+            "cost": 4,
+            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
+            "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "superclass": "FocusAttack"
         },
         {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
+            "cardName": "Focus Attack",
+            "cost": 4,
+            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
+            "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "cardProps": ["Attack", "15"],
+            "superclass": "FocusAttack"
         },
         {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
-        },
-        {
-            "cardName": "Guard",
-            "cost": 2,
-            "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
-            "cardProps": ["Defend", "5"]
+            "cardName": "Focus Attack",
+            "cost": 4,
+            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
+            "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "cardProps": ["Attack", "15"],
+            "superclass": "FocusAttack"
         }
-        
-        
     ]
 }

@@ -17,7 +17,6 @@ public class Enemy : Target
     
     void Start() {
         startPos = this.transform.position;
-        
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
