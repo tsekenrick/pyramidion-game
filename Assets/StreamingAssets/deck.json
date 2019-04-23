@@ -21,6 +21,7 @@
             "cost": 4,
             "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "cardProps": ["Attack", "15"],
             "superclass": "FocusAttack"
         },
         {

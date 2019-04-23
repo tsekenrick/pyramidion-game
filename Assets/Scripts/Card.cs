@@ -15,11 +15,10 @@ public class Card : MonoBehaviour
     private Board board = Board.me;
     private SoundManager sm = SoundManager.me;
 
-    public Sprite[] costSprites;
     private SpriteRenderer[] cardParts;
     private TextMeshPro[] textParts;
     [SerializeField]
-    private Sprite[] cardSprites;
+    private Sprite[] cardSprites = new Sprite[3];
 
     // anim related fields
     private Sequence tweenSequence;
@@ -77,7 +76,7 @@ public class Card : MonoBehaviour
 
     // this currently does not factor any sort of status modifier pressent on `target`
     public void Attack(int amount, GameObject target) {
-        Target t = target.GetComponent<Target>();
+        Target t = target.GetComponentInParent<Target>();
         int tmpBlock = t.block;
         t.block = Mathf.Max(t.block - amount, 0);
         t.health -= Mathf.Max(amount - tmpBlock, 0);
@@ -109,7 +108,7 @@ public class Card : MonoBehaviour
         // do things to resolve action based on data given in card field
     }
 
-    void Awake(){
+    public virtual void Awake(){
         tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         textParts = GetComponentsInChildren<TextMeshPro>();
@@ -118,9 +117,10 @@ public class Card : MonoBehaviour
 
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
+
     }
 
-    void Update(){
+    public virtual void Update(){
         if((board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.color = new Color(.5f, .5f, .5f, 1f);
@@ -155,9 +155,9 @@ public class Card : MonoBehaviour
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
-                        if(cardSprites[i] != null){
-                            cardParts[i].sprite = cardSprites[i];
-                        }
+                        // if(cardParts[i] != null){
+                        //     cardParts[i].sprite = cardSprites[i];
+                        // }
                     }
                     // FMOD Draw Event
                     sm.PlaySound(sm.drawSound);
