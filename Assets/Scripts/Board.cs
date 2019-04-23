@@ -304,7 +304,6 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         enemies[0].transform.DOMoveX(10, .5f);
-        EnableUIView();
 
         if(borrowedTime != 0) GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
     }
