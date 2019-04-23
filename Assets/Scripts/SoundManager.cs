@@ -17,10 +17,33 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string playerDefendSoundEvent;
 
+    [FMODUnity.EventRef]
+    public string drawSoundEvent;
+    [FMODUnity.EventRef]
+    public string hoverSoundEvent;
+    [FMODUnity.EventRef]
+    public string discardSoundEvent;
+    [FMODUnity.EventRef]
+    public string shuffleSoundEvent;
+    [FMODUnity.EventRef]
+    public string selectSoundEvent;
+    [FMODUnity.EventRef]
+    public string deselectSoundEvent;
+    [FMODUnity.EventRef]
+    public string confirmCardSoundEvent;
+
     FMOD.Studio.EventInstance enemyAttackSound;
     FMOD.Studio.EventInstance enemyDefendSound;
     FMOD.Studio.EventInstance playerAttackSound;
     FMOD.Studio.EventInstance playerDefendSound;
+
+    public FMOD.Studio.EventInstance drawSound;
+    public FMOD.Studio.EventInstance hoverSound;
+    public FMOD.Studio.EventInstance discardSound;
+    public FMOD.Studio.EventInstance shuffleSound;
+    public FMOD.Studio.EventInstance selectSound;
+    public FMOD.Studio.EventInstance deselectSound;
+    public FMOD.Studio.EventInstance confirmCardSound;
 
     private void Awake()
     {
@@ -30,6 +53,14 @@ public class SoundManager : MonoBehaviour
         enemyDefendSound = FMODUnity.RuntimeManager.CreateInstance(enemyDefendSoundEvent);
         playerAttackSound = FMODUnity.RuntimeManager.CreateInstance(playerAttackSoundEvent);
         playerDefendSound = FMODUnity.RuntimeManager.CreateInstance(playerDefendSoundEvent);
+
+        drawSound = FMODUnity.RuntimeManager.CreateInstance(drawSoundEvent);
+        hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
+        discardSound = FMODUnity.RuntimeManager.CreateInstance(discardSoundEvent);
+        shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
+        selectSound = FMODUnity.RuntimeManager.CreateInstance(selectSoundEvent);
+        deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
+        confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
     }
 
     public void PlayEnemyAttackSound()
@@ -47,5 +78,9 @@ public class SoundManager : MonoBehaviour
     public void PlayPlayerDefendSound()
     {
         playerDefendSound.start();
+    }
+    public void PlaySound(FMOD.Studio.EventInstance soundToPlay)
+    {
+        soundToPlay.start();
     }
 }
