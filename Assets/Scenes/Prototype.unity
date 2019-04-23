@@ -11049,7 +11049,7 @@ GameObject:
   - component: {fileID: 779088913}
   - component: {fileID: 779088912}
   m_Layer: 8
-  m_Name: Background_Mountians
+  m_Name: Background_Mountians1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11111,7 +11111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779088911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.37, y: -0.28, z: 28.37}
+  m_LocalPosition: {x: -19.4, y: -0.28, z: 29.17}
   m_LocalScale: {x: 1.9044559, y: 1.987871, z: 1.9044559}
   m_Children: []
   m_Father: {fileID: 0}
@@ -22826,7 +22826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694873655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.58, y: -9.18, z: 16.03}
+  m_LocalPosition: {x: -19.41, y: -9.53, z: 17.01}
   m_LocalScale: {x: 1.14, y: 1.14, z: 1.14}
   m_Children: []
   m_Father: {fileID: 0}
