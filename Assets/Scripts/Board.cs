@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -7,6 +8,7 @@ using DG.Tweening;
 public enum Phase { Mulligan, Play, Resolution };
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
+
     public Phase curPhase;
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
@@ -73,6 +75,7 @@ public class Board : MonoBehaviour {
         public string desc;
         public string artPath;
         public string[] cardProps;
+        public string superclass;
     }
 
     // Action describes an action that can be enqueued during the play phase.
@@ -253,7 +256,7 @@ public class Board : MonoBehaviour {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
-                    playerAction.resolveAction();
+                    playerAction.card.resolveAction();
 
                     // anims
                     TimelineResolutionPS.Play();
@@ -368,7 +371,7 @@ public class Board : MonoBehaviour {
     private List<GameObject> FisherYatesShuffle(List<GameObject> list) {
         for (int i = 0; i < list.Count; i++) {
             GameObject temp = list[i];
-            int randIdx = Random.Range(i, list.Count);
+            int randIdx = UnityEngine.Random.Range(i, list.Count);
             list[i] = list[randIdx];
             list[randIdx] = temp;
         }
@@ -404,12 +407,23 @@ public class Board : MonoBehaviour {
             // create card gameobject and populate its properties
             GameObject curCard = Instantiate(cardPrefab, cardAnchors["Deck Anchor"].position, Quaternion.identity);
             curCard.transform.parent = cardAnchors["Deck Anchor"];
+
+            // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
+            try {
+                curCard.AddComponent(Type.GetType(card.superclass, true));
+                Debug.Log("got to add custom component");
+                Debug.Log(Type.GetType(card.superclass,true));
+            } catch(Exception e) {
+                Debug.Log(e);
+                curCard.AddComponent<Card>();
+            }
+
             Card cardScript = curCard.GetComponent<Card>();
             cardScript.cardName = card.cardName;
             cardScript.cost = card.cost;
             cardScript.desc = card.desc;
             cardScript.cardProps = card.cardProps;
-            cardScript.cardArt = cardArtDict[cardScript.cardName]; 
+            cardScript.cardArt = cardArtDict[cardScript.cardName];
             pool.Add(curCard);
         }
         pool = FisherYatesShuffle(pool);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -12,47 +13,27 @@ public class Card : MonoBehaviour
 
     public CardState curState;
     private Board board = Board.me;
+    private SoundManager sm = SoundManager.me;
 
-    public Sprite[] costSprites;
     private SpriteRenderer[] cardParts;
     private TextMeshPro[] textParts;
     [SerializeField]
-    private Sprite[] cardSprites;
+    private Sprite[] cardSprites = new Sprite[3];
 
+    // anim related fields
     private Sequence tweenSequence;
     private Transform tr;
     private Transform prevParent;
     public bool isSettled = true;
 
+    // fields read from json
     public string cardName;
     public int cost;
     public string desc;
     public Sprite cardArt;
     public string[] cardProps;
 
-    // FMOD variables
-    [FMODUnity.EventRef]
-    public string drawSoundEvent;
-    [FMODUnity.EventRef]
-    public string hoverSoundEvent;
-    [FMODUnity.EventRef]
-    public string discardSoundEvent;
-    [FMODUnity.EventRef]
-    public string shuffleSoundEvent;
-    [FMODUnity.EventRef]
-    public string selectSoundEvent;
-    [FMODUnity.EventRef]
-    public string deselectSoundEvent;
-    [FMODUnity.EventRef]
-    public string confirmCardSoundEvent;
-
-    FMOD.Studio.EventInstance drawSound;
-    FMOD.Studio.EventInstance hoverSound;
-    FMOD.Studio.EventInstance discardSound;
-    FMOD.Studio.EventInstance shuffleSound;
-    FMOD.Studio.EventInstance selectSound;
-    FMOD.Studio.EventInstance deselectSound;
-    FMOD.Studio.EventInstance confirmCardSound;
+    public GameObject target; // null before card is "played"
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
@@ -95,7 +76,7 @@ public class Card : MonoBehaviour
 
     // this currently does not factor any sort of status modifier pressent on `target`
     public void Attack(int amount, GameObject target) {
-        Target t = target.GetComponent<Target>();
+        Target t = target.GetComponentInParent<Target>();
         int tmpBlock = t.block;
         t.block = Mathf.Max(t.block - amount, 0);
         t.health -= Mathf.Max(amount - tmpBlock, 0);
@@ -107,7 +88,27 @@ public class Card : MonoBehaviour
         t.block += amount;
     }
 
-    void Awake(){
+    public virtual void resolveAction() {
+        MethodInfo mi = this.GetType().GetMethod(this.cardProps[0]);
+        switch(cardProps[0]) {
+            case "Attack":
+                // FMOD Player Attack Sound
+                sm = SoundManager.me;
+                sm.PlayPlayerAttackSound();
+                break;
+            case "Defend":
+                // FMOD Player Defend Sound
+                sm = SoundManager.me;
+
+
+                sm.PlayPlayerDefendSound();
+                break;
+        }
+        mi.Invoke(this, new object[]{int.Parse(this.cardProps[1]), this.target});
+        // do things to resolve action based on data given in card field
+    }
+
+    public virtual void Awake(){
         tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         textParts = GetComponentsInChildren<TextMeshPro>();
@@ -117,17 +118,9 @@ public class Card : MonoBehaviour
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
 
-        // FMOD object init
-        drawSound = FMODUnity.RuntimeManager.CreateInstance(drawSoundEvent);
-        hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
-        discardSound = FMODUnity.RuntimeManager.CreateInstance(discardSoundEvent);
-        shuffleSound = FMODUnity.RuntimeManager.CreateInstance(shuffleSoundEvent);
-        selectSound = FMODUnity.RuntimeManager.CreateInstance(selectSoundEvent);
-        deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
-        confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
     }
 
-    void Update(){
+    public virtual void Update(){
         if((board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.color = new Color(.5f, .5f, .5f, 1f);
@@ -162,12 +155,12 @@ public class Card : MonoBehaviour
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
-                        if(cardSprites[i] != null){
-                            cardParts[i].sprite = cardSprites[i];
-                        }
+                        // if(cardParts[i] != null){
+                        //     cardParts[i].sprite = cardSprites[i];
+                        // }
                     }
                     // FMOD Draw Event
-                    drawSound.start();
+                    sm.PlaySound(sm.drawSound);
                 }
                 break;
 
@@ -176,7 +169,7 @@ public class Card : MonoBehaviour
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
                     // FMOD Discard Event
-                    discardSound.start();
+                    sm.PlaySound(sm.discardSound);
                 }
                 break;
             
@@ -185,7 +178,7 @@ public class Card : MonoBehaviour
                     StartCoroutine(ReshuffleAnim(tr));
                     isSettled = true;
                     // FMOD Shuffle Event
-                    shuffleSound.start();
+                    sm.PlaySound(sm.shuffleSound);
                 }
                 break;
             
@@ -221,7 +214,7 @@ public class Card : MonoBehaviour
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
-            hoverSound.start();
+            sm.PlaySound(sm.hoverSound);
         }
         
     }
@@ -245,13 +238,14 @@ public class Card : MonoBehaviour
                     board.toMul.Add(this.gameObject);
                     cardParts[5].enabled = true;
                     // FMOD Card Select Event
-                    selectSound.start();
+                    
+                    sm.PlaySound(sm.selectSound);
                 }
                 else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Remove(this.gameObject);
                     cardParts[5].enabled = false;
                     // FMOD Card Deselect Event
-                    deselectSound.start();
+                    sm.PlaySound(sm.deselectSound);
                 }
                 break;
             case Phase.Play:
@@ -271,14 +265,16 @@ public class Card : MonoBehaviour
         if(curState == CardState.InPlay) {
             Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
             foreach(Collider2D collider in colliders) {
-                if(collider.GetComponent<SpriteRenderer>() == null) continue;
-                if(collider.GetComponent<SpriteRenderer>().sortingLayerName == "Targets") {
+                if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
+                // change for new config
+                if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
                     PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+                    this.target = collider.gameObject;
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
                     curState = CardState.InQueue;
-                    // FMOD Card Play Confrimation Sound
-                    confirmCardSound.start();
+                    // FMOD Card Play Confirmation Sound
+                    sm.PlaySound(sm.confirmCardSound);
                 }
             }
             // reanchor to old hand pos
