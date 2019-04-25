@@ -42812,7 +42812,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   combatStates:
   - {fileID: 21300000, guid: cb42d3c6c289e42468501942f4bee0fc, type: 3}
-  - {fileID: 21300000, guid: 578847fecbd928e48a06562d3a25c033, type: 3}
+  - {fileID: 21300000, guid: a0f1a165383f9a149843668046742e23, type: 3}
   - {fileID: 21300000, guid: d46113e243974254db59022b608399d4, type: 3}
   srs: []
   blockOverlay: []
