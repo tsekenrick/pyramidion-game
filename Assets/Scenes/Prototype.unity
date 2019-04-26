@@ -5495,6 +5495,11 @@ MonoBehaviour:
   enemyDefendSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Block
   playerAttackSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Attack
   playerDefendSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Block
+  dequeueCardSoundEvent: event:/UI/Gameplay UI/Card Actions/DeQueueCard
+  lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
+  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
+  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
+  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
   drawSoundEvent: event:/UI/Gameplay UI/Card Actions/DrawCard
   hoverSoundEvent: event:/UI/Gameplay UI/Card Actions/HoverCard
   discardSoundEvent: event:/UI/Gameplay UI/Card Actions/DiscardCard
@@ -16853,10 +16858,6 @@ MonoBehaviour:
   toMul: []
   lockedHand: []
   TimelineResolutionPS: {fileID: 1981891906}
-  lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
-  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
-  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
-  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
 --- !u!4 &1098108933
 Transform:
   m_ObjectHideFlags: 0
