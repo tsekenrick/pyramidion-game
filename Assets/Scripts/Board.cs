@@ -46,19 +46,7 @@ public class Board : MonoBehaviour {
     public ParticleSystem TimelineResolutionPS;
 
     // FMOD variables
-    [FMODUnity.EventRef]
-    public string lockSoundEvent;
-    [FMODUnity.EventRef]
-    public string toPlayPhaseSoundEvent;
-    [FMODUnity.EventRef]
-    public string toResolutionPhaseSoundEvent;
-    [FMODUnity.EventRef]
-    public string toMulliganPhaseSoundEvent;
-
-    FMOD.Studio.EventInstance lockSound;
-    FMOD.Studio.EventInstance toPlayPhaseSound;
-    FMOD.Studio.EventInstance toResolutionPhaseSound;
-    FMOD.Studio.EventInstance toMulliganPhaseSound;
+    private SoundManager sm = SoundManager.me;
 
     [System.Serializable]
     public class DeckList {
@@ -154,6 +142,9 @@ public class Board : MonoBehaviour {
 
         public void DequeuePlayerAction(T item) {
             if(item.GetType() == typeof(PlayerAction)) {
+                // FMOD Play Dequeue Sound
+                me.sm.PlaySound(me.sm.dequeueCardSound); // Why is this playing the GenericQueueSound instead of the DequeueSound?
+
                 PlayerAction action = item as PlayerAction;
                 int idx = this.IndexOfCompleteTime(action.completeTime);
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
@@ -318,8 +309,9 @@ public class Board : MonoBehaviour {
 
         lockedHand.Clear();
         turn = 0;
-        // FMOD Play Phase Transition Sound           
-        toPlayPhaseSound.start();
+        // FMOD Play Phase Transition Sound      
+        sm = SoundManager.me;
+        sm.PlaySound(sm.toPlayPhaseSound);
         curPhase = Phase.Play;
     }
 
@@ -338,7 +330,8 @@ public class Board : MonoBehaviour {
         foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
 
         // FMOD Mulligan Phase Transition Sound
-        toMulliganPhaseSound.start();
+        sm = SoundManager.me;
+        sm.PlaySound(sm.toMulliganPhaseSound);
         curPhase = Phase.Mulligan;
     }
     
@@ -432,12 +425,6 @@ public class Board : MonoBehaviour {
         foreach(GameObject card in pool) {
             deck.Enqueue(card);
         }
-
-        // FMOD object init
-        lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
-        toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
-        toResolutionPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toResolutionPhaseSoundEvent);
-        toMulliganPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toMulliganPhaseSoundEvent);
     }
 
     void Update(){
@@ -462,7 +449,8 @@ public class Board : MonoBehaviour {
                         if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
                             lockedHand.Add(card);
                             // FMOD Play Lock Sound
-                            lockSound.start();
+                            sm = SoundManager.me;
+                            sm.PlaySound(sm.lockSound);
                         }
                     }
 
@@ -491,7 +479,8 @@ public class Board : MonoBehaviour {
                     curPhase = Phase.Resolution;
 
                     // FMOD Resolution Phase Transition Sound
-                    toResolutionPhaseSound.start();
+                    sm = SoundManager.me;
+                    sm.PlaySound(sm.toResolutionPhaseSound);
                     // enqueue enemy actions
                     if (!playSequence.ContainsEnemyAction()) {
                         foreach(GameObject enemy in enemies) {
