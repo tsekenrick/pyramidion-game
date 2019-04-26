@@ -76,7 +76,7 @@ public class SoundManager : MonoBehaviour
         playerAttackSound = FMODUnity.RuntimeManager.CreateInstance(playerAttackSoundEvent);
         playerDefendSound = FMODUnity.RuntimeManager.CreateInstance(playerDefendSoundEvent);
 
-        dequeueCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
+        dequeueCardSound = FMODUnity.RuntimeManager.CreateInstance(dequeueCardSoundEvent);
         lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
         toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
         toResolutionPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toResolutionPhaseSoundEvent);

@@ -1,19 +1,209 @@
-[LOG] System::create                           : Header version = 1.10.11. Current version = 1.10.11.
-[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
-[LOG] SystemI::init                            : Initialize version=11011 (100047), maxchannels=256, flags=0x00020000
-[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
-[LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
-[LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000000069E99D78 isAsync 0 updatePeriod 0.02
-[LOG] AsyncManager::init                       : done
-[LOG] PlaybackSystem::init                     : 
-[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
-[LOG] PlaybackSystem::init                     : done
-[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
-[LOG] Manager::init                            : done.
+[LOG] System::create                           :     Header version = 1.10.11. Current version = 1.10.11.
+[LOG] Manager::init                            :     maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            :     Initialize version=11011 (100047), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               :     Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       :     Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       :     Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000056768CE8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000004CD4B3C8
+[LOG] OutputWASAPI::init                       :     Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       :     Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       :     Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       :     manager 000000004253E308 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       :     done
+[LOG] PlaybackSystem::init                     :     
+[LOG] Thread::initThread                       :     Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     :     done
+[LOG] Thread::initThread                       :     Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            :     done.
+[LOG] Manager::readBank                        :     fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000004CD4B3C8
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SoundI::release                          :  (0000000056B8DBA8)
+[LOG] SoundI::release                          :     Lock_1 (0000000056B7E2D8)
+[LOG] SoundI::release                          :  (0000000042B11058)
+[LOG] SoundI::release                          :     Lock_2 (0000000056B7A9F8)
+[LOG] SoundI::release                          :  (0000000042661DA8)
+[LOG] SoundI::release                          :     Lock_3 (0000000056B680D8)
+[LOG] SoundI::release                          :  (00000000174A0858)
+[LOG] SoundI::release                          :     Lock_4 (0000000044011C58)
+[LOG] SoundI::release                          :  (0000000056B8D478)
+[LOG] SoundI::release                          :     Lock_5 (0000000056B7DDF8)
+[LOG] SoundI::release                          :  (0000000042662D78)
+[LOG] SoundI::release                          :     Lock_6 (0000000056B666D8)
+[LOG] SoundI::release                          :  (0000000042661508)
+[LOG] SoundI::release                          :     Lock_7 (0000000056B692B8)
+[LOG] SoundI::release                          :  (0000000056B8FE28)
+[LOG] SoundI::release                          :     Lock_8 (0000000056B7E7B8)
+[LOG] SoundI::release                          :  (0000000056B8D308)
+[LOG] SoundI::release                          :     Card Stuff_1 (0000000056B7C598)
+[LOG] SoundI::release                          :  (0000000042661F18)
+[LOG] SoundI::release                          :     Card Stuff_2 (0000000056B66878)
+[LOG] SoundI::release                          :  (0000000042B11618)
+[LOG] SoundI::release                          :     Card Stuff_3 (0000000056B7C3F8)
+[LOG] SoundI::release                          :  (0000000042B10928)
+[LOG] SoundI::release                          :     Card Stuff_4 (0000000056B7D918)
+[LOG] SoundI::release                          :  (0000000056B8D758)
+[LOG] SoundI::release                          :     Card Click_1 (0000000056B7AED8)
+[LOG] SoundI::release                          :  (0000000042B11338)
+[LOG] SoundI::release                          :     Card Click_2 (0000000056B79198)
+[LOG] SoundI::release                          :  (0000000056B8FB48)
+[LOG] SoundI::release                          :     Card Click_3 (0000000056B7BF18)
+[LOG] SoundI::release                          :  (0000000042662368)
+[LOG] SoundI::release                          :     Card Click_4 (0000000056B69938)
+[LOG] SoundI::release                          :  (0000000056B8FCB8)
+[LOG] SoundI::release                          :     Card Click_5 (0000000056B78E58)
+[LOG] SoundI::release                          :  (0000000056B8EB78)
+[LOG] SoundI::release                          :     TempLockShort (0000000056B7A038)
+[LOG] SoundI::release                          :  (0000000042661678)
+[LOG] SoundI::release                          :     Temp Attack Phase Transition (0000000056B67BF8)
+[LOG] SoundI::release                          :  (0000000042662928)
+[LOG] SoundI::release                          :     Card Draw_1 (0000000056B68A98)
+[LOG] SoundI::release                          :  (000000004D22A818)
+[LOG] SoundI::release                          :     Card Draw_2 (0000000056B65D18)
+[LOG] SoundI::release                          :  (0000000042662EE8)
+[LOG] SoundI::release                          :     Card Draw_3 (0000000056B68F78)
+[LOG] SoundI::release                          :  (0000000056B8DD18)
+[LOG] SoundI::release                          :     Card Draw_4 (0000000056B7B558)
+[LOG] SoundI::release                          :  (00000000426621F8)
+[LOG] SoundI::release                          :     Card Draw_5 (0000000056B68418)
+[LOG] SoundI::release                          :  (000000004D22A988)
+[LOG] SoundI::release                          :     Card Draw 2_1 (0000000056B661F8)
+[LOG] SoundI::release                          :  (0000000056B8CA68)
+[LOG] SoundI::release                          :     Card Draw 2_2 (0000000056B78978)
+[LOG] SoundI::release                          :  (0000000056B8F2A8)
+[LOG] SoundI::release                          :     Card Draw 2_3 (0000000056B7B218)
+[LOG] SoundI::release                          :  (0000000042B101F8)
+[LOG] SoundI::release                          :     Card Draw 2_4 (0000000056B695F8)
+[LOG] SoundI::release                          :  (0000000056B8CD48)
+[LOG] SoundI::release                          :     Card Draw 2_5 (0000000056B7B3B8)
+[LOG] SoundI::release                          :  (0000000042B118F8)
+[LOG] SoundI::release                          :     Card Hover_1 (0000000056B688F8)
+[LOG] SoundI::release                          :  (0000000042B10EE8)
+[LOG] SoundI::release                          :     Card Hover_2 (0000000056B7BA38)
+[LOG] SoundI::release                          :  (0000000042B10C08)
+[LOG] SoundI::release                          :     Card Hover_3 (0000000056B7DC58)
+[LOG] SoundI::release                          :  (0000000042B114A8)
+[LOG] SoundI::release                          :     Card Hover_4 (0000000056B79818)
+[LOG] SoundI::release                          :  (0000000042661AC8)
+[LOG] SoundI::release                          :     Blanket Tail 1 (0000000056B67098)
+[LOG] SoundI::release                          :  (0000000042662088)
+[LOG] SoundI::release                          :     Blanket Tail 2 (0000000056B69AD8)
+[LOG] SoundI::release                          :  (0000000056B8EE58)
+[LOG] SoundI::release                          :     Rake (0000000056B7D5D8)
+[LOG] SoundI::release                          :  (0000000056B903E8)
+[LOG] SoundI::release                          :     Blanket Head 1 (0000000056B7E138)
+[LOG] SoundI::release                          :  (0000000056B8C8F8)
+[LOG] SoundI::release                          :     Blanket Head 2 (0000000056B7CDB8)
+[LOG] SoundI::release                          :  (0000000056B8F418)
+[LOG] SoundI::release                          :     Shing (0000000056B7CC18)
+[LOG] SoundI::release                          :  (0000000056B90108)
+[LOG] SoundI::release                          :     Ping (0000000056B7EC98)
+[LOG] SoundI::release                          : WaterLoop (000000004CD4B218)
+[LOG] SoundI::release                          :     WaterLoop (0000000056B79E98)
+[LOG] SoundI::release                          :     WaterLoop (0000000056768CE8)
+[LOG] SoundI::release                          : WindLoop (0000000056768988)
+[LOG] SoundI::release                          :     WindLoop (0000000056B7A858)
+[LOG] SoundI::release                          :     WindLoop (000000004CD4B3C8)
+[LOG] SoundI::release                          :  (00000000426624D8)
+[LOG] SoundI::release                          :     BagDrop 1 (0000000056B678B8)
+[LOG] SoundI::release                          :  (0000000042B11EB8)
+[LOG] SoundI::release                          :     BagDrop 2 (0000000056B67238)
+[LOG] SoundI::release                          :  (0000000056B8EFC8)
+[LOG] SoundI::release                          :     BagDrop 3 (0000000056B79338)
+[LOG] SoundI::release                          :  (0000000056B8D198)
+[LOG] SoundI::release                          :     BagDrop 4 (0000000056B7B078)
+[LOG] SoundI::release                          :  (0000000042661398)
+[LOG] SoundI::release                          :     BagDrop 5 (0000000056B68758)
+[LOG] SoundI::release                          :  (00000000429DB908)
+[LOG] SoundI::release                          :     BagDrop 6 (0000000056B67A58)
+[LOG] SoundI::release                          :  (0000000056B8F9D8)
+[LOG] SoundI::release                          :     BagDrop 7 (0000000056B7E618)
+[LOG] SoundI::release                          :  (0000000042B10088)
+[LOG] SoundI::release                          :     BagDrop 8 (0000000056B69458)
+[LOG] SoundI::release                          :  (0000000042B11A68)
+[LOG] SoundI::release                          :     BagDrop 9 (0000000056B67578)
+[LOG] SoundI::release                          :  (0000000042662A98)
+[LOG] SoundI::release                          :     BagDrop 10 (0000000056B66538)
+[LOG] SoundI::release                          :  (0000000042B10648)
+[LOG] SoundI::release                          :     BagDrop 11 (0000000056B673D8)
+[LOG] SoundI::release                          :  (0000000042B10A98)
+[LOG] SoundI::release                          :     BagDrop 12 (0000000056B7CA78)
+[LOG] SoundI::release                          :  (0000000042661228)
+[LOG] SoundI::release                          :     BagDrop 13 (0000000056B66D58)
+[LOG] SoundI::release                          :  (0000000042B11BD8)
+[LOG] SoundI::release                          :     Marimba_1 (0000000056B66EF8)
+[LOG] SoundI::release                          :  (0000000056B8F6F8)
+[LOG] SoundI::release                          :     Marimba_2 (0000000056B7E958)
+[LOG] SoundI::release                          :  (0000000042B10D78)
+[LOG] SoundI::release                          :     Marimba_3 (0000000056B68DD8)
+[LOG] SoundI::release                          :  (0000000042661958)
+[LOG] SoundI::release                          :     Marimba_4 (0000000056B67F38)
+[LOG] SoundI::release                          :  (0000000056B8E728)
+[LOG] SoundI::release                          :     Marimba_5 (0000000056B7D298)
+[LOG] SoundI::release                          :  (0000000056B8CBD8)
+[LOG] SoundI::release                          :     Marimba_6 (0000000056B7EAF8)
+[LOG] SoundI::release                          :  (0000000042B11788)
+[LOG] SoundI::release                          :     Marimba_7 (0000000056B7D778)
+[LOG] SoundI::release                          :  (0000000056B90278)
+[LOG] SoundI::release                          :     Marimba_8 (0000000056B7C0B8)
+[LOG] SoundI::release                          :  (0000000056B8FF98)
+[LOG] SoundI::release                          :     Temp Mul Phase Transition (0000000056B794D8)
+[LOG] SoundI::release                          :  (0000000042662648)
+[LOG] SoundI::release                          :     Temp Action Button Down (0000000056B66A18)
+[LOG] SoundI::release                          :  (0000000042B107B8)
+[LOG] SoundI::release                          :     Card Discard 1 (0000000056B68C38)
+[LOG] SoundI::release                          :  (0000000042B11D48)
+[LOG] SoundI::release                          :     Card Discard 2 (0000000056B66398)
+[LOG] SoundI::release                          :  (00000000174A09C8)
+[LOG] SoundI::release                          :     Card Discard 3 (0000000044011DF8)
+[LOG] SoundI::release                          :  (0000000056B8E898)
+[LOG] SoundI::release                          :     Card Discard 4 (0000000056B799B8)
+[LOG] SoundI::release                          :  (00000000426617E8)
+[LOG] SoundI::release                          :     Card Discard 5 (0000000056B67D98)
+[LOG] SoundI::release                          :  (0000000056B8F138)
+[LOG] SoundI::release                          :     Card Cancel_1 (0000000056B7B6F8)
+[LOG] SoundI::release                          :  (0000000056B8C618)
+[LOG] SoundI::release                          :     Card Cancel_2 (0000000056B79CF8)
+[LOG] SoundI::release                          :  (00000000429DB628)
+[LOG] SoundI::release                          :     Card Cancel_3 (0000000044012138)
+[LOG] SoundI::release                          :  (0000000042661C38)
+[LOG] SoundI::release                          :     Card Cancel_4 (0000000056B65EB8)
+[LOG] SoundI::release                          :  (0000000042B10368)
+[LOG] SoundI::release                          :     Card Cancel_5 (0000000056B66BB8)
+[LOG] SoundI::release                          :  (0000000056B8ECE8)
+[LOG] SoundI::release                          :     Temp Action Button Up (0000000056B7DAB8)
+[LOG] SoundI::release                          :  (00000000426610B8)
+[LOG] SoundI::release                          :     Thump (0000000056B68278)
+[LOG] SoundI::release                          :  (0000000056B8DE88)
+[LOG] SoundI::release                          :     Whoosh (0000000056B7D438)
+[LOG] SoundI::release                          :  (0000000056B8EA08)
+[LOG] SoundI::release                          :     Stabby Gore 01 (0000000056B7DF98)
+[LOG] SoundI::release                          :  (00000000429DB798)
+[LOG] SoundI::release                          :     Stabby Gore 02 (0000000056B66058)
+[LOG] SoundI::release                          :  (000000004D22A538)
+[LOG] SoundI::release                          :     Stabby Gore 03 (0000000056B685B8)
+[LOG] SoundI::release                          :  (0000000042662C08)
+[LOG] SoundI::release                          :     Stabby Gore 04 (0000000056B67718)
+[LOG] SoundI::release                          :  (0000000042B104D8)
+[LOG] SoundI::release                          :     Thumpy Stab (0000000056B69798)
+[LOG] SoundI::release                          :  (00000000426627B8)
+[LOG] SoundI::release                          :     Sandy Shoop (0000000056B69118)
+[LOG] SoundI::release                          :  (0000000042B111C8)
+[LOG] SoundI::release                          :     Sword Shing (0000000056B78FF8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
@@ -27,4 +217,6 @@
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
 [LOG] SystemI::close                           : Closed.
