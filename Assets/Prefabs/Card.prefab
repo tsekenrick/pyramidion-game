@@ -66,7 +66,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5a9022e537c4fa84c8acea4c0a0ef92e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -84788881
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b3f166529d9f7d44895035252839e548, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -224,7 +224,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ec5b61be2fce95b46a737b2b5a05e4df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -739,7 +739,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 29c767711bee97d4384f3f0d64f66aab, type: 3}
   m_Color: {r: 1, g: 0.93311864, b: 0.6179246, a: 1}
@@ -1027,7 +1027,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cb9d158bd81d51c4784aa3a403864a50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1097,7 +1097,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6331844338736468083}
   - component: {fileID: 6331844338736468082}
-  - component: {fileID: 1982026306555956982}
   - component: {fileID: 4469470340819908445}
   - component: {fileID: 949254809762681991}
   m_Layer: 0
@@ -1138,47 +1137,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6331844338736468087}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1982026306555956982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331844338736468087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e582168c17f6e64e9433d8be8cfd631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curState: 0
-  costSprites:
-  - {fileID: 21300000, guid: 3a300c13107f8c74ebff082e838394f8, type: 3}
-  - {fileID: 21300000, guid: 6d99e64b85d68014d99e326ae02d07b4, type: 3}
-  - {fileID: 21300000, guid: cd9acb4041dd6d4469095783d1c24025, type: 3}
-  - {fileID: 21300000, guid: 37218499f59188e4f945390a46ddba29, type: 3}
-  - {fileID: 21300000, guid: fd15c8d53b02e3e44bf48e1e5914d974, type: 3}
-  - {fileID: 21300000, guid: 66be061ddc4bb4543ab072b6ec975d1f, type: 3}
-  - {fileID: 21300000, guid: 0c51ac930d1dc6647bbda4b822e2ae26, type: 3}
-  - {fileID: 21300000, guid: 7ac6bd302b002f549a860683e83cf90d, type: 3}
-  - {fileID: 21300000, guid: c5cd6a58121eb204299ba8443327db5b, type: 3}
-  - {fileID: 21300000, guid: c2e7da46e3a83fb4794522dcbc928975, type: 3}
-  cardSprites:
-  - {fileID: 21300000, guid: ec5b61be2fce95b46a737b2b5a05e4df, type: 3}
-  - {fileID: 0}
-  - {fileID: 21300000, guid: 4569cc1464726e949a635ed93b5dcf29, type: 3}
-  isSettled: 1
-  cardName: 
-  cost: 0
-  desc: 
-  cardArt: {fileID: 0}
-  cardProps: []
-  drawSoundEvent: event:/UI/Gameplay UI/Card Actions/DrawCard
-  hoverSoundEvent: event:/UI/Gameplay UI/Card Actions/HoverCard
-  discardSoundEvent: event:/UI/Gameplay UI/Card Actions/DiscardCard
-  shuffleSoundEvent: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
-  selectSoundEvent: event:/UI/Gameplay UI/Card Actions/SelectCard
-  deselectSoundEvent: event:/UI/Gameplay UI/Card Actions/DeselectCard
-  confirmCardSoundEvent: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
 --- !u!61 &4469470340819908445
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1241,7 +1199,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Time: 0.2
   m_Parameters:
@@ -1375,7 +1333,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821969777
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4569cc1464726e949a635ed93b5dcf29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
