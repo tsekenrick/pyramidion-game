@@ -57,6 +57,7 @@ public class ActionButton : MonoBehaviour
     }
 
     void OnMouseDown() {
+        if(board.overlayActive) return;
         renderPressed = true;
 
         // FMOD Action Button Down Sound Event
@@ -64,10 +65,15 @@ public class ActionButton : MonoBehaviour
     }
 
     void OnMouseExit() {
-        
+        if(board.overlayActive) return;
+
+        if(renderPressed) actionButtonUpSound.start();
+        renderPressed &= false;
     }
 
     void OnMouseUpAsButton() {
+        if(board.overlayActive) return;
+        
         switch(board.curPhase){
             case Phase.Mulligan:
                 buttonPressed = true;
