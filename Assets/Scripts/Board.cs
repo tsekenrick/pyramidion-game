@@ -6,10 +6,12 @@ using System.IO;
 using DG.Tweening;
 
 public enum Phase { Mulligan, Play, Resolution };
+
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
 
     public Phase curPhase;
+    public bool overlayActive;
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
 

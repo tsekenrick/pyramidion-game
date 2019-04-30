@@ -13,8 +13,8 @@ public class ActionInstance : MonoBehaviour {
 
 
     void OnMouseUpAsButton() {
-        Debug.Log("hit");
-        board.playSequence.DequeuePlayerAction(thisAction);
+        if(board.overlayActive) return;
         
+        board.playSequence.DequeuePlayerAction(thisAction);
     }
 }

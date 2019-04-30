@@ -204,6 +204,8 @@ public class Card : MonoBehaviour
     
 
     void OnMouseEnter(){
+        if(board.overlayActive) return;
+
         if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
@@ -220,6 +222,8 @@ public class Card : MonoBehaviour
     }
 
     void OnMouseExit(){
+        if(board.overlayActive) return;
+
         if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 3;
@@ -230,6 +234,8 @@ public class Card : MonoBehaviour
     }
 
     void OnMouseDown() {
+        if(board.overlayActive) return;
+        
         switch(board.curPhase){
             case Phase.Mulligan:
                 // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
