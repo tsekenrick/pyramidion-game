@@ -134,7 +134,6 @@ public class Card : MonoBehaviour
         }
 
         GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue);
-        cardParts[5].sortingOrder = 15;
         cardParts[5].sortingLayerName = "UI High";
         
         if(curState != CardState.InQueue) {
@@ -155,9 +154,10 @@ public class Card : MonoBehaviour
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
-                        // if(cardParts[i] != null){
-                        //     cardParts[i].sprite = cardSprites[i];
-                        // }
+                    }
+
+                    foreach(TextMeshPro tmp in textParts) {
+                        tmp.sortingLayerID = SortingLayer.NameToID("UI High");
                     }
                     // FMOD Draw Event
                     sm.PlaySound(sm.drawSound);
@@ -195,6 +195,10 @@ public class Card : MonoBehaviour
                         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
                         sr.sortingLayerName = "UI Low"; 
                     } 
+
+                    foreach(TextMeshPro tmp in textParts) {
+                        tmp.sortingLayerID = SortingLayer.NameToID("UI Low");
+                    }
                     cardParts[4].enabled = false;
                 }
                 break;
@@ -225,6 +229,7 @@ public class Card : MonoBehaviour
         if(board.overlayActive) return;
 
         if(curState == CardState.InHand) {
+            cardParts[5].sortingOrder = 0;
             foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 3;
             DOTween.Pause("zoomIn");
@@ -235,7 +240,7 @@ public class Card : MonoBehaviour
 
     void OnMouseDown() {
         if(board.overlayActive) return;
-        
+
         switch(board.curPhase){
             case Phase.Mulligan:
                 // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
@@ -243,6 +248,7 @@ public class Card : MonoBehaviour
                 board.toMul.Count < board.mulLimit && !board.lockedHand.Contains(this.gameObject)) {
                     board.toMul.Add(this.gameObject);
                     cardParts[5].enabled = true;
+                    cardParts[5].sortingOrder = 15;
                     // FMOD Card Select Event
                     
                     sm.PlaySound(sm.selectSound);
