@@ -64,7 +64,8 @@ public class ActionButton : MonoBehaviour
     }
 
     void OnMouseExit() {
-        
+        if(renderPressed) actionButtonUpSound.start();
+        renderPressed &= false;
     }
 
     void OnMouseUpAsButton() {

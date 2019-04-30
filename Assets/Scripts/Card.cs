@@ -15,8 +15,8 @@ public class Card : MonoBehaviour
     private Board board = Board.me;
     private SoundManager sm = SoundManager.me;
 
-    private SpriteRenderer[] cardParts;
-    private TextMeshPro[] textParts;
+    public SpriteRenderer[] cardParts;
+    public TextMeshPro[] textParts;
     [SerializeField]
     private Sprite[] cardSprites = new Sprite[3];
 

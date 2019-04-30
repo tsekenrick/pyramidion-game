@@ -28,7 +28,7 @@ public class Board : MonoBehaviour {
     private Dictionary<string, Sprite> cardArtDict = new Dictionary<string, Sprite>();
     public Dictionary<string, Transform> cardAnchors = new Dictionary<string, Transform>();
 
-    public Queue<GameObject> deck = new Queue<GameObject>();
+    public List<GameObject> deck = new List<GameObject>();
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
     public int deckCount;
@@ -198,7 +198,9 @@ public class Board : MonoBehaviour {
     public void DrawCard() {
         if(deck.Count == 0) Reshuffle();
         
-        GameObject curCard = deck.Dequeue();
+        GameObject curCard = deck[0];
+        deck.RemoveAt(0);
+
         curCard.GetComponent<Card>().curState = CardState.InHand;
         hand.Add(curCard);
         // find empty hand anchor
@@ -214,7 +216,7 @@ public class Board : MonoBehaviour {
     public void Reshuffle() {
         discard = FisherYatesShuffle(discard);
         foreach(GameObject card in discard) {
-            deck.Enqueue(card);
+            deck.Add(card);
             Card curCard = card.GetComponent<Card>();
             curCard.isSettled = false;
             curCard.curState = CardState.InDeck;
@@ -368,7 +370,7 @@ public class Board : MonoBehaviour {
         cardArtDict[cardName] = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
     }
 
-    private List<GameObject> FisherYatesShuffle(List<GameObject> list) {
+    public List<GameObject> FisherYatesShuffle(List<GameObject> list) {
         for (int i = 0; i < list.Count; i++) {
             GameObject temp = list[i];
             int randIdx = UnityEngine.Random.Range(i, list.Count);
@@ -411,10 +413,7 @@ public class Board : MonoBehaviour {
             // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
             try {
                 curCard.AddComponent(Type.GetType(card.superclass, true));
-                Debug.Log("got to add custom component");
-                Debug.Log(Type.GetType(card.superclass,true));
             } catch(Exception e) {
-                Debug.Log(e);
                 curCard.AddComponent<Card>();
             }
 
@@ -430,7 +429,7 @@ public class Board : MonoBehaviour {
         
         // now that all the preloading is done, actually put cards into the deck
         foreach(GameObject card in pool) {
-            deck.Enqueue(card);
+            deck.Add(card);
         }
 
         // FMOD object init
