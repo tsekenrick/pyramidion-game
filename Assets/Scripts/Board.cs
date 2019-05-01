@@ -6,14 +6,18 @@ using System.IO;
 using DG.Tweening;
 
 public enum Phase { Mulligan, Play, Resolution };
+
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
 
+    // "STATE" FIELDS //
     public Phase curPhase;
+    public bool overlayActive; // if this is true, disable interactive elements
+    private bool punishing; // true while punishment coroutine is running
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
 
-    // "entity" fields
+    // "ENTITY" FIELDS //
     public static Board me;
     public GameObject player;
     public GameObject phaseBanner;
@@ -28,7 +32,7 @@ public class Board : MonoBehaviour {
     private Dictionary<string, Sprite> cardArtDict = new Dictionary<string, Sprite>();
     public Dictionary<string, Transform> cardAnchors = new Dictionary<string, Transform>();
 
-    public Queue<GameObject> deck = new Queue<GameObject>();
+    public List<GameObject> deck = new List<GameObject>();
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
     public int deckCount;
@@ -66,10 +70,6 @@ public class Board : MonoBehaviour {
         public string superclass;
     }
 
-    // Action describes an action that can be enqueued during the play phase.
-    // This includes the card to be played for the action, its target(s), and
-    // the time cost of the action.
-
     // Extension of List, used to model the sequence of actions created
     // during the play phase, and executed during the resolution phase.
     public class PlaySequence<T> : List<T> {
@@ -83,7 +83,10 @@ public class Board : MonoBehaviour {
             for(int i = 0; i < this.Count; i++) {
                 Action action = this[i] as Action;
                 if(action.completeTime == targetTime) return i; 
-                else if (action.completeTime > targetTime) return i-1;
+                else if (action.completeTime > targetTime) {
+                    if(i-1 < 0) return 0;
+                    return i-1;
+                } 
             }
             return -1;
         }
@@ -189,7 +192,9 @@ public class Board : MonoBehaviour {
     public void DrawCard() {
         if(deck.Count == 0) Reshuffle();
         
-        GameObject curCard = deck.Dequeue();
+        GameObject curCard = deck[0];
+        deck.RemoveAt(0);
+
         curCard.GetComponent<Card>().curState = CardState.InHand;
         hand.Add(curCard);
         // find empty hand anchor
@@ -205,7 +210,7 @@ public class Board : MonoBehaviour {
     public void Reshuffle() {
         discard = FisherYatesShuffle(discard);
         foreach(GameObject card in discard) {
-            deck.Enqueue(card);
+            deck.Add(card);
             Card curCard = card.GetComponent<Card>();
             curCard.isSettled = false;
             curCard.curState = CardState.InDeck;
@@ -361,7 +366,7 @@ public class Board : MonoBehaviour {
         cardArtDict[cardName] = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
     }
 
-    private List<GameObject> FisherYatesShuffle(List<GameObject> list) {
+    public List<GameObject> FisherYatesShuffle(List<GameObject> list) {
         for (int i = 0; i < list.Count; i++) {
             GameObject temp = list[i];
             int randIdx = UnityEngine.Random.Range(i, list.Count);
@@ -369,6 +374,36 @@ public class Board : MonoBehaviour {
             list[randIdx] = temp;
         }
         return list;
+    }
+
+    private bool ContainsNonZeroActionCompleteTime(List<EnemyAction> list) {
+        foreach(EnemyAction action in list) {
+            if(action.completeTime > 0) return true;
+        }
+        return false;
+    }
+    
+    private IEnumerator Punishment(List<EnemyAction> list) {
+        Debug.Log("hit");
+        SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
+        overlay.enabled = true;
+        overlay.color = new Color(1f, 1f, 1f, 0f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), .75f);
+        yield return new WaitForSeconds(.75f);
+
+        player.GetComponentInChildren<ParticleSystem>().Play();
+        player.GetComponent<ParticleSystem>().Stop();
+        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        yield return new WaitForSeconds(2.0f);
+
+        overlay.enabled = false;
+        foreach(EnemyAction action in list) {
+            action.completeTime = action.baseCompleteTime;
+            float xPos = Mathf.Max(0, action.completeTime * 1.14f);
+            action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+        }
+        borrowedTime = 0;
+        punishing = false;
     }
 
     void Awake(){
@@ -404,10 +439,7 @@ public class Board : MonoBehaviour {
             // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
             try {
                 curCard.AddComponent(Type.GetType(card.superclass, true));
-                Debug.Log("got to add custom component");
-                Debug.Log(Type.GetType(card.superclass,true));
             } catch(Exception e) {
-                Debug.Log(e);
                 curCard.AddComponent<Card>();
             }
 
@@ -423,7 +455,7 @@ public class Board : MonoBehaviour {
         
         // now that all the preloading is done, actually put cards into the deck
         foreach(GameObject card in pool) {
-            deck.Enqueue(card);
+            deck.Add(card);
         }
     }
 
@@ -464,6 +496,19 @@ public class Board : MonoBehaviour {
                 }
                 break;
             case Phase.Play:
+                // check for Punishment mechanic conditions
+                List<EnemyAction> enemyActions = new List<EnemyAction>();
+                foreach(GameObject enemy in enemies) {
+                    foreach(EnemyAction action in enemy.GetComponent<Enemy>().curActions) {
+                        enemyActions.Add(action);
+                    }
+                }
+                
+                if(!ContainsNonZeroActionCompleteTime(enemyActions) && !punishing) {
+                    StartCoroutine(Punishment(enemyActions));
+                    punishing = true;
+                }
+
                 if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     // discard the cards that were not enqueue'd
                     foreach(GameObject card in hand) {
@@ -502,7 +547,7 @@ public class Board : MonoBehaviour {
                         }
                     }
                     Debug.Log($"Play sequence is: \n{playSequence.ToString()}");
-                    
+
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
