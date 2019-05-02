@@ -14,7 +14,8 @@ public class ActionInstance : MonoBehaviour {
 
     void OnMouseUpAsButton() {
         if(board.overlayActive) return;
-        
+
+        thisAction.card.OnDequeue();
         board.playSequence.DequeuePlayerAction(thisAction);
     }
 }
