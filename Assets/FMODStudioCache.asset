@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114483677391586480}
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   EditorEvents:
   - {fileID: 114281458955926936}
   - {fileID: 114384427825569212}
@@ -34,14 +34,14 @@ MonoBehaviour:
   - {fileID: 114153447924872738}
   - {fileID: 114111902343969096}
   - {fileID: 114528049741187368}
-  - {fileID: 114657389744423054}
   - {fileID: 114944331636343236}
+  - {fileID: 114894243935655508}
   MasterBanks:
   - {fileID: 114176059810486954}
   - {fileID: 114762604080103410}
   StringsBanks:
   - {fileID: 114483677391586480}
-  stringsBankWriteTime: 636916363308401054
+  stringsBankWriteTime: 636918907322931477
   cacheVersion: 3
 --- !u!114 &114007643132175608
 MonoBehaviour:
@@ -58,7 +58,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
   guid: 59490f66c5569642be2034e570dad581
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -66,6 +66,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2699
+--- !u!114 &114073593290515842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114111902343969096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +97,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/Action Button Up
   guid: 0280f107de5c6d45a67cf4a321339b8c
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -89,6 +105,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 136
+--- !u!114 &114126808454788170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\Master Bank.bank
+  lastModified: 636918907322876561
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1858624
+  Exists: 1
 --- !u!114 &114153447924872738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +139,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
   guid: f881f9cc28a277448726a242dd2982a3
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -153,6 +188,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2699
+--- !u!114 &114216095332344072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114234470221598048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +219,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DeselectCard
   guid: 01a7b2be99bb0a448ede2f120cdbf6a6
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -191,7 +242,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Monster/Generic Monster Attack
   guid: fcf1e3ca419923499a7252a5549b3a0c
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -214,7 +265,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
   guid: bd286a6247448446a8cad704d20ff04a
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -237,7 +288,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/HoverCard
   guid: 04e74ed530d715498265bd0d9cf6327c
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -279,7 +330,7 @@ MonoBehaviour:
   Path: event:/Environment/Ambiences/GenericWorldAtmos
   guid: 23c13dd9335e9b42b4d11ed832e971d7
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -359,7 +410,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DrawCard
   guid: 4b60242b0c28fe46855ab0e8888dee82
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -413,6 +464,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &114441033297322232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114480279032842180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,11 +515,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\Master Bank.strings.bank
-  lastModified: 636916363308401054
+  lastModified: 636918907322931477
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2402
+    Value: 2408
   Exists: 1
 --- !u!114 &114484637976093496
 MonoBehaviour:
@@ -488,7 +555,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
   guid: 3e4dc47b455330459da48939d3a35a72
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -530,14 +597,15 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
   guid: 49296243a838f4498d989167dc159739
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 114441033297322232}
   MinDistance: 0
   MaxDistance: 0
-  Length: 921
+  Length: 3500
 --- !u!114 &114618107168077184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +621,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
   guid: b2bca5a4e126fe42b9650441d2341f03
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -576,7 +644,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Monster/Generic Monster Block
   guid: 8f3f0cfaafd1a345943c7a7b3fe30ddb
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -617,8 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/Gameplay UI/Card Actions/OverplayWarning
   guid: 5263468502df4d4489273f1de67f126c
-  Banks:
-  - {fileID: 114350099642496994}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -626,6 +693,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3500
+--- !u!114 &114679512358785534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114751484784182310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +724,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/SelectCard
   guid: fd58c0f09c53a94782af5875257eaf5a
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -683,7 +766,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
   guid: 7ddfa111613a4e449fe8bd5006747236
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -706,7 +789,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Player/Generic Player Block
   guid: d22dfffabdead147b483b70d741fcdbf
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -729,7 +812,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/LockCard
   guid: 221feecf6a51924988ea41ee23101046
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -737,6 +820,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 440
+--- !u!114 &114808410722303524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114823210945589298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +873,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Player/Generic Player Attack
   guid: 05986b0be9a2ac4cae6f984c1f37ee14
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -782,6 +881,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1500
+--- !u!114 &114894243935655508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/DeQueueCard
+  guid: 8007154c74847940a382874656d7f549
+  Banks:
+  - {fileID: 114126808454788170}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1200
 --- !u!114 &114915981788478612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +1002,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Interface/Overplay Punishment
   guid: cf7ccd1b6853a1419b080dd620e1bceb
   Banks:
-  - {fileID: 114350099642496994}
+  - {fileID: 114126808454788170}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -888,6 +1010,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2000
+--- !u!114 &114948934326879866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114964621900553550
 MonoBehaviour:
   m_ObjectHideFlags: 0
