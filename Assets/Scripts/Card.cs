@@ -34,6 +34,7 @@ public class Card : MonoBehaviour
     public string[] cardProps;
 
     public GameObject target; // null before card is "played"
+    public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
@@ -86,6 +87,10 @@ public class Card : MonoBehaviour
         // Target t = target.GetComponent<Target>();
         Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
         t.block += amount;
+    }
+
+    public virtual void OnMulligan() {
+        return;
     }
 
     public virtual void resolveAction() {
@@ -278,9 +283,10 @@ public class Card : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
             foreach(Collider2D collider in colliders) {
                 if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
-                // change for new config
+
                 if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
                     PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+                    this.action = toInsert;
                     this.target = collider.gameObject;
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);

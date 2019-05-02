@@ -41,30 +41,6 @@
             "superclass": ""
         },
         {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
-            "superclass": ""
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
-            "superclass": ""
-        },
-        {
-            "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 Damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
-            "superclass": ""
-        },
-        {
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
@@ -99,186 +75,50 @@
         {
             "cardName": "Focus Attack",
             "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
+            "desc": "Deal 10 Damage, deal an additional 10 damage if this card is uninterrupted",
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
+            "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
         },
         {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively",
+            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "cardProps": ["Defend", "3"],
+            "superclass": "TemperedGuard"
         },
         {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively",
+            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "cardProps": ["Defend", "3"],
+            "superclass": "TemperedGuard"
         },
         {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively",
+            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "cardProps": ["Defend", "3"],
+            "superclass": "TemperedGuard"
         },
         {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively",
+            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "cardProps": ["Defend", "3"],
+            "superclass": "TemperedGuard"
         },
         {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 15 Damage, deal an additional 15 damage if this card is uninterrupted",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "15"],
-            "superclass": "FocusAttack"
+            "cardName": "Calculated Strike",
+            "cost": 2,
+            "desc": "Deal 3 Damage plus 5 for every time this card is mulliganed until it is played.",
+            "artPath": "Card_art/ph_cardart_calcstrike_1.png",
+            "cardProps": ["Attack", "3"],
+            "superclass": "CalculatedStrike"
         }
     ]
 }

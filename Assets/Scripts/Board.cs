@@ -91,6 +91,7 @@ public class Board : MonoBehaviour {
             totalTime = 0;
         }
 
+        // used to find index to insert enemy actions
         public int IndexOfCompleteTime(int targetTime) {
             for(int i = 0; i < this.Count; i++) {
                 Action action = this[i] as Action;
@@ -116,6 +117,14 @@ public class Board : MonoBehaviour {
         public bool ContainsEnemyAction() {
             foreach(T entry in this) {
                 if(entry is EnemyAction) return true;
+            }
+            return false;
+        }
+
+        public bool ContainsActionAtTime(int target) {
+            foreach(T entry in this) {
+                Action action = entry as Action;
+                if(action.completeTime == target) return true;
             }
             return false;
         }
@@ -158,6 +167,8 @@ public class Board : MonoBehaviour {
         public void DequeuePlayerAction(T item) {
             if(item.GetType() == typeof(PlayerAction)) {
                 PlayerAction action = item as PlayerAction;
+                action.card.target = null;
+                action.card.action = null;
                 int idx = this.IndexOfCompleteTime(action.completeTime);
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
@@ -179,15 +190,13 @@ public class Board : MonoBehaviour {
                     retStr += $"Enemy action of {action.actionType} at time {action.completeTime}\n";
                 }
             }
-
             return retStr;
-        }
-
-        
+        }   
     }
     
     public void Mulligan(Card card) {
         if(hand.Contains(card.gameObject)) {
+            card.OnMulligan();
             card.isSettled = false;
             card.curState = CardState.InDiscard;
             discard.Add(card.gameObject);
