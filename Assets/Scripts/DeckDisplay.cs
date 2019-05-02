@@ -66,6 +66,9 @@ public class DeckDisplay : MonoBehaviour
             int col = i % 8;
             GameObject card = toRender[i];
             Card cardScript = card.GetComponent<Card>();
+            foreach(SpriteRenderer sr in cardScript.cardParts) {
+                sr.color = Color.white;
+            }
             card.GetComponent<TrailRenderer>().enabled = false;
             card.transform.parent = this.gameObject.transform;
             

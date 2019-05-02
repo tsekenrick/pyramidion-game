@@ -6,13 +6,11 @@ using UnityEngine;
 public class FocusAttack : Card {
 
     public override void resolveAction() {
-        if(Board.me.playSequence.ContainsActionAtTime(this.action.completeTime - 1) ||
-           Board.me.playSequence.ContainsActionAtTime(this.action.completeTime - 2) ||
-           Board.me.playSequence.ContainsActionAtTime(this.action.completeTime - 3)) {
-            this.cardProps[1] = "10";
-        } else {
+        if(Board.me.prevResolvedAction == "PlayerAction") {
             this.cardProps[1] = "20";
             Debug.Log("focus attack satisfied conditions at resolution");
+        } else {
+            this.cardProps[1] = "10";
         }
         base.resolveAction();
         this.cardProps[1] = "10";

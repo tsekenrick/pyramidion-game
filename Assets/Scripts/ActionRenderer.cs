@@ -18,8 +18,9 @@ public class ActionRenderer : MonoBehaviour
         yield return new WaitForSeconds(1f);
         enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.completeTime) * 1.14f, .98f, 0), .2f);
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+        GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
     }
-    // Start is called before the first frame update
+
     void Start() {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemyActions = new List<EnemyAction>[enemies.Length];
@@ -27,7 +28,6 @@ public class ActionRenderer : MonoBehaviour
         board = Board.me;
     }
 
-    // Update is called once per frame
     void Update() {
         // this should run once per turn
         for(int i = 0; i < enemies.Length; i++) {

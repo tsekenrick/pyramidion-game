@@ -13,7 +13,7 @@ public class CalculatedStrike : Card {
     
     public override void OnMulligan() {
         Debug.Log("called onmulligan for calc strike");
-        this.cardProps[1] = int.Parse(this.cardProps[1] + 5).ToString();
+        this.cardProps[1] = (int.Parse(this.cardProps[1]) + 5).ToString();
     }
 
     public override void Awake() {
@@ -24,7 +24,8 @@ public class CalculatedStrike : Card {
         base.Update();
 
         this.desc = int.Parse(this.cardProps[1]) > 3 ? 
-            $"Deal {this.cardProps[1]} <color=#ff0000>Damage</color> plus 5 for every time this card is mulliganed until it is played." : this.desc;
+            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage plus 5 for every time this card is mulliganed until it is played." : 
+            "Deal 3 damage plus 5 for every time this card is mulliganed until it is played.";
     }
 
 }

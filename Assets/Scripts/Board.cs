@@ -16,6 +16,7 @@ public class Board : MonoBehaviour {
     private bool punishing; // true while punishment coroutine is running
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
+    public string prevResolvedAction;
 
     // "ENTITY" FIELDS //
     public static Board me;
@@ -260,6 +261,8 @@ public class Board : MonoBehaviour {
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
+                    prevResolvedAction = "PlayerAction"; // probably find a better way to do this later
+
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.card.resolveAction();
 
@@ -277,7 +280,7 @@ public class Board : MonoBehaviour {
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     if(playerAction.card.cardProps[0] == "Defend") {
-                        player.GetComponent<ParticleSystem>().Play();
+                        player.GetComponentsInChildren<ParticleSystem>()[0].Play();
                     }
                     yield return new WaitForSeconds(.2f);
 
@@ -287,6 +290,7 @@ public class Board : MonoBehaviour {
                     break;
                 
                 case "EnemyAction":
+                    prevResolvedAction = "EnemyAction"; // probably find a better way to do this later
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
                     
@@ -313,7 +317,10 @@ public class Board : MonoBehaviour {
         player.transform.DOMoveX(-10, .5f);
         enemies[0].transform.DOMoveX(10, .5f);
 
-        if(borrowedTime != 0) GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
+        if(borrowedTime != 0) {
+            GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
+            GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = true;
+        }
     }
 
     private void MulToPlayPhase() {  
@@ -397,11 +404,10 @@ public class Board : MonoBehaviour {
         SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
         overlay.enabled = true;
         overlay.color = new Color(1f, 1f, 1f, 0f);
-        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), .75f);
-        yield return new WaitForSeconds(.75f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
+        yield return new WaitForSeconds(1.5f);
 
-        player.GetComponentInChildren<ParticleSystem>().Play();
-        player.GetComponent<ParticleSystem>().Stop();
+        player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
         yield return new WaitForSeconds(2.0f);
 

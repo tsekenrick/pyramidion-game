@@ -93,6 +93,14 @@ public class Card : MonoBehaviour
         return;
     }
 
+    public virtual void OnEnqueue() {
+        return;
+    }
+
+    public virtual void OnDequeue() {
+        return;
+    }
+
     public virtual void resolveAction() {
         MethodInfo mi = this.GetType().GetMethod(this.cardProps[0]);
         switch(cardProps[0]) {
@@ -104,8 +112,6 @@ public class Card : MonoBehaviour
             case "Defend":
                 // FMOD Player Defend Sound
                 sm = SoundManager.me;
-
-
                 sm.PlayPlayerDefendSound();
                 break;
         }
@@ -220,6 +226,7 @@ public class Card : MonoBehaviour
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
             }
+            cardParts[5].sortingOrder = 7;
             cardParts[4].sortingOrder = 3; // set glow below the rest
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 10;
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
@@ -250,8 +257,14 @@ public class Card : MonoBehaviour
             case Phase.Mulligan:
                 // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
                 if(curState == CardState.InHand && !board.toMul.Contains(this.gameObject) && 
-                board.toMul.Count < board.mulLimit && !board.lockedHand.Contains(this.gameObject)) {
-                    board.toMul.Add(this.gameObject);
+                   !board.lockedHand.Contains(this.gameObject)) {
+                                    // board.toMul.Count < board.mulLimit &&
+                    if(board.toMul.Count == board.mulLimit) {
+                        board.toMul[0].GetComponent<Card>().cardParts[5].enabled = false;
+                        board.toMul[0] = this.gameObject;
+                    } else {
+                        board.toMul.Add(this.gameObject);
+                    }
                     cardParts[5].enabled = true;
                     cardParts[5].sortingOrder = 15;
                     // FMOD Card Select Event
@@ -290,6 +303,7 @@ public class Card : MonoBehaviour
                     this.target = collider.gameObject;
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
+                    OnEnqueue();
                     curState = CardState.InQueue;
                     // FMOD Card Play Confirmation Sound
                     sm.PlaySound(sm.confirmCardSound);

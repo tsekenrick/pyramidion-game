@@ -13,14 +13,14 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
     public SpriteRenderer[] mulliganIntents;
 
-    private const float MAX_HEALTH = 60f;
+    private const float MAX_HEALTH = 200f;
     
     void Start() {
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 60;
+        health = 200;
         block = 0;
 
         prevActions = new List<EnemyAction>();
