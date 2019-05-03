@@ -401,15 +401,25 @@ public class Board : MonoBehaviour {
     
     private IEnumerator Punishment(List<EnemyAction> list) {
         Debug.Log("hit");
+        // FMOD change mix to punishment mix
+        sm = SoundManager.me;
+        sm.PlaySound(sm.punishmentSnapshot);
+
         SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
         overlay.enabled = true;
         overlay.color = new Color(1f, 1f, 1f, 0f);
         DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
         yield return new WaitForSeconds(1.5f);
 
+        // FMOD play punishment sound
+        sm.PlaySound(sm.overplayPunishmentSound);
+
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
         yield return new WaitForSeconds(2.0f);
+
+        // FMOD change mix to battle mix
+        sm.PlaySound(sm.battleSnapshot);
 
         overlay.enabled = false;
         foreach(EnemyAction action in list) {
