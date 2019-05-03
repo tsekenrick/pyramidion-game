@@ -29,6 +29,8 @@ public class SoundManager : MonoBehaviour
     public string toResolutionPhaseSoundEvent;
     [FMODUnity.EventRef]
     public string toMulliganPhaseSoundEvent;
+    [FMODUnity.EventRef]
+    public string overplayPunishmentSoundEvent;
 
     //located on card
     [FMODUnity.EventRef]
@@ -45,19 +47,29 @@ public class SoundManager : MonoBehaviour
     public string deselectSoundEvent;
     [FMODUnity.EventRef]
     public string confirmCardSoundEvent;
-    
 
+    // FMOD Snapshots
+    [FMODUnity.EventRef]
+    public string battleSnapshotEvent;
+    [FMODUnity.EventRef]
+    public string punishmentSnapshotEvent;
+
+
+    //located in player and creature action logic
     FMOD.Studio.EventInstance enemyAttackSound;
     FMOD.Studio.EventInstance enemyDefendSound;
     FMOD.Studio.EventInstance playerAttackSound;
     FMOD.Studio.EventInstance playerDefendSound;
 
+    //located on board
     public FMOD.Studio.EventInstance dequeueCardSound;
     public FMOD.Studio.EventInstance lockSound;
     public FMOD.Studio.EventInstance toPlayPhaseSound;
     public FMOD.Studio.EventInstance toResolutionPhaseSound;
     public FMOD.Studio.EventInstance toMulliganPhaseSound;
+    public FMOD.Studio.EventInstance overplayPunishmentSound;
 
+    //located on card
     public FMOD.Studio.EventInstance drawSound;
     public FMOD.Studio.EventInstance hoverSound;
     public FMOD.Studio.EventInstance discardSound;
@@ -66,22 +78,29 @@ public class SoundManager : MonoBehaviour
     public FMOD.Studio.EventInstance deselectSound;
     public FMOD.Studio.EventInstance confirmCardSound;
 
+    //snapshots
+    public FMOD.Studio.EventInstance battleSnapshot;
+    public FMOD.Studio.EventInstance punishmentSnapshot;
 
     private void Awake()
     {
         me = this;
         // FMOD object init
+        //located in player and creature action logic
         enemyAttackSound = FMODUnity.RuntimeManager.CreateInstance(enemyAttackSoundEvent);
         enemyDefendSound = FMODUnity.RuntimeManager.CreateInstance(enemyDefendSoundEvent);
         playerAttackSound = FMODUnity.RuntimeManager.CreateInstance(playerAttackSoundEvent);
         playerDefendSound = FMODUnity.RuntimeManager.CreateInstance(playerDefendSoundEvent);
 
+        //located on board
         dequeueCardSound = FMODUnity.RuntimeManager.CreateInstance(dequeueCardSoundEvent);
         lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
         toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
         toResolutionPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toResolutionPhaseSoundEvent);
         toMulliganPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toMulliganPhaseSoundEvent);
+        overplayPunishmentSound = FMODUnity.RuntimeManager.CreateInstance(overplayPunishmentSoundEvent);
 
+        //located on card
         drawSound = FMODUnity.RuntimeManager.CreateInstance(drawSoundEvent);
         hoverSound = FMODUnity.RuntimeManager.CreateInstance(hoverSoundEvent);
         discardSound = FMODUnity.RuntimeManager.CreateInstance(discardSoundEvent);
@@ -90,6 +109,11 @@ public class SoundManager : MonoBehaviour
         deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
         confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
 
+        //snapshots
+        battleSnapshot = FMODUnity.RuntimeManager.CreateInstance(battleSnapshotEvent);
+        punishmentSnapshot = FMODUnity.RuntimeManager.CreateInstance(punishmentSnapshotEvent);
+
+        //parameter init
         confirmCardSound.setParameterValue("overplay", 0f);
     }
 
