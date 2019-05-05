@@ -297,22 +297,38 @@ public class Card : MonoBehaviour
 
     void OnMouseUpAsButton() {
         if(curState == CardState.InPlay) {
-            Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
-            foreach(Collider2D collider in colliders) {
-                if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
-
-                if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
-                    PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+            if(this.cardProps[0] == "Defend") {
+                float dist = Vector3.Distance(this.transform.position, this.prevParent.position);
+                if(dist > 3) {
+                    PlayerAction toInsert = new PlayerAction(this, board.player);
                     this.action = toInsert;
-                    this.target = collider.gameObject;
+                    this.target = board.player;
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
                     OnEnqueue();
                     curState = CardState.InQueue;
                     // FMOD Card Play Confirmation Sound
-                    sm.PlaySound(sm.confirmCardSound);
+                    sm.PlaySound(sm.confirmCardSound); 
+                }
+            } else {
+                Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
+                foreach(Collider2D collider in colliders) {
+                    if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
+
+                    if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+                        PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+                        this.action = toInsert;
+                        this.target = collider.gameObject;
+                        toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
+                        board.playSequence.Add(toInsert);
+                        OnEnqueue();
+                        curState = CardState.InQueue;
+                        // FMOD Card Play Confirmation Sound
+                        sm.PlaySound(sm.confirmCardSound);
+                    }
                 }
             }
+
             // reanchor to old hand pos
             tr.parent = prevParent;
             prevParent = null;
