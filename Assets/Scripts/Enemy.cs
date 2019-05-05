@@ -13,14 +13,16 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
     public SpriteRenderer[] mulliganIntents;
 
+    private bool dying;
     private const float MAX_HEALTH = 200f;
     
     void Start() {
+        dying = false;
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 50;
+        health = 1;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -54,7 +56,10 @@ public class Enemy : Target
         healthText[0].text = $"{health}/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
 
-        if(health <= 0) StartCoroutine(Die());
+        if(health <= 0 && !dying) {
+            dying = true;
+            StartCoroutine(Die());
+        } 
 
         switch(board.curPhase) {
             case Phase.Mulligan:

@@ -10716,6 +10716,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medjed
       objectReference: {fileID: 0}
+    - target: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4609263837508079394, guid: 4717511e3305ad84d8930a728ddaf38e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10815,21 +10820,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3336456160579630407, guid: 4717511e3305ad84d8930a728ddaf38e,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -737954065
-      objectReference: {fileID: 0}
-    - target: {fileID: 3336456160579630407, guid: 4717511e3305ad84d8930a728ddaf38e,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3336456160579630407, guid: 4717511e3305ad84d8930a728ddaf38e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4717511e3305ad84d8930a728ddaf38e, type: 3}
@@ -16824,6 +16814,7 @@ MonoBehaviour:
   borrowedTime: 0
   round: 0
   prevResolvedAction: 
+  level: 0
   player: {fileID: 0}
   enemySpawner: {fileID: 0}
   phaseBanner: {fileID: 0}
@@ -27668,6 +27659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e, type: 3}
+  boss: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e, type: 3}
 --- !u!4 &1759372506
 Transform:
   m_ObjectHideFlags: 0
@@ -27676,7 +27668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759372504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.45, y: 0.6, z: 0.064453125}
+  m_LocalPosition: {x: 9.45, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 644877992}

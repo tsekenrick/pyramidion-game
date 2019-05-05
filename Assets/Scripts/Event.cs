@@ -34,7 +34,8 @@ public class Event : MonoBehaviour {
         EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
         if(board.level != 4) {
             for(int i = 0; i < board.level; i++) {
-                Instantiate(spawner.enemyList[Random.Range(0, spawner.enemyList.Length)], new Vector3(i * -3f, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+                GameObject enemy = Instantiate(spawner.enemyList[Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
+                enemy.transform.localPosition = new Vector3(i * -3f, 0, 9.3f);
             }
         } else {
             Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);

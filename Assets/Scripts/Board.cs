@@ -25,6 +25,7 @@ public class Board : MonoBehaviour {
     public GameObject player;
     public GameObject enemySpawner;
     public GameObject phaseBanner;
+    public Transform[] eventContainers;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
     public bool actionButtonPressed;
@@ -446,11 +447,13 @@ public class Board : MonoBehaviour {
     void Start(){
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
-        Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], Vector3.zero, Quaternion.identity, enemySpawner.transform);
+        GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
-
+        eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
+        
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
 
@@ -500,17 +503,24 @@ public class Board : MonoBehaviour {
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
 
-        if(enemies.Length == 0) {
+        if(enemies.Length == 0 && curPhase != Phase.Event) {
             curPhase = Phase.Event;
             GameObject overlay = GameObject.Find("_DarknessOverlay");
             overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
             
-            Transform[] eventContainers = GameObject.Find("_EventManager").GetComponents<Transform>();
+            
             int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
             int curEvent = 0;
             for(int i = 0; i < possibleEvents.Count; i++) {       
                 if(i != doNotInclude) {
-                    Instantiate(possibleEvents[i], Vector3.zero, Quaternion.identity, eventContainers[curEvent]);
+                    Transform toAttach;
+                    foreach(Transform container in eventContainers) {
+                        if(container.childCount == 0) {
+                            toAttach = container;
+                            Instantiate(possibleEvents[i], toAttach, false);
+                            break;
+                        }
+                    }
                     curEvent++;
                 } 
             }
