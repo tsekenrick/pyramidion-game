@@ -6,7 +6,7 @@ using System.IO;
 using DG.Tweening;
 using TMPro;
 
-public enum Phase { Mulligan, Play, Resolution };
+public enum Phase { Mulligan, Play, Resolution, Event };
 
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
@@ -47,6 +47,10 @@ public class Board : MonoBehaviour {
 
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
+
+    // EVENT PHASE VARIABLES //
+    public List<GameObject> possibleEvents = new List<GameObject>();
+    public List<GameObject> curEvents = new List<GameObject>();
 
     //Particle Systems
     public ParticleSystem TimelineResolutionPS;
@@ -230,7 +234,7 @@ public class Board : MonoBehaviour {
         discard.Clear();
     }
 
-    public IEnumerator ResetEnemySprites() {
+    private IEnumerator ResetEnemySprites() {
         yield return new WaitForSeconds(.5f);
         foreach(GameObject enemy in enemies) {
             enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
@@ -238,18 +242,18 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public IEnumerator ResetPlayerSprites() {
+    private IEnumerator ResetPlayerSprites() {
         yield return new WaitForSeconds(.5f);
         player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
         // player.transform.position = player.GetComponent<Target>().startPos;
     }
 
-    public IEnumerator ResetActionCamera() {
+    private IEnumerator ResetActionCamera() {
         yield return new WaitForSeconds(.5f);
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
     }
 
-    public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
+    private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         if(playSequence.Count == 0) {
             yield return new WaitForSeconds(1f);
         }
@@ -323,6 +327,44 @@ public class Board : MonoBehaviour {
         }
     }
 
+    private IEnumerator Punishment(List<EnemyAction> list) {
+        SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
+
+        // FMOD change mix to punishment mix
+        sm = SoundManager.me;
+        sm.PlaySound(sm.punishmentSnapshot);
+
+        overlay.enabled = true;
+        overlay.color = new Color(1f, 1f, 1f, 0f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+
+        // FMOD play punishment sound
+        sm.PlaySound(sm.overplayPunishmentSound);
+
+        player.GetComponentsInChildren<ParticleSystem>()[1].Play();
+        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
+        player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
+        yield return new WaitForSeconds(2.0f);
+
+        // FMOD change mix to battle mix
+        sm.PlaySound(sm.battleSnapshot);
+
+        overlay.enabled = false;
+        foreach(EnemyAction action in list) {
+            action.completeTime = action.baseCompleteTime;
+            float xPos = Mathf.Max(0, action.completeTime * 1.14f);
+            action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+        }
+        borrowedTime = 0;
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
+        punishing = false;
+    }
+    
     private void MulToPlayPhase() {  
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
@@ -400,42 +442,13 @@ public class Board : MonoBehaviour {
         return false;
     }
     
-    private IEnumerator Punishment(List<EnemyAction> list) {
-        SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
-
-        // FMOD change mix to punishment mix
-        sm = SoundManager.me;
-        sm.PlaySound(sm.punishmentSnapshot);
-
-        overlay.enabled = true;
-        overlay.color = new Color(1f, 1f, 1f, 0f);
-        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
-        yield return new WaitForSeconds(1.5f);
-
-        // FMOD play punishment sound
-        sm.PlaySound(sm.overplayPunishmentSound);
-
-        player.GetComponentsInChildren<ParticleSystem>()[1].Play();
-        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
-        player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
-        yield return new WaitForSeconds(2.0f);
-
-        // FMOD change mix to battle mix
-        sm.PlaySound(sm.battleSnapshot);
-
-        overlay.enabled = false;
-        foreach(EnemyAction action in list) {
-            action.completeTime = action.baseCompleteTime;
-            float xPos = Mathf.Max(0, action.completeTime * 1.14f);
-            action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+    private bool AllEnemiesDead() {
+        foreach(GameObject enemy in enemies) {
+            if(enemy.GetComponent<Enemy>().health >= 0) {
+                return false;
+            }
         }
-        borrowedTime = 0;
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
-        punishing = false;
+        return true;
     }
 
     void Awake(){
@@ -494,6 +507,14 @@ public class Board : MonoBehaviour {
     void Update(){
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
+
+        if(AllEnemiesDead()) {
+            curPhase = Phase.Event;
+            GameObject overlay = GameObject.Find("_DarknessOverlay");
+            overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
+
+        }
+
         switch(curPhase){
             case Phase.Mulligan:
                 StartCoroutine(ResetEnemySprites());

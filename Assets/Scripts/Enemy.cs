@@ -20,7 +20,7 @@ public class Enemy : Target
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 200;
+        health = 20;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -36,6 +36,14 @@ public class Enemy : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
     }
 
+    private IEnumerator Die() {
+        SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
+        this.transform.DOShakePosition(1f, 2);
+        DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(this.gameObject);
+    }
+
     void Update() {
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
@@ -44,6 +52,8 @@ public class Enemy : Target
         // health text
         healthText[0].text = $"{health}/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
+
+        if(health <= 0) StartCoroutine(Die());
 
         switch(board.curPhase) {
             case Phase.Mulligan:
