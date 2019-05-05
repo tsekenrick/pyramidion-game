@@ -408,10 +408,18 @@ public class Board : MonoBehaviour {
     private IEnumerator Punishment(List<EnemyAction> list) {
         SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
         player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
+
+        // FMOD change mix to punishment mix
+        sm = SoundManager.me;
+        sm.PlaySound(sm.punishmentSnapshot);
+
         overlay.enabled = true;
         overlay.color = new Color(1f, 1f, 1f, 0f);
         DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
         yield return new WaitForSeconds(1.5f);
+
+        // FMOD play punishment sound
+        sm.PlaySound(sm.overplayPunishmentSound);
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
@@ -419,6 +427,9 @@ public class Board : MonoBehaviour {
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
         yield return new WaitForSeconds(2.0f);
+
+        // FMOD change mix to battle mix
+        sm.PlaySound(sm.battleSnapshot);
 
         overlay.enabled = false;
         foreach(EnemyAction action in list) {
