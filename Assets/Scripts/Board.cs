@@ -282,9 +282,6 @@ public class Board : MonoBehaviour {
                     
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
-                    if(playerAction.card.cardProps[0] == "Defend") {
-                        player.GetComponentsInChildren<ParticleSystem>()[0].Play();
-                    }
                     yield return new WaitForSeconds(.2f);
 
                     // StartCoroutine(ResetActionCamera());
@@ -306,9 +303,6 @@ public class Board : MonoBehaviour {
                     // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
-                    if(enemyAction.actionType == ActionType.Defense) {
-                        enemyAction.owner.GetComponent<ParticleSystem>().Play();
-                    }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     yield return new WaitForSeconds(.2f);
 
@@ -348,6 +342,7 @@ public class Board : MonoBehaviour {
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
+        Camera.main.transform.DOShakePosition(2f);
         yield return new WaitForSeconds(2.0f);
 
         // FMOD change mix to battle mix
@@ -512,14 +507,22 @@ public class Board : MonoBehaviour {
             curPhase = Phase.Event;
             GameObject overlay = GameObject.Find("_DarknessOverlay");
             overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
-
+            
+            Transform[] eventContainers = GameObject.Find("_EventManager").GetComponents<Transform>();
+            int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
+            int curEvent = 0;
+            for(int i = 0; i < possibleEvents.Count; i++) {       
+                if(i != doNotInclude) {
+                    Instantiate(possibleEvents[i], Vector3.zero, Quaternion.identity, eventContainers[curEvent]);
+                    curEvent++;
+                } 
+            }
         }
 
         switch(curPhase){
             case Phase.Mulligan:
                 StartCoroutine(ResetEnemySprites());
-                StartCoroutine(ResetPlayerSprites());
-                
+                StartCoroutine(ResetPlayerSprites());               
 
                 while(hand.Count < 5){
                     DrawCard();

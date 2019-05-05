@@ -20,7 +20,7 @@ public class Enemy : Target
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 20;
+        health = 50;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -38,7 +38,8 @@ public class Enemy : Target
 
     private IEnumerator Die() {
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
-        this.transform.DOShakePosition(1f, 2);
+        this.transform.DOShakePosition(1f, .50f);
+        yield return new WaitForSeconds(.25f);
         DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
         yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
@@ -57,9 +58,6 @@ public class Enemy : Target
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-                // if(Board.me.curPhase == Phase.Mulligan) {
-                //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-                // }
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
                     for(int i = 0; i < Random.Range(2, 3); i++) { 

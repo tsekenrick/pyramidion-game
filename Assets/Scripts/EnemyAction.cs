@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public enum ActionType { Attack, Defense, Status };
 
@@ -46,6 +47,13 @@ public class EnemyAction: Action
                 target.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(actionVal - tmpBlock, 0)}";
                 target.GetComponentInChildren<DamageText>().FadeText();
                 target.health -= Mathf.Max(actionVal - tmpBlock, 0);
+                if(Mathf.Max(actionVal - tmpBlock, 0) > 0) {
+                    target.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
+                    Camera.main.transform.DOShakePosition(.5f);
+                } else {
+                    Camera.main.transform.DOShakePosition(.5f, .5f);
+                }
+                
                 break;
 
             case ActionType.Defense:
@@ -54,6 +62,7 @@ public class EnemyAction: Action
                 sm.PlayEnemyDefendSound();
 
                 target.block += actionVal;
+                target.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
                 break;
         }
     }

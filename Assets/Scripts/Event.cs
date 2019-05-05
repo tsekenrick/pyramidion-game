@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Event : MonoBehaviour {
-    
+
     public Sprite[] eventStates;
     private SpriteRenderer sr;
     private Board board;
@@ -11,7 +11,16 @@ public class Event : MonoBehaviour {
     // do the thing the event says it will do, and then set game back to mul phase
     protected virtual void resolveEvent() {
 
-        // reset combat states
+        // disable dark overlay
+        GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>().enabled = false;
+
+        // show mulligan banner
+        GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+
+        // reset state variables
         Board.me.curPhase = Phase.Mulligan;
         board.mulLimit = 4;
         board.turn = 0;

@@ -83,6 +83,13 @@ public class Card : MonoBehaviour
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(amount - tmpBlock, 0)}";
         t.GetComponentInChildren<DamageText>().FadeText();
         t.health -= Mathf.Max(amount - tmpBlock, 0);
+
+        if(Mathf.Max(amount - tmpBlock, 0) > 0) {
+            t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
+            Camera.main.transform.DOShakePosition(.5f);
+        } else {
+            Camera.main.transform.DOShakePosition(.5f, .5f);
+        }
     }
 
     public void Defend(int amount, GameObject target) {
