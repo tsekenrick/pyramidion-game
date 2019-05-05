@@ -42,8 +42,12 @@ public class CardpileButton : MonoBehaviour
     }
 
     void OnMouseUpAsButton() {
-        if(board.overlayActive) return;
-        
-        GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckToScreen(thisPile);
+        // if(board.overlayActive) return;
+        DeckDisplay overlay = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
+        if(overlay.isRendering) {
+            overlay.DeckOffScreen();
+        } else {
+            overlay.DeckToScreen(thisPile);
+        }
     }
 }

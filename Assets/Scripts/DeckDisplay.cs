@@ -47,6 +47,28 @@ public class DeckDisplay : MonoBehaviour
             isRendering = false;
         }
     }
+    
+    public void DeckOffScreen() {
+        screenOverlay.enabled = false;
+        if(curRender.Count == 0) {
+            curRender = null;
+            isRendering = false;
+            return;
+        }
+
+        foreach(GameObject go in curRender) {
+            go.transform.parent = oldParent;
+            go.GetComponent<TrailRenderer>().enabled = true;
+            go.GetComponent<Card>().isSettled = false;
+            for(int i = 0; i < 3; i++){
+                go.GetComponent<Card>().textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
+                go.GetComponent<Card>().textParts[i].sortingOrder = -1;
+                go.GetComponent<Card>().cardParts[i].sortingLayerName = "UI Low";
+            }
+        }
+        curRender = null;
+        isRendering = false;
+    }
 
     public void DeckToScreen(List<GameObject> toRender) {
         screenOverlay.enabled = true;
