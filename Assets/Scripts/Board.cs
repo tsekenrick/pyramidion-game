@@ -18,10 +18,12 @@ public class Board : MonoBehaviour {
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
     public string prevResolvedAction;
+    public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
 
     // "ENTITY" FIELDS //
     public static Board me;
     public GameObject player;
+    public GameObject enemySpawner;
     public GameObject phaseBanner;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
@@ -436,22 +438,15 @@ public class Board : MonoBehaviour {
         }
         return false;
     }
-    
-    private bool AllEnemiesDead() {
-        foreach(GameObject enemy in enemies) {
-            if(enemy.GetComponent<Enemy>().health >= 0) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     void Awake(){
-        me=this;
+        me = this;
     }
 
     void Start(){
         player = GameObject.Find("Player");
+        enemySpawner = GameObject.Find("EnemySpawner");
+        Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], Vector3.zero, Quaternion.identity, enemySpawner.transform);
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
@@ -466,7 +461,8 @@ public class Board : MonoBehaviour {
 
         if(turn == 0) borrowedTime = 0;
         round = 0;
-        
+        level = 1;
+
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
@@ -500,10 +496,11 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
 
-        if(AllEnemiesDead()) {
+        if(enemies.Length == 0) {
             curPhase = Phase.Event;
             GameObject overlay = GameObject.Find("_DarknessOverlay");
             overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input

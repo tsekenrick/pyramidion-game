@@ -27,6 +27,19 @@ public class Event : MonoBehaviour {
         board.borrowedTime = 0;
         board.round = 0;
         board.Reshuffle();
+        board.level++;
+
+        // spawn new enemies
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
+        if(board.level != 4) {
+            for(int i = 0; i < board.level; i++) {
+                Instantiate(spawner.enemyList[Random.Range(0, spawner.enemyList.Length)], new Vector3(i * -3f, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+            }
+        } else {
+            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+        }
+        
         return;
     }
 

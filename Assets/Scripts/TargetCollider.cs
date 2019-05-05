@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TargetCollider : MonoBehaviour
 {
-    public Camera actionCam; //set in inspector
-    public Camera uiCam; //set in inspector
+    public Camera actionCam; 
+    public Camera uiCam;
     public SpriteRenderer ren; //set in inspector
     private BoxCollider2D box;
 
     void Start() { 
+        uiCam = Camera.main;
+        actionCam = GameObject.Find("Perspective Camera").GetComponent<Camera>();
         box = GetComponent<BoxCollider2D>(); 
     }
 
@@ -23,11 +25,8 @@ public class TargetCollider : MonoBehaviour
         max = uiCam.ScreenToWorldPoint(max);
 
         //move and smoosh the trigger collider
-        transform.position = 0.5f*(min + max);
-        box.size =0.5f*(max-min);
+        transform.position = 0.5f * (min + max);
+        box.size = 2f * (max - min);
     }
 
-    void OnMouseUp(){
-        
-    }
 }
