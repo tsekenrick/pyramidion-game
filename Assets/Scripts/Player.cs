@@ -7,7 +7,7 @@ using TMPro;
 public class Player : Target
 {
     public TextMeshPro[] healthText;
-    private const float MAX_HEALTH = 100.0f;
+    public const float MAX_HEALTH = 100.0f;
 
     void Start() {
         startPos = this.transform.position;
