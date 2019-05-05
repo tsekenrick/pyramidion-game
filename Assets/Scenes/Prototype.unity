@@ -5721,7 +5721,7 @@ MonoBehaviour:
   toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
   toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
   toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
-  overplayPunishmentSoundEvent: 
+  overplayPunishmentSoundEvent: event:/FX & Animations/Interface/Overplay Punishment
   drawSoundEvent: event:/UI/Gameplay UI/Card Actions/DrawCard
   hoverSoundEvent: event:/UI/Gameplay UI/Card Actions/HoverCard
   discardSoundEvent: event:/UI/Gameplay UI/Card Actions/DiscardCard
@@ -5729,8 +5729,8 @@ MonoBehaviour:
   selectSoundEvent: event:/UI/Gameplay UI/Card Actions/SelectCard
   deselectSoundEvent: event:/UI/Gameplay UI/Card Actions/DeselectCard
   confirmCardSoundEvent: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
-  battleSnapshotEvent: 
-  punishmentSnapshotEvent: 
+  battleSnapshotEvent: snapshot:/BattleMix
+  punishmentSnapshotEvent: snapshot:/OverplayMix
 --- !u!4 &314070935
 Transform:
   m_ObjectHideFlags: 0
