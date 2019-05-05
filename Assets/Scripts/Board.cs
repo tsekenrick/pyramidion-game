@@ -87,11 +87,10 @@ public class Board : MonoBehaviour {
                 Action action = this[i] as Action;
                 if(action.completeTime == targetTime) return i; 
                 else if (action.completeTime > targetTime) {
-                    if(i-1 < 0) return 0;
-                    return i-1;
+                    return i-1; // returns at least -1 (i is never < 0)
                 } 
             }
-            return -1;
+            return -2;
         }
 
         // adjusts the completeTime by amount speicfied in `offset` for each action starting with the specified `index`
@@ -566,12 +565,12 @@ public class Board : MonoBehaviour {
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
                                 if(!playSequence.Contains(actionToAdd)) {
                                     int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
-                                    if(actionToAdd.completeTime == 0 || idx == 0) {
+                                    if(actionToAdd.completeTime == 0 || idx == -1) {
                                         playSequence.Insert(0, actionToAdd);
-                                    } else if(idx != -1) {
-                                        playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
-                                    } else {
+                                    } else if(idx == -2) {
                                         playSequence.Add(actionToAdd); // add to end if the scheduled play time is after the last player action
+                                    } else {
+                                        playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
                                     }
                                 }
                             }
