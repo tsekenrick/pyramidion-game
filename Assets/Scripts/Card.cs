@@ -80,6 +80,8 @@ public class Card : MonoBehaviour
         Target t = target.GetComponentInParent<Target>();
         int tmpBlock = t.block;
         t.block = Mathf.Max(t.block - amount, 0);
+        t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(amount - tmpBlock, 0)}";
+        t.GetComponentInChildren<DamageText>().FadeText();
         t.health -= Mathf.Max(amount - tmpBlock, 0);
     }
 
@@ -222,6 +224,8 @@ public class Card : MonoBehaviour
         if(board.overlayActive) return;
 
         if(curState == CardState.InHand) {
+            if(board.lockedHand.Contains(this.gameObject)) return;
+            
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;

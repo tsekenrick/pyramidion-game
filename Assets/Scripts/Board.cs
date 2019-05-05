@@ -165,6 +165,7 @@ public class Board : MonoBehaviour {
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
+                action.card.isSettled = false;
                 Destroy(action.instance);
             }
             base.Remove(item);
@@ -261,7 +262,7 @@ public class Board : MonoBehaviour {
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
-                    prevResolvedAction = "PlayerAction"; // probably find a better way to do this later
+                    Debug.Log($"last action was a {prevResolvedAction}");
 
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.card.resolveAction();
@@ -286,11 +287,13 @@ public class Board : MonoBehaviour {
 
                     // StartCoroutine(ResetActionCamera());
                     StartCoroutine(ResetPlayerSprites());
+                    prevResolvedAction = "PlayerAction"; // probably find a better way to do this later
                     yield return new WaitForSeconds(1.5f);
                     break;
                 
                 case "EnemyAction":
-                    prevResolvedAction = "EnemyAction"; // probably find a better way to do this later
+                    Debug.Log($"last action was a {prevResolvedAction}");
+
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
                     
@@ -310,6 +313,7 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(.2f);
 
                     StartCoroutine(ResetEnemySprites());
+                    prevResolvedAction = "EnemyAction"; // probably find a better way to do this later
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
@@ -337,6 +341,7 @@ public class Board : MonoBehaviour {
     }
 
     private void ResToMulPhase() {
+        prevResolvedAction = "";
         mulLimit = 4;
         round++;
 
