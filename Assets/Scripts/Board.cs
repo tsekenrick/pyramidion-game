@@ -87,11 +87,7 @@ public class Board : MonoBehaviour {
                 Action action = this[i] as Action;
                 if(action.completeTime == targetTime) return i; 
                 else if (action.completeTime > targetTime) {
-                    if(i-1 < 0) {
-                        Debug.Log("hit edge case");
-                        return 0;
-                    }
-
+                    if(i-1 < 0) return 0;
                     return i-1;
                 } 
             }

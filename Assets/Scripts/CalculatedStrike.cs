@@ -8,7 +8,6 @@ public class CalculatedStrike : Card {
     public override void resolveAction() {
         base.resolveAction();
         this.cardProps[1] = "3";
-        Debug.Log("resolved in superclass");
     }
     
     public override void OnMulligan() {

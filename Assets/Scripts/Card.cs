@@ -54,7 +54,7 @@ public class Card : MonoBehaviour
 
     private IEnumerator MulliganAnim(Transform tr) {
         tr.DOMove(tr.parent.position, .3f);
-        tr.DOScale(.1f * Vector3.one, .3f);
+        tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) { sr.enabled = false; }
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
@@ -69,7 +69,7 @@ public class Card : MonoBehaviour
 
         tr.DOMove(tr.parent.position, .6f);
         tr.DOScale(.3f * Vector3.one, .3f);
-        tr.DOScale(.1f * Vector3.one, .3f);
+        tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
@@ -225,7 +225,7 @@ public class Card : MonoBehaviour
 
         if(curState == CardState.InHand) {
             if(board.lockedHand.Contains(this.gameObject)) return;
-            
+
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
@@ -297,22 +297,38 @@ public class Card : MonoBehaviour
 
     void OnMouseUpAsButton() {
         if(curState == CardState.InPlay) {
-            Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
-            foreach(Collider2D collider in colliders) {
-                if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
-
-                if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
-                    PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+            if(this.cardProps[0] == "Defend") {
+                float dist = Vector3.Distance(this.transform.position, this.prevParent.position);
+                if(dist > 3) {
+                    PlayerAction toInsert = new PlayerAction(this, board.player);
                     this.action = toInsert;
-                    this.target = collider.gameObject;
+                    this.target = board.player;
                     toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
                     board.playSequence.Add(toInsert);
                     OnEnqueue();
                     curState = CardState.InQueue;
                     // FMOD Card Play Confirmation Sound
-                    sm.PlaySound(sm.confirmCardSound);
+                    sm.PlaySound(sm.confirmCardSound); 
+                }
+            } else {
+                Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
+                foreach(Collider2D collider in colliders) {
+                    if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;
+
+                    if(collider.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+                        PlayerAction toInsert = new PlayerAction(this, collider.gameObject);
+                        this.action = toInsert;
+                        this.target = collider.gameObject;
+                        toInsert.completeTime = board.playSequence.totalTime + toInsert.card.cost; // TODO: integrate this calculation as a method on Action?
+                        board.playSequence.Add(toInsert);
+                        OnEnqueue();
+                        curState = CardState.InQueue;
+                        // FMOD Card Play Confirmation Sound
+                        sm.PlaySound(sm.confirmCardSound);
+                    }
                 }
             }
+
             // reanchor to old hand pos
             tr.parent = prevParent;
             prevParent = null;
