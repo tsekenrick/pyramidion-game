@@ -18,11 +18,14 @@ public class Board : MonoBehaviour {
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
     public string prevResolvedAction;
+    public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
 
     // "ENTITY" FIELDS //
     public static Board me;
     public GameObject player;
+    public GameObject enemySpawner;
     public GameObject phaseBanner;
+    public Transform[] eventContainers;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
     public bool actionButtonPressed;
@@ -282,9 +285,6 @@ public class Board : MonoBehaviour {
                     
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
-                    if(playerAction.card.cardProps[0] == "Defend") {
-                        player.GetComponentsInChildren<ParticleSystem>()[0].Play();
-                    }
                     yield return new WaitForSeconds(.2f);
 
                     // StartCoroutine(ResetActionCamera());
@@ -306,9 +306,6 @@ public class Board : MonoBehaviour {
                     // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
-                    if(enemyAction.actionType == ActionType.Defense) {
-                        enemyAction.owner.GetComponent<ParticleSystem>().Play();
-                    }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     yield return new WaitForSeconds(.2f);
 
@@ -348,6 +345,7 @@ public class Board : MonoBehaviour {
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
+        Camera.main.transform.DOShakePosition(2f);
         yield return new WaitForSeconds(2.0f);
 
         // FMOD change mix to battle mix
@@ -441,26 +439,21 @@ public class Board : MonoBehaviour {
         }
         return false;
     }
-    
-    private bool AllEnemiesDead() {
-        foreach(GameObject enemy in enemies) {
-            if(enemy.GetComponent<Enemy>().health >= 0) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     void Awake(){
-        me=this;
+        me = this;
     }
 
     void Start(){
         player = GameObject.Find("Player");
+        enemySpawner = GameObject.Find("EnemySpawner");
+        GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
-
+        eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
+        
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
 
@@ -471,7 +464,8 @@ public class Board : MonoBehaviour {
 
         if(turn == 0) borrowedTime = 0;
         round = 0;
-        
+        level = 1;
+
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
@@ -505,21 +499,37 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
 
-        if(AllEnemiesDead()) {
+        if(enemies.Length == 0 && curPhase != Phase.Event) {
             curPhase = Phase.Event;
             GameObject overlay = GameObject.Find("_DarknessOverlay");
             overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
-
+            
+            
+            int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
+            int curEvent = 0;
+            for(int i = 0; i < possibleEvents.Count; i++) {       
+                if(i != doNotInclude) {
+                    Transform toAttach;
+                    foreach(Transform container in eventContainers) {
+                        if(container.childCount == 0) {
+                            toAttach = container;
+                            Instantiate(possibleEvents[i], toAttach, false);
+                            break;
+                        }
+                    }
+                    curEvent++;
+                } 
+            }
         }
 
         switch(curPhase){
             case Phase.Mulligan:
                 StartCoroutine(ResetEnemySprites());
-                StartCoroutine(ResetPlayerSprites());
-                
+                StartCoroutine(ResetPlayerSprites());               
 
                 while(hand.Count < 5){
                     DrawCard();

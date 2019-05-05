@@ -22,10 +22,14 @@ public class ActionRenderer : MonoBehaviour
     }
 
     void Start() {
+        Invoke("LateStart", .5f);
+        board = Board.me;
+    }
+
+    void LateStart() {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemyActions = new List<EnemyAction>[enemies.Length];
         for(int i = 0; i < enemyActions.Length; i++) enemyActions[i] = new List<EnemyAction>();
-        board = Board.me;
     }
 
     void Update() {

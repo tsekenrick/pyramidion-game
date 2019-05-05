@@ -13,14 +13,16 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
     public SpriteRenderer[] mulliganIntents;
 
+    private bool dying;
     private const float MAX_HEALTH = 200f;
     
     void Start() {
+        dying = false;
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 20;
+        health = 1;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -38,7 +40,8 @@ public class Enemy : Target
 
     private IEnumerator Die() {
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
-        this.transform.DOShakePosition(1f, 2);
+        this.transform.DOShakePosition(1f, .50f);
+        yield return new WaitForSeconds(.25f);
         DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
         yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
@@ -53,13 +56,13 @@ public class Enemy : Target
         healthText[0].text = $"{health}/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
 
-        if(health <= 0) StartCoroutine(Die());
+        if(health <= 0 && !dying) {
+            dying = true;
+            StartCoroutine(Die());
+        } 
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-                // if(Board.me.curPhase == Phase.Mulligan) {
-                //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-                // }
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
                     for(int i = 0; i < Random.Range(2, 3); i++) { 
