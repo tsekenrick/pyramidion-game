@@ -54,7 +54,7 @@ public class Card : MonoBehaviour
 
     private IEnumerator MulliganAnim(Transform tr) {
         tr.DOMove(tr.parent.position, .3f);
-        tr.DOScale(.1f * Vector3.one, .3f);
+        tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) { sr.enabled = false; }
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
@@ -69,7 +69,7 @@ public class Card : MonoBehaviour
 
         tr.DOMove(tr.parent.position, .6f);
         tr.DOScale(.3f * Vector3.one, .3f);
-        tr.DOScale(.1f * Vector3.one, .3f);
+        tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
@@ -225,7 +225,7 @@ public class Card : MonoBehaviour
 
         if(curState == CardState.InHand) {
             if(board.lockedHand.Contains(this.gameObject)) return;
-            
+
             foreach(SpriteRenderer sr in cardParts) {
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
