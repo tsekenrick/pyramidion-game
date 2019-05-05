@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using DG.Tweening;
+using TMPro;
 
 public enum Phase { Mulligan, Play, Resolution };
 
@@ -86,11 +87,10 @@ public class Board : MonoBehaviour {
                 Action action = this[i] as Action;
                 if(action.completeTime == targetTime) return i; 
                 else if (action.completeTime > targetTime) {
-                    if(i-1 < 0) return 0;
-                    return i-1;
+                    return i-1; // returns at least -1 (i is never < 0)
                 } 
             }
-            return -1;
+            return -2;
         }
 
         // adjusts the completeTime by amount speicfied in `offset` for each action starting with the specified `index`
@@ -165,6 +165,7 @@ public class Board : MonoBehaviour {
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
+                action.card.isSettled = false;
                 Destroy(action.instance);
             }
             base.Remove(item);
@@ -261,8 +262,6 @@ public class Board : MonoBehaviour {
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
-                    prevResolvedAction = "PlayerAction"; // probably find a better way to do this later
-
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
                     playerAction.card.resolveAction();
 
@@ -286,11 +285,11 @@ public class Board : MonoBehaviour {
 
                     // StartCoroutine(ResetActionCamera());
                     StartCoroutine(ResetPlayerSprites());
+                    prevResolvedAction = "PlayerAction"; // probably find a better way to do this later
                     yield return new WaitForSeconds(1.5f);
                     break;
                 
                 case "EnemyAction":
-                    prevResolvedAction = "EnemyAction"; // probably find a better way to do this later
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.resolveAction();
                     
@@ -310,6 +309,7 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(.2f);
 
                     StartCoroutine(ResetEnemySprites());
+                    prevResolvedAction = "EnemyAction"; // probably find a better way to do this later
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
@@ -337,6 +337,7 @@ public class Board : MonoBehaviour {
     }
 
     private void ResToMulPhase() {
+        prevResolvedAction = "";
         mulLimit = 4;
         round++;
 
@@ -400,12 +401,13 @@ public class Board : MonoBehaviour {
     }
     
     private IEnumerator Punishment(List<EnemyAction> list) {
-        Debug.Log("hit");
+        SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
+
         // FMOD change mix to punishment mix
         sm = SoundManager.me;
         sm.PlaySound(sm.punishmentSnapshot);
 
-        SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
         overlay.enabled = true;
         overlay.color = new Color(1f, 1f, 1f, 0f);
         DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
@@ -416,6 +418,9 @@ public class Board : MonoBehaviour {
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
+        player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
         yield return new WaitForSeconds(2.0f);
 
         // FMOD change mix to battle mix
@@ -428,6 +433,8 @@ public class Board : MonoBehaviour {
             action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
         }
         borrowedTime = 0;
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
         punishing = false;
     }
 
@@ -558,12 +565,12 @@ public class Board : MonoBehaviour {
                             foreach(EnemyAction actionToAdd in enemyScript.curActions) {
                                 if(!playSequence.Contains(actionToAdd)) {
                                     int idx = playSequence.IndexOfCompleteTime(actionToAdd.completeTime);
-                                    if(actionToAdd.completeTime == 0) {
+                                    if(actionToAdd.completeTime == 0 || idx == -1) {
                                         playSequence.Insert(0, actionToAdd);
-                                    } else if(idx != -1) {
-                                        playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
-                                    } else {
+                                    } else if(idx == -2) {
                                         playSequence.Add(actionToAdd); // add to end if the scheduled play time is after the last player action
+                                    } else {
+                                        playSequence.Insert(idx + 1, actionToAdd); // insert AFTER given index to give player priority in resolution
                                     }
                                 }
                             }

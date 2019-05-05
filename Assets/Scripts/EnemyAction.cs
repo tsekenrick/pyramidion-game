@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum ActionType { Attack, Defense, Status };
 
@@ -42,6 +43,8 @@ public class EnemyAction: Action
 
                 int tmpBlock = target.block;
                 target.block = Mathf.Max(target.block - actionVal, 0);
+                target.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(actionVal - tmpBlock, 0)}";
+                target.GetComponentInChildren<DamageText>().FadeText();
                 target.health -= Mathf.Max(actionVal - tmpBlock, 0);
                 break;
 
