@@ -21,25 +21,28 @@ public class ActionRenderer : MonoBehaviour
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
     }
 
-    void Start() {
-        Invoke("LateStart", .5f);
+    private void Start() {
         board = Board.me;
     }
 
-    void LateStart() {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    // public void LateStart() {
+        
+    // }
+
+    private void Update() {
+        enemies = board.enemies;
         enemyActions = new List<EnemyAction>[enemies.Length];
         for(int i = 0; i < enemyActions.Length; i++) enemyActions[i] = new List<EnemyAction>();
-    }
-
-    void Update() {
+        
         // this should run once per turn
-        for(int i = 0; i < enemies.Length; i++) {
-            if(enemyActions[i].Count == 0) {
-                enemyActions[i] = enemies[i].GetComponent<Enemy>().curActions;
+        if(board.curPhase != Phase.Event) {
+            for(int i = 0; i < enemies.Length; i++) {
+                if(enemyActions[i].Count == 0) {
+                    enemyActions[i] = enemies[i].GetComponent<Enemy>().curActions;
+                }
             }
         }
-
+        
         // if in play phase - pull from enemy objects in scene and grab their curActions list
         if(board.curPhase == Phase.Play) {
             foreach(List<EnemyAction> actionList in enemyActions) {

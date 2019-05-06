@@ -14,7 +14,7 @@ public class Enemy : Target
     public SpriteRenderer[] mulliganIntents;
 
     private bool dying;
-    private const float MAX_HEALTH = 200f;
+    private const int MAX_HEALTH = 100;
     
     void Start() {
         dying = false;
@@ -22,7 +22,7 @@ public class Enemy : Target
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 1;
+        health = 100;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -39,6 +39,12 @@ public class Enemy : Target
     }
 
     private IEnumerator Die() {
+        for(int i = board.playSequence.Count - 1; i >= 0; i--) {
+            if(board.playSequence[i] is EnemyAction) {
+                EnemyAction toRemove = board.playSequence[i] as EnemyAction;
+                if(toRemove.owner == this.gameObject) board.playSequence.Remove(board.playSequence[i]);
+            }
+        }
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
         this.transform.DOShakePosition(1f, .50f);
         yield return new WaitForSeconds(.25f);

@@ -7,7 +7,7 @@ using TMPro;
 public class Player : Target
 {
     public TextMeshPro[] healthText;
-    public const float MAX_HEALTH = 100.0f;
+    public const int MAX_HEALTH = 100;
 
     void Start() {
         startPos = this.transform.position;
@@ -25,6 +25,7 @@ public class Player : Target
     }
 
     void Update() {
+        health = Mathf.Min(health, MAX_HEALTH);
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
 

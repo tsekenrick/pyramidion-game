@@ -19,6 +19,7 @@ public class Board : MonoBehaviour {
     public int round; // the number of mul-play-res cycles
     public string prevResolvedAction;
     public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
+    private IEnumerator co; // reference for starting the ExecuteAction coroutine - allows us to stop it
 
     // "ENTITY" FIELDS //
     public static Board me;
@@ -50,6 +51,7 @@ public class Board : MonoBehaviour {
 
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
+    private bool displayingEvents = false;
 
     // EVENT PHASE VARIABLES //
     public List<GameObject> possibleEvents = new List<GameObject>();
@@ -362,6 +364,44 @@ public class Board : MonoBehaviour {
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
         punishing = false;
     }
+
+    private IEnumerator DisplayEvents() {
+        Debug.Log("hit coroutine");
+        displayingEvents = true;
+        yield return new WaitForSeconds(1.75f);
+        curPhase = Phase.Event;
+        playSequence.Clear();
+        StartCoroutine(ResetActionCamera());
+        StartCoroutine(ResetPlayerSprites());
+        player.transform.DOMoveX(-10, .5f);
+        GameObject actionManager = GameObject.Find("Actions");
+        foreach(Transform child in actionManager.transform) {
+            Destroy(child.gameObject);
+        }
+
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = false;
+
+        GameObject overlay = GameObject.Find("_DarknessOverlay");
+        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
+        
+        
+        int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
+        int curEvent = 0;
+        for(int i = 0; i < possibleEvents.Count; i++) {       
+            if(i != doNotInclude) {
+                Transform toAttach;
+                foreach(Transform container in eventContainers) {
+                    if(container.childCount == 0) {
+                        toAttach = container;
+                        Instantiate(possibleEvents[i], toAttach, false);
+                        break;
+                    }
+                }
+                curEvent++;
+            } 
+        }
+        displayingEvents = false;
+    }
     
     private void MulToPlayPhase() {  
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
@@ -394,6 +434,45 @@ public class Board : MonoBehaviour {
         // FMOD Mulligan Phase Transition Sound
         sm = SoundManager.me;
         sm.PlaySound(sm.toMulliganPhaseSound);
+        curPhase = Phase.Mulligan;
+    }
+
+    public void EventToMulPhase() {
+        // disable dark overlay
+        GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>().enabled = false;
+
+        // show mulligan banner
+        GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+
+        // reset state variables  
+        mulLimit = 4;
+        turn = 0;
+        borrowedTime = 0;
+        round = 0;
+        Reshuffle();
+        level++;
+
+        // spawn new enemies
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
+        if(level != 4) {
+            for(int i = 0; i < level; i++) {
+                GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
+                enemy.transform.localPosition = new Vector3(i * -4.25f, 0, 9.3f);
+            }
+        } else {
+            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+        }
+        // GameObject.Find("Actions").GetComponent<ActionRenderer>().LateStart();
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // destroy the event objects
+        foreach(Transform container in eventContainers) {
+            Destroy(container.GetComponentInChildren<Event>().gameObject);
+        }
         curPhase = Phase.Mulligan;
     }
     
@@ -438,6 +517,15 @@ public class Board : MonoBehaviour {
             if(action.completeTime > 0) return true;
         }
         return false;
+    }
+
+    private bool AllEnemiesDead() {
+        if(enemies.Length == 0) return false;
+
+        foreach(GameObject enemy in enemies) {
+            if(enemy.GetComponent<Enemy>().health > 0) return false;
+        }
+        return true;
     }
 
     void Awake(){
@@ -502,28 +590,11 @@ public class Board : MonoBehaviour {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
-
-        if(enemies.Length == 0 && curPhase != Phase.Event) {
-            curPhase = Phase.Event;
-            GameObject overlay = GameObject.Find("_DarknessOverlay");
-            overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
+        if((AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
+            // stop any ongoing coroutines/actions
+            StopCoroutine(co);
+            StartCoroutine(DisplayEvents());
             
-            
-            int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
-            int curEvent = 0;
-            for(int i = 0; i < possibleEvents.Count; i++) {       
-                if(i != doNotInclude) {
-                    Transform toAttach;
-                    foreach(Transform container in eventContainers) {
-                        if(container.childCount == 0) {
-                            toAttach = container;
-                            Instantiate(possibleEvents[i], toAttach, false);
-                            break;
-                        }
-                    }
-                    curEvent++;
-                } 
-            }
         }
 
         switch(curPhase){
@@ -614,7 +685,8 @@ public class Board : MonoBehaviour {
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                    StartCoroutine(ExecuteAction(playSequence)); // resolve all enqueued actions
+                    co = ExecuteAction(playSequence);
+                    StartCoroutine(co); // resolve all enqueued actions
                 }
                 
                 break;
