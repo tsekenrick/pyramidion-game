@@ -83,11 +83,19 @@ public class Card : MonoBehaviour
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(amount - tmpBlock, 0)}";
         t.GetComponentInChildren<DamageText>().FadeText();
         t.health -= Mathf.Max(amount - tmpBlock, 0);
+
+        if(Mathf.Max(amount - tmpBlock, 0) > 0) {
+            t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
+            Camera.main.transform.DOShakePosition(.5f);
+        } else {
+            Camera.main.transform.DOShakePosition(.5f, .5f);
+        }
     }
 
     public void Defend(int amount, GameObject target) {
         // Target t = target.GetComponent<Target>();
         Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
+        t.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
         t.block += amount;
     }
 
@@ -287,6 +295,11 @@ public class Card : MonoBehaviour
                     curState = CardState.InPlay;
                     prevParent = tr.parent;
                     tr.parent = null;
+                    if(cardProps[0] == "Attack") {
+                        foreach(GameObject enemy in board.enemies) {
+                            enemy.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = true;
+                        }
+                    }
                 }
                 break;
             default:
@@ -311,6 +324,10 @@ public class Card : MonoBehaviour
                     sm.PlaySound(sm.confirmCardSound); 
                 }
             } else {
+                foreach(GameObject enemy in board.enemies) {
+                    enemy.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = false;
+                }
+
                 Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            
                 foreach(Collider2D collider in colliders) {
                     if(collider.GetComponentInParent<SpriteRenderer>() == null) continue;

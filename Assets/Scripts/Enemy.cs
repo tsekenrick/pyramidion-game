@@ -13,14 +13,16 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
     public SpriteRenderer[] mulliganIntents;
 
-    private const float MAX_HEALTH = 200f;
+    private bool dying;
+    private const int MAX_HEALTH = 100;
     
     void Start() {
+        dying = false;
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 200;
+        health = 100;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -36,6 +38,21 @@ public class Enemy : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
     }
 
+    private IEnumerator Die() {
+        for(int i = board.playSequence.Count - 1; i >= 0; i--) {
+            if(board.playSequence[i] is EnemyAction) {
+                EnemyAction toRemove = board.playSequence[i] as EnemyAction;
+                if(toRemove.owner == this.gameObject) board.playSequence.Remove(board.playSequence[i]);
+            }
+        }
+        SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
+        this.transform.DOShakePosition(1f, .50f);
+        yield return new WaitForSeconds(.25f);
+        DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(this.gameObject);
+    }
+
     void Update() {
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
@@ -45,11 +62,13 @@ public class Enemy : Target
         healthText[0].text = $"{health}/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
 
+        if(health <= 0 && !dying) {
+            dying = true;
+            StartCoroutine(Die());
+        } 
+
         switch(board.curPhase) {
             case Phase.Mulligan:
-                // if(Board.me.curPhase == Phase.Mulligan) {
-                //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-                // }
                 // roll for action type and display non-numerical intent
                 if(curActions.Count == 0) {
                     for(int i = 0; i < Random.Range(2, 3); i++) { 

@@ -6,7 +6,7 @@ using System.IO;
 using DG.Tweening;
 using TMPro;
 
-public enum Phase { Mulligan, Play, Resolution };
+public enum Phase { Mulligan, Play, Resolution, Event };
 
 public class Board : MonoBehaviour {
     private string deckFileName = "deck.json";
@@ -18,11 +18,15 @@ public class Board : MonoBehaviour {
     public int borrowedTime; // offset time carryover if overplay/underplay
     public int round; // the number of mul-play-res cycles
     public string prevResolvedAction;
+    public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
+    private IEnumerator co; // reference for starting the ExecuteAction coroutine - allows us to stop it
 
     // "ENTITY" FIELDS //
     public static Board me;
     public GameObject player;
+    public GameObject enemySpawner;
     public GameObject phaseBanner;
+    public Transform[] eventContainers;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
     public bool actionButtonPressed;
@@ -47,6 +51,11 @@ public class Board : MonoBehaviour {
 
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
+    private bool displayingEvents = false;
+
+    // EVENT PHASE VARIABLES //
+    public List<GameObject> possibleEvents = new List<GameObject>();
+    public List<GameObject> curEvents = new List<GameObject>();
 
     //Particle Systems
     public ParticleSystem TimelineResolutionPS;
@@ -230,7 +239,7 @@ public class Board : MonoBehaviour {
         discard.Clear();
     }
 
-    public IEnumerator ResetEnemySprites() {
+    private IEnumerator ResetEnemySprites() {
         yield return new WaitForSeconds(.5f);
         foreach(GameObject enemy in enemies) {
             enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
@@ -238,18 +247,18 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public IEnumerator ResetPlayerSprites() {
+    private IEnumerator ResetPlayerSprites() {
         yield return new WaitForSeconds(.5f);
         player.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().combatStates[0];
         // player.transform.position = player.GetComponent<Target>().startPos;
     }
 
-    public IEnumerator ResetActionCamera() {
+    private IEnumerator ResetActionCamera() {
         yield return new WaitForSeconds(.5f);
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
     }
 
-    public IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
+    private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         if(playSequence.Count == 0) {
             yield return new WaitForSeconds(1f);
         }
@@ -278,9 +287,6 @@ public class Board : MonoBehaviour {
                     
                     // TODO: abstract this out
                     player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
-                    if(playerAction.card.cardProps[0] == "Defend") {
-                        player.GetComponentsInChildren<ParticleSystem>()[0].Play();
-                    }
                     yield return new WaitForSeconds(.2f);
 
                     // StartCoroutine(ResetActionCamera());
@@ -302,9 +308,6 @@ public class Board : MonoBehaviour {
                     // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
-                    if(enemyAction.actionType == ActionType.Defense) {
-                        enemyAction.owner.GetComponent<ParticleSystem>().Play();
-                    }
                     enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     yield return new WaitForSeconds(.2f);
 
@@ -323,6 +326,83 @@ public class Board : MonoBehaviour {
         }
     }
 
+    private IEnumerator Punishment(List<EnemyAction> list) {
+        SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
+
+        // FMOD change mix to punishment mix
+        sm = SoundManager.me;
+        sm.PlaySound(sm.punishmentSnapshot);
+
+        overlay.enabled = true;
+        overlay.color = new Color(1f, 1f, 1f, 0f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+
+        // FMOD play punishment sound
+        sm.PlaySound(sm.overplayPunishmentSound);
+
+        player.GetComponentsInChildren<ParticleSystem>()[1].Play();
+        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
+        player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
+        Camera.main.transform.DOShakePosition(2f);
+        yield return new WaitForSeconds(2.0f);
+
+        // FMOD change mix to battle mix
+        sm.PlaySound(sm.battleSnapshot);
+
+        overlay.enabled = false;
+        foreach(EnemyAction action in list) {
+            action.completeTime = action.baseCompleteTime;
+            float xPos = Mathf.Max(0, action.completeTime * 1.14f);
+            action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+        }
+        borrowedTime = 0;
+        player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
+        punishing = false;
+    }
+
+    private IEnumerator DisplayEvents() {
+        Debug.Log("hit coroutine");
+        displayingEvents = true;
+        yield return new WaitForSeconds(1.75f);
+        curPhase = Phase.Event;
+        playSequence.Clear();
+        StartCoroutine(ResetActionCamera());
+        StartCoroutine(ResetPlayerSprites());
+        player.transform.DOMoveX(-10, .5f);
+        GameObject actionManager = GameObject.Find("Actions");
+        foreach(Transform child in actionManager.transform) {
+            Destroy(child.gameObject);
+        }
+
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = false;
+
+        GameObject overlay = GameObject.Find("_DarknessOverlay");
+        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
+        
+        
+        int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
+        int curEvent = 0;
+        for(int i = 0; i < possibleEvents.Count; i++) {       
+            if(i != doNotInclude) {
+                Transform toAttach;
+                foreach(Transform container in eventContainers) {
+                    if(container.childCount == 0) {
+                        toAttach = container;
+                        Instantiate(possibleEvents[i], toAttach, false);
+                        break;
+                    }
+                }
+                curEvent++;
+            } 
+        }
+        displayingEvents = false;
+    }
+    
     private void MulToPlayPhase() {  
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
@@ -354,6 +434,45 @@ public class Board : MonoBehaviour {
         // FMOD Mulligan Phase Transition Sound
         sm = SoundManager.me;
         sm.PlaySound(sm.toMulliganPhaseSound);
+        curPhase = Phase.Mulligan;
+    }
+
+    public void EventToMulPhase() {
+        // disable dark overlay
+        GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>().enabled = false;
+
+        // show mulligan banner
+        GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+
+        // reset state variables  
+        mulLimit = 4;
+        turn = 0;
+        borrowedTime = 0;
+        round = 0;
+        Reshuffle();
+        level++;
+
+        // spawn new enemies
+        GameObject enemySpawner = GameObject.Find("EnemySpawner");
+        EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
+        if(level != 4) {
+            for(int i = 0; i < level; i++) {
+                GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
+                enemy.transform.localPosition = new Vector3(i * -4.25f, 0, 9.3f);
+            }
+        } else {
+            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+        }
+        // GameObject.Find("Actions").GetComponent<ActionRenderer>().LateStart();
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // destroy the event objects
+        foreach(Transform container in eventContainers) {
+            Destroy(container.GetComponentInChildren<Event>().gameObject);
+        }
         curPhase = Phase.Mulligan;
     }
     
@@ -399,55 +518,30 @@ public class Board : MonoBehaviour {
         }
         return false;
     }
-    
-    private IEnumerator Punishment(List<EnemyAction> list) {
-        SpriteRenderer overlay = GameObject.Find("_DarknessActionOverlay").GetComponent<SpriteRenderer>();
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "Above Darkness";
 
-        // FMOD change mix to punishment mix
-        sm = SoundManager.me;
-        sm.PlaySound(sm.punishmentSnapshot);
+    private bool AllEnemiesDead() {
+        if(enemies.Length == 0) return false;
 
-        overlay.enabled = true;
-        overlay.color = new Color(1f, 1f, 1f, 0f);
-        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .6f), 1.5f);
-        yield return new WaitForSeconds(1.5f);
-
-        // FMOD play punishment sound
-        sm.PlaySound(sm.overplayPunishmentSound);
-
-        player.GetComponentsInChildren<ParticleSystem>()[1].Play();
-        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
-        player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
-        yield return new WaitForSeconds(2.0f);
-
-        // FMOD change mix to battle mix
-        sm.PlaySound(sm.battleSnapshot);
-
-        overlay.enabled = false;
-        foreach(EnemyAction action in list) {
-            action.completeTime = action.baseCompleteTime;
-            float xPos = Mathf.Max(0, action.completeTime * 1.14f);
-            action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
+        foreach(GameObject enemy in enemies) {
+            if(enemy.GetComponent<Enemy>().health > 0) return false;
         }
-        borrowedTime = 0;
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
-        punishing = false;
+        return true;
     }
 
     void Awake(){
-        me=this;
+        me = this;
     }
 
     void Start(){
         player = GameObject.Find("Player");
+        enemySpawner = GameObject.Find("EnemySpawner");
+        GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
-
+        eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
+        
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
 
@@ -458,7 +552,8 @@ public class Board : MonoBehaviour {
 
         if(turn == 0) borrowedTime = 0;
         round = 0;
-        
+        level = 1;
+
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
@@ -492,13 +587,20 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
+        if((AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
+            // stop any ongoing coroutines/actions
+            StopCoroutine(co);
+            StartCoroutine(DisplayEvents());
+            
+        }
+
         switch(curPhase){
             case Phase.Mulligan:
                 StartCoroutine(ResetEnemySprites());
-                StartCoroutine(ResetPlayerSprites());
-                
+                StartCoroutine(ResetPlayerSprites());               
 
                 while(hand.Count < 5){
                     DrawCard();
@@ -583,7 +685,8 @@ public class Board : MonoBehaviour {
                     // calculate borrowed time for next round                    
                     borrowedTime = playSequence.totalTime - playSequence.GetLastEnemyActionTime();
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                    StartCoroutine(ExecuteAction(playSequence)); // resolve all enqueued actions
+                    co = ExecuteAction(playSequence);
+                    StartCoroutine(co); // resolve all enqueued actions
                 }
                 
                 break;
