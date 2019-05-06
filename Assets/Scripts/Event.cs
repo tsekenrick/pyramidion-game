@@ -11,37 +11,7 @@ public class Event : MonoBehaviour {
     // do the thing the event says it will do, and then set game back to mul phase
     protected virtual void resolveEvent() {
 
-        // disable dark overlay
-        GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>().enabled = false;
-
-        // show mulligan banner
-        GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
-        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
-
-        // reset state variables
-        Board.me.curPhase = Phase.Mulligan;
-        board.mulLimit = 4;
-        board.turn = 0;
-        board.borrowedTime = 0;
-        board.round = 0;
-        board.Reshuffle();
-        board.level++;
-
-        // spawn new enemies
-        GameObject enemySpawner = GameObject.Find("EnemySpawner");
-        EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
-        if(board.level != 4) {
-            for(int i = 0; i < board.level; i++) {
-                GameObject enemy = Instantiate(spawner.enemyList[Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -3f, 0, 9.3f);
-            }
-        } else {
-            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
-        }
-        
-        return;
+        board.EventToMulPhase();
     }
 
     protected virtual void Start() {
