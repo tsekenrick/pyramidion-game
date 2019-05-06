@@ -11126,7 +11126,7 @@ MonoBehaviour:
   LoadEvent: 1
   UnloadEvent: 2
   Banks:
-  - Master Bank
+  - MasterBank
   CollisionTag: 
   PreloadSamples: 0
 --- !u!4 &792269251
@@ -42507,6 +42507,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3596416710193640731, guid: 4717511e3305ad84d8930a728ddaf38e,
         type: 3}
       propertyPath: looping
@@ -42551,16 +42561,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4609263837508079394, guid: 4717511e3305ad84d8930a728ddaf38e,
         type: 3}

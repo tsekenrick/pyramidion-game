@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   HasSourceProject: 0
-  HasPlatforms: 1
+  HasPlatforms: 0
   sourceProjectPath: 
   SourceProjectPathUnformatted: 
-  SourceBankPathUnformatted: Assets\FMODBanks
+  SourceBankPathUnformatted: Assets\FMODBanks\Desktop
   AutomaticEventLoading: 1
-  AutomaticSampleLoading: 0
+  AutomaticSampleLoading: 1
   ImportType: 0
   TargetAssetPath: 
   LoggingLevel: 2
@@ -47,7 +47,7 @@ MonoBehaviour:
     Value: 0
   BankDirectorySettings:
   - Platform: 2
-    Value: Desktop
+    Value: DOTween
   VirtualChannelSettings:
   - Platform: 1
     Value: 1024
@@ -60,7 +60,5 @@ MonoBehaviour:
     Value: 32
   Plugins: []
   MasterBanks:
-  - Master Bank
-  - Master Bank
-  Banks:
-  - Master Bank
+  - MasterBank
+  Banks: []
