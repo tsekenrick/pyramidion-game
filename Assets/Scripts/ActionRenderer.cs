@@ -28,10 +28,6 @@ public class ActionRenderer : MonoBehaviour
         board = Board.me;
     }
 
-    // public void LateStart() {
-        
-    // }
-
     private void Update() {
         enemies = board.enemies;
         enemyActions = new List<EnemyAction>[enemies.Length];
@@ -77,9 +73,7 @@ public class ActionRenderer : MonoBehaviour
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 
                     Transform playerIcon = action.instance.transform.Find("PlayerIcon");
-                    Debug.Log(action.card.cost * OFFSET);
                     playerIcon.localPosition = new Vector3(-0.23f + (action.card.cost * OFFSET), -.55f, playerIcon.position.z);
-                // TODO: Add dequeueing functionality
                 } else {
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
                 }

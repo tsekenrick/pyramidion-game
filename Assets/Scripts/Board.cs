@@ -378,11 +378,10 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
-        yield return new WaitForSeconds(1.75f);
         curPhase = Phase.Event;
-        for(int i = playSequence.Count - 1; i <= 0; i++) {
-            playSequence.Remove(playSequence[i]);
-        }
+        yield return new WaitForSeconds(1.75f);
+        playSequence.Clear();
+        playSequence.totalTime = 0;
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2.5f, .75f);
         }
@@ -394,11 +393,8 @@ public class Board : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = false;
-
         GameObject overlay = GameObject.Find("_DarknessOverlay");
-        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
-        
+        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input     
         
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;
@@ -717,7 +713,7 @@ public class Board : MonoBehaviour {
 
             case Phase.Resolution:
                 // waits for ExecuteAction coroutine to finish
-                if(playSequence.Count == 0) {
+                if(playSequence.Count == 0 && !AllEnemiesDead()) {
                     if(!IsInvoking()) Invoke("ResToMulPhase", .7f);
                 }
                 break;
