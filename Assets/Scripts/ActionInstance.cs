@@ -23,6 +23,12 @@ public class ActionInstance : MonoBehaviour {
         }
     }
 
+    void OnMouseDown() {
+        if(thisAction.card.cardProps[0] == "Attack") {
+            thisAction.card.target.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
     void OnMouseUpAsButton() {
         if(board.overlayActive) return;
 

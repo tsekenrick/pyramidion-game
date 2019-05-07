@@ -60,7 +60,6 @@ public class Card : MonoBehaviour
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
     }
 
-    // TODO: try having second param, and iterating delay for each subsequent call to get staggering effect
     private IEnumerator ReshuffleAnim(Transform tr) {
         // cardParts[0].sprite = cardSprites[0];
         // cardParts[2].sprite = cardSprites[2];
@@ -98,10 +97,10 @@ public class Card : MonoBehaviour
         Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
         t.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
 
+        // currently doesn't work - will fix later
         Sequence animShield = DOTween.Sequence();
         animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
         animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
-        
         
         t.block += amount;
     }
@@ -161,7 +160,7 @@ public class Card : MonoBehaviour
             cardParts[4].enabled = true;
         }
 
-        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue);
+        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution);
         cardParts[5].sortingLayerName = "UI High";
         
         if(curState != CardState.InQueue) {
@@ -193,6 +192,7 @@ public class Card : MonoBehaviour
                 break;
 
             case CardState.InDiscard:
+                if(isSettled) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
@@ -202,6 +202,7 @@ public class Card : MonoBehaviour
                 break;
             
             case CardState.InDeck:
+                if(isSettled) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(ReshuffleAnim(tr));
                     isSettled = true;
