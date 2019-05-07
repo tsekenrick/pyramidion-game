@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 using DG.Tweening;
 using TMPro;
@@ -344,7 +345,7 @@ public class Board : MonoBehaviour {
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.5f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
         Camera.main.transform.DOShakePosition(2f);
@@ -370,7 +371,9 @@ public class Board : MonoBehaviour {
         displayingEvents = true;
         yield return new WaitForSeconds(1.75f);
         curPhase = Phase.Event;
-        playSequence.Clear();
+        foreach(Action action in playSequence) {
+            playSequence.Remove(action);
+        }
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
         player.transform.DOMoveX(-10, .5f);
@@ -447,7 +450,8 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
 
-        // reset state variables  
+        // reset state variables
+        playSequence.totalTime = 0;
         mulLimit = 4;
         turn = 0;
         borrowedTime = 0;
@@ -466,7 +470,6 @@ public class Board : MonoBehaviour {
         } else {
             Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
         }
-        // GameObject.Find("Actions").GetComponent<ActionRenderer>().LateStart();
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         // destroy the event objects
@@ -587,6 +590,10 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        if(Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(0);
+        }
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
@@ -594,7 +601,6 @@ public class Board : MonoBehaviour {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);
             StartCoroutine(DisplayEvents());
-            
         }
 
         switch(curPhase){

@@ -88,6 +88,7 @@ public class Card : MonoBehaviour
             t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
             Camera.main.transform.DOShakePosition(.5f);
         } else {
+            t.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
             Camera.main.transform.DOShakePosition(.5f, .5f);
         }
     }
@@ -96,6 +97,12 @@ public class Card : MonoBehaviour
         // Target t = target.GetComponent<Target>();
         Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
         t.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
+
+        Sequence animShield = DOTween.Sequence();
+        animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
+        animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
+        
+        
         t.block += amount;
     }
 

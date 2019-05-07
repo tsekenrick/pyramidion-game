@@ -51,6 +51,7 @@ public class EnemyAction: Action
                     target.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
                     Camera.main.transform.DOShakePosition(.5f);
                 } else {
+                    target.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
                     Camera.main.transform.DOShakePosition(.5f, .5f);
                 }
                 
@@ -63,6 +64,10 @@ public class EnemyAction: Action
 
                 target.block += actionVal;
                 target.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
+                
+                Sequence animShield = DOTween.Sequence();
+                animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
+                animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
                 break;
         }
     }
