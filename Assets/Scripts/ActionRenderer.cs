@@ -15,7 +15,10 @@ public class ActionRenderer : MonoBehaviour
     private const float OFFSET = 1.2f;
 
     public IEnumerator AdjustForBorrowedTime(EnemyAction enemyAction) {
+
         yield return new WaitForSeconds(1f);
+        enemyAction.instance.transform.DOShakePosition(.5f, .15f, 80, 45f);
+        yield return new WaitForSeconds(.5f);
         enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.completeTime) * 1.14f, .98f, 0), .2f);
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
@@ -53,6 +56,7 @@ public class ActionRenderer : MonoBehaviour
                         enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .2f);
                         if(board.borrowedTime != 0) {
                             StartCoroutine(AdjustForBorrowedTime(enemyAction));
+                            StartCoroutine(GameObject.Find("BarOverlay").GetComponent<DarkProgressBar>().AdjustForBorrowedTime());
                         }
                     }
                 }
@@ -72,6 +76,9 @@ public class ActionRenderer : MonoBehaviour
                     action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 
+                    Transform playerIcon = action.instance.transform.Find("PlayerIcon");
+                    Debug.Log(action.card.cost * OFFSET);
+                    playerIcon.localPosition = new Vector3(-0.23f + (action.card.cost * OFFSET), -.55f, playerIcon.position.z);
                 // TODO: Add dequeueing functionality
                 } else {
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);

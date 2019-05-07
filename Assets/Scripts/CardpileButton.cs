@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CardpileButton : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class CardpileButton : MonoBehaviour
     }
 
     void Update() {
+        this.GetComponentInChildren<TextMeshPro>().text = thisPile.Count.ToString();
         switch(this.gameObject.name) {
             case "_DiscardAnchor":
                 thisPile = board.discard;
@@ -39,6 +41,16 @@ public class CardpileButton : MonoBehaviour
                 Debug.LogError("attempting to click on unidentified cardpile");
                 break;
         }
+    }
+
+    void OnMouseEnter() {
+        SpriteRenderer sr = this.transform.Find("DeckGlow").GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+    }
+
+    void OnMouseExit() {
+        SpriteRenderer sr = this.transform.Find("DeckGlow").GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .55f);
     }
 
     void OnMouseUpAsButton() {

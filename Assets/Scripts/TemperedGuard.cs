@@ -7,7 +7,7 @@ public class TemperedGuard : Card {
     
     public override void resolveAction() {
         base.resolveAction();
-        this.cardProps[1] = "3";
+        this.cardProps[1] = "2";
     }
 
     public override void OnEnqueue() {
@@ -24,7 +24,7 @@ public class TemperedGuard : Card {
     }
 
     public override void OnDequeue() {
-        this.cardProps[1] = "3";
+        this.cardProps[1] = "2";
     }
 
     public override void Awake() {
