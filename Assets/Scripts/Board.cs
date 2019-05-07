@@ -54,6 +54,9 @@ public class Board : MonoBehaviour {
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
     private bool displayingEvents = false;
 
+    // RESOLUTION PHASE VARIABLES //
+    List<GameObject> elementsToTween = new PlaySequence<GameObject>();
+
     // EVENT PHASE VARIABLES //
     public List<GameObject> possibleEvents = new List<GameObject>();
     public List<GameObject> curEvents = new List<GameObject>();
@@ -264,6 +267,10 @@ public class Board : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
 
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y - 2.5f, .75f);
+        }
+
         // move actors closer together (resets at end of coroutine)
         player.transform.DOMoveX(-4.5f, .5f);
         enemies[0].transform.DOMoveX(4.5f, .5f);
@@ -320,6 +327,9 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         enemies[0].transform.DOMoveX(10, .5f);
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y + 2.5f, .75f);
+        }
 
         if(borrowedTime != 0) {
             GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
@@ -367,12 +377,14 @@ public class Board : MonoBehaviour {
     }
 
     private IEnumerator DisplayEvents() {
-        Debug.Log("hit coroutine");
         displayingEvents = true;
         yield return new WaitForSeconds(1.75f);
         curPhase = Phase.Event;
-        foreach(Action action in playSequence) {
-            playSequence.Remove(action);
+        for(int i = playSequence.Count - 1; i <= 0; i++) {
+            playSequence.Remove(playSequence[i]);
+        }
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y + 2.5f, .75f);
         }
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
@@ -544,7 +556,13 @@ public class Board : MonoBehaviour {
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
-        
+
+        // used to specify ui elements to tween down during res phase
+        elementsToTween.Add(GameObject.Find("_HandAnchor"));
+        elementsToTween.Add(GameObject.Find("Playfield"));
+        elementsToTween.Add(GameObject.Find("_DiscardAnchor"));
+        elementsToTween.Add(GameObject.Find("_DeckAnchor"));
+
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
 
