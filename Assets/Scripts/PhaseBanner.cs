@@ -39,7 +39,7 @@ public class PhaseBanner : MonoBehaviour {
     }
   
     void Start() {
-        DOTween.SetTweensCapacity(1000, 50);
+        DOTween.SetTweensCapacity(6250, 50);
         canBanner = true;
         doBanner();
         board = Board.me;

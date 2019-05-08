@@ -38,6 +38,11 @@ public class Card : MonoBehaviour
 
     private IEnumerator DrawAnim(Transform tr) {
         tr.localScale = Vector3.zero;
+        foreach(SpriteRenderer sr in cardParts) {
+            sr.sortingLayerName = "UI Low";
+            sr.sortingOrder = 6;
+        }
+        cardParts[4].sortingOrder = 3;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
         yield return null;
@@ -53,16 +58,19 @@ public class Card : MonoBehaviour
     }
 
     private IEnumerator MulliganAnim(Transform tr) {
+        GetComponent<TrailRenderer>().enabled = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) { sr.enabled = false; }
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        GetComponent<TrailRenderer>().enabled = false;
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
         // cardParts[0].sprite = cardSprites[0];
         // cardParts[2].sprite = cardSprites[2];
+        GetComponent<TrailRenderer>().enabled = true;
         cardParts[0].enabled = true;
         cardParts[2].enabled = true;
 
@@ -72,6 +80,7 @@ public class Card : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        GetComponent<TrailRenderer>().enabled = false;
     }
 
     // this currently does not factor any sort of status modifier pressent on `target`
@@ -160,7 +169,7 @@ public class Card : MonoBehaviour
             cardParts[4].enabled = true;
         }
 
-        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution);
+        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
         cardParts[5].sortingLayerName = "UI High";
         
         if(curState != CardState.InQueue) {
@@ -192,7 +201,7 @@ public class Card : MonoBehaviour
                 break;
 
             case CardState.InDiscard:
-                if(isSettled) GetComponent<TrailRenderer>().enabled = false;
+                // if(isSettled && !GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().isRendering) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
@@ -202,7 +211,7 @@ public class Card : MonoBehaviour
                 break;
             
             case CardState.InDeck:
-                if(isSettled) GetComponent<TrailRenderer>().enabled = false;
+                // if(isSettled && !GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().isRendering) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(ReshuffleAnim(tr));
                     isSettled = true;
