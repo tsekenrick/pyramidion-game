@@ -421,7 +421,6 @@ public class Board : MonoBehaviour {
         player.transform.DOMoveX(-10, .5f);
         yield return new WaitForSeconds(.5f);
         foreach(GameObject go in elementsToTween) {
-            Debug.Log(go.transform.position.y);
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
         playSequence.Clear();
@@ -685,8 +684,11 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(0);
+        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
+        if(Input.GetKeyDown(KeyCode.T)) {
+            foreach(GameObject enemy in enemies) {
+                enemy.GetComponent<Enemy>().health = 1;
+            }
         }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
