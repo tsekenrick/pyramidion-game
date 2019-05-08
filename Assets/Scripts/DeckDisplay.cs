@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class DeckDisplay : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class DeckDisplay : MonoBehaviour
     public SpriteRenderer screenOverlay;
     public bool isRendering = true;
     public List<GameObject> curRender;
+    private SpriteRenderer[] lastRendered;
+    private TextMeshPro lastRenderedCounter;
 
     private Transform oldParent; // 
 
@@ -27,6 +30,11 @@ public class DeckDisplay : MonoBehaviour
         // reset doesn't quite work with discard pile rn
         if(Input.GetKeyDown(KeyCode.Escape) && isRendering && !(board.curPhase == Phase.Event)) {
             screenOverlay.enabled = false;
+            if(lastRendered != null) {
+                foreach(SpriteRenderer sr in lastRendered) sr.sortingLayerName = "UI Mid";
+                lastRenderedCounter.sortingLayerID = SortingLayer.NameToID("UI Mid");
+            }
+            
             if(curRender.Count == 0) {
                 curRender = null;
                 isRendering = false;
@@ -48,8 +56,13 @@ public class DeckDisplay : MonoBehaviour
         }
     }
     
-    public void DeckOffScreen() {
+    public void DeckOffScreen(SpriteRenderer[] toLower = null, TextMeshPro toLowerText = null) {
         screenOverlay.enabled = false;
+        if(toLower != null) {
+            foreach(SpriteRenderer sr in toLower) sr.sortingLayerName = "UI Mid";
+            toLowerText.sortingLayerID = SortingLayer.NameToID("UI Mid");
+        }
+
         if(curRender.Count == 0) {
             curRender = null;
             isRendering = false;
@@ -70,8 +83,14 @@ public class DeckDisplay : MonoBehaviour
         isRendering = false;
     }
 
-    public void DeckToScreen(List<GameObject> toRender) {
-        screenOverlay.enabled = true;
+    public void DeckToScreen(List<GameObject> toRender, SpriteRenderer[] toRaise = null, TextMeshPro toRaiseText = null) {
+        screenOverlay.enabled = true;       
+        if(toRaise != null) {
+            lastRendered = toRaise;
+            lastRenderedCounter = toRaiseText;
+            foreach(SpriteRenderer sr in toRaise) sr.sortingLayerName = "Above Darkness";
+            toRaiseText.sortingLayerID = SortingLayer.NameToID("Above Darkness");
+        }
         curRender = toRender;
         isRendering = true;
 

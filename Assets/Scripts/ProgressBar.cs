@@ -6,7 +6,6 @@ using DG.Tweening;
 public class ProgressBar : MonoBehaviour {
 
     private Board board;
-    public int barLength;
     private SpriteRenderer sr;
     // FMOD variables
     private SoundManager sm;
