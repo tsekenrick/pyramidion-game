@@ -21,7 +21,7 @@ public class Enemy : Target
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
 
-        health = 1;
+        health = 100;
         block = 0;
 
         prevActions = new List<EnemyAction>();
