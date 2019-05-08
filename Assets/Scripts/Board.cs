@@ -268,7 +268,7 @@ public class Board : MonoBehaviour {
         }
 
         foreach(GameObject go in elementsToTween) {
-            go.transform.DOMoveY(go.transform.position.y - 2.5f, .75f);
+            go.transform.DOMoveY(go.transform.position.y - 2f, .75f);
         }
 
         // move actors closer together (resets at end of coroutine)
@@ -285,7 +285,7 @@ public class Board : MonoBehaviour {
                     // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(-3.5f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 8), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -309,7 +309,7 @@ public class Board : MonoBehaviour {
                     
                     // anims
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(3.5f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 8), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -328,7 +328,7 @@ public class Board : MonoBehaviour {
         player.transform.DOMoveX(-10, .5f);
         enemies[0].transform.DOMoveX(10, .5f);
         foreach(GameObject go in elementsToTween) {
-            go.transform.DOMoveY(go.transform.position.y + 2.5f, .75f);
+            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
 
         if(borrowedTime != 0) {
@@ -383,7 +383,7 @@ public class Board : MonoBehaviour {
         playSequence.Clear();
         playSequence.totalTime = 0;
         foreach(GameObject go in elementsToTween) {
-            go.transform.DOMoveY(go.transform.position.y + 2.5f, .75f);
+            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
@@ -476,7 +476,8 @@ public class Board : MonoBehaviour {
                 enemy.transform.localPosition = new Vector3(i * -4.25f, 0, 9.3f);
             }
         } else {
-            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+            GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
+            enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 

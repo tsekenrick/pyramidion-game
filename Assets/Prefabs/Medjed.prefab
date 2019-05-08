@@ -10094,7 +10094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
+  - {fileID: 2100000, guid: 6b6119a9f37d1434e987897b11e942e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10153,8 +10153,7 @@ MonoBehaviour:
   m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 6b6119a9f37d1434e987897b11e942e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10179,8 +10178,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10375,7 +10374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
+  - {fileID: 2100000, guid: f002753e543e2564fa5215f009ad3eca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10434,15 +10433,14 @@ MonoBehaviour:
   m_text: 100/100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: f002753e543e2564fa5215f009ad3eca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289851647
+  m_fontColor: {r: 1, g: 0.9411765, b: 0.69411767, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10460,8 +10458,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10643,7 +10641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.25}
+  m_AnchoredPosition: {x: 0, y: 3.48}
   m_SizeDelta: {x: 1.967, y: 1.154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4609263838940317391
@@ -10663,7 +10661,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
+  - {fileID: 2100000, guid: f9306575ef10ce943b86cbba111ba245, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10722,15 +10720,14 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: f9306575ef10ce943b86cbba111ba245, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190260
-  m_fontColor: {r: 0.7075472, g: 0, b: 0, a: 1}
+    rgba: 4278190274
+  m_fontColor: {r: 0.764151, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10748,8 +10745,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10786,7 +10783,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -0.12379974}
   m_textInfo:
     textComponent: {fileID: 4609263838940317388}
     characterCount: 0
@@ -10804,7 +10801,7 @@ MonoBehaviour:
   m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 4609263838940317391}
+  m_renderer: {fileID: 0}
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
