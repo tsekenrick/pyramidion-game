@@ -31,6 +31,8 @@ public class Board : MonoBehaviour {
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
     public bool actionButtonPressed;
+    private SpriteRenderer[] daytimeSprites;
+    private SpriteRenderer[] nighttimeSprites;
     
 
     // CARD MANIPULATING FIELDS //
@@ -267,13 +269,21 @@ public class Board : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
 
+        // foreach(GameObject card in deck) {
+        //     card.GetComponent<TrailRenderer>().enabled = false;
+        // }
+        // foreach(GameObject card in discard) {
+        //     card.GetComponent<TrailRenderer>().enabled = false;
+        // }
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y - 2f, .75f);
         }
 
         // move actors closer together (resets at end of coroutine)
-        player.transform.DOMoveX(-4.5f, .5f);
-        enemies[0].transform.DOMoveX(4.5f, .5f);
+        player.transform.DOMoveX(-4.5f - (2 * (enemies.Length - 1)), .5f);
+        for(int i = enemies.Length - 1; i >= 0; i--) {
+            enemies[i].transform.DOLocalMoveX(-4.5f - (3.5f * i), .5f - (.05f * i)); // DO IT BACK AT END
+        }
         // GameObject.Find("Main Camera").GetComponent<Camera>().cullingMask = 0;
 
         while(playSequence.Count != 0) {
@@ -326,7 +336,10 @@ public class Board : MonoBehaviour {
             }
         }
         player.transform.DOMoveX(-10, .5f);
-        enemies[0].transform.DOMoveX(10, .5f);
+        for(int i = 0; i < enemies.Length; i++) {
+            enemies[i].transform.DOLocalMoveX(i * - 4.5f, .5f);
+        }
+        
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
@@ -378,20 +391,53 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
+        yield return new WaitForSeconds(1.5f);     
+
+        // for some reason DOTween doesn't like my for loop so we have this monstrosity instead
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
+
+        // for(int i = 0; i < daytimeSprites.Length; i++) {
+        //     DOTween.To(()=> daytimeSprites[i].color, x=> daytimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        //     DOTween.To(()=> nighttimeSprites[i].color, x=> nighttimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        // }
+
         curPhase = Phase.Event;
-        yield return new WaitForSeconds(1.75f);
-        playSequence.Clear();
-        playSequence.totalTime = 0;
-        foreach(GameObject go in elementsToTween) {
-            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
-        }
+        
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
         player.transform.DOMoveX(-10, .5f);
+        yield return new WaitForSeconds(.5f);
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
+        }
+        playSequence.Clear();
+        playSequence.totalTime = 0;
         GameObject actionManager = GameObject.Find("Actions");
         foreach(Transform child in actionManager.transform) {
             Destroy(child.gameObject);
         }
+        yield return new WaitForSeconds(1.75f);
+
+        
 
         GameObject overlay = GameObject.Find("_DarknessOverlay");
         overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input     
@@ -418,7 +464,7 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
-
+        GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
         turn = 0;
         // FMOD Play Phase Transition Sound      
@@ -448,9 +494,42 @@ public class Board : MonoBehaviour {
         curPhase = Phase.Mulligan;
     }
 
-    public void EventToMulPhase() {
-        // disable dark overlay
+    public IEnumerator EventToMulPhase() {
         GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>().enabled = false;
+        foreach(Transform container in eventContainers) {
+            Transform evt = container.GetComponentInChildren<Event>().transform;
+            evt.GetComponent<SpriteRenderer>().enabled = false;
+            evt.GetComponentsInChildren<TextMeshPro>()[0].enabled = false;
+            evt.GetComponentsInChildren<TextMeshPro>()[1].enabled = false;
+        }
+
+        // transition to day
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        
+        // for(int i = 0; i < daytimeSprites.Length; i++) {
+        //     DOTween.To(() => daytimeSprites[i].color, x => daytimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
+        //     DOTween.To(() => nighttimeSprites[i].color, x => nighttimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
+        // }
+        yield return new WaitForSeconds(1.5f);
 
         // show mulligan banner
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
@@ -466,6 +545,9 @@ public class Board : MonoBehaviour {
         round = 0;
         Reshuffle();
         level++;
+        foreach(GameObject card in deck) {
+            card.GetComponent<Card>().curState = CardState.InDeck;
+        }
 
         // spawn new enemies
         GameObject enemySpawner = GameObject.Find("EnemySpawner");
@@ -473,7 +555,7 @@ public class Board : MonoBehaviour {
         if(level != 4) {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -4.25f, 0, 9.3f);
+                enemy.transform.localPosition = new Vector3(i * -4.5f, 0, 9.3f);
             }
         } else {
             GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
@@ -553,6 +635,9 @@ public class Board : MonoBehaviour {
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
+        daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
+        nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
+       
 
         // used to specify ui elements to tween down during res phase
         elementsToTween.Add(GameObject.Find("_HandAnchor"));
@@ -605,8 +690,11 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(0);
+        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
+        if(Input.GetKeyDown(KeyCode.T)) {
+            foreach(GameObject enemy in enemies) {
+                enemy.GetComponent<Enemy>().health = 1;
+            }
         }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");

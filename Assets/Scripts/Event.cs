@@ -11,7 +11,7 @@ public class Event : MonoBehaviour {
     // do the thing the event says it will do, and then set game back to mul phase
     protected virtual void resolveEvent() {
 
-        board.EventToMulPhase();
+        StartCoroutine(board.EventToMulPhase());
     }
 
     protected virtual void Start() {

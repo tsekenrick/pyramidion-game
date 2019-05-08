@@ -14,7 +14,11 @@ public class CloudMover : MonoBehaviour {
         end = -30f;
         start = 30f;
         this.transform.DOMoveX(end, firstLoopTime).OnComplete(MoveCloud);
+    }
 
+    void Update() {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .78f);
     }
 
     public void MoveCloud() {
