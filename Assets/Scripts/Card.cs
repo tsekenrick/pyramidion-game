@@ -270,9 +270,9 @@ public class Card : MonoBehaviour
         if(board.overlayActive) return;
 
         if(curState == CardState.InHand) {
-            cardParts[5].sortingOrder = 0;
+            cardParts[5].sortingOrder = 5;
             foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
-            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 3;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 0;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
         }
@@ -297,7 +297,6 @@ public class Card : MonoBehaviour
                     cardParts[5].enabled = true;
                     cardParts[5].sortingOrder = 15;
                     // FMOD Card Select Event
-                    
                     sm.PlaySound(sm.selectSound);
                 }
                 else if(board.toMul.Contains(this.gameObject) && !board.lockedHand.Contains(this.gameObject)) {
