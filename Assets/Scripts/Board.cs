@@ -464,7 +464,7 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
-
+        GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
         turn = 0;
         // FMOD Play Phase Transition Sound      

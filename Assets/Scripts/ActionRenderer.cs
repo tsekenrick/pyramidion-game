@@ -11,6 +11,7 @@ public class ActionRenderer : MonoBehaviour
     public GameObject enemyActionPrefab;
     public GameObject[] enemies;
     private List<EnemyAction>[] enemyActions;
+    public bool adjusted;
     
     private const float OFFSET = 1.2f;
 
@@ -26,6 +27,7 @@ public class ActionRenderer : MonoBehaviour
 
     private void Start() {
         board = Board.me;
+        adjusted = false;
     }
 
     private void Update() {
@@ -52,11 +54,13 @@ public class ActionRenderer : MonoBehaviour
                         enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .2f);
                         if(board.borrowedTime != 0) {
                             StartCoroutine(AdjustForBorrowedTime(enemyAction));
-                            StartCoroutine(GameObject.Find("BarOverlay").GetComponent<DarkProgressBar>().AdjustForBorrowedTime());
                         }
                     }
                 }
             }
+            
+            if(!adjusted) StartCoroutine(GameObject.Find("BarOverlay").GetComponent<DarkProgressBar>().AdjustForBorrowedTime());
+            
         }
 
         foreach(Action entry in board.playSequence) {
