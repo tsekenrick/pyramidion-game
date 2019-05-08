@@ -37,6 +37,7 @@ public class Card : MonoBehaviour
     public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
+        GetComponent<TrailRenderer>().enabled = true;
         tr.localScale = Vector3.zero;
         foreach(SpriteRenderer sr in cardParts) {
             sr.sortingLayerName = "UI Low";
@@ -45,16 +46,14 @@ public class Card : MonoBehaviour
         cardParts[4].sortingOrder = 3;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
+        GetComponent<TrailRenderer>().enabled = false;
         yield return null;
-
     }
 
     private void PlayAnim(Transform tr) {
-        GetComponent<TrailRenderer>().enabled = false;
         tr.localScale = Vector3.zero;
         tr.position = tr.parent.position;
         tr.localScale = Vector3.one;
-        GetComponent<TrailRenderer>().enabled = true;
     }
 
     private IEnumerator MulliganAnim(Transform tr) {
@@ -107,9 +106,9 @@ public class Card : MonoBehaviour
         t.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
 
         // currently doesn't work - will fix later
-        Sequence animShield = DOTween.Sequence();
-        animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
-        animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
+        // Sequence animShield = DOTween.Sequence();
+        // animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
+        // animShield.Append(t.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
         
         t.block += amount;
     }
@@ -169,7 +168,7 @@ public class Card : MonoBehaviour
             cardParts[4].enabled = true;
         }
 
-        GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
+        // GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
         cardParts[5].sortingLayerName = "UI High";
         
         if(curState != CardState.InQueue) {
@@ -201,7 +200,6 @@ public class Card : MonoBehaviour
                 break;
 
             case CardState.InDiscard:
-                // if(isSettled && !GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().isRendering) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
@@ -211,7 +209,6 @@ public class Card : MonoBehaviour
                 break;
             
             case CardState.InDeck:
-                // if(isSettled && !GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().isRendering) GetComponent<TrailRenderer>().enabled = false;
                 if(!isSettled) {
                     StartCoroutine(ReshuffleAnim(tr));
                     isSettled = true;
@@ -255,9 +252,9 @@ public class Card : MonoBehaviour
                 sr.sortingLayerName = "UI High";
                 sr.sortingOrder = 6;
             }
-            cardParts[5].sortingOrder = 7;
+            cardParts[5].sortingOrder = 8;
             cardParts[4].sortingOrder = 3; // set glow below the rest
-            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 10;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
             tweenSequence.Append(tr.DOScale(1.4f * Vector3.one, .25f).SetId("zoomIn"));
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
@@ -270,9 +267,9 @@ public class Card : MonoBehaviour
         if(board.overlayActive) return;
 
         if(curState == CardState.InHand) {
-            cardParts[5].sortingOrder = 5;
+            cardParts[5].sortingOrder = 1;
             foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
-            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 0;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = -1;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
         }
@@ -287,7 +284,6 @@ public class Card : MonoBehaviour
                 // add card to the mulligan list if it isn't already in, and if it isn't locked, and if the mulligan limit isn't reached
                 if(curState == CardState.InHand && !board.toMul.Contains(this.gameObject) && 
                    !board.lockedHand.Contains(this.gameObject)) {
-                                    // board.toMul.Count < board.mulLimit &&
                     if(board.toMul.Count == board.mulLimit) {
                         board.toMul[0].GetComponent<Card>().cardParts[5].enabled = false;
                         board.toMul[0] = this.gameObject;
@@ -308,6 +304,7 @@ public class Card : MonoBehaviour
                 break;
             case Phase.Play:
                 if(curState == CardState.InHand) {
+                    GetComponent<TrailRenderer>().enabled = true;
                     curState = CardState.InPlay;
                     prevParent = tr.parent;
                     tr.parent = null;
@@ -327,6 +324,7 @@ public class Card : MonoBehaviour
     void OnMouseUpAsButton() {
         if(curState == CardState.InPlay) {
             if(this.cardProps[0] == "Defend") {
+                GetComponent<TrailRenderer>().enabled = false;
                 float dist = Vector3.Distance(this.transform.position, this.prevParent.position);
                 if(dist > 3) {
                     PlayerAction toInsert = new PlayerAction(this, board.player);
@@ -340,6 +338,7 @@ public class Card : MonoBehaviour
                     sm.PlaySound(sm.confirmCardSound); 
                 }
             } else {
+                GetComponent<TrailRenderer>().enabled = false;
                 foreach(GameObject enemy in board.enemies) {
                     enemy.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = false;
                 }
@@ -358,6 +357,7 @@ public class Card : MonoBehaviour
                         curState = CardState.InQueue;
                         // FMOD Card Play Confirmation Sound
                         sm.PlaySound(sm.confirmCardSound);
+                        break;
                     }
                 }
             }
@@ -365,6 +365,7 @@ public class Card : MonoBehaviour
             // reanchor to old hand pos
             tr.parent = prevParent;
             prevParent = null;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 0;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
         }

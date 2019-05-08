@@ -269,6 +269,12 @@ public class Board : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
 
+        // foreach(GameObject card in deck) {
+        //     card.GetComponent<TrailRenderer>().enabled = false;
+        // }
+        // foreach(GameObject card in discard) {
+        //     card.GetComponent<TrailRenderer>().enabled = false;
+        // }
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y - 2f, .75f);
         }
