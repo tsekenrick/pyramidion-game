@@ -14,6 +14,6 @@ public class DamageText : MonoBehaviour {
     public void FadeText() {
         TextMeshPro tmp = this.GetComponent<TextMeshPro>();
         tmp.color = initColor;
-        DOTween.To(()=> tmp.color, x=> tmp.color = x, new Color32(180, 0, 0, 0), .75f);
+        DOTween.To(()=> tmp.color, x=> tmp.color = x, new Color32(180, 0, 0, 0), 1.2f);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 using DG.Tweening;
 using TMPro;
@@ -52,6 +53,9 @@ public class Board : MonoBehaviour {
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
     private bool displayingEvents = false;
+
+    // RESOLUTION PHASE VARIABLES //
+    List<GameObject> elementsToTween = new PlaySequence<GameObject>();
 
     // EVENT PHASE VARIABLES //
     public List<GameObject> possibleEvents = new List<GameObject>();
@@ -263,6 +267,10 @@ public class Board : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
 
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y - 2f, .75f);
+        }
+
         // move actors closer together (resets at end of coroutine)
         player.transform.DOMoveX(-4.5f, .5f);
         enemies[0].transform.DOMoveX(4.5f, .5f);
@@ -277,7 +285,7 @@ public class Board : MonoBehaviour {
                     // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(-3.5f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 8), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -301,7 +309,7 @@ public class Board : MonoBehaviour {
                     
                     // anims
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(3.5f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 8), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -319,6 +327,9 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         enemies[0].transform.DOMoveX(10, .5f);
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
+        }
 
         if(borrowedTime != 0) {
             GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
@@ -344,7 +355,7 @@ public class Board : MonoBehaviour {
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
         player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
-        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.25f * player.GetComponent<Player>().health)).ToString();
+        player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.5f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
         Camera.main.transform.DOShakePosition(2f);
@@ -366,11 +377,14 @@ public class Board : MonoBehaviour {
     }
 
     private IEnumerator DisplayEvents() {
-        Debug.Log("hit coroutine");
         displayingEvents = true;
-        yield return new WaitForSeconds(1.75f);
         curPhase = Phase.Event;
+        yield return new WaitForSeconds(1.75f);
         playSequence.Clear();
+        playSequence.totalTime = 0;
+        foreach(GameObject go in elementsToTween) {
+            go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
+        }
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
         player.transform.DOMoveX(-10, .5f);
@@ -379,11 +393,8 @@ public class Board : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = false;
-
         GameObject overlay = GameObject.Find("_DarknessOverlay");
-        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input
-        
+        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input     
         
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;
@@ -447,7 +458,8 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
 
-        // reset state variables  
+        // reset state variables
+        playSequence.totalTime = 0;
         mulLimit = 4;
         turn = 0;
         borrowedTime = 0;
@@ -464,9 +476,9 @@ public class Board : MonoBehaviour {
                 enemy.transform.localPosition = new Vector3(i * -4.25f, 0, 9.3f);
             }
         } else {
-            Instantiate(spawner.boss, new Vector3(0, 0, 9.3f), Quaternion.identity, enemySpawner.transform);
+            GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
+            enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
         }
-        // GameObject.Find("Actions").GetComponent<ActionRenderer>().LateStart();
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         // destroy the event objects
@@ -541,7 +553,13 @@ public class Board : MonoBehaviour {
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
-        
+
+        // used to specify ui elements to tween down during res phase
+        elementsToTween.Add(GameObject.Find("_HandAnchor"));
+        elementsToTween.Add(GameObject.Find("Playfield"));
+        elementsToTween.Add(GameObject.Find("_DiscardAnchor"));
+        elementsToTween.Add(GameObject.Find("_DeckAnchor"));
+
         List<CardData> deckList = LoadDeckData().deckList;
         GetAnchors(); // get anchor positions
 
@@ -587,6 +605,10 @@ public class Board : MonoBehaviour {
     }
 
     void Update(){
+        if(Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(0);
+        }
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
@@ -594,7 +616,6 @@ public class Board : MonoBehaviour {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);
             StartCoroutine(DisplayEvents());
-            
         }
 
         switch(curPhase){
@@ -693,7 +714,7 @@ public class Board : MonoBehaviour {
 
             case Phase.Resolution:
                 // waits for ExecuteAction coroutine to finish
-                if(playSequence.Count == 0) {
+                if(playSequence.Count == 0 && !AllEnemiesDead()) {
                     if(!IsInvoking()) Invoke("ResToMulPhase", .7f);
                 }
                 break;

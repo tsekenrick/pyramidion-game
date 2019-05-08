@@ -75,7 +75,7 @@
         {
             "cardName": "Focus Attack",
             "cost": 4,
-            "desc": "Deal 10 damage. Deal 20 damage if the previous resolved action was not the enemy's.",
+            "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
@@ -83,7 +83,7 @@
         {
             "cardName": "Focus Attack",
             "cost": 4,
-            "desc": "Deal 10 damage. Deal 20 damage if the previous resolved action was not the enemy's.",
+            "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
@@ -91,7 +91,7 @@
         {
             "cardName": "Focus Attack",
             "cost": 4,
-            "desc": "Deal 10 damage. Deal 20 damage if the previous resolved action was not the enemy's.",
+            "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
@@ -99,49 +99,41 @@
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 3 block. Gain 3 additional block for every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
+            "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
+            "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
+            "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
+            "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
-            "superclass": "TemperedGuard"
-        },
-        {
-            "cardName": "Tempered Guard",
-            "cost": 1,
-            "desc": "Gain 3 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/ph_cardart_entrench_1.png",
-            "cardProps": ["Defend", "3"],
+            "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
         {

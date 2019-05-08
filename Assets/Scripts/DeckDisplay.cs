@@ -25,7 +25,7 @@ public class DeckDisplay : MonoBehaviour
         // completeDeck = board.FisherYatesShuffle(completeDeck);
 
         // reset doesn't quite work with discard pile rn
-        if(Input.GetKeyDown(KeyCode.Escape) && isRendering) {
+        if(Input.GetKeyDown(KeyCode.Escape) && isRendering && !(board.curPhase == Phase.Event)) {
             screenOverlay.enabled = false;
             if(curRender.Count == 0) {
                 curRender = null;

@@ -11,7 +11,6 @@ public class Enemy : Target
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
     public TextMeshPro[] healthText;
-    public SpriteRenderer[] mulliganIntents;
 
     private bool dying;
     private const int MAX_HEALTH = 100;
@@ -79,13 +78,9 @@ public class Enemy : Target
                     }
                 }
                 curActions.Sort((a, b) => a.completeTime.CompareTo(b.completeTime));
-                foreach(EnemyAction action in curActions) {
-                    mulliganIntents[(int)action.actionType].enabled = true;
-                }
                 break;
 
             case Phase.Play:
-                foreach(SpriteRenderer sr in mulliganIntents) sr.enabled = false;
                 break;
             
             case Phase.Resolution:

@@ -47,4 +47,8 @@ public class PhaseBanner : MonoBehaviour {
         phaseName.text = "Mulligan Phase";
     }
 
+    void Update() {
+        if(board.curPhase == Phase.Event) canBanner = false;
+    }
+
 }
