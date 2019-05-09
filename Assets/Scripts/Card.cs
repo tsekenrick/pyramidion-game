@@ -278,7 +278,8 @@ public class Card : MonoBehaviour
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = -1;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
-        } else if (curState == CardState.InSelection  || DeckDisplay.instance.isRendering) {
+        } else if (curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
+            Debug.Log($"hit, curState is {curState} and isRendering is {DeckDisplay.instance.isRendering}");
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 6;
             cardParts[4].sortingOrder = -1;
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
@@ -334,7 +335,7 @@ public class Card : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collided) {
-        Debug.Log(collided.name);
+        if(curState != CardState.InPlay || collided == null) return;
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[1];
@@ -342,7 +343,7 @@ public class Card : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D collided) {
-        Debug.Log(collided.name);
+        if(curState != CardState.InPlay || collided == null) return;
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];

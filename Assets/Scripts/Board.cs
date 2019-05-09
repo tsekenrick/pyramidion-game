@@ -160,7 +160,7 @@ public class Board : MonoBehaviour {
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
-                Board.me.Mulligan(action.card); // jank
+                Board.me.Mulligan(action.card, false); // jank
                 Destroy(action.instance);
             } else if (item is EnemyAction) {
                 EnemyAction action = item as EnemyAction;
@@ -203,9 +203,9 @@ public class Board : MonoBehaviour {
         }   
     }
     
-    public void Mulligan(Card card) {
+    public void Mulligan(Card card, bool useEffect) {
         if(hand.Contains(card.gameObject)) {
-            card.OnMulligan();
+            if(useEffect) card.OnMulligan();
             card.isSettled = false;
             card.curState = CardState.InDiscard;
             discard.Add(card.gameObject);
@@ -735,7 +735,7 @@ public class Board : MonoBehaviour {
                     }
 
                     foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>()); 
+                        Mulligan(card.GetComponent<Card>(), true); 
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
@@ -765,7 +765,7 @@ public class Board : MonoBehaviour {
                         }
                     }
                     foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>()); 
+                        Mulligan(card.GetComponent<Card>(), false); 
                     }
                     toMul.Clear();
 
