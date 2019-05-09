@@ -333,6 +333,22 @@ public class Card : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collided) {
+        Debug.Log(collided.name);
+        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+            SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
+            targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[1];
+        }      
+    }
+
+    void OnTriggerExit2D(Collider2D collided) {
+        Debug.Log(collided.name);
+        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+            SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
+            targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];
+        }      
+    }
+
     void OnMouseUpAsButton() {
         if(curState == CardState.InPlay) {
             if(this.cardProps[0] == "Defend") {

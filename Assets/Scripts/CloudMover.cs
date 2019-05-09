@@ -11,8 +11,6 @@ public class CloudMover : MonoBehaviour {
     public float otherLoopsTime;
 
     void Start() {
-        end = -30f;
-        start = 30f;
         this.transform.DOMoveX(end, firstLoopTime).OnComplete(MoveCloud);
     }
 
