@@ -48,6 +48,18 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string confirmCardSoundEvent;
 
+    //located on cardpile button
+    [FMODUnity.EventRef]
+    public string pileHoverSoundEvent;
+    [FMODUnity.EventRef]
+    public string pileSelectSoundEvent;
+    [FMODUnity.EventRef]
+    public string pileDeselectSoundEvent;
+
+    //located on sound manager
+    [FMODUnity.EventRef]
+    public string ambienceSoundEvent;
+
     // FMOD Snapshots
     [FMODUnity.EventRef]
     public string battleSnapshotEvent;
@@ -77,6 +89,14 @@ public class SoundManager : MonoBehaviour
     public FMOD.Studio.EventInstance selectSound;
     public FMOD.Studio.EventInstance deselectSound;
     public FMOD.Studio.EventInstance confirmCardSound;
+
+    //located on cardpile button
+    public FMOD.Studio.EventInstance pileHoverSound;
+    public FMOD.Studio.EventInstance pileSelectSound;
+    public FMOD.Studio.EventInstance pileDeselectSound;
+
+    //located on sound manager
+    FMOD.Studio.EventInstance ambienceSound;
 
     //snapshots
     public FMOD.Studio.EventInstance battleSnapshot;
@@ -109,12 +129,25 @@ public class SoundManager : MonoBehaviour
         deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
         confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
 
+        //located on cardpile button
+        pileHoverSound = FMODUnity.RuntimeManager.CreateInstance(pileHoverSoundEvent);
+        pileSelectSound = FMODUnity.RuntimeManager.CreateInstance(pileSelectSoundEvent);
+        pileDeselectSound = FMODUnity.RuntimeManager.CreateInstance(pileDeselectSoundEvent);
+
+        //located on sound manager
+        ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
+
         //snapshots
         battleSnapshot = FMODUnity.RuntimeManager.CreateInstance(battleSnapshotEvent);
         punishmentSnapshot = FMODUnity.RuntimeManager.CreateInstance(punishmentSnapshotEvent);
 
         //parameter init
         confirmCardSound.setParameterValue("overplay", 0f);
+    }
+
+    private void Start()
+    {
+        ambienceSound.start();
     }
 
     public void PlayEnemyAttackSound()
