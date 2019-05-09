@@ -13,15 +13,13 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
 
     private bool dying;
-    private const int MAX_HEALTH = 100;
+    public const int MAX_HEALTH = 100;
     
     void Start() {
         dying = false;
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
-
-        health = 100;
         block = 0;
 
         prevActions = new List<EnemyAction>();

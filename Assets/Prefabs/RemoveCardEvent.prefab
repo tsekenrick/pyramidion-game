@@ -124,6 +124,7 @@ MonoBehaviour:
   eventStates:
   - {fileID: 21300000, guid: 27db6f49c3417274baa38c74a44a5466, type: 3}
   - {fileID: 21300000, guid: def4157d9b597284e8fcc723c87d1ff3, type: 3}
+  toRemove: []
 --- !u!1 &3655467522716121670
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +445,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Remove a card from your deck
+  m_text: Remove two cards from your deck.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
   m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
@@ -514,7 +515,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2443971897447733241}
-    characterCount: 28
+    characterCount: 32
     spriteCount: 0
     spaceCount: 5
     wordCount: 6
