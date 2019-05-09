@@ -13,8 +13,7 @@ public class ModFightEvent : Event {
     }
 
     protected override void resolveEvent() {
-        Player player = Board.me.player.GetComponent<Player>();
-        player.health += (int)(Player.MAX_HEALTH * .3f);
+        Board.me.spawnEnemiesAtHealth = .8f;
         base.resolveEvent();
     }
 }

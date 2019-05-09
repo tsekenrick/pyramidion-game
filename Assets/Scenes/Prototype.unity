@@ -32058,11 +32058,11 @@ MonoBehaviour:
   toMul: []
   lockedHand: []
   possibleEvents:
-  - {fileID: 521714060291473597, guid: 8735bb19b45e28b4da202b96c5b24217, type: 3}
-  - {fileID: 3500470099681425095, guid: f094980262f94b141acc9197a0a29bf5, type: 3}
   - {fileID: 2936876536622872133, guid: b77bb40802799dc48bc821b974065741, type: 3}
+  - {fileID: 3500470099681425095, guid: f094980262f94b141acc9197a0a29bf5, type: 3}
   - {fileID: 8109330900915568485, guid: c7f9ddcc66e20f44b9b28d2f30672930, type: 3}
   curEvents: []
+  spawnEnemiesAtHealth: 0
   TimelineResolutionPS: {fileID: 1981891906}
 --- !u!4 &1098108933
 Transform:

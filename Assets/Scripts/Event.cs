@@ -6,7 +6,7 @@ public class Event : MonoBehaviour {
 
     public Sprite[] eventStates;
     private SpriteRenderer sr;
-    private Board board;
+    protected Board board;
 
     // do the thing the event says it will do, and then set game back to mul phase
     protected virtual void resolveEvent() {
