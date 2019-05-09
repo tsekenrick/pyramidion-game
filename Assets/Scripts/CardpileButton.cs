@@ -7,7 +7,10 @@ public class CardpileButton : MonoBehaviour
 {
     private Board board;
     private List<GameObject> thisPile;
-    
+
+    // FMOD variables
+    private SoundManager sm = SoundManager.me;
+
     void Start() {
         board = Board.me;
 
@@ -46,6 +49,10 @@ public class CardpileButton : MonoBehaviour
     void OnMouseEnter() {
         SpriteRenderer sr = this.transform.Find("DeckGlow").GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+
+        // FMOD Play Pile Hover Sound     
+        sm = SoundManager.me;
+        sm.PlaySound(sm.pileHoverSound);
     }
 
     void OnMouseExit() {
@@ -58,8 +65,16 @@ public class CardpileButton : MonoBehaviour
         DeckDisplay overlay = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
         if(overlay.isRendering) {
             overlay.DeckOffScreen(GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
+            Debug.Log("close");
+            // FMOD Play Pile Close Sound     
+            sm = SoundManager.me;
+            sm.PlaySound(sm.pileDeselectSound);
         } else {
             overlay.DeckToScreen(thisPile, GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
+            Debug.Log("open");
+            // FMOD Play Pile Open Sound     
+            sm = SoundManager.me;
+            sm.PlaySound(sm.pileSelectSound);
         }
     }
 }
