@@ -10,7 +10,7 @@ public class DeckDisplay : MonoBehaviour
     public static DeckDisplay instance;  
 
     public SpriteRenderer screenOverlay;
-    public bool isRendering = true;
+    public bool isRendering;
     public List<GameObject> curRender;
     private SpriteRenderer[] lastRendered;
     private TextMeshPro lastRenderedCounter;
@@ -18,6 +18,7 @@ public class DeckDisplay : MonoBehaviour
     private Transform oldParent; // 
 
     void Start() { 
+        isRendering = false;
         board = Board.me;
         instance = this; 
     }
