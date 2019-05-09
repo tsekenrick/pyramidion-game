@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue}; 
+public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelection }; 
 
 [System.Serializable]
 public class Card : MonoBehaviour
@@ -158,12 +158,12 @@ public class Card : MonoBehaviour
     public virtual void Update(){
         if((board.lockedHand.Contains(this.gameObject) || board.lockedHand.Count >= 4) && board.curPhase == Phase.Mulligan) {
             foreach(SpriteRenderer sr in cardParts) {
-                sr.color = new Color(.5f, .5f, .5f, 1f);
+                if(sr != cardParts[4]) sr.color = new Color(.5f, .5f, .5f, 1f);
             }
             cardParts[4].enabled = false; // kill glow
         } else if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
-                sr.color = Color.white;
+                if(sr != cardParts[4]) sr.color = Color.white;   
             }
             cardParts[4].enabled = true;
         }
@@ -242,8 +242,8 @@ public class Card : MonoBehaviour
     }
     
 
-    void OnMouseEnter(){
-        if(board.overlayActive) return;
+    void OnMouseEnter(){ 
+        if(board.overlayActive && board.curPhase != Phase.Event) return;
 
         if(curState == CardState.InHand) {
             if(board.lockedHand.Contains(this.gameObject)) return;
@@ -259,12 +259,18 @@ public class Card : MonoBehaviour
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
             sm.PlaySound(sm.hoverSound);
+        } else if(curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
+            foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 10;
+            cardParts[4].sortingOrder = 9; // set glow below the rest
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 12;
+            tweenSequence.Append(tr.DOScale(1.25f * Vector3.one, .25f).SetId("zoomIn"));
+            sm.PlaySound(sm.hoverSound);
         }
         
     }
 
     void OnMouseExit(){
-        if(board.overlayActive) return;
+        if(board.overlayActive && board.curPhase != Phase.Event) return;
 
         if(curState == CardState.InHand) {
             cardParts[5].sortingOrder = 1;
@@ -272,12 +278,18 @@ public class Card : MonoBehaviour
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = -1;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
+        } else if (curState == CardState.InSelection  || DeckDisplay.instance.isRendering) {
+            foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 6;
+            cardParts[4].sortingOrder = -1;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
+            DOTween.Pause("zoomIn");
+            tweenSequence.Append(tr.DOScale(Vector3.one * .8f, .1f));
         }
         
     }
 
     void OnMouseDown() {
-        if(board.overlayActive) return;
+        if(board.overlayActive && board.curPhase != Phase.Event) return;
 
         switch(board.curPhase){
             case Phase.Mulligan:
@@ -319,6 +331,22 @@ public class Card : MonoBehaviour
                 Debug.Log("reached unknown phase on click");
                 break;
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collided) {
+        Debug.Log(collided.name);
+        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+            SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
+            targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[1];
+        }      
+    }
+
+    void OnTriggerExit2D(Collider2D collided) {
+        Debug.Log(collided.name);
+        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+            SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
+            targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];
+        }      
     }
 
     void OnMouseUpAsButton() {
@@ -368,6 +396,27 @@ public class Card : MonoBehaviour
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 0;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
+        } else if(curState == CardState.InSelection) {
+            RemoveCardEvent removeEvent = Object.FindObjectOfType<RemoveCardEvent>();
+            if(!removeEvent.toRemove.Contains(this.gameObject)) {
+                removeEvent.toRemove.Add(this.gameObject);
+                cardParts[4].enabled = true;
+                cardParts[4].sortingLayerName = "Above Darkness";
+                cardParts[4].sortingOrder = -1;
+            } else {
+                removeEvent.toRemove.Remove(this.gameObject);
+                cardParts[4].enabled = false;
+                cardParts[4].sortingLayerName = "UI Low";
+            }
+
+            if(removeEvent.toRemove.Count == 2) {
+                removeEvent.callBaseResolve();
+                for(int i = removeEvent.toRemove.Count - 1; i >= 0; i--) {
+                    board.deck.Remove(removeEvent.toRemove[i]);
+                    GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
+                    Destroy(removeEvent.toRemove[i]);
+                }
+            }
         }
     }
     

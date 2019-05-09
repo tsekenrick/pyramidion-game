@@ -13,15 +13,13 @@ public class Enemy : Target
     public TextMeshPro[] healthText;
 
     private bool dying;
-    private const int MAX_HEALTH = 100;
+    public const int MAX_HEALTH = 100;
     
     void Start() {
         dying = false;
         startPos = this.transform.position;
         board = Board.me;
         healthText = GetComponentsInChildren<TextMeshPro>();
-
-        health = 100;
         block = 0;
 
         prevActions = new List<EnemyAction>();
@@ -58,7 +56,7 @@ public class Enemy : Target
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
         
         // health text
-        healthText[0].text = $"{health}/{MAX_HEALTH}";
+        healthText[0].text = health > 0 ? $"{health}/{MAX_HEALTH}" : $"0/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
 
         if(health <= 0 && !dying) {

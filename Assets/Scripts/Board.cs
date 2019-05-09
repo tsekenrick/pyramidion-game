@@ -62,6 +62,7 @@ public class Board : MonoBehaviour {
     // EVENT PHASE VARIABLES //
     public List<GameObject> possibleEvents = new List<GameObject>();
     public List<GameObject> curEvents = new List<GameObject>();
+    public float spawnEnemiesAtHealth;
 
     //Particle Systems
     public ParticleSystem TimelineResolutionPS;
@@ -445,7 +446,7 @@ public class Board : MonoBehaviour {
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;
         for(int i = 0; i < possibleEvents.Count; i++) {       
-            if(i != doNotInclude) {
+            // if(i != doNotInclude) {
                 Transform toAttach;
                 foreach(Transform container in eventContainers) {
                     if(container.childCount == 0) {
@@ -455,7 +456,7 @@ public class Board : MonoBehaviour {
                     }
                 }
                 curEvent++;
-            } 
+            // } 
         }
         displayingEvents = false;
     }
@@ -556,10 +557,12 @@ public class Board : MonoBehaviour {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
                 enemy.transform.localPosition = new Vector3(i * -4.5f, 0, 9.3f);
+                enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
             }
         } else {
             GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
             enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
+            enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -567,6 +570,7 @@ public class Board : MonoBehaviour {
         foreach(Transform container in eventContainers) {
             Destroy(container.GetComponentInChildren<Event>().gameObject);
         }
+        spawnEnemiesAtHealth = 1f;
         curPhase = Phase.Mulligan;
     }
     
@@ -630,6 +634,7 @@ public class Board : MonoBehaviour {
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
         GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
+        enemy.GetComponent<Enemy>().health = Enemy.MAX_HEALTH;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
@@ -637,7 +642,7 @@ public class Board : MonoBehaviour {
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
-       
+       spawnEnemiesAtHealth = 1f;
 
         // used to specify ui elements to tween down during res phase
         elementsToTween.Add(GameObject.Find("_HandAnchor"));

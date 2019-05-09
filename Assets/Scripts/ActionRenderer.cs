@@ -59,8 +59,7 @@ public class ActionRenderer : MonoBehaviour
                 }
             }
             
-            if(!adjusted) StartCoroutine(GameObject.Find("BarOverlay").GetComponent<DarkProgressBar>().AdjustForBorrowedTime());
-            
+            if(!adjusted) StartCoroutine(GameObject.Find("BarOverlay").GetComponent<DarkProgressBar>().AdjustForBorrowedTime());   
         }
 
         foreach(Action entry in board.playSequence) {
