@@ -217,7 +217,10 @@ public class Board : MonoBehaviour {
     }
     
     public void DrawCard() {
-        if(deck.Count == 0) Reshuffle();
+        if(deck.Count == 0) {
+            Reshuffle();
+            return;
+        }
         
         GameObject curCard = deck[0];
         deck.RemoveAt(0);
@@ -338,7 +341,7 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
-            enemies[i].transform.DOLocalMoveX(i * - 4.5f, .5f);
+            enemies[i].transform.DOLocalMoveX(i * - 4.65f, .5f);
         }
         
         foreach(GameObject go in elementsToTween) {
@@ -430,8 +433,22 @@ public class Board : MonoBehaviour {
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
+
+        // reset playSequence
+        foreach(Action action in playSequence) {
+            if(action is PlayerAction) {
+                PlayerAction playerAction = action as PlayerAction;
+                playerAction.card.curState = CardState.InHand;
+                Board.me.Mulligan(playerAction.card, false);
+                Destroy(action.instance);
+            } else if (action is EnemyAction) {
+                EnemyAction enemyAction = action as EnemyAction;
+                Destroy(enemyAction.instance);
+            }
+        }
         playSequence.Clear();
         playSequence.totalTime = 0;
+
         GameObject actionManager = GameObject.Find("Actions");
         foreach(Transform child in actionManager.transform) {
             Destroy(child.gameObject);
@@ -556,7 +573,7 @@ public class Board : MonoBehaviour {
         if(level != 4) {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -4.5f, 0, 9.3f);
+                enemy.transform.localPosition = new Vector3(i * -4.65f, 0, 9.3f);
                 enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
             }
         } else {

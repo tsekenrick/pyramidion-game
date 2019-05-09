@@ -40,6 +40,7 @@ public class Card : MonoBehaviour
         GetComponent<TrailRenderer>().enabled = true;
         tr.localScale = Vector3.zero;
         foreach(SpriteRenderer sr in cardParts) {
+            if(sr != cardParts[3] && sr != cardParts[5]) sr.enabled = true;
             sr.sortingLayerName = "UI Low";
             sr.sortingOrder = 6;
         }

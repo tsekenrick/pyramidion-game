@@ -4,7 +4,7 @@
             "cardName": "Shield Bash",
             "cost": 1,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
-            "artPath": "Card_art/ph_cardart_recklessswing_1.png",
+            "artPath": "Card_art/ph_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
             "superclass": "ShieldBash"
         },
@@ -12,7 +12,7 @@
             "cardName": "Shield Bash",
             "cost": 1,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
-            "artPath": "Card_art/ph_cardart_recklessswing_1.png",
+            "artPath": "Card_art/ph_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
             "superclass": "ShieldBash"
         },

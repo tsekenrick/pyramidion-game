@@ -9,6 +9,7 @@ public class ShieldBash : Card {
 
     public override void resolveAction() {
         Attack(Board.me.player.GetComponent<Player>().block, target);
+        SoundManager.me.PlayPlayerAttackSound();
     }
 
     public override void Awake() {

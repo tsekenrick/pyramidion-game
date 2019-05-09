@@ -15,12 +15,14 @@ public class Preparation : Card {
 
         t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
         Camera.main.transform.DOShakePosition(.5f);
+        SoundManager.me.PlayPlayerAttackSound();
     }
     
     public override void OnMulligan() {
         Debug.Log("called onmulligan for preparation");
         Board.me.player.GetComponent<Player>().block += 3;
         Board.me.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
+        SoundManager.me.PlayPlayerDefendSound();
     }
 
     public override void Awake() {
