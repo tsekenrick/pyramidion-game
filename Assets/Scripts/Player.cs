@@ -29,7 +29,7 @@ public class Player : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
 
-        healthText[0].text = $"{health}/{MAX_HEALTH}";
+        healthText[0].text = health > 0 ? $"{health}/{MAX_HEALTH}" : $"0/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
         // if(Board.me.curPhase == Phase.Mulligan) {
         //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];

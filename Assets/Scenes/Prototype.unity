@@ -5147,8 +5147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774c13ca6bc6ba458d4c2b734636e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: 0
-  start: 0
+  end: -30
+  start: 30
   firstLoopTime: 100
   otherLoopsTime: 120
 --- !u!1 &244686302
@@ -10667,7 +10667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1618f25d35f4cd45bd9aa4895aabadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completeDeck: []
   screenOverlay: {fileID: 1591698135}
   isRendering: 1
   curRender: []
@@ -26697,8 +26696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774c13ca6bc6ba458d4c2b734636e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: 0
-  start: 0
+  end: -30
+  start: 30
   firstLoopTime: 100
   otherLoopsTime: 120
 --- !u!212 &979334941
@@ -36987,8 +36986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774c13ca6bc6ba458d4c2b734636e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: 0
-  start: 0
+  end: -30
+  start: 30
   firstLoopTime: 50
   otherLoopsTime: 65
 --- !u!212 &1166987667
@@ -37278,8 +37277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774c13ca6bc6ba458d4c2b734636e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: 0
-  start: 0
+  end: -30
+  start: 30
   firstLoopTime: 50
   otherLoopsTime: 65
 --- !u!1 &1296327030

@@ -56,7 +56,7 @@ public class Enemy : Target
         healthBar.DOScaleX(Mathf.Max(0, (float)health/MAX_HEALTH), .3f);
         
         // health text
-        healthText[0].text = $"{health}/{MAX_HEALTH}";
+        healthText[0].text = health > 0 ? $"{health}/{MAX_HEALTH}" : $"0/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
 
         if(health <= 0 && !dying) {

@@ -642,7 +642,7 @@ public class Board : MonoBehaviour {
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
-       
+       spawnEnemiesAtHealth = 1f;
 
         // used to specify ui elements to tween down during res phase
         elementsToTween.Add(GameObject.Find("_HandAnchor"));
