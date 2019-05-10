@@ -64,6 +64,7 @@ public class DeckDisplay : MonoBehaviour
             for(int i = 0; i < 3; i++){
                 cardScript.textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
                 cardScript.textParts[i].sortingOrder = -1;
+                cardScript.textParts[i].enabled = false;
                 cardScript.cardParts[i].sortingLayerName = "UI Low";
             }
             cardScript.cardParts[4].sortingLayerName = "UI Low";
@@ -115,6 +116,7 @@ public class DeckDisplay : MonoBehaviour
             for(int j = 0; j < 3; j++) {
                 cardScript.textParts[j].sortingLayerID = SortingLayer.NameToID("Above Darkness");
                 cardScript.textParts[j].sortingOrder = 7;
+                cardScript.textParts[j].enabled = true;
                 cardScript.cardParts[j].enabled = true; 
                 cardScript.cardParts[j].sortingLayerName = "Above Darkness";
             }
@@ -151,6 +153,7 @@ public class DeckDisplay : MonoBehaviour
             for(int j = 0; j < 3; j++) {
                 cardScript.textParts[j].sortingLayerID = SortingLayer.NameToID("Above Darkness");
                 cardScript.textParts[j].sortingOrder = 7;
+                cardScript.textParts[j].enabled = true;
                 cardScript.cardParts[j].enabled = true; 
                 cardScript.cardParts[j].sortingLayerName = "Above Darkness";
             }
