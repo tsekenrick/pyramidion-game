@@ -378,7 +378,7 @@ public class Board : MonoBehaviour {
         sm.PlaySound(sm.overplayPunishmentSound);
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
-        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        player.GetComponent<Player>().health -= (int)(.5f * player.GetComponent<Player>().health);
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.5f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
@@ -394,6 +394,7 @@ public class Board : MonoBehaviour {
             float xPos = Mathf.Max(0, action.completeTime * 1.14f);
             action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
         }
+        StartCoroutine(UnityEngine.Object.FindObjectOfType<DarkProgressBar>().AdjustForBorrowedTime());
         borrowedTime = 0;
         player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
