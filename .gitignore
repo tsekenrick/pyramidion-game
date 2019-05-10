@@ -18,7 +18,8 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-
+*.vs
+*.vscode
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -29,3 +30,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Misc
+fmod_editor.log
