@@ -15373,7 +15373,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1.11, y: 1.04}
-  m_SizeDelta: {x: 1.967, y: 1.154}
+  m_SizeDelta: {x: 3, y: 1.154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5043719677747647564
 MeshRenderer:
@@ -15514,7 +15514,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -0.12379974}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2674271567384884725}
     characterCount: 0
@@ -20459,6 +20459,9 @@ MonoBehaviour:
   srs: []
   blockOverlay: []
   startPos: {x: 0, y: 0, z: 0}
+  intentIcons:
+  - {fileID: 21300000, guid: b8f64ee88b0339343826c37c5c469127, type: 3}
+  - {fileID: 21300000, guid: 0959dd58fd39c7b469809b3600fc0718, type: 3}
   healthText: []
 --- !u!1 &5965146978635588616
 GameObject:

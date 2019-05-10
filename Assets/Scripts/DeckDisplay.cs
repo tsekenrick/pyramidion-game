@@ -16,7 +16,7 @@ public class DeckDisplay : MonoBehaviour
     private TextMeshPro lastRenderedCounter;
 
     private Transform oldParent; // 
-    private bool canToggle;
+    public bool canToggle;
 
     void Start() { 
         canToggle = true;
@@ -26,40 +26,14 @@ public class DeckDisplay : MonoBehaviour
     }
 
     void Update() {
-
-        // reset doesn't quite work with discard pile rn
         if(Input.GetKeyDown(KeyCode.Escape) && canToggle && isRendering && !(board.curPhase == Phase.Event)) {
-            StartCoroutine(SpamDisabler());
-            screenOverlay.enabled = false;
-            if(lastRendered != null) {
-                foreach(SpriteRenderer sr in lastRendered) sr.sortingLayerName = "UI Mid";
-                lastRenderedCounter.sortingLayerID = SortingLayer.NameToID("UI Mid");
-            }
-
-            if(curRender.Count == 0) {
-                curRender = null;
-                isRendering = false;
-                return;
-            }
-
-            foreach(GameObject go in curRender) {
-                go.transform.parent = oldParent;
-                go.GetComponent<TrailRenderer>().enabled = true;
-                go.GetComponent<Card>().isSettled = false;
-                for(int i = 0; i < 3; i++){
-                    go.GetComponent<Card>().textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
-                    go.GetComponent<Card>().textParts[i].sortingOrder = -1;
-                    go.GetComponent<Card>().cardParts[i].sortingLayerName = "UI Low";
-                }
-            }
-            curRender = null;
-            isRendering = false;
+            DeckOffScreen(lastRendered, lastRenderedCounter);
         }
     }
     
     private IEnumerator SpamDisabler() {
         canToggle = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.2f);
         canToggle = true;
     }
 
@@ -80,17 +54,21 @@ public class DeckDisplay : MonoBehaviour
         }
 
         foreach(GameObject go in curRender) {
+            Card cardScript = go.GetComponent<Card>();
             go.transform.parent = oldParent;
             go.GetComponent<TrailRenderer>().enabled = true;
-            go.GetComponent<Card>().isSettled = false;
+            StartCoroutine(cardScript.MulliganAnim(cardScript.transform));
             // for case of displaying during events, always goes back to deck afterwards
             if(go.GetComponent<Card>().curState == CardState.InSelection) go.GetComponent<Card>().curState = CardState.InDeck;
             
             for(int i = 0; i < 3; i++){
-                go.GetComponent<Card>().textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
-                go.GetComponent<Card>().textParts[i].sortingOrder = -1;
-                go.GetComponent<Card>().cardParts[i].sortingLayerName = "UI Low";
+                cardScript.textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
+                cardScript.textParts[i].sortingOrder = -1;
+                cardScript.cardParts[i].sortingLayerName = "UI Low";
             }
+            cardScript.cardParts[4].sortingLayerName = "UI Low";
+
+
         }
         curRender = null;
         isRendering = false;

@@ -65,13 +65,11 @@ public class CardpileButton : MonoBehaviour
         DeckDisplay overlay = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
         if(overlay.isRendering) {
             overlay.DeckOffScreen(GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
-            Debug.Log("close");
             // FMOD Play Pile Close Sound     
             sm = SoundManager.me;
             sm.PlaySound(sm.pileDeselectSound);
         } else {
             overlay.DeckToScreen(thisPile, GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
-            Debug.Log("open");
             // FMOD Play Pile Open Sound     
             sm = SoundManager.me;
             sm.PlaySound(sm.pileSelectSound);

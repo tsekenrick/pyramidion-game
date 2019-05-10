@@ -8,7 +8,6 @@ public class EnemyIntentRenderer : MonoBehaviour
 {
     public int completeTime;
 
-    public Sprite[] intentIcons;
     private TextMeshPro textMesh;
     private SpriteRenderer sr;
     public EnemyAction action;
@@ -30,11 +29,17 @@ public class EnemyIntentRenderer : MonoBehaviour
     // Update is called once per frame
     void Update() {
         completeTime = action.completeTime;
-
         textMesh.text = action.actionVal.ToString();
-        sr.sprite = intentIcons[(int)action.actionType];
         float xPos = Mathf.Max(0, action.completeTime * 1.14f);
         if(!stopAllTweens && (Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Mulligan)) this.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
 
+    }
+
+    void OnMouseEnter() {
+        this.action.owner.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    void OnMouseExit() {
+        this.action.owner.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = false;
     }
 }

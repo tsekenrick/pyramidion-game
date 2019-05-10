@@ -10670,6 +10670,7 @@ MonoBehaviour:
   screenOverlay: {fileID: 1591698135}
   isRendering: 1
   curRender: []
+  canToggle: 0
 --- !u!4 &320835590
 Transform:
   m_ObjectHideFlags: 0
@@ -58194,7 +58195,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.25, y: 3.3}
-  m_SizeDelta: {x: 1.967, y: 1.154}
+  m_SizeDelta: {x: 3, y: 1.154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036402183
 MonoBehaviour:
@@ -58294,7 +58295,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -0.12379974}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2036402184}
     characterCount: 0
