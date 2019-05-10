@@ -164,7 +164,7 @@ public class Board : MonoBehaviour {
                 Destroy(action.instance);
             } else if (item is EnemyAction) {
                 EnemyAction action = item as EnemyAction;
-                Destroy(action.instance);
+                Board.me.DestroyActionInstance(action.instance);
             }
             base.Remove(item);
         }
@@ -202,6 +202,12 @@ public class Board : MonoBehaviour {
             return retStr;
         }   
     }
+
+    private void DestroyActionInstance(GameObject actionInstance) {
+        StartCoroutine(actionInstance.GetComponent<EnemyIntentRenderer>().DestroyEnemyAction(actionInstance));
+    }
+
+    
     
     public void Mulligan(Card card, bool useEffect) {
         if(hand.Contains(card.gameObject)) {
@@ -217,22 +223,23 @@ public class Board : MonoBehaviour {
     }
     
     public void DrawCard() {
-        if(deck.Count == 0) {
-            Reshuffle();
-            return;
-        }
+        if(deck.Count == 0) Reshuffle();
         
         GameObject curCard = deck[0];
+        Card cardScript = curCard.GetComponent<Card>();
         deck.RemoveAt(0);
-
+        // foreach(SpriteRenderer sr in cardScript.cardParts) {
+        //     if(sr != cardScript.cardParts[3] && sr != cardScript.cardParts[5]) sr.enabled = true;
+        // }
+        cardScript.isSettled = false;
         curCard.GetComponent<Card>().curState = CardState.InHand;
+        
         hand.Add(curCard);
         // find empty hand anchor
         for(int i = 0; i < 5; i++) {
             Transform anchor = GameObject.Find($"Hand{i}").transform;
                 if(anchor.childCount == 0){
                     curCard.transform.parent = anchor;
-                    curCard.GetComponent<Card>().isSettled = false;
                 }
         }
     }
@@ -557,6 +564,7 @@ public class Board : MonoBehaviour {
 
         // reset state variables
         playSequence.totalTime = 0;
+        player.GetComponent<Player>().block = 0;
         mulLimit = 4;
         turn = 0;
         borrowedTime = 0;
