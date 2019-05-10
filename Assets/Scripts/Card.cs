@@ -39,11 +39,6 @@ public class Card : MonoBehaviour
     private IEnumerator DrawAnim(Transform tr) {
         GetComponent<TrailRenderer>().enabled = true;
         tr.localScale = Vector3.zero;
-        foreach(SpriteRenderer sr in cardParts) {
-            if(sr != cardParts[3] && sr != cardParts[5]) sr.enabled = true;
-            sr.sortingLayerName = "UI Low";
-            sr.sortingOrder = 6;
-        }
         cardParts[4].sortingOrder = 3;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
@@ -164,9 +159,9 @@ public class Card : MonoBehaviour
             cardParts[4].enabled = false; // kill glow
         } else if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
-                if(sr != cardParts[4]) sr.color = Color.white;   
+                if(sr != cardParts[4]) sr.color = Color.white;  
+                if(sr != cardParts[5] && sr != cardParts[3]) sr.enabled = true;
             }
-            cardParts[4].enabled = true;
         }
 
         // GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
@@ -395,7 +390,7 @@ public class Card : MonoBehaviour
             // reanchor to old hand pos
             tr.parent = prevParent;
             prevParent = null;
-            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 0;
+            foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
         } else if(curState == CardState.InSelection) {
