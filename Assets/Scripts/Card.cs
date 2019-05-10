@@ -159,9 +159,17 @@ public class Card : MonoBehaviour
             cardParts[4].enabled = false; // kill glow
         } else if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
-                if(sr != cardParts[4]) sr.color = Color.white;  
+                if(sr != cardParts[4]) sr.color = Color.white;
                 if(sr != cardParts[5] && sr != cardParts[3]) sr.enabled = true;
+                if(sr != cardParts[4] && sr !=cardParts[5]) sr.sortingOrder = 6;
             }
+            
+            foreach(TextMeshPro tmp in textParts) {
+                tmp.enabled = true;
+                tmp.sortingLayerID = SortingLayer.NameToID("UI High");
+            }
+
+            cardParts[4].sortingOrder = 3;
         }
 
         // GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
