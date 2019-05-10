@@ -39,11 +39,17 @@ public class Card : MonoBehaviour
     private IEnumerator DrawAnim(Transform tr) {
         GetComponent<TrailRenderer>().enabled = true;
         tr.localScale = Vector3.zero;
+        foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
+        cardParts[5].sortingLayerName = "UI High";
         cardParts[4].sortingOrder = 3;
+
+        foreach(TextMeshPro tmp in textParts) tmp.enabled = true;
+
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
         GetComponent<TrailRenderer>().enabled = false;
         yield return null;
+
     }
 
     private void PlayAnim(Transform tr) {
@@ -52,13 +58,13 @@ public class Card : MonoBehaviour
         tr.localScale = Vector3.one;
     }
 
-    private IEnumerator MulliganAnim(Transform tr) {
+    public IEnumerator MulliganAnim(Transform tr) {
         GetComponent<TrailRenderer>().enabled = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
-        foreach(SpriteRenderer sr in cardParts) { sr.enabled = false; }
-        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        foreach(SpriteRenderer sr in cardParts) sr.enabled = false; 
+        foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         GetComponent<TrailRenderer>().enabled = false;
     }
 
@@ -74,7 +80,7 @@ public class Card : MonoBehaviour
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
-        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         GetComponent<TrailRenderer>().enabled = false;
     }
 
@@ -160,7 +166,9 @@ public class Card : MonoBehaviour
         } else if(curState == CardState.InHand) {
             foreach(SpriteRenderer sr in cardParts) {
                 if(sr != cardParts[4]) sr.color = Color.white;
-                if(sr != cardParts[5] && sr != cardParts[3]) sr.enabled = true;
+                if(sr != cardParts[5] && sr != cardParts[3]) {
+                    sr.enabled = true;
+                }
                 if(sr != cardParts[4] && sr !=cardParts[5]) sr.sortingOrder = 6;
             }
             
@@ -168,7 +176,6 @@ public class Card : MonoBehaviour
                 tmp.enabled = true;
                 tmp.sortingLayerID = SortingLayer.NameToID("UI High");
             }
-
             cardParts[4].sortingOrder = 3;
         }
 
@@ -339,7 +346,7 @@ public class Card : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collided) {
-        if(curState != CardState.InPlay || collided == null) return;
+        if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[1];
@@ -347,7 +354,7 @@ public class Card : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D collided) {
-        if(curState != CardState.InPlay || collided == null) return;
+        if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];
@@ -356,6 +363,15 @@ public class Card : MonoBehaviour
 
     void OnMouseUpAsButton() {
         if(curState == CardState.InPlay) {
+            if(board.playSequence.totalTime + this.cost > 15) {
+                tr.parent = prevParent;
+                prevParent = null;
+                foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
+                curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
+                isSettled = false;
+                return;
+            }
+
             if(this.cardProps[0] == "Defend") {
                 GetComponent<TrailRenderer>().enabled = false;
                 float dist = Vector3.Distance(this.transform.position, this.prevParent.position);
@@ -373,7 +389,9 @@ public class Card : MonoBehaviour
             } else {
                 GetComponent<TrailRenderer>().enabled = false;
                 foreach(GameObject enemy in board.enemies) {
-                    enemy.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>().enabled = false;
+                    SpriteRenderer targetingFrame = enemy.transform.Find("TargetingFrame").GetComponent<SpriteRenderer>();
+                    targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];
+                    targetingFrame.enabled = false;
                 }
 
                 Collider2D[] colliders = Physics2D.OverlapPointAll(new Vector2(transform.position.x, transform.position.y));            

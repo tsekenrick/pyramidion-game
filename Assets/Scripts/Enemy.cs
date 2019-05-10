@@ -10,6 +10,7 @@ public class Enemy : Target
 
     public List<EnemyAction> prevActions;
     public List<EnemyAction> curActions;
+    public Sprite[] intentIcons;
     public TextMeshPro[] healthText;
 
     private bool dying;
@@ -40,6 +41,17 @@ public class Enemy : Target
             if(board.playSequence[i] is EnemyAction) {
                 EnemyAction toRemove = board.playSequence[i] as EnemyAction;
                 if(toRemove.owner == this.gameObject) board.playSequence.Remove(board.playSequence[i]);
+            }
+
+            // redirect any actions in playSequence that were targetted at this enemy
+            if(board.playSequence[i].target == this.gameObject) {
+                if(board.enemies.Length == 1) {
+                    board.playSequence.Remove(board.playSequence[i]);
+                } else {
+                    foreach(GameObject enemy in board.enemies) {
+                        if(enemy != this.gameObject) board.playSequence[i].target = enemy;
+                    }
+                }
             }
         }
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();

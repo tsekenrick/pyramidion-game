@@ -291,7 +291,7 @@ public class Board : MonoBehaviour {
         }
 
         // move actors closer together (resets at end of coroutine)
-        player.transform.DOMoveX(-4.5f - (2 * (enemies.Length - 1)), .5f);
+        player.transform.DOMoveX(-4.5f - (1.8f * (enemies.Length - 1)), .5f);
         for(int i = enemies.Length - 1; i >= 0; i--) {
             enemies[i].transform.DOLocalMoveX(-4.5f - (3.5f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
@@ -348,7 +348,7 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
-            enemies[i].transform.DOLocalMoveX(i * - 4.65f, .5f);
+            enemies[i].transform.DOLocalMoveX(i * - 4.75f, .5f);
         }
         
         foreach(GameObject go in elementsToTween) {
@@ -581,7 +581,7 @@ public class Board : MonoBehaviour {
         if(level != 4) {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -4.65f, 0, 9.3f);
+                enemy.transform.localPosition = new Vector3(i * -4.75f, 0, 9.3f);
                 enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
             }
         } else {
