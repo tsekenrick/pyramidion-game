@@ -160,11 +160,11 @@ public class Board : MonoBehaviour {
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
-                Board.me.Mulligan(action.card); // jank
+                Board.me.Mulligan(action.card, false); // jank
                 Destroy(action.instance);
             } else if (item is EnemyAction) {
                 EnemyAction action = item as EnemyAction;
-                Destroy(action.instance);
+                Board.me.DestroyActionInstance(action.instance);
             }
             base.Remove(item);
         }
@@ -202,10 +202,16 @@ public class Board : MonoBehaviour {
             return retStr;
         }   
     }
+
+    private void DestroyActionInstance(GameObject actionInstance) {
+        StartCoroutine(actionInstance.GetComponent<EnemyIntentRenderer>().DestroyEnemyAction(actionInstance));
+    }
+
     
-    public void Mulligan(Card card) {
+    
+    public void Mulligan(Card card, bool useEffect) {
         if(hand.Contains(card.gameObject)) {
-            card.OnMulligan();
+            if(useEffect) card.OnMulligan();
             card.isSettled = false;
             card.curState = CardState.InDiscard;
             discard.Add(card.gameObject);
@@ -220,16 +226,20 @@ public class Board : MonoBehaviour {
         if(deck.Count == 0) Reshuffle();
         
         GameObject curCard = deck[0];
+        Card cardScript = curCard.GetComponent<Card>();
         deck.RemoveAt(0);
-
+        // foreach(SpriteRenderer sr in cardScript.cardParts) {
+        //     if(sr != cardScript.cardParts[3] && sr != cardScript.cardParts[5]) sr.enabled = true;
+        // }
+        cardScript.isSettled = false;
         curCard.GetComponent<Card>().curState = CardState.InHand;
+        
         hand.Add(curCard);
         // find empty hand anchor
         for(int i = 0; i < 5; i++) {
             Transform anchor = GameObject.Find($"Hand{i}").transform;
                 if(anchor.childCount == 0){
                     curCard.transform.parent = anchor;
-                    curCard.GetComponent<Card>().isSettled = false;
                 }
         }
     }
@@ -338,7 +348,7 @@ public class Board : MonoBehaviour {
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
-            enemies[i].transform.DOLocalMoveX(i * - 4.5f, .5f);
+            enemies[i].transform.DOLocalMoveX(i * - 4.65f, .5f);
         }
         
         foreach(GameObject go in elementsToTween) {
@@ -430,8 +440,22 @@ public class Board : MonoBehaviour {
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
+
+        // reset playSequence
+        foreach(Action action in playSequence) {
+            if(action is PlayerAction) {
+                PlayerAction playerAction = action as PlayerAction;
+                playerAction.card.curState = CardState.InHand;
+                Board.me.Mulligan(playerAction.card, false);
+                Destroy(action.instance);
+            } else if (action is EnemyAction) {
+                EnemyAction enemyAction = action as EnemyAction;
+                Destroy(enemyAction.instance);
+            }
+        }
         playSequence.Clear();
         playSequence.totalTime = 0;
+
         GameObject actionManager = GameObject.Find("Actions");
         foreach(Transform child in actionManager.transform) {
             Destroy(child.gameObject);
@@ -540,6 +564,7 @@ public class Board : MonoBehaviour {
 
         // reset state variables
         playSequence.totalTime = 0;
+        player.GetComponent<Player>().block = 0;
         mulLimit = 4;
         turn = 0;
         borrowedTime = 0;
@@ -556,7 +581,7 @@ public class Board : MonoBehaviour {
         if(level != 4) {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -4.5f, 0, 9.3f);
+                enemy.transform.localPosition = new Vector3(i * -4.65f, 0, 9.3f);
                 enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
             }
         } else {
@@ -735,7 +760,7 @@ public class Board : MonoBehaviour {
                     }
 
                     foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>()); 
+                        Mulligan(card.GetComponent<Card>(), true); 
                     }
                     mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
@@ -765,7 +790,7 @@ public class Board : MonoBehaviour {
                         }
                     }
                     foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>()); 
+                        Mulligan(card.GetComponent<Card>(), false); 
                     }
                     toMul.Clear();
 

@@ -10,27 +10,26 @@ public class DeckDisplay : MonoBehaviour
     public static DeckDisplay instance;  
 
     public SpriteRenderer screenOverlay;
-    public bool isRendering = true;
+    public bool isRendering;
     public List<GameObject> curRender;
     private SpriteRenderer[] lastRendered;
     private TextMeshPro lastRenderedCounter;
 
     private Transform oldParent; // 
+    private bool canToggle;
 
     void Start() { 
+        canToggle = true;
+        isRendering = false;
         board = Board.me;
         instance = this; 
     }
 
     void Update() {
 
-        // define completeDeck when needed, not on update
-        // completeDeck = board.deck;
-        // completeDeck.AddRange(board.discard);
-        // completeDeck = board.FisherYatesShuffle(completeDeck);
-
         // reset doesn't quite work with discard pile rn
-        if(Input.GetKeyDown(KeyCode.Escape) && isRendering && !(board.curPhase == Phase.Event)) {
+        if(Input.GetKeyDown(KeyCode.Escape) && canToggle && isRendering && !(board.curPhase == Phase.Event)) {
+            StartCoroutine(SpamDisabler());
             screenOverlay.enabled = false;
             if(lastRendered != null) {
                 foreach(SpriteRenderer sr in lastRendered) sr.sortingLayerName = "UI Mid";
@@ -58,7 +57,16 @@ public class DeckDisplay : MonoBehaviour
         }
     }
     
+    private IEnumerator SpamDisabler() {
+        canToggle = false;
+        yield return new WaitForSeconds(1f);
+        canToggle = true;
+    }
+
     public void DeckOffScreen(SpriteRenderer[] toLower = null, TextMeshPro toLowerText = null) {
+        if(!canToggle) return;
+        StartCoroutine(SpamDisabler());
+
         screenOverlay.enabled = false;
         if(toLower != null) {
             foreach(SpriteRenderer sr in toLower) sr.sortingLayerName = "UI Mid";
@@ -89,6 +97,9 @@ public class DeckDisplay : MonoBehaviour
     }
 
     public void DeckToScreen(List<GameObject> toRender, SpriteRenderer[] toRaise = null, TextMeshPro toRaiseText = null) {
+        if(!canToggle) return;
+        StartCoroutine(SpamDisabler());
+        
         screenOverlay.enabled = true;       
         if(toRaise != null) {
             lastRendered = toRaise;
