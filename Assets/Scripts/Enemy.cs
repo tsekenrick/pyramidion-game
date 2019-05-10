@@ -44,7 +44,7 @@ public class Enemy : Target
             }
 
             // redirect any actions in playSequence that were targetted at this enemy
-            if(board.playSequence[i].target == this.gameObject) {
+            else if(board.playSequence[i].target == this.gameObject) {
                 if(board.enemies.Length == 1) {
                     board.playSequence.Remove(board.playSequence[i]);
                 } else {
