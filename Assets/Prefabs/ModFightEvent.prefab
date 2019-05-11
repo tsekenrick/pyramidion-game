@@ -322,7 +322,7 @@ MonoBehaviour:
   m_text: Reduce health of enemies in next encounter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: b062ba788a06cb94bb0c5bbd0945f0f2, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -486,7 +486,7 @@ SpriteRenderer:
   m_SortingLayerID: 914261393
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 57084f4c2a092664d82ecf41d4d9abab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af1bc4d9af832b9469a26b4dcc4705d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -536,5 +536,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventStates:
-  - {fileID: 21300000, guid: 57084f4c2a092664d82ecf41d4d9abab, type: 3}
-  - {fileID: 21300000, guid: b9d86ca278f5d5142ad34490f7249ad5, type: 3}
+  - {fileID: 21300000, guid: af1bc4d9af832b9469a26b4dcc4705d6, type: 3}
+  - {fileID: 21300000, guid: b275fcea57b2bc143930e110bd56fadf, type: 3}

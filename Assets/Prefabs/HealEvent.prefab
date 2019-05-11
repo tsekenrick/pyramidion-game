@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 914261393
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 56ff0a3b3d3fe2f4eb12fbc672bea817, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cb9f98fc53a0cf42a3800881494a2bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventStates:
-  - {fileID: 21300000, guid: 56ff0a3b3d3fe2f4eb12fbc672bea817, type: 3}
-  - {fileID: 21300000, guid: 0a889970047f6754b808c38a15df480a, type: 3}
+  - {fileID: 21300000, guid: 5cb9f98fc53a0cf42a3800881494a2bf, type: 3}
+  - {fileID: 21300000, guid: 4d0deb830ff99c04a939ad87e4ab35d6, type: 3}
 --- !u!1 &5344968440731378350
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_text: Heal for 30% of max HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: b062ba788a06cb94bb0c5bbd0945f0f2, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
