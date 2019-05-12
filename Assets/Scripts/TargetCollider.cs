@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
 
 public class TargetCollider : MonoBehaviour
 {
@@ -25,8 +27,20 @@ public class TargetCollider : MonoBehaviour
         max = uiCam.ScreenToWorldPoint(max);
 
         //move and smoosh the trigger collider
-        transform.position = 0.5f * (min + max);
-        box.size = 2f * (max - min);
+        transform.position = .5f * (min + max);
+        box.size = 1.5f * (max - min);
+    }
+
+    void OnMouseEnter() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        TextMeshPro tmp = transform.parent.Find("EnemyName").GetComponent<TextMeshPro>();
+        tmp.DOColor(new Color(tmp.color.r, tmp.color.g, tmp.color.b, 1f), .5f);
+    }
+
+    void OnMouseExit() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        TextMeshPro tmp = transform.parent.Find("EnemyName").GetComponent<TextMeshPro>();
+        tmp.DOColor(new Color(tmp.color.r, tmp.color.g, tmp.color.b, 0), .5f);
     }
 
 }

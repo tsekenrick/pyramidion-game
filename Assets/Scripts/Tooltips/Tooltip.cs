@@ -11,6 +11,7 @@ public class Tooltip : MonoBehaviour {
     protected TextMeshPro tmp;
 
     protected virtual void OnMouseEnter() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
         StopAllCoroutines();
         tooltipInstance = Instantiate(tooltipPrefab, Vector3.zero, Quaternion.identity);
         sr = tooltipInstance.GetComponent<SpriteRenderer>();
@@ -26,7 +27,7 @@ public class Tooltip : MonoBehaviour {
     }
     
     protected virtual void OnMouseExit() {
-        if(tooltipInstance == null) return;
+        if(tooltipInstance == null || Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
         SpriteRenderer sr = tooltipInstance.GetComponent<SpriteRenderer>();
         TextMeshPro tmp = tooltipInstance.GetComponentInChildren<TextMeshPro>();
         

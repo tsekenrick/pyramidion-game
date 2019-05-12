@@ -605,7 +605,7 @@ public class Board : MonoBehaviour {
             }
         } else {
             GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
-            enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
+            // enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
             enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");

@@ -30,7 +30,7 @@ public class MulliganIntentRenderer : MonoBehaviour {
 
     void Start() {
         sr = GetComponent<SpriteRenderer>();
-        transform.DOMoveY(transform.position.y + .2f, .7f).SetLoops(-1, LoopType.Yoyo);
+        transform.DOMoveY(transform.position.y + .15f, .7f).SetLoops(-1, LoopType.Yoyo);
     }
 
     void Update() {
