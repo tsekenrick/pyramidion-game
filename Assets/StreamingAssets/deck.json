@@ -19,17 +19,17 @@
         {
             "cardName": "Preparation",
             "cost": 3,
-            "desc": "Deal 8 unblockable damage. When you mulligan this card, gain 3 block.",
+            "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
             "artPath": "Card_art/ph_cardart_preparation_1.png",
-            "cardProps": ["Attack", "8"],
+            "cardProps": ["Attack", "9"],
             "superclass": "Preparation"
         },
         {
             "cardName": "Preparation",
             "cost": 3,
-            "desc": "Deal 8 unblockable damage. When you mulligan this card, gain 3 block.",
+            "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
             "artPath": "Card_art/ph_cardart_preparation_1.png",
-            "cardProps": ["Attack", "8"],
+            "cardProps": ["Attack", "9"],
             "superclass": "Preparation"
         },
         {
@@ -179,25 +179,25 @@
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
+            "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         },
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
+            "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         },
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
+            "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         }
         

@@ -9,7 +9,7 @@ public class Preparation : Card {
 
     public override void resolveAction() {
         Target t = target.GetComponentInParent<Target>();
-        int damage = charged ? 16 : 8;
+        int damage = charged ? 18 : 9;
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{damage}";
         t.GetComponentInChildren<DamageText>().FadeText();
         t.health -= damage;

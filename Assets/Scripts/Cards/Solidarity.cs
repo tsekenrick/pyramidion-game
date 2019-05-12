@@ -9,11 +9,11 @@ public class Solidarity : Card {
 
     public override void resolveAction() {
         base.resolveAction();
-        this.cardProps[1] = "4";
+        this.cardProps[1] = "5";
     }
 
     public override void OnDraw() {
-        this.cardProps[1] = "4";
+        this.cardProps[1] = "5";
         base.OnDraw();
     }
 
@@ -29,25 +29,25 @@ public class Solidarity : Card {
 
         if(handPos == 0) {
             if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "6";
+                this.cardProps[1] = "8";
             }
         } else if(handPos == 4) {
             if(GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "6";
+                this.cardProps[1] = "8";
             }
         } else {
             if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" &&
                 GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "8";
+                this.cardProps[1] = "11";
             } else if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" ||
                 GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "6";
+                this.cardProps[1] = "8";
             }
         }
 
-        transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 4 ?
-            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand." :
-            $"Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.";
+        transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 5 ?
+            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand." :
+            $"Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.";
           
     }
 }
