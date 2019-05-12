@@ -359,7 +359,7 @@ public class Card : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collided) {
         if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
-        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+        if(collided.name == "EnemyColliderDefault") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[1];
         }      
@@ -368,7 +368,7 @@ public class Card : MonoBehaviour
     void OnTriggerExit2D(Collider2D collided) {
         if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
         
-        if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
+        if(collided.name == "EnemyColliderDefault") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];
         }      
