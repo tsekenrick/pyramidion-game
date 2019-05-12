@@ -19,7 +19,10 @@ public class MulliganIntentRenderer : MonoBehaviour {
                 hitDefend = true;
             }
         }
-        if(hitAttack && hitDefend) {
+
+        if(!hitAttack && !hitDefend) {
+            return 3;
+        } else if(hitAttack && hitDefend) {
             return 2;
         } else if (hitDefend) {
             return 1;

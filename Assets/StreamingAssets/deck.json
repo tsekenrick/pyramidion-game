@@ -175,6 +175,30 @@
             "artPath": "Card_art/ph_cardart_armageddon_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "RecklessAbandon"
+        },
+        {
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
+        },
+        {
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
+        },
+        {
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
         }
         
     ]

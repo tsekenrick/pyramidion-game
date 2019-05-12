@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayMenuButton : MenuButton {
-
+    [SerializeField]
+    private int sceneToLoad;
     protected override void OnMouseUpAsButton() {
         base.OnMouseUpAsButton();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

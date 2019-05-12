@@ -21,6 +21,9 @@ public class IntentIconTooltip : Tooltip {
             case 2:
                 tmp.text = "The enemy intends to both attack and defend this turn.";
                 break;
+            case 3:
+                tmp.text = "The enemy intends to summon a minion next turn.";
+                break;
         }
     }
 
