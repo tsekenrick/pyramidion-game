@@ -12,6 +12,7 @@ public class Card : MonoBehaviour
 {
 
     public CardState curState;
+    public static bool charged;
     private Board board = Board.me;
     private SoundManager sm = SoundManager.me;
 
@@ -43,7 +44,10 @@ public class Card : MonoBehaviour
         cardParts[5].sortingLayerName = "UI High";
         cardParts[4].sortingOrder = 3;
 
-        foreach(TextMeshPro tmp in textParts) tmp.enabled = true;
+        foreach(TextMeshPro tmp in textParts) {
+            tmp.enabled = true;
+            tmp.sortingOrder = -1;
+        }
 
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
@@ -69,8 +73,6 @@ public class Card : MonoBehaviour
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
-        // cardParts[0].sprite = cardSprites[0];
-        // cardParts[2].sprite = cardSprites[2];
         GetComponent<TrailRenderer>().enabled = true;
         cardParts[0].enabled = true;
         cardParts[2].enabled = true;
@@ -86,7 +88,12 @@ public class Card : MonoBehaviour
 
     // this currently does not factor any sort of status modifier pressent on `target`
     public void Attack(int amount, GameObject target) {
+        board.player.GetComponent<SpriteRenderer>().sprite = board.player.GetComponent<Player>().combatStates[1];
+
         Target t = target.GetComponentInParent<Target>();
+        if(charged) {
+            amount *= 2;
+        }
         int tmpBlock = t.block;
         t.block = Mathf.Max(t.block - amount, 0);
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{Mathf.Max(amount - tmpBlock, 0)}";
@@ -103,8 +110,8 @@ public class Card : MonoBehaviour
     }
 
     public void Defend(int amount, GameObject target) {
-        // Target t = target.GetComponent<Target>();
-        Target t = GameObject.Find("Player").GetComponent<Target>(); // hardcoded sins
+        board.player.GetComponent<SpriteRenderer>().sprite = board.player.GetComponent<Player>().combatStates[2];
+        Target t = board.player.GetComponent<Target>();
         t.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
 
         // currently doesn't work - will fix later
@@ -142,7 +149,7 @@ public class Card : MonoBehaviour
                 break;
         }
         mi.Invoke(this, new object[]{int.Parse(this.cardProps[1]), this.target});
-        // do things to resolve action based on data given in card field
+        charged = false;
     }
 
     public virtual void Awake(){
@@ -231,11 +238,15 @@ public class Card : MonoBehaviour
             case CardState.InPlay:
                 Vector3 mousePos = Input.mousePosition;
                 tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
+                tr.DOScale(.65f, .3f).SetId("PlayScale");
                 break;
 
             case CardState.InQueue:
                 if(!isSettled) {
-                    PlayAnim(tr);
+                    tr.position = tr.parent.position;
+                    DOTween.Pause("PlayScale");
+                    tr.DOScale(1, .1f);
+                    // PlayAnim(tr);
                     isSettled = true;
                     foreach(SpriteRenderer sr in cardParts){
                         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
@@ -355,6 +366,7 @@ public class Card : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collided) {
         if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
+        
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];

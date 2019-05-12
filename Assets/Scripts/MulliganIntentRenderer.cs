@@ -6,10 +6,11 @@ using DG.Tweening;
 public class MulliganIntentRenderer : MonoBehaviour {
 
     public Sprite[] mulliganIntentIcons;
+    public int iconIndex;
     private SpriteRenderer sr;
 
 
-    private int DetermineActionType(List<EnemyAction> actions) {
+    public int DetermineActionType(List<EnemyAction> actions) {
         bool hitAttack = false, hitDefend = false;
         foreach(EnemyAction action in actions) {
             if(action.actionType == ActionType.Attack && !hitAttack) {
@@ -34,8 +35,9 @@ public class MulliganIntentRenderer : MonoBehaviour {
 
     void Update() {
         if(Board.me.curPhase == Phase.Mulligan) {
+            iconIndex = DetermineActionType(transform.parent.GetComponent<Enemy>().curActions);
             sr.enabled = true;
-            sr.sprite = mulliganIntentIcons[DetermineActionType(transform.parent.GetComponent<Enemy>().curActions)];
+            sr.sprite = mulliganIntentIcons[iconIndex];
         } else {
             sr.enabled = false;
         }

@@ -154,6 +154,15 @@ public class Board : MonoBehaviour {
         }
 
         public new void Remove(T item) {
+            // adjust position of intent icons
+            foreach(T entry in this) {
+                if(entry is EnemyAction) {
+                    Action toRemove = item as Action;
+                    EnemyAction action = entry as EnemyAction;
+                    action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
+                }
+            }
+
             if(item.GetType() == typeof(PlayerAction)) {
                 PlayerAction action = item as PlayerAction;
                 int idx = this.IndexOfCompleteTime(action.completeTime);
@@ -315,7 +324,7 @@ public class Board : MonoBehaviour {
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
                     
                     // TODO: abstract this out
-                    player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
+                    // player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     yield return new WaitForSeconds(.2f);
 
                     // StartCoroutine(ResetActionCamera());
@@ -337,7 +346,7 @@ public class Board : MonoBehaviour {
                     // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
-                    enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
+                    // enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     yield return new WaitForSeconds(.2f);
 
                     StartCoroutine(ResetEnemySprites());
@@ -345,6 +354,7 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
+                
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
@@ -502,6 +512,7 @@ public class Board : MonoBehaviour {
     private void ResToMulPhase() {
         prevResolvedAction = "";
         mulLimit = 4;
+        Card.charged = false;
         round++;
 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 

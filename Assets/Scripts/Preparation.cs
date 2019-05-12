@@ -9,12 +9,14 @@ public class Preparation : Card {
 
     public override void resolveAction() {
         Target t = target.GetComponentInParent<Target>();
-        t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = "8";
+        int damage = charged ? 16 : 8;
+        t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{damage}";
         t.GetComponentInChildren<DamageText>().FadeText();
-        t.health -= 8;
+        t.health -= damage;
 
         t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
         Camera.main.transform.DOShakePosition(.5f);
+        charged = false;
         SoundManager.me.PlayPlayerAttackSound();
     }
     

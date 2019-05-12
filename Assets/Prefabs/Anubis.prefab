@@ -10485,6 +10485,7 @@ GameObject:
   - component: {fileID: 3290595347202890707}
   - component: {fileID: 6605872235354820372}
   - component: {fileID: 755400398992748662}
+  - component: {fileID: 8507941377665862396}
   m_Layer: 8
   m_Name: MulliganIntent
   m_TagString: Untagged
@@ -10570,6 +10571,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1d2e927e98c740840a688a55ada86270, type: 3}
   - {fileID: 21300000, guid: b8bdea6b237841844ba0720ded509dbe, type: 3}
   - {fileID: 21300000, guid: f191628cdbd14014ebb7d683b79c834b, type: 3}
+  iconIndex: 0
+--- !u!114 &8507941377665862396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739302999897732504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8565f650fd600428edb0b8b3825415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 0}
+  tooltipInstance: {fileID: 0}
 --- !u!1 &4792472116978589442
 GameObject:
   m_ObjectHideFlags: 0
