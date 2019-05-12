@@ -1,0 +1,61 @@
+{
+    "deckList": [
+        {
+            "cardName": "Slash",
+            "cost": 2,
+            "desc": "Deal 6 damage",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Attack", "6"],
+            "superclass": ""
+        },
+        {
+            "cardName": "Slash",
+            "cost": 2,
+            "desc": "Deal 6 damage",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Attack", "6"],
+            "superclass": ""
+        },
+        {
+            "cardName": "Slash",
+            "cost": 2,
+            "desc": "Deal 6 damage",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Attack", "6"],
+            "superclass": ""
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Attack", "0"],
+            "superclass": "RecklessAbandon"
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Attack", "0"],
+            "superclass": "RecklessAbandon"
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Attack", "0"],
+            "superclass": "RecklessAbandon"
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Attack", "0"],
+            "superclass": "RecklessAbandon"
+        }
+        
+    ]
+}

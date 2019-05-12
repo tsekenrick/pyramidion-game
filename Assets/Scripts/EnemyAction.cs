@@ -36,6 +36,8 @@ public class EnemyAction: Action
 
     public void resolveAction() {
         Target target = this.target.GetComponent<Target>();
+        this.owner.GetComponent<SpriteRenderer>().sprite = this.owner.GetComponent<Enemy>().combatStates[(int)this.actionType + 1];
+
         switch(actionType) {
             case ActionType.Attack:
                 // FMOD Enemy Attack Sound
