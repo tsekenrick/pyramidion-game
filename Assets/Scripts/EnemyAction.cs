@@ -4,15 +4,15 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 
-public enum ActionType { Attack, Defense, Status };
+public enum ActionType { Attack, Defense, Summon };
 
-public class EnemyAction: Action
-{
+public class EnemyAction: Action {
+
     public GameObject owner;
     public ActionType actionType;
     public int actionVal;
     public int baseCompleteTime; // complete time without borrowed time offset - used for animation
-    public string statusType;
+    public GameObject toSummon;
     public SoundManager sm;
 
     public EnemyAction(ActionType actionType, GameObject target, GameObject owner) : base(target) {
@@ -30,6 +30,14 @@ public class EnemyAction: Action
             while (existingTimes.Contains(choice)) choice = Random.Range(2, 8); 
         }
         this.baseCompleteTime = choice;
+        this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.me.borrowedTime)));
+        this.owner = owner;
+    }
+
+    public EnemyAction(ActionType actionType, GameObject target, GameObject owner, int actionVal, int baseCompleteTime) : base(target) {
+        this.actionType = actionType;
+        this.actionVal = actionVal;
+        this.baseCompleteTime = baseCompleteTime;
         this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.me.borrowedTime)));
         this.owner = owner;
     }
@@ -70,6 +78,11 @@ public class EnemyAction: Action
                 // Sequence animShield = DOTween.Sequence();
                 // animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(2f, .25f));
                 // animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
+                break;
+
+            case ActionType.Summon:
+                // needs a sound
+                this.owner.GetComponent<Anubis>().SummonMedjed();
                 break;
         }
     }

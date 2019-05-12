@@ -47,6 +47,7 @@ public class CardpileButton : MonoBehaviour
     }
 
     void OnMouseEnter() {
+        if(board.displayingLoseScreen) return;
         SpriteRenderer sr = this.transform.Find("DeckGlow").GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
 
@@ -61,7 +62,7 @@ public class CardpileButton : MonoBehaviour
     }
 
     void OnMouseUpAsButton() {
-        // if(board.overlayActive) return;
+        if(board.displayingLoseScreen) return;
         DeckDisplay overlay = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
         if(overlay.isRendering) {
             overlay.DeckOffScreen(GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
