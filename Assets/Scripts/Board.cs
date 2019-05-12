@@ -155,16 +155,23 @@ public class Board : MonoBehaviour {
 
         public new void Remove(T item) {
             // adjust position of intent icons
-            foreach(T entry in this) {
-                if(entry is EnemyAction) {
-                    Action toRemove = item as Action;
-                    EnemyAction action = entry as EnemyAction;
-                    action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
-                }
-            }
+            // foreach(T entry in this) {
+            //     if(entry is EnemyAction) {
+            //         Action toRemove = item as Action;
+            //         EnemyAction action = entry as EnemyAction;
+            //         action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
+            //     }
+            // }
 
-            if(item.GetType() == typeof(PlayerAction)) {
+            if(item is PlayerAction) {
                 PlayerAction action = item as PlayerAction;
+                foreach(T entry in this) {
+                    if(entry is EnemyAction) {
+                        Debug.Log("hit");
+                        EnemyAction toMove = entry as EnemyAction;
+                        toMove.instance.transform.DOLocalMoveX((toMove.completeTime - action.completeTime) * 1.14f, .2f);
+                    }
+                }
                 int idx = this.IndexOfCompleteTime(action.completeTime);
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
@@ -302,7 +309,7 @@ public class Board : MonoBehaviour {
         // move actors closer together (resets at end of coroutine)
         player.transform.DOMoveX(-4.5f - (1.8f * (enemies.Length - 1)), .5f);
         for(int i = enemies.Length - 1; i >= 0; i--) {
-            enemies[i].transform.DOLocalMoveX(-4.5f - (3.5f * i), .5f - (.05f * i)); // DO IT BACK AT END
+            enemies[i].transform.DOLocalMoveX(-4.5f - (3.75f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
         // GameObject.Find("Main Camera").GetComponent<Camera>().cullingMask = 0;
 
@@ -594,12 +601,12 @@ public class Board : MonoBehaviour {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
                 enemy.transform.localPosition = new Vector3(i * -5.5f, 0, 9.3f);
-                enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
+                enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
             }
         } else {
             GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
             enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
-            enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
+            enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -671,7 +678,7 @@ public class Board : MonoBehaviour {
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
         GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
-        enemy.GetComponent<Enemy>().health = Enemy.MAX_HEALTH;
+        enemy.GetComponent<Enemy>().health = enemy.GetComponent<Enemy>().maxHealth;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");

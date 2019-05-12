@@ -26,6 +26,7 @@ public class Tooltip : MonoBehaviour {
     }
     
     protected virtual void OnMouseExit() {
+        if(tooltipInstance == null) return;
         SpriteRenderer sr = tooltipInstance.GetComponent<SpriteRenderer>();
         TextMeshPro tmp = tooltipInstance.GetComponentInChildren<TextMeshPro>();
         
