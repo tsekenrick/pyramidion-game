@@ -72,7 +72,7 @@ public class EnemyAction: Action
                 // animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
                 break;
         }
-        this.instance.transform.DOLocalMove(new Vector3(0, .98f, 0), .2f);
+        this.instance.transform.DOLocalMove(new Vector3(0, .98f, 0), .75f);
     }
 
 }

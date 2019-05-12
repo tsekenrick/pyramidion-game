@@ -8,6 +8,7 @@ public class TimelineTooltip : Tooltip {
 
 
     protected override void OnMouseEnter() {
+        if(!transform.Find("TimelineGlow").GetComponent<SpriteRenderer>().enabled) return;
         base.OnMouseEnter();
 
         if(Board.me.borrowedTime > 0) {

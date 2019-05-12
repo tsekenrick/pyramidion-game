@@ -238,13 +238,13 @@ public class Card : MonoBehaviour
             case CardState.InPlay:
                 Vector3 mousePos = Input.mousePosition;
                 tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
-                tr.DOScale(.65f, .3f);
+                tr.DOScale(.65f, .3f).SetId("PlayScale");
                 break;
 
             case CardState.InQueue:
                 if(!isSettled) {
                     tr.position = tr.parent.position;
-                    DOTween.PauseAll();
+                    DOTween.Pause("PlayScale");
                     tr.DOScale(1, .1f);
                     // PlayAnim(tr);
                     isSettled = true;
@@ -366,6 +366,7 @@ public class Card : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collided) {
         if(curState != CardState.InPlay || collided == null || cardProps[0] == "Defend") return;
+        
         if(collided.GetComponentInParent<SpriteRenderer>().sortingLayerName == "Targets") {
             SpriteRenderer targetingFrame = collided.transform.parent.Find("TargetingFrame").GetComponent<SpriteRenderer>();
             targetingFrame.sprite = targetingFrame.GetComponent<TargetingFrameRenderer>().frames[0];

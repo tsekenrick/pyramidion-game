@@ -10,7 +10,7 @@ using TMPro;
 public enum Phase { Mulligan, Play, Resolution, Event };
 
 public class Board : MonoBehaviour {
-    private string deckFileName = "test_deck.json";
+    private string deckFileName = "deck.json";
 
     // "STATE" FIELDS //
     public Phase curPhase;
@@ -154,6 +154,15 @@ public class Board : MonoBehaviour {
         }
 
         public new void Remove(T item) {
+            // adjust position of intent icons
+            foreach(T entry in this) {
+                if(entry is EnemyAction) {
+                    Action toRemove = item as Action;
+                    EnemyAction action = entry as EnemyAction;
+                    action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
+                }
+            }
+
             if(item.GetType() == typeof(PlayerAction)) {
                 PlayerAction action = item as PlayerAction;
                 int idx = this.IndexOfCompleteTime(action.completeTime);
@@ -345,6 +354,7 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
+                
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
