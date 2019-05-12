@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 914261393
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27db6f49c3417274baa38c74a44a5466, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36e97d8aa7b885641bfe1b9accb6967e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventStates:
-  - {fileID: 21300000, guid: 27db6f49c3417274baa38c74a44a5466, type: 3}
-  - {fileID: 21300000, guid: def4157d9b597284e8fcc723c87d1ff3, type: 3}
+  - {fileID: 21300000, guid: 36e97d8aa7b885641bfe1b9accb6967e, type: 3}
+  - {fileID: 21300000, guid: d5db19994858e974b9f834350916b340, type: 3}
   toRemove: []
 --- !u!1 &3655467522716121670
 GameObject:
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_text: Remove two cards from your deck.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: b062ba788a06cb94bb0c5bbd0945f0f2, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

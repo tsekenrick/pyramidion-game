@@ -36,6 +36,8 @@ public class EnemyAction: Action
 
     public void resolveAction() {
         Target target = this.target.GetComponent<Target>();
+        this.owner.GetComponent<SpriteRenderer>().sprite = this.owner.GetComponent<Enemy>().combatStates[(int)this.actionType + 1];
+
         switch(actionType) {
             case ActionType.Attack:
                 // FMOD Enemy Attack Sound
@@ -70,7 +72,6 @@ public class EnemyAction: Action
                 // animShield.Append(target.transform.Find("HealthBarBase").Find("BlockIcon").DOScale(1f, .25f));
                 break;
         }
-        this.instance.transform.DOLocalMove(new Vector3(0, .98f, 0), .2f);
     }
 
 }

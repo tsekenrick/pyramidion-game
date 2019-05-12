@@ -154,8 +154,24 @@ public class Board : MonoBehaviour {
         }
 
         public new void Remove(T item) {
-            if(item.GetType() == typeof(PlayerAction)) {
+            // adjust position of intent icons
+            // foreach(T entry in this) {
+            //     if(entry is EnemyAction) {
+            //         Action toRemove = item as Action;
+            //         EnemyAction action = entry as EnemyAction;
+            //         action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
+            //     }
+            // }
+
+            if(item is PlayerAction) {
                 PlayerAction action = item as PlayerAction;
+                foreach(T entry in this) {
+                    if(entry is EnemyAction) {
+                        Debug.Log("hit");
+                        EnemyAction toMove = entry as EnemyAction;
+                        toMove.instance.transform.DOLocalMoveX((toMove.completeTime - action.completeTime) * 1.14f, .2f);
+                    }
+                }
                 int idx = this.IndexOfCompleteTime(action.completeTime);
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
@@ -291,9 +307,9 @@ public class Board : MonoBehaviour {
         }
 
         // move actors closer together (resets at end of coroutine)
-        player.transform.DOMoveX(-4.5f - (2 * (enemies.Length - 1)), .5f);
+        player.transform.DOMoveX(-4.5f - (1.8f * (enemies.Length - 1)), .5f);
         for(int i = enemies.Length - 1; i >= 0; i--) {
-            enemies[i].transform.DOLocalMoveX(-4.5f - (3.5f * i), .5f - (.05f * i)); // DO IT BACK AT END
+            enemies[i].transform.DOLocalMoveX(-4.5f - (3.75f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
         // GameObject.Find("Main Camera").GetComponent<Camera>().cullingMask = 0;
 
@@ -315,7 +331,7 @@ public class Board : MonoBehaviour {
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
                     
                     // TODO: abstract this out
-                    player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
+                    // player.GetComponent<SpriteRenderer>().sprite = playerAction.card.cardProps[0] == "Attack" ? player.GetComponent<Player>().combatStates[1] : player.GetComponent<Player>().combatStates[2];
                     yield return new WaitForSeconds(.2f);
 
                     // StartCoroutine(ResetActionCamera());
@@ -337,7 +353,7 @@ public class Board : MonoBehaviour {
                     // player.transform.DOMoveX(-1.6f, .5f).SetEase(Ease.OutExpo);
                     // enemies[0].transform.DOMoveX(1.6f, .5f).SetEase(Ease.OutExpo);
 
-                    enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
+                    // enemyAction.owner.GetComponent<SpriteRenderer>().sprite = enemyAction.owner.GetComponent<Enemy>().combatStates[(int)enemyAction.actionType + 1];
                     yield return new WaitForSeconds(.2f);
 
                     StartCoroutine(ResetEnemySprites());
@@ -345,10 +361,11 @@ public class Board : MonoBehaviour {
                     yield return new WaitForSeconds(1.5f);
                     break;
             }
+                
         }
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
-            enemies[i].transform.DOLocalMoveX(i * - 4.65f, .5f);
+            enemies[i].transform.DOLocalMoveX(i * - 5.5f, .5f);
         }
         
         foreach(GameObject go in elementsToTween) {
@@ -378,7 +395,7 @@ public class Board : MonoBehaviour {
         sm.PlaySound(sm.overplayPunishmentSound);
 
         player.GetComponentsInChildren<ParticleSystem>()[1].Play();
-        player.GetComponent<Player>().health -= (int)(.25f * player.GetComponent<Player>().health);
+        player.GetComponent<Player>().health -= (int)(.5f * player.GetComponent<Player>().health);
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().text = ((int)(.5f * player.GetComponent<Player>().health)).ToString();
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Above Darkness");
         player.transform.Find("DamageText").GetComponent<DamageText>().FadeText();
@@ -394,6 +411,7 @@ public class Board : MonoBehaviour {
             float xPos = Mathf.Max(0, action.completeTime * 1.14f);
             action.instance.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
         }
+        StartCoroutine(UnityEngine.Object.FindObjectOfType<DarkProgressBar>().AdjustForBorrowedTime());
         borrowedTime = 0;
         player.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
         player.transform.Find("DamageText").GetComponent<TextMeshPro>().sortingLayerID = SortingLayer.NameToID("Targets");
@@ -501,6 +519,7 @@ public class Board : MonoBehaviour {
     private void ResToMulPhase() {
         prevResolvedAction = "";
         mulLimit = 4;
+        Card.charged = false;
         round++;
 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
@@ -581,13 +600,13 @@ public class Board : MonoBehaviour {
         if(level != 4) {
             for(int i = 0; i < level; i++) {
                 GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -4.65f, 0, 9.3f);
-                enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
+                enemy.transform.localPosition = new Vector3(i * -5.5f, 0, 9.3f);
+                enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
             }
         } else {
             GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
-            enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
-            enemy.GetComponent<Enemy>().health = (int)(Enemy.MAX_HEALTH * spawnEnemiesAtHealth);
+            // enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
+            enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -659,7 +678,7 @@ public class Board : MonoBehaviour {
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
         GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
-        enemy.GetComponent<Enemy>().health = Enemy.MAX_HEALTH;
+        enemy.GetComponent<Enemy>().health = enemy.GetComponent<Enemy>().maxHealth;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");

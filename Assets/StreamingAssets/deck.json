@@ -159,6 +159,22 @@
             "artPath": "Card_art/ph_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Defend", "0"],
+            "superclass": "RecklessAbandon"
+        },
+        {
+            "cardName": "Reckless Abandon",
+            "cost": 1,
+            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
+            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "cardProps": ["Defend", "0"],
+            "superclass": "RecklessAbandon"
         }
         
     ]

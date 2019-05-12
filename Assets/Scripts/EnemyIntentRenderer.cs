@@ -8,17 +8,14 @@ public class EnemyIntentRenderer : MonoBehaviour
 {
     public int completeTime;
 
-    public Sprite[] intentIcons;
     private TextMeshPro textMesh;
     private SpriteRenderer sr;
     public EnemyAction action;
     private Sequence hoverSeq;
-    private bool stopAllTweens = false;
 
     public IEnumerator DestroyEnemyAction(GameObject actionInstance) {
-        stopAllTweens = true;
         this.transform.DOLocalMove(new Vector3(0, .98f, 0), .2f);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.35f);
         Destroy(this.gameObject);
     }
 
@@ -27,14 +24,24 @@ public class EnemyIntentRenderer : MonoBehaviour
         textMesh = this.GetComponentInChildren<TextMeshPro>();
     }
 
-    // Update is called once per frame
     void Update() {
         completeTime = action.completeTime;
-
         textMesh.text = action.actionVal.ToString();
-        sr.sprite = intentIcons[(int)action.actionType];
-        float xPos = Mathf.Max(0, action.completeTime * 1.14f);
-        if(!stopAllTweens && (Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Mulligan)) this.transform.DOLocalMove(new Vector3(xPos, .98f, 0), .2f);
 
+    }
+
+    void OnMouseEnter() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        Transform frame = this.action.owner.transform.Find("TargetingFrame");
+        SpriteRenderer frameSr = frame.GetComponent<SpriteRenderer>();
+        Vector3 initScale = frame.transform.localScale;
+        frameSr.enabled = true;
+    }
+
+    void OnMouseExit() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        Transform frame = this.action.owner.transform.Find("TargetingFrame");
+        SpriteRenderer frameSr = frame.GetComponent<SpriteRenderer>();
+        frameSr.enabled = false;
     }
 }

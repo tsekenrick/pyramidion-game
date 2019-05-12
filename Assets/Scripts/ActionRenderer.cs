@@ -49,9 +49,12 @@ public class ActionRenderer : MonoBehaviour
             foreach(List<EnemyAction> actionList in enemyActions) {
                 foreach(EnemyAction enemyAction in actionList) {
                     if(!enemyAction.instance) {
+                        // do by enemyAction.owner
+                        Enemy owner = enemyAction.owner.GetComponent<Enemy>();
                         enemyAction.instance = Instantiate(enemyActionPrefab, enemyAction.owner.transform.position, Quaternion.identity, this.transform);
+                        enemyAction.instance.GetComponent<SpriteRenderer>().sprite = owner.intentIcons[(int)enemyAction.actionType];
                         enemyAction.instance.GetComponent<EnemyIntentRenderer>().action = enemyAction;
-                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .2f);
+                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .5f);
                         if(board.borrowedTime != 0) {
                             StartCoroutine(AdjustForBorrowedTime(enemyAction));
                         }
