@@ -38,7 +38,7 @@ public class Card : MonoBehaviour
     public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
-        GetComponent<TrailRenderer>().enabled = true;
+        // GetComponent<TrailRenderer>().enabled = true;
         tr.localScale = Vector3.zero;
         foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
         cardParts[5].sortingLayerName = "UI High";
@@ -51,7 +51,7 @@ public class Card : MonoBehaviour
 
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(1f * Vector3.one, .3f);
-        GetComponent<TrailRenderer>().enabled = false;
+        // GetComponent<TrailRenderer>().enabled = false;
         yield return null;
 
     }
@@ -63,17 +63,17 @@ public class Card : MonoBehaviour
     }
 
     public IEnumerator MulliganAnim(Transform tr) {
-        GetComponent<TrailRenderer>().enabled = true;
+        // GetComponent<TrailRenderer>().enabled = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false; 
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
-        GetComponent<TrailRenderer>().enabled = false;
+        // GetComponent<TrailRenderer>().enabled = false;
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
-        GetComponent<TrailRenderer>().enabled = true;
+        // GetComponent<TrailRenderer>().enabled = true;
         cardParts[0].enabled = true;
         cardParts[2].enabled = true;
 
@@ -83,7 +83,8 @@ public class Card : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
-        GetComponent<TrailRenderer>().enabled = false;
+        isSettled = true;
+        // GetComponent<TrailRenderer>().enabled = false;
     }
 
     // this currently does not factor any sort of status modifier pressent on `target`
@@ -219,19 +220,24 @@ public class Card : MonoBehaviour
 
             case CardState.InDiscard:
                 if(!isSettled) {
+                    GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(MulliganAnim(tr));
                     isSettled = true;
                     // FMOD Discard Event
                     sm.PlaySound(sm.discardSound);
+                } else {
+                    GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;
             
             case CardState.InDeck:
                 if(!isSettled) {
+                    GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(ReshuffleAnim(tr));
-                    isSettled = true;
                     // FMOD Shuffle Event
                     sm.PlaySound(sm.shuffleSound);
+                } else {
+                    GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;
             

@@ -10486,6 +10486,7 @@ GameObject:
   - component: {fileID: 6605872235354820372}
   - component: {fileID: 755400398992748662}
   - component: {fileID: 8507941377665862396}
+  - component: {fileID: 4334943017112978905}
   m_Layer: 8
   m_Name: MulliganIntent
   m_TagString: Untagged
@@ -10584,8 +10585,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8565f650fd600428edb0b8b3825415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tooltipPrefab: {fileID: 0}
+  tooltipPrefab: {fileID: 9006043690555886985, guid: 5f80c68b4d4115741ace86f841f89d63,
+    type: 3}
   tooltipInstance: {fileID: 0}
+--- !u!61 &4334943017112978905
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739302999897732504}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.72, y: 3.6}
+    newSize: {x: 3.72, y: 3.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.72, y: 3.6}
+  m_EdgeRadius: 0
 --- !u!1 &4792472116978589442
 GameObject:
   m_ObjectHideFlags: 0
@@ -20372,7 +20400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7085614971991483139}
   - component: {fileID: 3619818236835500647}
-  - component: {fileID: 3880849406648243130}
+  - component: {fileID: 6142704423013092558}
   m_Layer: 8
   m_Name: Anubis
   m_TagString: Enemy
@@ -20388,7 +20416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5547390648045039223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.45, y: 1, z: 9.3}
+  m_LocalPosition: {x: 0, y: 0, z: 9.3}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 9114529093059466141}
@@ -20453,7 +20481,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3880849406648243130
+--- !u!114 &6142704423013092558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20462,7 +20490,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5547390648045039223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96886c92a54dbdf4dbba5f4186960963, type: 3}
+  m_Script: {fileID: 11500000, guid: 8661d796bfea84547b40d49d196c4945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
@@ -20479,6 +20507,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b8f64ee88b0339343826c37c5c469127, type: 3}
   - {fileID: 21300000, guid: 0959dd58fd39c7b469809b3600fc0718, type: 3}
   healthText: []
+  maxHealth: 200
 --- !u!1 &5965146978635588616
 GameObject:
   m_ObjectHideFlags: 0

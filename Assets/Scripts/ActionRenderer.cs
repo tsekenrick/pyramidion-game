@@ -54,7 +54,7 @@ public class ActionRenderer : MonoBehaviour
                         enemyAction.instance = Instantiate(enemyActionPrefab, enemyAction.owner.transform.position, Quaternion.identity, this.transform);
                         enemyAction.instance.GetComponent<SpriteRenderer>().sprite = owner.intentIcons[(int)enemyAction.actionType];
                         enemyAction.instance.GetComponent<EnemyIntentRenderer>().action = enemyAction;
-                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .2f);
+                        enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.baseCompleteTime) * 1.14f, .98f, 0), .5f);
                         if(board.borrowedTime != 0) {
                             StartCoroutine(AdjustForBorrowedTime(enemyAction));
                         }

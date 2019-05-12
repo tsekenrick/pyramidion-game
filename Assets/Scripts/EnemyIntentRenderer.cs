@@ -12,10 +12,10 @@ public class EnemyIntentRenderer : MonoBehaviour
     private SpriteRenderer sr;
     public EnemyAction action;
     private Sequence hoverSeq;
-    private bool stopAllTweens = false;
 
     public IEnumerator DestroyEnemyAction(GameObject actionInstance) {
-        yield return new WaitForSeconds(.2f);
+        this.transform.DOLocalMove(new Vector3(0, .98f, 0), .2f);
+        yield return new WaitForSeconds(.35f);
         Destroy(this.gameObject);
     }
 
