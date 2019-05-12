@@ -27,8 +27,8 @@ public class TargetCollider : MonoBehaviour
         max = uiCam.ScreenToWorldPoint(max);
 
         //move and smoosh the trigger collider
-        transform.position = .6f * (min + max);
-        box.size = 2f * (max - min);
+        transform.position = .5f * (min + max);
+        box.size = 1.5f * (max - min);
     }
 
     void OnMouseEnter() {
