@@ -31,6 +31,7 @@ public class EnemyIntentRenderer : MonoBehaviour
     }
 
     void OnMouseEnter() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
         Transform frame = this.action.owner.transform.Find("TargetingFrame");
         SpriteRenderer frameSr = frame.GetComponent<SpriteRenderer>();
         Vector3 initScale = frame.transform.localScale;
@@ -38,6 +39,7 @@ public class EnemyIntentRenderer : MonoBehaviour
     }
 
     void OnMouseExit() {
+        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
         Transform frame = this.action.owner.transform.Find("TargetingFrame");
         SpriteRenderer frameSr = frame.GetComponent<SpriteRenderer>();
         frameSr.enabled = false;
