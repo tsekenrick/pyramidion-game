@@ -21,6 +21,8 @@ public class Board : MonoBehaviour {
     public string prevResolvedAction;
     public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
     private IEnumerator co; // reference for starting the ExecuteAction coroutine - allows us to stop it
+    private bool displayingEvents = false;
+    public bool displayingLoseScreen = false;
 
     // "ENTITY" FIELDS //
     public static Board me;
@@ -33,6 +35,8 @@ public class Board : MonoBehaviour {
     public bool actionButtonPressed;
     private SpriteRenderer[] daytimeSprites;
     private SpriteRenderer[] nighttimeSprites;
+    [SerializeField]
+    private GameObject loseScreen;
     
 
     // CARD MANIPULATING FIELDS //
@@ -54,7 +58,7 @@ public class Board : MonoBehaviour {
 
     // PLAY PHASE VARIABLES //
     public PlaySequence<Action> playSequence = new PlaySequence<Action>();
-    private bool displayingEvents = false;
+    
 
     // RESOLUTION PHASE VARIABLES //
     List<GameObject> elementsToTween = new PlaySequence<GameObject>();
@@ -154,15 +158,6 @@ public class Board : MonoBehaviour {
         }
 
         public new void Remove(T item) {
-            // adjust position of intent icons
-            // foreach(T entry in this) {
-            //     if(entry is EnemyAction) {
-            //         Action toRemove = item as Action;
-            //         EnemyAction action = entry as EnemyAction;
-            //         action.instance.transform.DOLocalMoveX((action.completeTime - toRemove.completeTime) * 1.14f, .2f);
-            //     }
-            // }
-
             if(item is PlayerAction) {
                 PlayerAction action = item as PlayerAction;
                 foreach(T entry in this) {
@@ -222,8 +217,6 @@ public class Board : MonoBehaviour {
     private void DestroyActionInstance(GameObject actionInstance) {
         StartCoroutine(actionInstance.GetComponent<EnemyIntentRenderer>().DestroyEnemyAction(actionInstance));
     }
-
-    
     
     public void Mulligan(Card card, bool useEffect) {
         if(hand.Contains(card.gameObject)) {
@@ -258,6 +251,8 @@ public class Board : MonoBehaviour {
                     curCard.transform.parent = anchor;
                 }
         }
+
+        curCard.GetComponent<Card>().OnDraw();
     }
 
     public void Reshuffle() {
@@ -418,6 +413,31 @@ public class Board : MonoBehaviour {
         punishing = false;
     }
 
+    private IEnumerator DisplayLoseScreen() {
+        displayingLoseScreen = true;
+
+        for(int i = 0; i < enemies.Length; i++) {
+            enemies[i].transform.DOLocalMoveX(i * - 5.5f, .5f);
+        }
+
+        player.transform.Find("HealthBarBase").gameObject.SetActive(false);
+        SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
+        player.transform.DOShakePosition(1f, .75f);
+        yield return new WaitForSeconds(.25f);
+        DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
+        player.transform.Find("BasicShadow").gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+
+        SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
+        overlay.enabled = true;
+        overlay.color = new Color(1f, 1f, 1f, 0f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .75f), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        
+        Destroy(player.gameObject);
+        loseScreen.SetActive(true);
+    }
+
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
         yield return new WaitForSeconds(1.5f);     
@@ -522,9 +542,11 @@ public class Board : MonoBehaviour {
         Card.charged = false;
         round++;
 
-        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        if(!displayingEvents && !displayingLoseScreen) {
+            phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+            phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+            phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        }
 
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
 
@@ -745,10 +767,16 @@ public class Board : MonoBehaviour {
                 enemy.GetComponent<Enemy>().health = 1;
             }
         }
+        if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
         deckCount = deck.Count; // exposes variable for debug
+        if(!displayingLoseScreen && player.GetComponent<Player>().health <= 0) {
+            StopCoroutine(co);
+            StartCoroutine(DisplayLoseScreen());
+        }
+
         if((AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);

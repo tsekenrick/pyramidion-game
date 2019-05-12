@@ -8,8 +8,7 @@ using TMPro;
 public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelection }; 
 
 [System.Serializable]
-public class Card : MonoBehaviour
-{
+public class Card : MonoBehaviour {
 
     public CardState curState;
     public static bool charged;
@@ -126,6 +125,10 @@ public class Card : MonoBehaviour
     }
 
     public virtual void OnDequeue() {
+        return;
+    }
+
+    public virtual void OnDraw() {
         return;
     }
 

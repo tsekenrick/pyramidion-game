@@ -25,37 +25,30 @@
             "superclass": ""
         },
         {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
-            "cardProps": ["Attack", "0"],
-            "superclass": "RecklessAbandon"
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
         },
         {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
-            "cardProps": ["Attack", "0"],
-            "superclass": "RecklessAbandon"
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
         },
         {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
-            "cardProps": ["Attack", "0"],
-            "superclass": "RecklessAbandon"
-        },
-        {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
-            "cardProps": ["Attack", "0"],
-            "superclass": "RecklessAbandon"
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "cardProps": ["Attack", "4"],
+            "superclass": "Solidarity"
         }
+        
         
     ]
 }
