@@ -38,8 +38,6 @@ public class Card : MonoBehaviour
     public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
-        // GetComponent<TrailRenderer>().enabled = true;
-        tr.localScale = Vector3.zero;
         foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
         cardParts[5].sortingLayerName = "UI High";
         cardParts[4].sortingOrder = 3;
@@ -47,12 +45,12 @@ public class Card : MonoBehaviour
         foreach(TextMeshPro tmp in textParts) {
             tmp.enabled = true;
             tmp.sortingOrder = -1;
-        }
+        }   
 
-        tr.DOMove(tr.parent.position, .3f);
-        tr.DOScale(1f * Vector3.one, .3f);
-        // GetComponent<TrailRenderer>().enabled = false;
-        yield return null;
+        tr.DOScale(Vector3.one, .3f);
+        tr.DOMove(tr.parent.position, .3f);       
+        yield return new WaitForSeconds(.3f);
+        isSettled = true;
 
     }
 
@@ -63,17 +61,15 @@ public class Card : MonoBehaviour
     }
 
     public IEnumerator MulliganAnim(Transform tr) {
-        // GetComponent<TrailRenderer>().enabled = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false; 
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
-        // GetComponent<TrailRenderer>().enabled = false;
+        isSettled = true;
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
-        // GetComponent<TrailRenderer>().enabled = true;
         cardParts[0].enabled = true;
         cardParts[2].enabled = true;
 
@@ -84,10 +80,8 @@ public class Card : MonoBehaviour
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         isSettled = true;
-        // GetComponent<TrailRenderer>().enabled = false;
     }
 
-    // this currently does not factor any sort of status modifier pressent on `target`
     public void Attack(int amount, GameObject target) {
         board.player.GetComponent<SpriteRenderer>().sprite = board.player.GetComponent<Player>().combatStates[1];
 
@@ -162,7 +156,6 @@ public class Card : MonoBehaviour
 
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
-
     }
 
     public virtual void Update(){
@@ -200,8 +193,8 @@ public class Card : MonoBehaviour
         switch(curState) {
             case CardState.InHand:
                 if(!isSettled) {
+                    GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(DrawAnim(tr));
-                    isSettled = true;
                     textParts[0].text = cardName;
                     textParts[1].text = desc;
                     textParts[2].text = cost.ToString();
@@ -215,6 +208,8 @@ public class Card : MonoBehaviour
                     }
                     // FMOD Draw Event
                     sm.PlaySound(sm.drawSound);
+                } else {
+                    GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;
 
@@ -222,7 +217,7 @@ public class Card : MonoBehaviour
                 if(!isSettled) {
                     GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(MulliganAnim(tr));
-                    isSettled = true;
+                    
                     // FMOD Discard Event
                     sm.PlaySound(sm.discardSound);
                 } else {
@@ -244,7 +239,7 @@ public class Card : MonoBehaviour
             case CardState.InPlay:
                 Vector3 mousePos = Input.mousePosition;
                 tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
-                tr.DOScale(.65f, .3f).SetId("PlayScale");
+                tr.DOScale(.75f, .3f).SetId("PlayScale");
                 break;
 
             case CardState.InQueue:
