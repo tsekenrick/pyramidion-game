@@ -21,7 +21,7 @@ public class Medjed : Enemy {
                             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 4));
                             break;
                         case 2:
-                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 10, 10));
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 15, 9));
                             break;
                     }
                 }

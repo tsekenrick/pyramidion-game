@@ -19,8 +19,8 @@ public class Anubis : Enemy {
             case Phase.Mulligan:
                 if(curActions.Count == 0) {
                     if(board.round == 0) {
-                        curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 5));
-                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 8));
+                        curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 4));
+                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 6));
                     } else {
                         switch(roundsSinceSpawn) {
                             case -1:
@@ -29,15 +29,15 @@ public class Anubis : Enemy {
                                 break;
                             case 0:
                                 // base turn
-                                DoBaseTurn(new float[3] {.4f, .8f, 1f});
+                                DoBaseTurn(new float[3] {.5f, .8f, 1f});
                                 break;
                             case 1:
                                 // weighted for spawn
-                                DoBaseTurn(new float[3] {.25f, .5f, 1f});
+                                DoBaseTurn(new float[3] {.3f, .5f, 1f});
                                 break;
                             case 2:
                                 // spawn
-                                curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 0, 5));
+                                curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 5));
                                 roundsSinceSpawn = -2;
                                 break;
                         }
@@ -57,9 +57,9 @@ public class Anubis : Enemy {
         if(selector <= weights[0]) {
             curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 20, 8));
         } else if (selector <= weights[1]) {
-            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 6));
+            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 12, 5));
         } else {
-            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 0, 5));
+            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 5));
             roundsSinceSpawn = -2; // turns into -1 due to auto increment at end of action generation
         }   
     }

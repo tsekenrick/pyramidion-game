@@ -31,11 +31,11 @@ public class Serpopard : Enemy {
                         int turnType = Random.Range(0, 4);
                         switch(turnType) {
                             case 0:
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 3, 3));
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 3, 5));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 4, 3));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 4, 5));
                                 break;
                             case 1:
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 7));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 5));
                                 break;
                             case 2:
                                 curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 5));
