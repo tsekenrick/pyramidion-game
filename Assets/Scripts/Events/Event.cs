@@ -8,6 +8,9 @@ public class Event : MonoBehaviour {
     private SpriteRenderer sr;
     protected Board board;
 
+    // FMOD variables
+    private SoundManager sm = SoundManager.me;
+
     // do the thing the event says it will do, and then set game back to mul phase
     protected virtual void resolveEvent() {
 
@@ -21,6 +24,9 @@ public class Event : MonoBehaviour {
 
     void OnMouseEnter() {
         sr.sprite = eventStates[1];
+
+        // FMOD Play Hover Event Sound
+        sm.PlaySound(sm.hoverEventButtonSound);
     }
 
     void OnMouseExit() {
@@ -28,6 +34,9 @@ public class Event : MonoBehaviour {
     }
 
     void OnMouseUpAsButton() {
+        // FMOD Play Click Event Sound
+        sm.PlaySound(sm.clickEventButtonSound);
+
         resolveEvent();
     }
 }

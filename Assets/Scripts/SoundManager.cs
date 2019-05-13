@@ -48,6 +48,12 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string confirmCardSoundEvent;
 
+    //located on event
+    [FMODUnity.EventRef]
+    public string hoverEventButtonSoundEvent;
+    [FMODUnity.EventRef]
+    public string clickEventButtonSoundEvent;
+
     //located on cardpile button
     [FMODUnity.EventRef]
     public string pileHoverSoundEvent;
@@ -55,6 +61,14 @@ public class SoundManager : MonoBehaviour
     public string pileSelectSoundEvent;
     [FMODUnity.EventRef]
     public string pileDeselectSoundEvent;
+
+    //located on MenuButton
+    [FMODUnity.EventRef]
+    public string menuButtonHoverSoundEvent;
+    [FMODUnity.EventRef]
+    public string menuButtonClickSoundEvent;
+    [FMODUnity.EventRef]
+    public string menuButtonReleaseSoundEvent;
 
     //located on sound manager
     [FMODUnity.EventRef]
@@ -90,10 +104,19 @@ public class SoundManager : MonoBehaviour
     public FMOD.Studio.EventInstance deselectSound;
     public FMOD.Studio.EventInstance confirmCardSound;
 
+    //located on event
+    public FMOD.Studio.EventInstance hoverEventButtonSound;
+    public FMOD.Studio.EventInstance clickEventButtonSound;
+
     //located on cardpile button
     public FMOD.Studio.EventInstance pileHoverSound;
     public FMOD.Studio.EventInstance pileSelectSound;
     public FMOD.Studio.EventInstance pileDeselectSound;
+
+    //located on MenuButton
+    public FMOD.Studio.EventInstance menuButtonHoverSound;
+    public FMOD.Studio.EventInstance menuButtonClickSound;
+    public FMOD.Studio.EventInstance menuButtonReleaseSound;
 
     //located on sound manager
     public FMOD.Studio.EventInstance ambienceSound;
@@ -104,6 +127,7 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         me = this;
         // FMOD object init
         //located in player and creature action logic
@@ -129,10 +153,19 @@ public class SoundManager : MonoBehaviour
         deselectSound = FMODUnity.RuntimeManager.CreateInstance(deselectSoundEvent);
         confirmCardSound = FMODUnity.RuntimeManager.CreateInstance(confirmCardSoundEvent);
 
+        //located on event
+        hoverEventButtonSound = FMODUnity.RuntimeManager.CreateInstance(hoverEventButtonSoundEvent);
+        clickEventButtonSound = FMODUnity.RuntimeManager.CreateInstance(clickEventButtonSoundEvent);
+
         //located on cardpile button
         pileHoverSound = FMODUnity.RuntimeManager.CreateInstance(pileHoverSoundEvent);
         pileSelectSound = FMODUnity.RuntimeManager.CreateInstance(pileSelectSoundEvent);
         pileDeselectSound = FMODUnity.RuntimeManager.CreateInstance(pileDeselectSoundEvent);
+
+        //located on MenuButton
+        menuButtonHoverSound = FMODUnity.RuntimeManager.CreateInstance(menuButtonHoverSoundEvent);
+        menuButtonClickSound = FMODUnity.RuntimeManager.CreateInstance(menuButtonClickSoundEvent);
+        menuButtonReleaseSound = FMODUnity.RuntimeManager.CreateInstance(menuButtonReleaseSoundEvent);
 
         //located on sound manager
         ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
