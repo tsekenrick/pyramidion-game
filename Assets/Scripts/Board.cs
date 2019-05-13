@@ -37,6 +37,7 @@ public class Board : MonoBehaviour {
     private SpriteRenderer[] nighttimeSprites;
     [SerializeField]
     private GameObject loseScreen;
+    public Texture2D[] cursors;
     
 
     // CARD MANIPULATING FIELDS //
@@ -692,11 +693,12 @@ public class Board : MonoBehaviour {
         return true;
     }
 
-    void Awake(){
+    void Awake() {
         me = this;
     }
 
-    void Start(){
+    void Start() {
+        Cursor.SetCursor(cursors[0], Vector2.zero, CursorMode.Auto);
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
         GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
@@ -760,7 +762,13 @@ public class Board : MonoBehaviour {
         }
     }
 
-    void Update(){
+    void Update() {
+        if(Input.GetMouseButton(0)) {
+            Cursor.SetCursor(cursors[1], Vector2.zero, CursorMode.Auto);
+        } else {
+            Cursor.SetCursor(cursors[0], Vector2.zero, CursorMode.Auto);
+        }
+
         if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
         if(Input.GetKeyDown(KeyCode.T)) {
             foreach(GameObject enemy in enemies) {
@@ -883,7 +891,6 @@ public class Board : MonoBehaviour {
                     if(!IsInvoking()) Invoke("ResToMulPhase", .7f);
                 }
                 break;
-        }
-            
+        }       
     }
 }
