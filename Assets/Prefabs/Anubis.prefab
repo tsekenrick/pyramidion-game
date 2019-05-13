@@ -10572,7 +10572,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1d2e927e98c740840a688a55ada86270, type: 3}
   - {fileID: 21300000, guid: b8bdea6b237841844ba0720ded509dbe, type: 3}
   - {fileID: 21300000, guid: f191628cdbd14014ebb7d683b79c834b, type: 3}
-  - {fileID: 21300000, guid: 3c50aa6b5a10a4641bde6cd6f08c06d6, type: 3}
+  - {fileID: 21300000, guid: 41cf2096c9a2edb4ca7565ccb18707b1, type: 3}
   iconIndex: 0
 --- !u!61 &4334943017112978905
 BoxCollider2D:
@@ -15834,7 +15834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5500541706888923158}
   m_LocalRotation: {x: -0.7071068, y: 0.00000002980233, z: 0.00000002980233, w: 0.7071068}
-  m_LocalPosition: {x: -1.6400002, y: -4.02, z: -2}
+  m_LocalPosition: {x: -0.62, y: -4.17, z: 0}
   m_LocalScale: {x: 0.78521246, y: 0.7351908, z: 1.007409}
   m_Children: []
   m_Father: {fileID: 7085614971991483139}
@@ -15923,7 +15923,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.5
+      scalar: 3.8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -20711,14 +20711,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 118928bc23a3a7a408fed3755c046144, type: 3}
   - {fileID: 21300000, guid: db3134cdb701c7f46930f7b29a1044d1, type: 3}
   - {fileID: 21300000, guid: 6d88660a4be6fdd41acfcd2c55d8e319, type: 3}
-  - {fileID: 21300000, guid: 6d88660a4be6fdd41acfcd2c55d8e319, type: 3}
+  - {fileID: 21300000, guid: 43d08203541b1af46847af5f1f90a534, type: 3}
   srs: []
   blockOverlay: []
   startPos: {x: 0, y: 0, z: 0}
   intentIcons:
   - {fileID: 21300000, guid: b8f64ee88b0339343826c37c5c469127, type: 3}
   - {fileID: 21300000, guid: 0959dd58fd39c7b469809b3600fc0718, type: 3}
-  - {fileID: 21300000, guid: 3c50aa6b5a10a4641bde6cd6f08c06d6, type: 3}
+  - {fileID: 21300000, guid: 129fb5b25817ab849a81c8e1687cb7ca, type: 3}
   healthText: []
   maxHealth: 200
   addCount: 0
