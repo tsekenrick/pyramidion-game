@@ -10697,72 +10697,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &314070933
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 314070935}
-  - component: {fileID: 314070934}
-  m_Layer: 0
-  m_Name: _SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &314070934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314070933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 867b5853c9ca6054e832bafe5ba2388f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAttackSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Attack
-  enemyDefendSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Block
-  playerAttackSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Attack
-  playerDefendSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Block
-  dequeueCardSoundEvent: event:/UI/Gameplay UI/Card Actions/DeQueueCard
-  lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
-  toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
-  toResolutionPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
-  toMulliganPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
-  overplayPunishmentSoundEvent: event:/FX & Animations/Interface/Overplay Punishment
-  drawSoundEvent: event:/UI/Gameplay UI/Card Actions/DrawCard
-  hoverSoundEvent: event:/UI/Gameplay UI/Card Actions/HoverCard
-  discardSoundEvent: event:/UI/Gameplay UI/Card Actions/DiscardCard
-  shuffleSoundEvent: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
-  selectSoundEvent: event:/UI/Gameplay UI/Card Actions/SelectCard
-  deselectSoundEvent: event:/UI/Gameplay UI/Card Actions/DeselectCard
-  confirmCardSoundEvent: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
-  pileHoverSoundEvent: event:/UI/Gameplay UI/Overlay Actions/HoverDeck
-  pileSelectSoundEvent: event:/UI/Gameplay UI/Overlay Actions/OpenDeck
-  pileDeselectSoundEvent: event:/UI/Gameplay UI/Overlay Actions/CloseDeck
-  ambienceSoundEvent: event:/Environment/Ambiences/GenericWorldAtmos
-  battleSnapshotEvent: snapshot:/BattleMix
-  punishmentSnapshotEvent: snapshot:/OverplayMix
---- !u!4 &314070935
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314070933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &320835588
 GameObject:
   m_ObjectHideFlags: 0
@@ -21296,55 +21230,6 @@ MonoBehaviour:
     type: 3}
   enemies: []
   adjusted: 0
---- !u!1 &792269249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 792269251}
-  - component: {fileID: 792269250}
-  m_Layer: 0
-  m_Name: FMODBankManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &792269250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792269249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadEvent: 1
-  UnloadEvent: 2
-  Banks:
-  - MasterBank
-  CollisionTag: 
-  PreloadSamples: 0
---- !u!4 &792269251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792269249}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822894022
 GameObject:
   m_ObjectHideFlags: 0
@@ -37006,7 +36891,7 @@ Transform:
   m_LocalScale: {x: 0.75, y: 1, z: 0.76}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1125500503
 GameObject:
@@ -37504,7 +37389,7 @@ Transform:
   - {fileID: 417306871}
   - {fileID: 1296327032}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1287308070
 GameObject:
@@ -37912,7 +37797,7 @@ Transform:
   - {fileID: 1196933758}
   - {fileID: 1354907319}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440041590
 GameObject:
@@ -43367,7 +43252,7 @@ RectTransform:
   - {fileID: 1911382843}
   - {fileID: 205281759}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -58882,7 +58767,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: -180.165, y: -90, z: 89.99999}
 --- !u!1 &2036402181
 GameObject:
@@ -64091,3 +63976,72 @@ Transform:
   m_Father: {fileID: 781014671}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4071532362275321729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4071532362030456852, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_Name
+      value: _SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071532362030456854, guid: ea504b0ffced1e5469749c5252395dbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea504b0ffced1e5469749c5252395dbd, type: 3}

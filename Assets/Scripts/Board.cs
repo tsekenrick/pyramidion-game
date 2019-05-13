@@ -441,7 +441,11 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
-        yield return new WaitForSeconds(1.5f);     
+        yield return new WaitForSeconds(1.5f);
+
+        // FMOD set parameter for ambience to 1 (night)
+        sm = SoundManager.me;
+        sm.SetSoundParameter(sm.ambienceSound, "DayNight", 1f);
 
         // for some reason DOTween doesn't like my for loop so we have this monstrosity instead
         DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
@@ -569,6 +573,10 @@ public class Board : MonoBehaviour {
             evt.GetComponentsInChildren<TextMeshPro>()[0].enabled = false;
             evt.GetComponentsInChildren<TextMeshPro>()[1].enabled = false;
         }
+
+        // FMOD set parameter for ambience to 0 (day)
+        sm = SoundManager.me;
+        sm.SetSoundParameter(sm.ambienceSound, "DayNight", 0f);
 
         // transition to day
         DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
