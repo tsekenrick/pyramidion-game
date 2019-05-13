@@ -54,6 +54,11 @@ public class Enemy : Target
                 }
             }
         }
+
+        foreach(TooltipBehavior tb in GameObject.FindObjectsOfType<TooltipBehavior>()) {
+            Destroy(tb.gameObject);
+        }
+        
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
         this.transform.DOShakePosition(1f, .50f);
         yield return new WaitForSeconds(.25f);
@@ -65,7 +70,7 @@ public class Enemy : Target
     protected virtual void Update() {
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
-        healthBar.DOScaleX(Mathf.Max(0, (float)health/maxHealth), .3f);
+        healthBar.DOScaleX(Mathf.Max(0, (float)health/maxHealth), 1f);
         
         // health text
         healthText[0].text = health > 0 ? $"{health}/{maxHealth}" : $"0/{maxHealth}";
@@ -76,19 +81,5 @@ public class Enemy : Target
             StartCoroutine(Die());
         } 
 
-        // switch(board.curPhase) {
-        //     case Phase.Mulligan:
-        //         // roll for action type and display non-numerical intent
-        //         if(curActions.Count == 0) {
-        //             for(int i = 0; i < Random.Range(2, 3); i++) { 
-        //                 ActionType actionType = (ActionType)Random.Range(0, 2); // change to max 3 when we added statuses
-        //                 // temporary cheeky one-liner - will not work for ActionType.Status
-        //                 GameObject target = actionType == ActionType.Attack ? GameObject.Find("Player") : this.gameObject;
-        //                 curActions.Add(new EnemyAction(actionType, target, this.gameObject));
-        //             }
-        //         }
-        //         curActions.Sort((a, b) => a.completeTime.CompareTo(b.completeTime));
-        //         break;
-        // }
     }
 }
