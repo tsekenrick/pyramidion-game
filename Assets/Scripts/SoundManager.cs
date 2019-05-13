@@ -96,7 +96,7 @@ public class SoundManager : MonoBehaviour
     public FMOD.Studio.EventInstance pileDeselectSound;
 
     //located on sound manager
-    FMOD.Studio.EventInstance ambienceSound;
+    public FMOD.Studio.EventInstance ambienceSound;
 
     //snapshots
     public FMOD.Studio.EventInstance battleSnapshot;
@@ -143,6 +143,7 @@ public class SoundManager : MonoBehaviour
 
         //parameter init
         confirmCardSound.setParameterValue("overplay", 0f);
+        ambienceSound.setParameterValue("DayNight", 0f);
     }
 
     private void Start()
