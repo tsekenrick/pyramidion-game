@@ -25,23 +25,26 @@ public class Solidarity : Card {
         base.Update();
         if(curState == CardState.InHand || curState == CardState.InQueue) {
             handPos = int.Parse(transform.parent.name[transform.parent.name.Length - 1].ToString());
+            
         }
 
-        if(handPos == 0) {
-            if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "8";
-            }
-        } else if(handPos == 4) {
-            if(GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "8";
-            }
-        } else {
-            if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" &&
-                GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "11";
-            } else if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" ||
-                GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                this.cardProps[1] = "8";
+        if(Board.me.curPhase == Phase.Mulligan) {
+            if(handPos == 0) {
+                if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
+                    this.cardProps[1] = "8";
+                }
+            } else if(handPos == 4) {
+                if(GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
+                    this.cardProps[1] = "8";
+                }
+            } else {
+                if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" &&
+                    GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
+                    this.cardProps[1] = "11";
+                } else if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" ||
+                    GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
+                    this.cardProps[1] = "8";
+                }
             }
         }
 

@@ -20,11 +20,11 @@ public class Ammit : Enemy {
                             float selector = Random.Range(0f, 1f);
                             if(selector <= .4f) {
                                 turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 8));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 6));
                             } else if(selector <= .8f) {
                                 turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 12, 6));
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 6, 8));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 3));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 8));
                             } else {
                                 curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 6));
                             }
@@ -33,10 +33,7 @@ public class Ammit : Enemy {
                             curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 12));                
                             break;
                         case 2:
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 2, 2));
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 2, 4));
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 2, 6));
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 2, 8));
+                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 6));
                             turnCounter = -1; // goes back to case 0 next turn
                             break;
                     }
