@@ -73,6 +73,7 @@ public class Board : MonoBehaviour {
     public ParticleSystem TimelineResolutionPS;
 
     // FMOD variables
+    public GameObject soundManagerPrefab;
     private SoundManager sm = SoundManager.me;
 
     [System.Serializable]
@@ -702,6 +703,10 @@ public class Board : MonoBehaviour {
     }
 
     void Awake() {
+        // Spawn FMOD sound manager if it doesn't exist.
+        if (GameObject.Find("_SoundManager")) { }
+        else
+            Instantiate(soundManagerPrefab);
         me = this;
     }
 
