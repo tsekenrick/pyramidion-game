@@ -32155,6 +32155,9 @@ MonoBehaviour:
   perspectiveCamera: {fileID: 0}
   actionButtonPressed: 0
   loseScreen: {fileID: 1548853315}
+  cursors:
+  - {fileID: 2800000, guid: cb58d9eb961052b4f837fdc4637ae20f, type: 3}
+  - {fileID: 2800000, guid: e9a442feb6a1f60469aec22ca447bc9d, type: 3}
   cardPrefab: {fileID: 6331844338736468087, guid: 00d90514217f4eb448b4d3b4bac6d5d8,
     type: 3}
   deck: []
