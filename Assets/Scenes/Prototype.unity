@@ -43848,7 +43848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 5547390648045039223, guid: 386f98f1a7fa44349813c67a265ba84c, type: 3}
+  - {fileID: 4609263837508079392, guid: 4717511e3305ad84d8930a728ddaf38e, type: 3}
   - {fileID: 4145638793232558106, guid: 46e0adf6cabecac43b70d625ac0f2cd0, type: 3}
   - {fileID: 789899014530690475, guid: c35a34067a3e20148aef296fb73156d6, type: 3}
   boss: {fileID: 5547390648045039223, guid: 386f98f1a7fa44349813c67a265ba84c, type: 3}
