@@ -81,7 +81,10 @@ public class EnemyAction: Action {
                 break;
 
             case ActionType.Summon:
-                // needs a sound
+                // FMOD Summon Sound
+                sm = SoundManager.me;
+                sm.PlaySummonSound();
+
                 this.owner.GetComponent<Anubis>().SummonMedjed();
                 break;
         }

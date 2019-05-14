@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class Serpopard : Enemy {
     protected bool isEnraged;
+    public SoundManager sm;
 
     protected override void Start() {
         base.Start();
@@ -18,8 +19,12 @@ public class Serpopard : Enemy {
                 if(curActions.Count == 0) {
                     if(health < .2f * maxHealth && !isEnraged) {
                         isEnraged = true;
-                        GetComponent<SpriteRenderer>().DOColor(new Color(.85f, .3f, .3f, 1f), 1f).SetDelay(2.25f);
-                        StartCoroutine(DelayedChargeParticle());
+                        // FMOD Play Enrage Sound
+                        sm = SoundManager.me;
+                        sm.PlayEnrageSound();
+
+                        // play a particle system here when we get it
+                        GetComponent<SpriteRenderer>().DOColor(new Color(.85f, .3f, .3f, 1f), 1f).SetDelay(2f);
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 3));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 5));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 7));

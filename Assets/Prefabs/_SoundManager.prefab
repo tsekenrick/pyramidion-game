@@ -48,6 +48,9 @@ MonoBehaviour:
   enemyDefendSoundEvent: event:/FX & Animations/Attacks/Monster/Generic Monster Block
   playerAttackSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Attack
   playerDefendSoundEvent: event:/FX & Animations/Attacks/Player/Generic Player Block
+  summonSoundEvent: event:/FX & Animations/Attacks/Monster/Summon
+  enrageSoundEvent: event:/FX & Animations/Attacks/Monster/Enrage
+  playerBuffSoundEvent: event:/FX & Animations/Attacks/Player/Buff
   dequeueCardSoundEvent: event:/UI/Gameplay UI/Card Actions/DeQueueCard
   lockSoundEvent: event:/UI/Gameplay UI/Card Actions/LockCard
   toPlayPhaseSoundEvent: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
