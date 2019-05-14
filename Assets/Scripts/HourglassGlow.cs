@@ -9,7 +9,7 @@ public class HourglassGlow : MonoBehaviour
 
     void Start() {
         isActive = false;
-        board = Board.me;
+        board = Board.instance;
     }
 
     void Update() {

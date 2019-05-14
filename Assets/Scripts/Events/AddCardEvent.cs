@@ -12,9 +12,9 @@ public class AddCardEvent : Event {
         
     }
 
-    protected override void resolveEvent() {
-        Player player = Board.me.player.GetComponent<Player>();
+    protected override void ResolveEvent() {
+        Player player = Board.instance.player.GetComponent<Player>();
         player.health += (int)(Player.MAX_HEALTH * .3f);
-        base.resolveEvent();
+        base.ResolveEvent();
     }
 }

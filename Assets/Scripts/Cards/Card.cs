@@ -12,7 +12,7 @@ public class Card : MonoBehaviour {
 
     public CardState curState;
     public static bool charged;
-    private Board board = Board.me;
+    private Board board = Board.instance;
     private SoundManager sm = SoundManager.me;
 
     public SpriteRenderer[] cardParts;
@@ -25,6 +25,7 @@ public class Card : MonoBehaviour {
     private Transform tr;
     private Transform prevParent;
     public bool isSettled = true;
+    private bool playingMul = false;
 
     // fields read from json
     public string cardName;
@@ -60,12 +61,14 @@ public class Card : MonoBehaviour {
     }
 
     public IEnumerator MulliganAnim(Transform tr) {
+        playingMul = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false; 
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         isSettled = true;
+        playingMul = false;
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
@@ -132,7 +135,11 @@ public class Card : MonoBehaviour {
         return;
     }
 
-    public virtual void resolveAction() {
+    public virtual void OnNewCombat() {
+        return;
+    }
+
+    public virtual void ResolveAction() {
         MethodInfo mi = this.GetType().GetMethod(this.cardProps[0]);
         switch(cardProps[0]) {
             case "Attack":
@@ -223,7 +230,7 @@ public class Card : MonoBehaviour {
                     
                     // FMOD Discard Event
                     sm.PlaySound(sm.discardSound);
-                } else {
+                } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;
@@ -234,7 +241,7 @@ public class Card : MonoBehaviour {
                     StartCoroutine(ReshuffleAnim(tr));
                     // FMOD Shuffle Event
                     sm.PlaySound(sm.shuffleSound);
-                } else {
+                } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;

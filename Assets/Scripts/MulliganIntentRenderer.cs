@@ -37,7 +37,7 @@ public class MulliganIntentRenderer : MonoBehaviour {
     }
 
     void Update() {
-        if(Board.me.curPhase == Phase.Mulligan) {
+        if(Board.instance.curPhase == Phase.Mulligan) {
             iconIndex = DetermineActionType(transform.parent.GetComponent<Enemy>().curActions);
             sr.enabled = true;
             sr.sprite = mulliganIntentIcons[iconIndex];

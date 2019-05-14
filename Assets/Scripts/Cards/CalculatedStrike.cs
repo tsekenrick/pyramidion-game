@@ -5,26 +5,30 @@ using UnityEngine;
 [System.Serializable]
 public class CalculatedStrike : Card {
 
-    public override void resolveAction() {
-        base.resolveAction();
-        this.cardProps[1] = "3";
+    public override void ResolveAction() {
+        base.ResolveAction();
+        this.cardProps[1] = "4";
     }
     
     public override void OnMulligan() {
-        Debug.Log("called onmulligan for calc strike");
-        this.cardProps[1] = (int.Parse(this.cardProps[1]) + 5).ToString();
+        this.cardProps[1] = (int.Parse(this.cardProps[1]) + 6).ToString();
     }
 
     public override void Awake() {
         base.Awake();
     }
 
+    public override void OnNewCombat() {
+        this.cardProps[1] = "4";
+        base.OnNewCombat();
+    }
+
     public override void Update() {
         base.Update();
 
-        this.desc = int.Parse(this.cardProps[1]) > 3 ? 
-            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage plus 5 for every time this card is mulliganed until it is played." : 
-            "Deal 3 damage plus 5 for every time this card is mulliganed until it is played.";
+        this.desc = int.Parse(this.cardProps[1]) > 4 ? 
+            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage plus 6 for every time this card is mulliganed until it is played." : 
+            "Deal 4 damage plus 6 for every time this card is mulliganed until it is played.";
     }
 
 }

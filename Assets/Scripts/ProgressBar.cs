@@ -13,7 +13,7 @@ public class ProgressBar : MonoBehaviour {
     void Start() {
         sr = GetComponent<SpriteRenderer>();
         sr.color = new Color(0, 1, 0, .5f);
-        board = Board.me;
+        board = Board.instance;
         sm = SoundManager.me;
     }
 

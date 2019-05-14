@@ -7,7 +7,7 @@ using TMPro;
 [System.Serializable]
 public class Preparation : Card {
 
-    public override void resolveAction() {
+    public override void ResolveAction() {
         Target t = target.GetComponentInParent<Target>();
         int damage = charged ? 18 : 9;
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{damage}";
@@ -22,8 +22,8 @@ public class Preparation : Card {
     
     public override void OnMulligan() {
         Debug.Log("called onmulligan for preparation");
-        Board.me.player.GetComponent<Player>().block += 3;
-        Board.me.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
+        Board.instance.player.GetComponent<Player>().block += 3;
+        Board.instance.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
         SoundManager.me.PlayPlayerDefendSound();
     }
 

@@ -31,7 +31,7 @@ public class ActionButton : MonoBehaviour
 
     void Start() {
         buttonPressed = false;
-        board = Board.me;
+        board = Board.instance;
         col = this.GetComponent<CircleCollider2D>();
         sr = this.GetComponent<SpriteRenderer>();
         glow = GameObject.Find("ActionBtnGlow").GetComponent<SpriteRenderer>();

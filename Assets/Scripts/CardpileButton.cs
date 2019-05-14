@@ -12,7 +12,7 @@ public class CardpileButton : MonoBehaviour
     private SoundManager sm = SoundManager.me;
 
     void Start() {
-        board = Board.me;
+        board = Board.instance;
 
         switch(this.gameObject.name) {
             case "_DiscardAnchor":
@@ -47,7 +47,7 @@ public class CardpileButton : MonoBehaviour
     }
 
     void OnMouseEnter() {
-        if(board.displayingLoseScreen) return;
+        if(board.displayingLoseScreen || board.curPhase == Phase.Event) return;
         SpriteRenderer sr = this.transform.Find("DeckGlow").GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
 
@@ -62,7 +62,7 @@ public class CardpileButton : MonoBehaviour
     }
 
     void OnMouseUpAsButton() {
-        if(board.displayingLoseScreen) return;
+        if(board.displayingLoseScreen || board.curPhase == Phase.Event) return;
         DeckDisplay overlay = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
         if(overlay.isRendering) {
             overlay.DeckOffScreen(GetComponentsInChildren<SpriteRenderer>(), GetComponentInChildren<TextMeshPro>());
