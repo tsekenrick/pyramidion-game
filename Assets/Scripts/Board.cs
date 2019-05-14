@@ -777,7 +777,7 @@ public class Board : MonoBehaviour {
             Cursor.SetCursor(cursors[0], Vector2.zero, CursorMode.Auto);
         }
 
-        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
+        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
         if(Input.GetKeyDown(KeyCode.T)) {
             foreach(GameObject enemy in enemies) {
                 enemy.GetComponent<Enemy>().health = 1;
