@@ -4,7 +4,7 @@
             "cardName": "Shield Bash",
             "cost": 1,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
-            "artPath": "Card_art/ph_cardart_sbash_1.png",
+            "artPath": "Card_art/final_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
             "superclass": "ShieldBash"
         },
@@ -12,7 +12,7 @@
             "cardName": "Shield Bash",
             "cost": 1,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
-            "artPath": "Card_art/ph_cardart_sbash_1.png",
+            "artPath": "Card_art/final_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
             "superclass": "ShieldBash"
         },
@@ -20,7 +20,7 @@
             "cardName": "Preparation",
             "cost": 3,
             "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
-            "artPath": "Card_art/ph_cardart_preparation_1.png",
+            "artPath": "Card_art/final_cardart_preparation_1.png",
             "cardProps": ["Attack", "9"],
             "superclass": "Preparation"
         },
@@ -28,7 +28,7 @@
             "cardName": "Preparation",
             "cost": 3,
             "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
-            "artPath": "Card_art/ph_cardart_preparation_1.png",
+            "artPath": "Card_art/final_cardart_preparation_1.png",
             "cardProps": ["Attack", "9"],
             "superclass": "Preparation"
         },
@@ -36,7 +36,7 @@
             "cardName": "Tempered Guard",
             "cost": 1,
             "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "artPath": "Card_art/final_cardart_tempguard_1.png",
             "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
@@ -44,7 +44,7 @@
             "cardName": "Tempered Guard",
             "cost": 1,
             "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "artPath": "Card_art/final_cardart_tempguard_1.png",
             "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
@@ -52,7 +52,7 @@
             "cardName": "Tempered Guard",
             "cost": 1,
             "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/ph_cardart_entrench_1.png",
+            "artPath": "Card_art/final_cardart_tempguard_1.png",
             "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
         },
@@ -60,7 +60,7 @@
             "cardName": "Slash",
             "cost": 2,
             "desc": "Deal 6 damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "artPath": "Card_art/final_cardart_strike_1.png",
             "cardProps": ["Attack", "6"],
             "superclass": ""
         },
@@ -68,7 +68,7 @@
             "cardName": "Slash",
             "cost": 2,
             "desc": "Deal 6 damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "artPath": "Card_art/final_cardart_strike_1.png",
             "cardProps": ["Attack", "6"],
             "superclass": ""
         },
@@ -76,7 +76,7 @@
             "cardName": "Slash",
             "cost": 2,
             "desc": "Deal 6 damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "artPath": "Card_art/final_cardart_strike_1.png",
             "cardProps": ["Attack", "6"],
             "superclass": ""
         },
@@ -84,7 +84,7 @@
             "cardName": "Slash",
             "cost": 2,
             "desc": "Deal 6 damage",
-            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "artPath": "Card_art/final_cardart_strike_1.png",
             "cardProps": ["Attack", "6"],
             "superclass": ""
         },
@@ -92,7 +92,7 @@
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
+            "artPath": "Card_art/final_cardart_defend_1.png",
             "cardProps": ["Defend", "5"],
             "superclass": ""
         },
@@ -100,7 +100,7 @@
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
+            "artPath": "Card_art/final_cardart_defend_1.png",
             "cardProps": ["Defend", "5"],
             "superclass": ""
         },
@@ -108,7 +108,7 @@
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
+            "artPath": "Card_art/final_cardart_defend_1.png",
             "cardProps": ["Defend", "5"],
             "superclass": ""
         },
@@ -116,7 +116,7 @@
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
+            "artPath": "Card_art/final_cardart_defend_1.png",
             "cardProps": ["Defend", "5"],
             "superclass": ""
         },
@@ -124,7 +124,7 @@
             "cardName": "Guard",
             "cost": 2,
             "desc": "Gain 5 Block",
-            "artPath": "Card_art/ph_cardart_defend_1.png",
+            "artPath": "Card_art/final_cardart_defend_1.png",
             "cardProps": ["Defend", "5"],
             "superclass": ""
         },
@@ -132,7 +132,7 @@
             "cardName": "Calculated Strike",
             "cost": 2,
             "desc": "Deal 3 damage plus 5 for every time this card is mulliganed until it is played",
-            "artPath": "Card_art/ph_cardart_calcstrike_1.png",
+            "artPath": "Card_art/final_cardart_calcstrike_1.png",
             "cardProps": ["Attack", "3"],
             "superclass": "CalculatedStrike"
         },
@@ -140,7 +140,7 @@
             "cardName": "Calculated Strike",
             "cost": 2,
             "desc": "Deal 3 damage plus 5 for every time this card is mulliganed until it is played",
-            "artPath": "Card_art/ph_cardart_calcstrike_1.png",
+            "artPath": "Card_art/final_cardart_calcstrike_1.png",
             "cardProps": ["Attack", "3"],
             "superclass": "CalculatedStrike"
         },
@@ -148,7 +148,7 @@
             "cardName": "Focus Attack",
             "cost": 4,
             "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "artPath": "Card_art/final_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
         },
@@ -156,7 +156,7 @@
             "cardName": "Focus Attack",
             "cost": 4,
             "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
-            "artPath": "Card_art/ph_cardart_focusattack_1.png",
+            "artPath": "Card_art/final_cardart_focusattack_1.png",
             "cardProps": ["Attack", "10"],
             "superclass": "FocusAttack"
         },
@@ -164,7 +164,7 @@
             "cardName": "Reckless Abandon",
             "cost": 1,
             "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "artPath": "Card_art/final_cardart_recklessabandon_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "RecklessAbandon"
         },
@@ -172,7 +172,7 @@
             "cardName": "Reckless Abandon",
             "cost": 1,
             "desc": "If the next action you take this turn is an attack, that attack deals twice the damage.",
-            "artPath": "Card_art/ph_cardart_armageddon_1.png",
+            "artPath": "Card_art/final_cardart_recklessabandon_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "RecklessAbandon"
         },
@@ -180,7 +180,7 @@
             "cardName": "Solidarity",
             "cost": 2,
             "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         },
@@ -188,7 +188,7 @@
             "cardName": "Solidarity",
             "cost": 2,
             "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         },
@@ -196,7 +196,7 @@
             "cardName": "Solidarity",
             "cost": 2,
             "desc": "Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
+            "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
         }
