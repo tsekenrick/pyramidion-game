@@ -2,7 +2,7 @@
     "deckList": [
         {
             "cardName": "Shield Bash",
-            "cost": 1,
+            "cost": 2,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
             "artPath": "Card_art/final_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
@@ -10,7 +10,7 @@
         },
         {
             "cardName": "Shield Bash",
-            "cost": 1,
+            "cost": 2,
             "desc": "Deal damage equal to your amount of block at this card's resolution.",
             "artPath": "Card_art/final_cardart_sbash_1.png",
             "cardProps": ["Attack", "0"],
