@@ -316,7 +316,6 @@ public class Card : MonoBehaviour {
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
         } else if (curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
-            Debug.Log($"hit, curState is {curState} and isRendering is {DeckDisplay.instance.isRendering}");
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 6;
             cardParts[4].sortingOrder = -1;
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;

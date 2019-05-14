@@ -449,6 +449,9 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
+        for(int i = hand.Count - 1; i >= 0; i--) {
+            Mulligan(hand[i].GetComponent<Card>(), false);
+        }
         yield return new WaitForSeconds(1.5f);
 
         // FMOD set parameter for ambience to 1 (night)
@@ -793,13 +796,22 @@ public class Board : MonoBehaviour {
 
     void Update() {
         // debug shortcuts
-        // if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
-        // if(Input.GetKeyDown(KeyCode.T)) {
-        //     foreach(GameObject enemy in enemies) {
-        //         enemy.GetComponent<Enemy>().health = 1;
-        //     }
-        // }
+        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
+        if(Input.GetKeyDown(KeyCode.T)) {
+            foreach(GameObject enemy in enemies) {
+                enemy.GetComponent<Enemy>().health = 1;
+            }
+        }
         // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
+
+        if(Input.GetMouseButtonDown(1)) {
+            for(int i = playSequence.Count - 1; i >= 0; i--) {
+                if(playSequence[i] is PlayerAction) {
+                    playSequence.DequeuePlayerAction(playSequence[i]);
+                    break;
+                }
+            }
+        }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
@@ -864,15 +876,15 @@ public class Board : MonoBehaviour {
 
                 if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     // discard the cards that were not enqueue'd
-                    foreach(GameObject card in hand) {
-                        if(card.GetComponent<Card>().curState != CardState.InQueue) {
-                            toMul.Add(card);
-                        }
-                    }
-                    foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>(), false); 
-                    }
-                    toMul.Clear();
+                    // foreach(GameObject card in hand) {
+                    //     if(card.GetComponent<Card>().curState != CardState.InQueue) {
+                    //         toMul.Add(card);
+                    //     }
+                    // }
+                    // foreach(GameObject card in toMul) {
+                    //     Mulligan(card.GetComponent<Card>(), false); 
+                    // }
+                    // toMul.Clear();
 
                     curPhase = Phase.Resolution;
 
