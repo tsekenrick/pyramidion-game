@@ -25,6 +25,7 @@ public class Card : MonoBehaviour {
     private Transform tr;
     private Transform prevParent;
     public bool isSettled = true;
+    private bool playingMul = false;
 
     // fields read from json
     public string cardName;
@@ -60,12 +61,14 @@ public class Card : MonoBehaviour {
     }
 
     public IEnumerator MulliganAnim(Transform tr) {
+        playingMul = true;
         tr.DOMove(tr.parent.position, .3f);
         tr.DOScale(Vector3.zero, .3f);
         yield return new WaitForSeconds(.3f);
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false; 
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         isSettled = true;
+        playingMul = false;
     }
 
     private IEnumerator ReshuffleAnim(Transform tr) {
@@ -227,7 +230,7 @@ public class Card : MonoBehaviour {
                     
                     // FMOD Discard Event
                     sm.PlaySound(sm.discardSound);
-                } else {
+                } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;
@@ -238,7 +241,7 @@ public class Card : MonoBehaviour {
                     StartCoroutine(ReshuffleAnim(tr));
                     // FMOD Shuffle Event
                     sm.PlaySound(sm.shuffleSound);
-                } else {
+                } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
                 }
                 break;

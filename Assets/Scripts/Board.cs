@@ -514,7 +514,8 @@ public class Board : MonoBehaviour {
         yield return new WaitForSeconds(1.75f);
 
         GameObject overlay = GameObject.Find("_DarknessOverlay");
-        overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input     
+        SpriteRenderer overlaySr = overlay.GetComponent<SpriteRenderer>();
+        overlaySr.enabled = true; // enable without disabling input     
         
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;

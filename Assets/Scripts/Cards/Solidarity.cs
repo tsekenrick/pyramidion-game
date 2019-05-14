@@ -19,6 +19,7 @@ public class Solidarity : Card {
 
     public override void Awake() {
         base.Awake();
+        transform.Find("CardDesc").GetComponent<TextMeshPro>().enabled = false;
     }
 
     public override void Update() {
@@ -51,6 +52,6 @@ public class Solidarity : Card {
         transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 5 ?
             $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand." :
             $"Deal 5 damage. Deals 3 more damage for each adjacent copy of Solidarity in your hand.";
-          
+
     }
 }
