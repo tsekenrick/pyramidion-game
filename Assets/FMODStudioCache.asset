@@ -46,12 +46,19 @@ MonoBehaviour:
   - {fileID: 114129535024035838}
   - {fileID: 114400351407161366}
   - {fileID: 114511598573273866}
+  - {fileID: 114738743263281744}
+  - {fileID: 114696966576939888}
+  - {fileID: 114694722355382136}
   MasterBanks:
   - {fileID: 114641560442070740}
   - {fileID: 114118298797728688}
   StringsBanks:
   - {fileID: 114689313186008936}
+<<<<<<< Updated upstream
   stringsBankWriteTime: 636933781428226476
+=======
+  stringsBankWriteTime: 636933729852679229
+>>>>>>> Stashed changes
   cacheVersion: 3
 --- !u!114 &114006766225064468
 MonoBehaviour:
@@ -1295,6 +1302,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 209
+--- !u!114 &114415424947430344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114417635954546490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1436,6 +1459,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: DayNight
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114446169563671804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
   Min: 0
   Max: 1
   Default: 0
@@ -1711,6 +1750,38 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 136
+--- !u!114 &114514926610255888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114517298733465890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114524813952453494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1852,7 +1923,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 114146113459373838}
+=======
+  - {fileID: 114846671362169510}
+>>>>>>> Stashed changes
   MinDistance: 0
   MaxDistance: 0
   Length: 3500
@@ -2172,11 +2247,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
+<<<<<<< Updated upstream
   lastModified: 636933781428226476
+=======
+  lastModified: 636933729852679229
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 2966
+    Value: 3136
   Exists: 1
 --- !u!114 &114694370385262472
 MonoBehaviour:
@@ -2191,6 +2270,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114694722355382136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Player/Buff
+  guid: bd7dc556934ed04c98c5213aee76f722
+  Banks:
+  - {fileID: 114793032618036744}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1646
+--- !u!114 &114696966576939888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Monster/Summon
+  guid: 89a27e893e63bb4da420c6d58bac187d
+  Banks:
+  - {fileID: 114793032618036744}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2800
+--- !u!114 &114703231169477966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
   Min: 0
   Max: 1
   Default: 0
@@ -2276,10 +2417,37 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 114904468098267806}
+=======
+  - {fileID: 114905221048761086}
+>>>>>>> Stashed changes
   MinDistance: 0
   MaxDistance: 0
   Length: 60799
+--- !u!114 &114738743263281744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Monster/Enrage
+  guid: 4708b80449260444a2f2e1a4ef19b36f
+  Banks:
+  - {fileID: 114793032618036744}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 4000
 --- !u!114 &114749578244338016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2423,11 +2591,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636933601173083331
+  lastModified: 636933729852619249
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 2680704
+    Value: 2745856
   Exists: 1
 --- !u!114 &114798352949811236
 MonoBehaviour:
@@ -2568,6 +2736,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 60799
+--- !u!114 &114846671362169510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114855598289469918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2692,7 +2876,11 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1200
+<<<<<<< Updated upstream
 --- !u!114 &114904468098267806
+=======
+--- !u!114 &114905221048761086
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3084,3 +3272,19 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &114988141172020996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
+  Min: 0
+  Max: 1
+  Default: 0
