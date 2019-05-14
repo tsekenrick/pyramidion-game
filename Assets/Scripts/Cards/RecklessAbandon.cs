@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class RecklessAbandon : Card {
 
-    public override void resolveAction() {
+    public override void ResolveAction() {
         Card.charged = true;
-        Board.me.player.transform.Find("ChargePS").GetComponent<ParticleSystem>().Play();
-        Board.me.player.GetComponent<SpriteRenderer>().sprite = Board.me.player.GetComponent<Player>().combatStates[2];
+        Board.instance.player.transform.Find("ChargePS").GetComponent<ParticleSystem>().Play();
+        Board.instance.player.GetComponent<SpriteRenderer>().sprite = Board.instance.player.GetComponent<Player>().combatStates[2];
     }
 
     public override void Awake() {

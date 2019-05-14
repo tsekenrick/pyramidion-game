@@ -74,4 +74,44 @@ public class Anubis : Enemy {
         sr.DOColor(initColor, 2f);
         newAdd.transform.DOLocalMoveX(-4.5f - (3.75f * addCount), .5f - (.05f * addCount));
     }
+
+    public override IEnumerator Die() {
+        for(int i = board.playSequence.Count - 1; i >= 0; i--) {
+            if(board.playSequence[i] is EnemyAction) {
+                EnemyAction toRemove = board.playSequence[i] as EnemyAction;
+                if(toRemove.owner == this.gameObject) board.playSequence.Remove(board.playSequence[i]);
+            }
+
+            // redirect any actions in playSequence that were targetted at this enemy
+            else if(board.playSequence[i].target == this.gameObject) {
+                if(board.enemies.Length == 1) {
+                    board.playSequence.Remove(board.playSequence[i]);
+                } else {
+                    foreach(GameObject enemy in board.enemies) {
+                        if(enemy != this.gameObject) board.playSequence[i].target = enemy;
+                    }
+                }
+            }
+        }
+
+        foreach(TooltipBehavior tb in GameObject.FindObjectsOfType<TooltipBehavior>()) {
+            Destroy(tb.gameObject);
+        }
+        
+        SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
+        this.transform.DOShakePosition(1f, .50f);
+        
+        yield return new WaitForSeconds(.25f);
+        DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
+        foreach(GameObject enemy in board.enemies) {
+            if(enemy != this.gameObject) StartCoroutine(enemy.GetComponent<Enemy>().Die());
+        }
+        
+        yield return new WaitForSeconds(1.5f);
+        GetComponent<SpriteRenderer>().enabled = false;
+        transform.Find("EnemyHealthBarBase").GetComponent<SpriteRenderer>().enabled = false;
+        transform.Find("BasicShadow").GetComponent<SpriteRenderer>().enabled = false;
+        yield return StartCoroutine(board.DisplayWinScreen());
+        Destroy(this.gameObject);        
+    }
 }

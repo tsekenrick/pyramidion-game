@@ -5,7 +5,7 @@ using UnityEngine;
 public class IntentIconTooltip : Tooltip {
 
     protected override void OnMouseEnter() {
-        if(Board.me.curPhase != Phase.Mulligan) return;
+        if(Board.instance.curPhase != Phase.Mulligan) return;
         base.OnMouseEnter();
         MulliganIntentRenderer intentIconScript = transform.parent.GetComponentInChildren<MulliganIntentRenderer>();
 
@@ -28,7 +28,7 @@ public class IntentIconTooltip : Tooltip {
     }
 
     protected override void OnMouseExit() {
-        if(Board.me.curPhase != Phase.Mulligan) return;
+        if(Board.instance.curPhase != Phase.Mulligan) return;
         base.OnMouseExit();
         
     }

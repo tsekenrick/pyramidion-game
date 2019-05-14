@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114689313186008936}
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   EditorEvents:
   - {fileID: 114374693957964344}
   - {fileID: 114340216618860080}
@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 114118298797728688}
   StringsBanks:
   - {fileID: 114689313186008936}
-  stringsBankWriteTime: 636933601173143312
+  stringsBankWriteTime: 636933781428226476
   cacheVersion: 3
 --- !u!114 &114006766225064468
 MonoBehaviour:
@@ -68,7 +68,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/HoverEventButtons
   guid: f235b8a8ecc69344b209c7b70578476d
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/OpenDeck
   guid: b9d7dd173b87174db32dd46d506d1210
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -156,7 +156,7 @@ MonoBehaviour:
   Path: snapshot:/BattleMix
   guid: 4de09abd5aae7c40990ba0806059c1ab
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Player/Generic Player Block
   guid: d22dfffabdead147b483b70d741fcdbf
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -315,7 +315,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
   guid: bd286a6247448446a8cad704d20ff04a
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -357,7 +357,7 @@ MonoBehaviour:
   Path: event:/UI/Menu UI/ButtonHover
   guid: 322292f6d8780c4aa68b5c097313b582
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -420,6 +420,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 6000
+--- !u!114 &114146113459373838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114153447924872738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +548,7 @@ MonoBehaviour:
   Path: snapshot:/OverplayMix
   guid: 8b76432067d15c40a506760be6171273
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -694,7 +710,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/LockCard
   guid: 221feecf6a51924988ea41ee23101046
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -856,7 +872,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/HoverCard
   guid: 04e74ed530d715498265bd0d9cf6327c
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -960,7 +976,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/CloseDeck
   guid: 757a23b88c225d439837348cb76c06c5
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -983,7 +999,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
   guid: 7ddfa111613a4e449fe8bd5006747236
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1006,7 +1022,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/Action Button Up
   guid: 0280f107de5c6d45a67cf4a321339b8c
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1061,7 +1077,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DrawCard
   guid: 4b60242b0c28fe46855ab0e8888dee82
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1141,7 +1157,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DeselectCard
   guid: 01a7b2be99bb0a448ede2f120cdbf6a6
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1206,7 +1222,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DeQueueCard
   guid: 8007154c74847940a382874656d7f549
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1248,7 +1264,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/ClickEventButton
   guid: cae4ebfeb8e9fc4cb9504a900b2d5bae
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1271,7 +1287,7 @@ MonoBehaviour:
   Path: event:/UI/Menu UI/ButtonClick
   guid: b641392c4d82004f9ff6d1bc6d571110
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1556,7 +1572,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
   guid: 3e4dc47b455330459da48939d3a35a72
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1579,7 +1595,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Monster/Generic Monster Block
   guid: 8f3f0cfaafd1a345943c7a7b3fe30ddb
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1641,7 +1657,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
   guid: f881f9cc28a277448726a242dd2982a3
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1687,7 +1703,7 @@ MonoBehaviour:
   Path: event:/UI/Menu UI/ButtonRelease
   guid: 1e796bfd37a62d44b59e8f46664d2774
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1710,7 +1726,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
   guid: 59490f66c5569642be2034e570dad581
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1831,12 +1847,12 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
   guid: 49296243a838f4498d989167dc159739
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114627630255772414}
+  - {fileID: 114146113459373838}
   MinDistance: 0
   MaxDistance: 0
   Length: 3500
@@ -1879,6 +1895,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 145
+--- !u!114 &114623490403720576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
+  lastModified: 636933781428206525
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 2680704
+  Exists: 1
 --- !u!114 &114627630255772414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1971,7 +2006,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/SelectCard
   guid: fd58c0f09c53a94782af5875257eaf5a
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2137,7 +2172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
-  lastModified: 636933601173143312
+  lastModified: 636933781428226476
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -2190,7 +2225,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/HoverDeck
   guid: fff0f0406cb81a46ba760e611c0d8f6d
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2236,12 +2271,12 @@ MonoBehaviour:
   Path: event:/Environment/Ambiences/GenericWorldAtmos
   guid: 23c13dd9335e9b42b4d11ed832e971d7
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114614828691372338}
+  - {fileID: 114904468098267806}
   MinDistance: 0
   MaxDistance: 0
   Length: 60799
@@ -2603,7 +2638,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
   guid: b2bca5a4e126fe42b9650441d2341f03
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2626,7 +2661,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Player/Generic Player Attack
   guid: 05986b0be9a2ac4cae6f984c1f37ee14
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2657,6 +2692,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1200
+--- !u!114 &114904468098267806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114915981788478612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2710,7 +2761,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Interface/Overplay Punishment
   guid: cf7ccd1b6853a1419b080dd620e1bceb
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2756,7 +2807,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Monster/Generic Monster Attack
   guid: fcf1e3ca419923499a7252a5549b3a0c
   Banks:
-  - {fileID: 114793032618036744}
+  - {fileID: 114623490403720576}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

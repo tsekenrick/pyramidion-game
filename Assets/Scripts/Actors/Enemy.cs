@@ -19,7 +19,7 @@ public class Enemy : Target
     protected virtual void Start() {
         dying = false;
         startPos = this.transform.position;
-        board = Board.me;
+        board = Board.instance;
         healthText = GetComponentsInChildren<TextMeshPro>();
         block = 0;
 
@@ -36,7 +36,7 @@ public class Enemy : Target
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = false;
     }
 
-    private IEnumerator Die() {
+    public virtual IEnumerator Die() {
         for(int i = board.playSequence.Count - 1; i >= 0; i--) {
             if(board.playSequence[i] is EnemyAction) {
                 EnemyAction toRemove = board.playSequence[i] as EnemyAction;
@@ -58,11 +58,13 @@ public class Enemy : Target
         foreach(TooltipBehavior tb in GameObject.FindObjectsOfType<TooltipBehavior>()) {
             Destroy(tb.gameObject);
         }
-        
+
         SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
         this.transform.DOShakePosition(1f, .50f);
+        
         yield return new WaitForSeconds(.25f);
         DOTween.To(()=> sr.color, x=> sr.color = x, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 1.5f);
+        
         yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
     }
@@ -70,7 +72,7 @@ public class Enemy : Target
     protected virtual void Update() {
         // healthbar/block overlay logic
         foreach(SpriteRenderer sr in blockOverlay) sr.enabled = (block > 0);
-        healthBar.DOScaleX(Mathf.Max(0, (float)health/maxHealth), 1f);
+        healthBar.DOScaleX(Mathf.Max(0, (float)health/maxHealth), 1.25f);
         
         // health text
         healthText[0].text = health > 0 ? $"{health}/{maxHealth}" : $"0/{maxHealth}";

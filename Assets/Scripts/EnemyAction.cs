@@ -30,7 +30,7 @@ public class EnemyAction: Action {
             while (existingTimes.Contains(choice)) choice = Random.Range(2, 8); 
         }
         this.baseCompleteTime = choice;
-        this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.me.borrowedTime)));
+        this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.instance.borrowedTime)));
         this.owner = owner;
     }
 
@@ -38,11 +38,11 @@ public class EnemyAction: Action {
         this.actionType = actionType;
         this.actionVal = actionVal;
         this.baseCompleteTime = baseCompleteTime;
-        this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.me.borrowedTime)));
+        this.completeTime = Mathf.Min(15, (Mathf.Max(0, baseCompleteTime - Board.instance.borrowedTime)));
         this.owner = owner;
     }
 
-    public void resolveAction() {
+    public void ResolveAction() {
         Target target = this.target.GetComponent<Target>();
         this.owner.GetComponent<SpriteRenderer>().sprite = this.owner.GetComponent<Enemy>().combatStates[(int)this.actionType + 1];
 

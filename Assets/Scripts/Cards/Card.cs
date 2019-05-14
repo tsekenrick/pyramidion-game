@@ -12,7 +12,7 @@ public class Card : MonoBehaviour {
 
     public CardState curState;
     public static bool charged;
-    private Board board = Board.me;
+    private Board board = Board.instance;
     private SoundManager sm = SoundManager.me;
 
     public SpriteRenderer[] cardParts;
@@ -132,7 +132,11 @@ public class Card : MonoBehaviour {
         return;
     }
 
-    public virtual void resolveAction() {
+    public virtual void OnNewCombat() {
+        return;
+    }
+
+    public virtual void ResolveAction() {
         MethodInfo mi = this.GetType().GetMethod(this.cardProps[0]);
         switch(cardProps[0]) {
             case "Attack":

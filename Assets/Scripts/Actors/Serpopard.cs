@@ -18,8 +18,8 @@ public class Serpopard : Enemy {
                 if(curActions.Count == 0) {
                     if(health < .2f * maxHealth && !isEnraged) {
                         isEnraged = true;
-                        // play a particle system here when we get it
-                        GetComponent<SpriteRenderer>().DOColor(new Color(.85f, .3f, .3f, 1f), 1f).SetDelay(2f);
+                        GetComponent<SpriteRenderer>().DOColor(new Color(.85f, .3f, .3f, 1f), 1f).SetDelay(2.25f);
+                        StartCoroutine(DelayedChargeParticle());
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 3));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 5));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 7));
@@ -47,5 +47,10 @@ public class Serpopard : Enemy {
                 curActions.Sort((a, b) => a.completeTime.CompareTo(b.completeTime));
                 break;
         }
+    }
+
+    private IEnumerator DelayedChargeParticle() {
+        yield return new WaitForSeconds(2.4f);
+        transform.Find("ChargePS").GetComponent<ParticleSystem>().Play();
     }
 }

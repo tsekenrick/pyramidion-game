@@ -12,7 +12,7 @@ public class CardpileButton : MonoBehaviour
     private SoundManager sm = SoundManager.me;
 
     void Start() {
-        board = Board.me;
+        board = Board.instance;
 
         switch(this.gameObject.name) {
             case "_DiscardAnchor":

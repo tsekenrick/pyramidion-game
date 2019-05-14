@@ -26,7 +26,7 @@ public class ActionRenderer : MonoBehaviour
     }
 
     private void Start() {
-        board = Board.me;
+        board = Board.instance;
         adjusted = false;
     }
 

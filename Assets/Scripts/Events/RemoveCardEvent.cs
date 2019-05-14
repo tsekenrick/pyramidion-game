@@ -17,7 +17,7 @@ public class RemoveCardEvent : Event {
 
     }
 
-    protected override void resolveEvent() {
+    protected override void ResolveEvent() {
         board.Reshuffle();
         foreach(Transform container in board.eventContainers) {
             container.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "UI High";
@@ -30,7 +30,7 @@ public class RemoveCardEvent : Event {
     }
 
     public void callBaseResolve() {
-        base.resolveEvent();
+        base.ResolveEvent();
     }
     
 }

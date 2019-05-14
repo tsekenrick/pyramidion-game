@@ -8,7 +8,7 @@ public class ActionInstance : MonoBehaviour {
     private Board board;
 
     void Start() {
-        board = Board.me;
+        board = Board.instance;
     }
 
     void OnMouseEnter() {

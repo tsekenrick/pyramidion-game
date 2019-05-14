@@ -21,7 +21,7 @@ public class DeckDisplay : MonoBehaviour
     void Start() { 
         canToggle = true;
         isRendering = false;
-        board = Board.me;
+        board = Board.instance;
         instance = this; 
     }
 

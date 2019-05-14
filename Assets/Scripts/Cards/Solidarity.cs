@@ -7,8 +7,8 @@ using TMPro;
 public class Solidarity : Card {
     public int handPos;
 
-    public override void resolveAction() {
-        base.resolveAction();
+    public override void ResolveAction() {
+        base.ResolveAction();
         this.cardProps[1] = "5";
     }
 
@@ -28,7 +28,7 @@ public class Solidarity : Card {
             
         }
 
-        if(Board.me.curPhase == Phase.Mulligan) {
+        if(Board.instance.curPhase == Phase.Mulligan) {
             if(handPos == 0) {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
                     this.cardProps[1] = "8";
