@@ -8,7 +8,6 @@ public class FocusAttack : Card {
     public override void ResolveAction() {
         if(Board.instance.prevResolvedAction == "PlayerAction") {
             this.cardProps[1] = "20";
-            Debug.Log("focus attack satisfied conditions at resolution");
         } else {
             this.cardProps[1] = "10";
         }
