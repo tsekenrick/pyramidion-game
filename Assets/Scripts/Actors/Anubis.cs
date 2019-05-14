@@ -60,7 +60,8 @@ public class Anubis : Enemy {
         } else if (selector <= weights[1]) {
             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 12, 3));
         } else {
-            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 5));
+            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 6));
+            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 3));
             roundsSinceSpawn = -2; // turns into -1 due to auto increment at end of action generation
         }   
     }

@@ -43295,11 +43295,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1548853319}
@@ -48771,14 +48771,14 @@ MonoBehaviour:
   m_text: Light Has Triumphed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: ef4b67e41962feb49815f980a12f2cf3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5084e72fcca41de489744d816242b52b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278191272
-  m_fontColor: {r: 0.6603774, g: 0.018274508, b: 0, a: 1}
+    rgba: 4280932092
+  m_fontColor: {r: 0.990566, g: 0.8399339, b: 0.16353682, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -48896,7 +48896,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ef4b67e41962feb49815f980a12f2cf3, type: 2}
+  - {fileID: 2100000, guid: 5084e72fcca41de489744d816242b52b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
