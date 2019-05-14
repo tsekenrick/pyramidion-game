@@ -21,6 +21,8 @@ public class SoundManager : MonoBehaviour
     public string summonSoundEvent;
     [FMODUnity.EventRef]
     public string enrageSoundEvent;
+    [FMODUnity.EventRef]
+    public string playerBuffSoundEvent;
 
     //located on board
     [FMODUnity.EventRef]
@@ -92,6 +94,7 @@ public class SoundManager : MonoBehaviour
     FMOD.Studio.EventInstance playerDefendSound;
     FMOD.Studio.EventInstance summonSound;
     FMOD.Studio.EventInstance enrageSound;
+    FMOD.Studio.EventInstance playerBuffSound;
 
     //located on board
     public FMOD.Studio.EventInstance dequeueCardSound;
@@ -143,8 +146,9 @@ public class SoundManager : MonoBehaviour
         playerDefendSound = FMODUnity.RuntimeManager.CreateInstance(playerDefendSoundEvent);
         summonSound = FMODUnity.RuntimeManager.CreateInstance(summonSoundEvent);
         enrageSound = FMODUnity.RuntimeManager.CreateInstance(enrageSoundEvent);
+        playerBuffSound = FMODUnity.RuntimeManager.CreateInstance(playerBuffSoundEvent);
 
-        //located on board
+       //located on board
         dequeueCardSound = FMODUnity.RuntimeManager.CreateInstance(dequeueCardSoundEvent);
         lockSound = FMODUnity.RuntimeManager.CreateInstance(lockSoundEvent);
         toPlayPhaseSound = FMODUnity.RuntimeManager.CreateInstance(toPlayPhaseSoundEvent);
@@ -215,6 +219,10 @@ public class SoundManager : MonoBehaviour
     public void PlayEnrageSound()
     {
         enrageSound.start();
+    }
+    public void PlayPlayerBuffSound()
+    {
+        playerBuffSound.start();
     }
     public void PlaySound(FMOD.Studio.EventInstance soundToPlay)
     {
