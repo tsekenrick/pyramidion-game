@@ -38,6 +38,7 @@ public class Card : MonoBehaviour {
     public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
+        GetComponent<BoxCollider2D>().enabled = true;
         foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
         cardParts[5].sortingLayerName = "UI High";
         cardParts[4].sortingOrder = 3;
@@ -119,6 +120,7 @@ public class Card : MonoBehaviour {
         t.block += amount;
     }
 
+    // utility functions to be implemented in superclasses
     public virtual void OnMulligan() {
         return;
     }
@@ -157,13 +159,14 @@ public class Card : MonoBehaviour {
         charged = false;
     }
 
-    public virtual void Awake(){
+    public virtual void Awake() {
         tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         textParts = GetComponentsInChildren<TextMeshPro>();
         tr = this.gameObject.transform;
         curState = CardState.InDeck;
 
+        GetComponent<BoxCollider2D>().enabled = false;
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.text = "";
     }
@@ -243,6 +246,7 @@ public class Card : MonoBehaviour {
                     sm.PlaySound(sm.shuffleSound);
                 } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
+                    
                 }
                 break;
             

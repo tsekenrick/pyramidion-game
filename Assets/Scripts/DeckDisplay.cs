@@ -106,6 +106,7 @@ public class DeckDisplay : MonoBehaviour
                 if(sr != cardScript.cardParts[4]) sr.color = Color.white;
             }
             card.GetComponent<TrailRenderer>().enabled = false;
+            card.GetComponent<BoxCollider2D>().enabled = true;
             card.transform.parent = this.gameObject.transform;
             
             cardScript.textParts[0].text = cardScript.cardName;
@@ -143,6 +144,7 @@ public class DeckDisplay : MonoBehaviour
                 if(sr != cardScript.cardParts[4]) sr.color = Color.white;
             }
             card.GetComponent<TrailRenderer>().enabled = false;
+            card.GetComponent<BoxCollider2D>().enabled = true;
             card.transform.parent = this.gameObject.transform;
             
             cardScript.textParts[0].text = cardScript.cardName;
