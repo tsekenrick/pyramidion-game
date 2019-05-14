@@ -61,9 +61,14 @@ MonoBehaviour:
   selectSoundEvent: event:/UI/Gameplay UI/Card Actions/SelectCard
   deselectSoundEvent: event:/UI/Gameplay UI/Card Actions/DeselectCard
   confirmCardSoundEvent: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
+  hoverEventButtonSoundEvent: event:/UI/Gameplay UI/Overlay Actions/HoverEventButtons
+  clickEventButtonSoundEvent: event:/UI/Gameplay UI/Overlay Actions/ClickEventButton
   pileHoverSoundEvent: event:/UI/Gameplay UI/Overlay Actions/HoverDeck
   pileSelectSoundEvent: event:/UI/Gameplay UI/Overlay Actions/OpenDeck
   pileDeselectSoundEvent: event:/UI/Gameplay UI/Overlay Actions/CloseDeck
+  menuButtonHoverSoundEvent: event:/UI/Menu UI/ButtonHover
+  menuButtonClickSoundEvent: event:/UI/Menu UI/ButtonClick
+  menuButtonReleaseSoundEvent: event:/UI/Menu UI/ButtonRelease
   ambienceSoundEvent: event:/Environment/Ambiences/GenericWorldAtmos
   battleSnapshotEvent: snapshot:/BattleMix
   punishmentSnapshotEvent: snapshot:/OverplayMix
