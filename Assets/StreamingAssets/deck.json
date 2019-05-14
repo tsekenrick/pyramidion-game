@@ -58,34 +58,34 @@
         },
         {
             "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 damage",
+            "cost": 1,
+            "desc": "Deal 3 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
+            "cardProps": ["Attack", "3"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 damage",
+            "cost": 1,
+            "desc": "Deal 3 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
+            "cardProps": ["Attack", "3"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 damage",
+            "cost": 1,
+            "desc": "Deal 3 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
+            "cardProps": ["Attack", "3"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
-            "cost": 2,
-            "desc": "Deal 6 damage",
+            "cost": 1,
+            "desc": "Deal 3 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "6"],
+            "cardProps": ["Attack", "3"],
             "superclass": ""
         },
         {
@@ -131,17 +131,17 @@
         {
             "cardName": "Calculated Strike",
             "cost": 2,
-            "desc": "Deal 3 damage plus 5 for every time this card is mulliganed until it is played",
+            "desc": "Deal 4 damage plus 6 for every time this card is mulliganed until it is played.",
             "artPath": "Card_art/final_cardart_calcstrike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": "CalculatedStrike"
         },
         {
             "cardName": "Calculated Strike",
             "cost": 2,
-            "desc": "Deal 3 damage plus 5 for every time this card is mulliganed until it is played",
+            "desc": "Deal 4 damage plus 6 for every time this card is mulliganed until it is played.",
             "artPath": "Card_art/final_cardart_calcstrike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": "CalculatedStrike"
         },
         {
@@ -199,6 +199,22 @@
             "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Attack", "5"],
             "superclass": "Solidarity"
+        },
+        {
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/final_cardart_sandcloak_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
+        },
+        {
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/final_cardart_sandcloak_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
         }
         
     ]

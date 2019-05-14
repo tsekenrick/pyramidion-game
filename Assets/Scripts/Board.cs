@@ -21,11 +21,12 @@ public class Board : MonoBehaviour {
     public string prevResolvedAction;
     public int level; // the number of complete fights (4 in total - 3 fights, 1 boss)
     private IEnumerator co; // reference for starting the ExecuteAction coroutine - allows us to stop it
+    public IEnumerator eventCo; 
     private bool displayingEvents = false;
     public bool displayingLoseScreen = false;
 
     // "ENTITY" FIELDS //
-    public static Board me;
+    public static Board instance;
     public GameObject player;
     public GameObject enemySpawner;
     public GameObject phaseBanner;
@@ -35,10 +36,8 @@ public class Board : MonoBehaviour {
     public bool actionButtonPressed;
     private SpriteRenderer[] daytimeSprites;
     private SpriteRenderer[] nighttimeSprites;
-    [SerializeField]
-    private GameObject loseScreen;
-    public Texture2D[] cursors;
-    
+    public GameObject loseScreen;
+    public GameObject winScreen;
 
     // CARD MANIPULATING FIELDS //
     public GameObject cardPrefab;
@@ -164,7 +163,6 @@ public class Board : MonoBehaviour {
                 PlayerAction action = item as PlayerAction;
                 foreach(T entry in this) {
                     if(entry is EnemyAction) {
-                        Debug.Log("hit");
                         EnemyAction toMove = entry as EnemyAction;
                         toMove.instance.transform.DOLocalMoveX((toMove.completeTime - action.completeTime) * 1.14f, .2f);
                     }
@@ -173,11 +171,11 @@ public class Board : MonoBehaviour {
                 if(idx != -1) this.RecalculateCompleteTime(idx, action.card.cost);
                 this.totalTime -= action.card.cost;
                 action.card.curState = CardState.InHand;
-                Board.me.Mulligan(action.card, false); // jank
+                Board.instance.Mulligan(action.card, false); // jank
                 Destroy(action.instance);
             } else if (item is EnemyAction) {
                 EnemyAction action = item as EnemyAction;
-                Board.me.DestroyActionInstance(action.instance);
+                Board.instance.DestroyActionInstance(action.instance);
             }
             base.Remove(item);
         }
@@ -185,7 +183,7 @@ public class Board : MonoBehaviour {
         public void DequeuePlayerAction(T item) {
             if(item.GetType() == typeof(PlayerAction)) {
                 // FMOD Play Dequeue Sound
-                me.sm.PlaySound(me.sm.dequeueCardSound); // Why is this playing the GenericQueueSound instead of the DequeueSound?
+                instance.sm.PlaySound(instance.sm.dequeueCardSound); // Why is this playing the GenericQueueSound instead of the DequeueSound?
 
                 PlayerAction action = item as PlayerAction;
                 action.card.target = null;
@@ -293,12 +291,6 @@ public class Board : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
 
-        // foreach(GameObject card in deck) {
-        //     card.GetComponent<TrailRenderer>().enabled = false;
-        // }
-        // foreach(GameObject card in discard) {
-        //     card.GetComponent<TrailRenderer>().enabled = false;
-        // }
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y - 2f, .75f);
         }
@@ -308,13 +300,12 @@ public class Board : MonoBehaviour {
         for(int i = enemies.Length - 1; i >= 0; i--) {
             enemies[i].transform.DOLocalMoveX(-4.5f - (3.7f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
-        // GameObject.Find("Main Camera").GetComponent<Camera>().cullingMask = 0;
 
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
                 case "PlayerAction":
                     PlayerAction playerAction = playSequence[0] as PlayerAction;
-                    playerAction.card.resolveAction();
+                    playerAction.card.ResolveAction();
 
                     // anims
                     TimelineResolutionPS.Play();
@@ -339,7 +330,7 @@ public class Board : MonoBehaviour {
                 
                 case "EnemyAction":
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
-                    enemyAction.resolveAction();
+                    enemyAction.ResolveAction();
                     
                     // anims
                     playSequence.Remove(playSequence[0]);
@@ -360,6 +351,8 @@ public class Board : MonoBehaviour {
             }
                 
         }
+
+        // move actors and ui elements back to position
         player.transform.DOMoveX(-10, .5f);
         for(int i = 0; i < enemies.Length; i++) {
             enemies[i].transform.DOLocalMoveX(i * - 5.5f, .5f);
@@ -417,7 +410,7 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayLoseScreen() {
         displayingLoseScreen = true;
-
+        StartCoroutine(ResetActionCamera());
         for(int i = 0; i < enemies.Length; i++) {
             enemies[i].transform.DOLocalMoveX(i * - 5.5f, .5f);
         }
@@ -438,6 +431,20 @@ public class Board : MonoBehaviour {
         
         Destroy(player.gameObject);
         loseScreen.SetActive(true);
+    }
+
+    public IEnumerator DisplayWinScreen() {
+        StopCoroutine(co);
+        displayingLoseScreen = true;
+        StartCoroutine(ResetActionCamera());
+        player.transform.DOMoveX(-10, .5f);
+        
+        SpriteRenderer overlay = GameObject.Find("_DarknessOverlay").GetComponent<SpriteRenderer>();
+        overlay.enabled = true;
+        overlay.color = new Color(1f, 1f, 1f, 0f);
+        DOTween.To(()=> overlay.color, x=> overlay.color = x, new Color(1f, 1f, 1f, .75f), 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        winScreen.SetActive(true);
     }
 
     private IEnumerator DisplayEvents() {
@@ -490,7 +497,7 @@ public class Board : MonoBehaviour {
             if(action is PlayerAction) {
                 PlayerAction playerAction = action as PlayerAction;
                 playerAction.card.curState = CardState.InHand;
-                Board.me.Mulligan(playerAction.card, false);
+                Board.instance.Mulligan(playerAction.card, false);
                 Destroy(action.instance);
             } else if (action is EnemyAction) {
                 EnemyAction enemyAction = action as EnemyAction;
@@ -505,8 +512,6 @@ public class Board : MonoBehaviour {
             Destroy(child.gameObject);
         }
         yield return new WaitForSeconds(1.75f);
-
-        
 
         GameObject overlay = GameObject.Find("_DarknessOverlay");
         overlay.GetComponent<SpriteRenderer>().enabled = true; // enable without disabling input     
@@ -543,16 +548,17 @@ public class Board : MonoBehaviour {
     }
 
     private void ResToMulPhase() {
+        if(displayingEvents || displayingLoseScreen) return;
         prevResolvedAction = "";
         mulLimit = 4;
         Card.charged = false;
         round++;
 
-        if(!displayingEvents && !displayingLoseScreen) {
+        // if(!displayingEvents && !displayingLoseScreen) {
             phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
             phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
             phaseBanner.GetComponent<PhaseBanner>().doBanner();
-        }
+        // }
 
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
 
@@ -619,26 +625,35 @@ public class Board : MonoBehaviour {
         mulLimit = 4;
         turn = 0;
         borrowedTime = 0;
+        GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+        GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
         round = 0;
         Reshuffle();
         level++;
         foreach(GameObject card in deck) {
+            card.GetComponent<Card>().OnNewCombat();
             card.GetComponent<Card>().curState = CardState.InDeck;
         }
 
         // spawn new enemies
-        GameObject enemySpawner = GameObject.Find("EnemySpawner");
         EnemySpawner spawner = enemySpawner.GetComponent<EnemySpawner>();
-        if(level != 4) {
-            for(int i = 0; i < level; i++) {
-                GameObject enemy = Instantiate(spawner.enemyList[UnityEngine.Random.Range(0, spawner.enemyList.Length)], enemySpawner.transform, false);
-                enemy.transform.localPosition = new Vector3(i * -5.5f, 0, 9.3f);
+        switch(level) {
+            case 1:
+                spawner.SpawnEnemy(0, 0);
+                break;
+            case 2:
+                spawner.SpawnEnemy(0, 0);
+                spawner.SpawnEnemy(1, 1);
+                break;
+            case 3:
+                spawner.SpawnEnemy(1, 0);
+                spawner.SpawnEnemy(2, 1);
+                break;
+            // boss
+            case 4:
+                GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().boss, enemySpawner.transform, false);
                 enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
-            }
-        } else {
-            GameObject enemy = Instantiate(spawner.boss, enemySpawner.transform, false);
-            // enemy.transform.localPosition = new Vector3(0, 1, 9.3f);
-            enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
+                break;
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -646,6 +661,7 @@ public class Board : MonoBehaviour {
         foreach(Transform container in eventContainers) {
             Destroy(container.GetComponentInChildren<Event>().gameObject);
         }
+
         spawnEnemiesAtHealth = 1f;
         curPhase = Phase.Mulligan;
     }
@@ -707,11 +723,10 @@ public class Board : MonoBehaviour {
         if (GameObject.Find("_SoundManager")) { }
         else
             Instantiate(soundManagerPrefab);
-        me = this;
+        instance = this;
     }
 
     void Start() {
-        Cursor.SetCursor(cursors[0], Vector2.zero, CursorMode.Auto);
         player = GameObject.Find("Player");
         enemySpawner = GameObject.Find("EnemySpawner");
         GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().enemyList[0], enemySpawner.transform, false);
@@ -723,7 +738,7 @@ public class Board : MonoBehaviour {
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
-       spawnEnemiesAtHealth = 1f;
+        spawnEnemiesAtHealth = 1f;
 
         // used to specify ui elements to tween down during res phase
         elementsToTween.Add(GameObject.Find("_HandAnchor"));
@@ -776,12 +791,6 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetMouseButton(0)) {
-            Cursor.SetCursor(cursors[1], Vector2.zero, CursorMode.Auto);
-        } else {
-            Cursor.SetCursor(cursors[0], Vector2.zero, CursorMode.Auto);
-        }
-
         if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
         if(Input.GetKeyDown(KeyCode.T)) {
             foreach(GameObject enemy in enemies) {
@@ -792,16 +801,17 @@ public class Board : MonoBehaviour {
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
-        deckCount = deck.Count; // exposes variable for debug
+
         if(!displayingLoseScreen && player.GetComponent<Player>().health <= 0) {
             StopCoroutine(co);
             StartCoroutine(DisplayLoseScreen());
         }
 
-        if((AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
+        if(level < 4 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);
-            StartCoroutine(DisplayEvents());
+            eventCo = DisplayEvents();
+            StartCoroutine(eventCo);
         }
 
         switch(curPhase){

@@ -6,7 +6,7 @@ public class InputToggler : MonoBehaviour
 {
     private Board board;
     void Start() { 
-        board = Board.me;
+        board = Board.instance;
     }
 
     void Update() {

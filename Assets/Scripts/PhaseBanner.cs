@@ -42,7 +42,7 @@ public class PhaseBanner : MonoBehaviour {
         DOTween.SetTweensCapacity(6250, 50);
         canBanner = true;
         doBanner();
-        board = Board.me;
+        board = Board.instance;
         phaseName = GetComponentInChildren<TextMeshPro>();
         phaseName.text = "Mulligan Phase";
     }

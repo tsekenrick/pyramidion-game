@@ -28,7 +28,7 @@ public class DarkProgressBar : MonoBehaviour {
 
     void Start() {
         sr = GetComponent<SpriteRenderer>();
-        board = Board.me;
+        board = Board.instance;
     }
 
     void Update() {

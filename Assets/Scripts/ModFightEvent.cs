@@ -12,8 +12,8 @@ public class ModFightEvent : Event {
         
     }
 
-    protected override void resolveEvent() {
-        Board.me.spawnEnemiesAtHealth = .8f;
-        base.resolveEvent();
+    protected override void ResolveEvent() {
+        Board.instance.spawnEnemiesAtHealth = .8f;
+        base.ResolveEvent();
     }
 }

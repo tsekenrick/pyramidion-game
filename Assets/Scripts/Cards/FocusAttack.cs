@@ -5,14 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class FocusAttack : Card {
 
-    public override void resolveAction() {
-        if(Board.me.prevResolvedAction == "PlayerAction") {
+    public override void ResolveAction() {
+        if(Board.instance.prevResolvedAction == "PlayerAction") {
             this.cardProps[1] = "20";
             Debug.Log("focus attack satisfied conditions at resolution");
         } else {
             this.cardProps[1] = "10";
         }
-        base.resolveAction();
+        base.ResolveAction();
         this.cardProps[1] = "10";
     }
 

@@ -25,30 +25,36 @@
             "superclass": ""
         },
         {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
-            "superclass": "Solidarity"
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
         },
         {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
-            "superclass": "Solidarity"
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
         },
         {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 4 damage. Deals 2 more damage for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/ph_cardart_ironwill_1.png",
-            "cardProps": ["Attack", "4"],
-            "superclass": "Solidarity"
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
+        },
+        {
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/ph_cardart_strike_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
         }
-        
-        
     ]
 }

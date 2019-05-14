@@ -32,13 +32,13 @@ public class TargetCollider : MonoBehaviour
     }
 
     void OnMouseEnter() {
-        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        if(Board.instance.curPhase == Phase.Resolution || Board.instance.curPhase == Phase.Event) return;
         TextMeshPro tmp = transform.parent.Find("EnemyName").GetComponent<TextMeshPro>();
         tmp.DOColor(new Color(tmp.color.r, tmp.color.g, tmp.color.b, 1f), .5f);
     }
 
     void OnMouseExit() {
-        if(Board.me.curPhase == Phase.Resolution || Board.me.curPhase == Phase.Event) return;
+        if(Board.instance.curPhase == Phase.Resolution || Board.instance.curPhase == Phase.Event) return;
         TextMeshPro tmp = transform.parent.Find("EnemyName").GetComponent<TextMeshPro>();
         tmp.DOColor(new Color(tmp.color.r, tmp.color.g, tmp.color.b, 0), .5f);
     }

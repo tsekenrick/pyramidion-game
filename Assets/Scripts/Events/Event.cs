@@ -12,14 +12,13 @@ public class Event : MonoBehaviour {
     private SoundManager sm = SoundManager.me;
 
     // do the thing the event says it will do, and then set game back to mul phase
-    protected virtual void resolveEvent() {
-
+    protected virtual void ResolveEvent() {
         StartCoroutine(board.EventToMulPhase());
     }
 
     protected virtual void Start() {
         sr = this.GetComponent<SpriteRenderer>();
-        board = Board.me;
+        board = Board.instance;
     }
 
     void OnMouseEnter() {
@@ -37,6 +36,6 @@ public class Event : MonoBehaviour {
         // FMOD Play Click Event Sound
         sm.PlaySound(sm.clickEventButtonSound);
 
-        resolveEvent();
+        ResolveEvent();
     }
 }

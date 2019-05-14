@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneAfterVideoEnded : MonoBehaviour {
+public class CutsceneTransition : MonoBehaviour {
     
     public VideoPlayer vp;
     

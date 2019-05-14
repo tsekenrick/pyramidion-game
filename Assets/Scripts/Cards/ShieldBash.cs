@@ -7,8 +7,8 @@ using DG.Tweening;
 [System.Serializable]
 public class ShieldBash : Card {
 
-    public override void resolveAction() {
-        Attack(Board.me.player.GetComponent<Player>().block, target);
+    public override void ResolveAction() {
+        Attack(Board.instance.player.GetComponent<Player>().block, target);
         SoundManager.me.PlayPlayerAttackSound();
     }
 
