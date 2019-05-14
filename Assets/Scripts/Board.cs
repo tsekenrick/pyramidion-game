@@ -792,13 +792,14 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
-        if(Input.GetKeyDown(KeyCode.T)) {
-            foreach(GameObject enemy in enemies) {
-                enemy.GetComponent<Enemy>().health = 1;
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
+        // debug shortcuts
+        // if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
+        // if(Input.GetKeyDown(KeyCode.T)) {
+        //     foreach(GameObject enemy in enemies) {
+        //         enemy.GetComponent<Enemy>().health = 1;
+        //     }
+        // }
+        // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
