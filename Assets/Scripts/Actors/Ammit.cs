@@ -20,20 +20,20 @@ public class Ammit : Enemy {
                             float selector = Random.Range(0f, 1f);
                             if(selector <= .4f) {
                                 turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 6));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 16, 6));
                             } else if(selector <= .8f) {
                                 turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 3));
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 8));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 2));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 8));
                             } else {
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 6));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 4));
                             }
                             break;
                         case 1:
-                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 12));                
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 10));                
                             break;
                         case 2:
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 6));
+                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 4));
                             turnCounter = -1; // goes back to case 0 next turn
                             break;
                     }
