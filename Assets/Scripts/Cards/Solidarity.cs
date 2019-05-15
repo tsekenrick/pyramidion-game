@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 [System.Serializable]
 public class Solidarity : Card {
@@ -10,7 +11,17 @@ public class Solidarity : Card {
     public override void ResolveAction() {
         foreach(GameObject enemy in Board.instance.enemies) {
             Attack(5, enemy);
+            int tmpBlock = enemy.GetComponent<Target>().block;
+            int amount = charged ? 10 : 5;
+            if(Mathf.Max(amount - tmpBlock, 0) > 0) {
+                enemy.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
+                Camera.main.transform.DOShakePosition(.5f);
+            } else {
+                enemy.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
+                Camera.main.transform.DOShakePosition(.5f, .5f);
+            }
         }
+
         charged = false;
         Board.instance.player.GetComponent<Target>().block += int.Parse(this.cardProps[1]);
         if(int.Parse(this.cardProps[1]) > 0) Board.instance.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
@@ -24,6 +35,7 @@ public class Solidarity : Card {
 
     public override void Awake() {
         base.Awake();
+        shake = false;
         transform.Find("CardDesc").GetComponent<TextMeshPro>().enabled = false;
     }
 
@@ -54,7 +66,7 @@ public class Solidarity : Card {
         }
 
         transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 0 ?
-            $"Deal 5 damage to ALL enemies. Gain 3 (<color=#2bce43>{this.cardProps[1]}</color>) block for each adjacent copy of Solidarity in your hand." :
+            $"Deal 5 damage to ALL enemies. Gain 3 <color=#2bce43>({this.cardProps[1]})</color> block for each adjacent copy of Solidarity in your hand." :
             $"Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.";
 
     }
