@@ -9,6 +9,8 @@ public class Solidarity : Card {
     public int handPos;
 
     public override void ResolveAction() {
+        SoundManager sm = SoundManager.me;
+        sm.PlayPlayerAttackSound();
         foreach(GameObject enemy in Board.instance.enemies) {
             Attack(5, enemy);
             int tmpBlock = enemy.GetComponent<Target>().block;
