@@ -11,17 +11,22 @@ public class Solidarity : Card {
     public override void ResolveAction() {
         SoundManager sm = SoundManager.me;
         sm.PlayPlayerAttackSound();
+        int amount = charged ? 10 : 5;
         foreach(GameObject enemy in Board.instance.enemies) {
             Attack(5, enemy);
             int tmpBlock = enemy.GetComponent<Target>().block;
-            int amount = charged ? 10 : 5;
             if(Mathf.Max(amount - tmpBlock, 0) > 0) {
                 enemy.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
-                Camera.main.transform.DOShakePosition(.5f);
             } else {
                 enemy.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
-                Camera.main.transform.DOShakePosition(.5f, .5f);
             }
+            
+        }
+
+        if(Mathf.Max(amount - Board.instance.enemies[0].GetComponent<Target>().block, 0) > 0) {
+            Camera.main.transform.DOShakePosition(.5f);
+        } else {
+            Camera.main.transform.DOShakePosition(.5f, .5f);
         }
 
         charged = false;
