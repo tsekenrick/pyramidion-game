@@ -26,6 +26,7 @@ public class Card : MonoBehaviour {
     private Transform prevParent;
     public bool isSettled = true;
     private bool playingMul = false;
+    protected bool shake = true;
 
     // fields read from json
     public string cardName;
@@ -100,10 +101,10 @@ public class Card : MonoBehaviour {
 
         if(Mathf.Max(amount - tmpBlock, 0) > 0) {
             t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
-            Camera.main.transform.DOShakePosition(.5f);
+            if(shake) Camera.main.transform.DOShakePosition(.5f);
         } else {
             t.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
-            Camera.main.transform.DOShakePosition(.5f, .5f);
+            if(shake) Camera.main.transform.DOShakePosition(.5f, .5f);
         }
     }
 
