@@ -25,6 +25,7 @@ public class Serpopard : Enemy {
 
                         // play a particle system here when we get it
                         GetComponent<SpriteRenderer>().DOColor(new Color(.85f, .3f, .3f, 1f), 1f).SetDelay(2f);
+                        StartCoroutine(DelayedChargeParticle());
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 3));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 5));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 7));
