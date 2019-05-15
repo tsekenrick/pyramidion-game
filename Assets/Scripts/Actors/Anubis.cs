@@ -19,8 +19,8 @@ public class Anubis : Enemy {
             case Phase.Mulligan:
                 if(curActions.Count == 0) {
                     if(board.round == 0) {
-                        curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 4));
-                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 6));
+                        curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 4));
+                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 6));
                     } else {
                         switch(roundsSinceSpawn) {
                             case -1:
@@ -56,9 +56,9 @@ public class Anubis : Enemy {
         if(board.enemies.Length >= 3) weights = new float[] {.5f, 1f, 1f};
 
         if(selector <= weights[0]) {
-            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 20, 8));
+            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 8));
         } else if (selector <= weights[1]) {
-            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 12, 3));
+            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 14, 3));
         } else {
             curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 6));
             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 3));

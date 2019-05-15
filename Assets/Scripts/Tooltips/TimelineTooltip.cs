@@ -12,11 +12,11 @@ public class TimelineTooltip : Tooltip {
         base.OnMouseEnter();
 
         if(Board.instance.borrowedTime > 0) {
-            tmp.text = $"Enemies are attacking {Board.instance.borrowedTime} time units sooner than usual due to overplaying on the previous turn.";
+            tmp.text = $"Enemies are acting {Board.instance.borrowedTime} time units sooner than usual due to overplaying on the previous turn.";
         } else if(Board.instance.borrowedTime < 0) {
-            tmp.text = $"Enemies are attacking {Mathf.Abs(Board.instance.borrowedTime)} time units later than usual due to underplaying on the previous turn.";
+            tmp.text = $"Enemies are acting {Mathf.Abs(Board.instance.borrowedTime)} time units later than usual due to underplaying on the previous turn.";
         } else {
-            tmp.text = $"Enemies are attacking at their regular time because you played equal to their actions on the previous turn.";
+            tmp.text = $"Enemies are acting at their regular time because you played equal to their actions on the previous turn.";
         }
     }
     
