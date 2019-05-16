@@ -27,8 +27,8 @@ public class CalculatedStrike : Card {
         base.Update();
 
         this.desc = int.Parse(this.cardProps[1]) > 4 ? 
-            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage plus 6 for every time this card is mulliganed until it is played." : 
-            "Deal 4 damage plus 6 for every time this card is mulliganed until it is played.";
+            $"Deal <color=#2bce43>{this.cardProps[1]}</color> damage. Increase this card's damage by 6 when it is mulliganed. Resets on use." :
+            "Deal 4 damage. Increase this card's damage by 6 when it is mulliganed. Resets on use.";
     }
 
 }

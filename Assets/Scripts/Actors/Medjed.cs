@@ -15,12 +15,13 @@ public class Medjed : Enemy {
                 if(curActions.Count == 0) {
                     switch(board.round % 3) {
                         case 0:
-                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 7, 4));
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 7, 6));
                             break;
                         case 1:
                             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 7, 4));
                             break;
                         case 2:
+                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 4, 4));
                             curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 16, 9));
                             break;
                     }
