@@ -25,7 +25,7 @@ public class Anubis : Enemy {
                         switch(roundsSinceSpawn) {
                             case -1:
                                 // recovery turn
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 8, 8));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 8, 5));
                                 break;
                             case 0:
                                 // base turn
@@ -37,8 +37,8 @@ public class Anubis : Enemy {
                                 break;
                             case 2:
                                 // spawn
-                                curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 6));
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 3));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 5));
+                                curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 8));
                                 roundsSinceSpawn = -2;
                                 break;
                         }
@@ -60,8 +60,8 @@ public class Anubis : Enemy {
         } else if (selector <= weights[1]) {
             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 14, 3));
         } else {
-            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 6));
-            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 3));
+            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 5));
+            curActions.Add(new EnemyAction(ActionType.Summon, this.gameObject, this.gameObject, 1, 8));
             roundsSinceSpawn = -2; // turns into -1 due to auto increment at end of action generation
         }   
     }

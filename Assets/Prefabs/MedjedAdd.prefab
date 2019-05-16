@@ -115,8 +115,7 @@ MonoBehaviour:
   m_text: Medjed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15020,8 +15019,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3211701945506326922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.05, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: -0.01, y: 0.08, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 0.7894915}
   m_Children: []
   m_Father: {fileID: 8461065528275030999}
   m_RootOrder: 7
@@ -15063,7 +15062,7 @@ SpriteRenderer:
   m_SortingLayerID: -737954065
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8657d1c17b09a1c4cae96265c27e0fa2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8390aa916f04be441b62abbf76d729e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15087,8 +15086,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300000, guid: 8657d1c17b09a1c4cae96265c27e0fa2, type: 3}
-  - {fileID: 21300000, guid: 3e1f7553618ab9c4f9465c903a78e20b, type: 3}
+  - {fileID: 21300000, guid: 8390aa916f04be441b62abbf76d729e9, type: 3}
+  - {fileID: 21300000, guid: 91a583872bdeaf44a9db4dd30200df10, type: 3}
 --- !u!1 &4288866630593694603
 GameObject:
   m_ObjectHideFlags: 0

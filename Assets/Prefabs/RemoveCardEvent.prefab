@@ -444,7 +444,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Remove two cards from your deck.
+  m_text: Choose two cards to remove from your deck.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: d31088e4deb508e479b8605a608abeae, type: 2}
@@ -513,10 +513,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2443971897447733241}
-    characterCount: 32
+    characterCount: 42
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
     lineCount: 2
     pageCount: 1

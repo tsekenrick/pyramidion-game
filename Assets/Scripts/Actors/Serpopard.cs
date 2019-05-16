@@ -29,7 +29,7 @@ public class Serpopard : Enemy {
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 3));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 5));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 7));
-                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 10, 11));
+                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 11));
                     } else if(health < .2f * maxHealth && isEnraged) {
                         curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 1, 5));
                     } else {
