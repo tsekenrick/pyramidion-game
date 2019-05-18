@@ -51,7 +51,6 @@ public class Board : MonoBehaviour {
     public int deckCount;
 
     // MULLIGAN PHASE VARIABLES //
-    public int turn; // number of mulligan "sets" completed
     public int mulLimit;
     public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
     public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
@@ -544,7 +543,6 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
-        turn = 0;
         // FMOD Play Phase Transition Sound      
         sm = SoundManager.me;
         sm.PlaySound(sm.toPlayPhaseSound);
@@ -554,7 +552,7 @@ public class Board : MonoBehaviour {
     private void ResToMulPhase() {
         if(displayingEvents || displayingLoseScreen) return;
         prevResolvedAction = "";
-        mulLimit = 4;
+        mulLimit = 5;
         Card.charged = false;
         round++;
 
@@ -626,8 +624,7 @@ public class Board : MonoBehaviour {
         // reset state variables
         playSequence.totalTime = 0;
         player.GetComponent<Player>().block = 0;
-        mulLimit = 4;
-        turn = 0;
+        mulLimit = 5;
         borrowedTime = 0;
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
@@ -650,11 +647,14 @@ public class Board : MonoBehaviour {
                 spawner.SpawnEnemy(1, 1);
                 break;
             case 3:
+                spawner.SpawnEnemy(2, 0);
+                break;
+            case 4:
                 spawner.SpawnEnemy(1, 0);
                 spawner.SpawnEnemy(2, 1);
                 break;
             // boss
-            case 4:
+            case 5:
                 GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().boss, enemySpawner.transform, false);
                 enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
                 break;
@@ -755,10 +755,9 @@ public class Board : MonoBehaviour {
 
         // initialize phase variables
         curPhase = Phase.Mulligan;
-        mulLimit = 4;
-        turn = 0;
+        mulLimit = 5;
 
-        if(turn == 0) borrowedTime = 0;
+        borrowedTime = 0;
         round = 0;
         level = 1;
 
@@ -830,35 +829,33 @@ public class Board : MonoBehaviour {
 
         switch(curPhase){
             case Phase.Mulligan:
+                GameObject.Find("MulCounter").GetComponent<TextMeshPro>().text = $"Redraws: {mulLimit}";
                 StartCoroutine(ResetEnemySprites());
                 StartCoroutine(ResetPlayerSprites());               
 
-                while(hand.Count < 5){
+                while(hand.Count < 5) {
                     DrawCard();
                 }
 
-                if(lockedHand.Count == 5 || mulLimit == 0) {
-                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);
-                    
-                } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
-                    turn++;
-                    foreach(GameObject card in hand) {
-                        if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
-                            lockedHand.Add(card);
-                            // FMOD Play Lock Sound
-                            sm = SoundManager.me;
-                            sm.PlaySound(sm.lockSound);
-                        }
+                if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
+                    if(toMul.Count == 0) {
+                        if(!IsInvoking()) Invoke("MulToPlayPhase", .5f);
                     }
-
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>(), true); 
+                        sm = SoundManager.me;
+                        sm.PlaySound(sm.lockSound);
+                        mulLimit--;
+                        GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
+                        
                     }
-                    mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
                     toMul.Clear();
-                    GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                    
                 }
+
+                if(mulLimit == 0) {
+                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);                
+                } 
+                    
                 break;
             case Phase.Play:
                 // check for Punishment mechanic conditions
@@ -875,17 +872,6 @@ public class Board : MonoBehaviour {
                 }
 
                 if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
-                    // discard the cards that were not enqueue'd
-                    // foreach(GameObject card in hand) {
-                    //     if(card.GetComponent<Card>().curState != CardState.InQueue) {
-                    //         toMul.Add(card);
-                    //     }
-                    // }
-                    // foreach(GameObject card in toMul) {
-                    //     Mulligan(card.GetComponent<Card>(), false); 
-                    // }
-                    // toMul.Clear();
-
                     curPhase = Phase.Resolution;
 
                     // FMOD Resolution Phase Transition Sound

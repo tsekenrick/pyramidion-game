@@ -17,6 +17,8 @@ public class MulliganIntentRenderer : MonoBehaviour {
                 hitAttack = true;
             } else if(action.actionType == ActionType.Defense && !hitDefend) {
                 hitDefend = true;
+            } else if(action.actionType == ActionType.Summon) {
+                return 0;
             }
         }
 
