@@ -22,7 +22,7 @@ public class Solidarity : Card {
             }
             
         }
-
+        // do the screenshake only once
         if(Mathf.Max(amount - Board.instance.enemies[0].GetComponent<Target>().block, 0) > 0) {
             Camera.main.transform.DOShakePosition(.5f);
         } else {
@@ -56,10 +56,14 @@ public class Solidarity : Card {
             if(handPos == 0) {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
                     this.cardProps[1] = "3";
+                } else {
+                    this.cardProps[1] = "0";
                 }
             } else if(handPos == 4) {
                 if(GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
                     this.cardProps[1] = "3";
+                } else {
+                    this.cardProps[1] = "0";
                 }
             } else {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" &&
@@ -68,6 +72,8 @@ public class Solidarity : Card {
                 } else if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" ||
                     GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
                     this.cardProps[1] = "3";
+                } else {
+                    this.cardProps[1] = "0";
                 }
             }
         }
