@@ -25121,6 +25121,7 @@ GameObject:
   - component: {fileID: 4365690375344048022}
   - component: {fileID: 7993482252424715390}
   - component: {fileID: 1735771655373323468}
+  - component: {fileID: 449307181480972709}
   m_Layer: 8
   m_Name: Serpopard
   m_TagString: Enemy
@@ -25230,6 +25231,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 17fd3c9ccee1ae14099292ee8f90fe70, type: 3}
   healthText: []
   maxHealth: 100
+  sm: {fileID: 0}
+--- !u!95 &449307181480972709
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145638793232558106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a8279c936e4e614fa60a0cd711dc0cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6466389935816585879
 GameObject:
   m_ObjectHideFlags: 0
