@@ -60,7 +60,11 @@ public class DeckDisplay : MonoBehaviour
             StartCoroutine(cardScript.MulliganAnim(cardScript.transform));
             // for case of displaying during events, always goes back to deck afterwards
             if(cardScript.curState == CardState.InSelectionRemove || cardScript.curState == CardState.InSelectionAdd) {
-                cardScript.GetComponent<SpriteRenderer>().enabled = false;
+                foreach(SpriteRenderer sr in cardScript.cardParts) {
+                    if(sr != cardScript.cardParts[5] && sr != cardScript.cardParts[3]) {
+                        sr.enabled = false;
+                    }
+                }
                 cardScript.curState = CardState.InDeck;
             }
             for(int i = 0; i < 3; i++){
@@ -147,6 +151,9 @@ public class DeckDisplay : MonoBehaviour
             cardScript.curState = state;
             foreach(SpriteRenderer sr in cardScript.cardParts) {
                 if(sr != cardScript.cardParts[4]) sr.color = Color.white;
+                if(sr != cardScript.cardParts[5] && sr != cardScript.cardParts[3]) {
+                    sr.enabled = true;
+                }
             }
             card.GetComponent<TrailRenderer>().enabled = false;
             card.GetComponent<BoxCollider2D>().enabled = true;
