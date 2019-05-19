@@ -83,5 +83,11 @@ public class Enemy : Target
             StartCoroutine(Die());
         } 
 
+        if(Board.instance.curPhase == Phase.Resolution) {
+            GetComponent<Animator>().enabled = false;
+        } else {
+            GetComponent<Animator>().enabled = true;
+        }
+
     }
 }
