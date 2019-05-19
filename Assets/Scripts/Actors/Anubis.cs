@@ -113,6 +113,7 @@ public class Anubis : Enemy {
         GetComponent<SpriteRenderer>().enabled = false;
         transform.Find("EnemyHealthBarBase").GetComponent<SpriteRenderer>().enabled = false;
         transform.Find("BasicShadow").GetComponent<SpriteRenderer>().enabled = false;
+        transform.Find("MulliganIntent").GetComponent<SpriteRenderer>().enabled = false;
         yield return StartCoroutine(board.DisplayWinScreen());
         Destroy(this.gameObject);        
     }

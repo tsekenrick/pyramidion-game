@@ -541,7 +541,7 @@ public class Board : MonoBehaviour {
     private void MulToPlayPhase() {  
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
         // FMOD Play Phase Transition Sound
@@ -560,7 +560,7 @@ public class Board : MonoBehaviour {
         // if(!displayingEvents && !displayingLoseScreen) {
             phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
             phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-            phaseBanner.GetComponent<PhaseBanner>().doBanner();
+            phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         // }
 
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
@@ -620,7 +620,7 @@ public class Board : MonoBehaviour {
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // reset state variables
         playSequence.totalTime = 0;
