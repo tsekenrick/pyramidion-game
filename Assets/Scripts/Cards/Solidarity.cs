@@ -52,7 +52,7 @@ public class Solidarity : Card {
             handPos = int.Parse(transform.parent.name[transform.parent.name.Length - 1].ToString());
         }
 
-        if(Board.instance.curPhase == Phase.Mulligan) {
+        if(Board.instance.curPhase == Phase.Mulligan && Board.instance.hand.Count == 5) {
             if(handPos == 0) {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
                     this.cardProps[1] = "3";
