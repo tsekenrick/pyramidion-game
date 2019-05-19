@@ -839,21 +839,20 @@ public class Board : MonoBehaviour {
 
                 if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
                     if(toMul.Count == 0) {
-                        if(!IsInvoking()) Invoke("MulToPlayPhase", .5f);
+                        mulLimit = 0;
                     }
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>(), true); 
                         sm = SoundManager.me;
                         sm.PlaySound(sm.lockSound);
                         mulLimit--;
-                        GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                        
                     }
+                    GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
                     toMul.Clear();
                 }
 
                 if(mulLimit == 0) {
-                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);                
+                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);
                 } 
                     
                 break;
