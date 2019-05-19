@@ -282,7 +282,7 @@ public class Board : MonoBehaviour {
     }
 
     private IEnumerator ResetActionCamera() {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.15f);
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
     }
 
@@ -492,10 +492,10 @@ public class Board : MonoBehaviour {
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
         player.transform.DOMoveX(-10, .5f);
-        yield return new WaitForSeconds(.5f);
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
+        yield return new WaitForSeconds(.5f);
 
         // reset playSequence
         foreach(Action action in playSequence) {
@@ -872,10 +872,11 @@ public class Board : MonoBehaviour {
                 }
 
                 if(Input.GetKeyUp(KeyCode.E)) {
-                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
                 }
 
-                if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E)) && actionButton.GetComponent<ActionButton>().canClick) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
                     if(toMul.Count == 0) {
                         mulLimit = 0;
                     }
@@ -913,11 +914,12 @@ public class Board : MonoBehaviour {
                 }
 
                 if(Input.GetKeyUp(KeyCode.E)) {
-                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
                 }
 
-                if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E)) && actionButton.GetComponent<ActionButton>().canClick) {
                     curPhase = Phase.Resolution;
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
 
                     // FMOD Resolution Phase Transition Sound
                     sm = SoundManager.me;

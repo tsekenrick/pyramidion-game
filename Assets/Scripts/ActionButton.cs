@@ -66,7 +66,7 @@ public class ActionButton : MonoBehaviour
         actionButtonDownSound.start();
     }
 
-    void OnMouseExit() {
+    public void OnMouseExit() {
         if(board.overlayActive) return;
 
         if(renderPressed) actionButtonUpSound.start();
@@ -94,7 +94,7 @@ public class ActionButton : MonoBehaviour
 
     private IEnumerator SpamDisabler() {
         canClick = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
         canClick = true;
     }
 }
