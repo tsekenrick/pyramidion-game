@@ -297,9 +297,11 @@ public class Board : MonoBehaviour {
 
         // move actors closer together (resets at end of coroutine)
         player.transform.DOMoveX(-4.5f - (.85f * (enemies.Length - 1)), .5f);
+        StartCoroutine(ResetPlayerSprites());
         for(int i = enemies.Length - 1; i >= 0; i--) {
             enemies[i].transform.DOLocalMoveX(-4.5f - (3.7f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
+        StartCoroutine(ResetEnemySprites());
 
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
