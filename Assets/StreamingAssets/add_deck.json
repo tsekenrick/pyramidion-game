@@ -1,0 +1,21 @@
+{
+    "deckList": [
+        {
+            "cardName": "Shield Bash",
+            "cost": 2,
+            "desc": "Deal damage equal to your amount of block at this card's resolution.",
+            "artPath": "Card_art/final_cardart_sbash_1.png",
+            "cardProps": ["Attack", "0"],
+            "superclass": "ShieldBash"
+        },
+        {
+            "cardName": "Sand Cloak",
+            "cost": 3,
+            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
+            "artPath": "Card_art/final_cardart_sandcloak_1.png",
+            "cardProps": ["Defend", "18"],
+            "superclass": "SandCloak"
+        }
+        
+    ]
+}

@@ -12,6 +12,7 @@ public class ActionButton : MonoBehaviour
     private CircleCollider2D col;
     public bool buttonPressed;
     private bool renderPressed;
+    public bool canClick;
 
     // FMOD variables
     [FMODUnity.EventRef]
@@ -31,6 +32,7 @@ public class ActionButton : MonoBehaviour
 
     void Start() {
         buttonPressed = false;
+        canClick = true;
         board = Board.instance;
         col = this.GetComponent<CircleCollider2D>();
         sr = this.GetComponent<SpriteRenderer>();
@@ -56,8 +58,8 @@ public class ActionButton : MonoBehaviour
         }
     }
 
-    void OnMouseDown() {
-        if(board.overlayActive) return;
+    public void OnMouseDown() {
+        if(board.overlayActive || !canClick) return;
         renderPressed = true;
 
         // FMOD Action Button Down Sound Event
@@ -71,8 +73,9 @@ public class ActionButton : MonoBehaviour
         renderPressed &= false;
     }
 
-    void OnMouseUpAsButton() {
-        if(board.overlayActive) return;
+    public void OnMouseUpAsButton() {
+        if(board.overlayActive || !canClick) return;
+        StartCoroutine(SpamDisabler());
         
         switch(board.curPhase){
             case Phase.Mulligan:
@@ -87,5 +90,11 @@ public class ActionButton : MonoBehaviour
         }
         // FMOD Action Button Up Sound Event
         actionButtonUpSound.start();
+    }
+
+    private IEnumerator SpamDisabler() {
+        canClick = false;
+        yield return new WaitForSeconds(2f);
+        canClick = true;
     }
 }
