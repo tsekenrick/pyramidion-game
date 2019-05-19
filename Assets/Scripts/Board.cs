@@ -10,7 +10,6 @@ using TMPro;
 public enum Phase { Mulligan, Play, Resolution, Event };
 
 public class Board : MonoBehaviour {
-    private string deckFileName = "deck.json";
 
     // "STATE" FIELDS //
     public Phase curPhase;
@@ -33,7 +32,7 @@ public class Board : MonoBehaviour {
     public Transform[] eventContainers;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
-    public bool actionButtonPressed;
+    private GameObject actionButton;
     private SpriteRenderer[] daytimeSprites;
     private SpriteRenderer[] nighttimeSprites;
     public GameObject loseScreen;
@@ -48,6 +47,7 @@ public class Board : MonoBehaviour {
     public List<GameObject> deck = new List<GameObject>();
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
+    public List<GameObject> addDeck = new List<GameObject>();
     public int deckCount;
 
     // MULLIGAN PHASE VARIABLES //
@@ -522,7 +522,7 @@ public class Board : MonoBehaviour {
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;
         for(int i = 0; i < possibleEvents.Count; i++) {       
-            // if(i != doNotInclude) {
+            if(i != doNotInclude) {
                 Transform toAttach;
                 foreach(Transform container in eventContainers) {
                     if(container.childCount == 0) {
@@ -532,7 +532,7 @@ public class Board : MonoBehaviour {
                     }
                 }
                 curEvent++;
-            // } 
+            } 
         }
         displayingEvents = false;
     }
@@ -676,10 +676,11 @@ public class Board : MonoBehaviour {
             cardAnchors.Add($"Hand {i}", GameObject.Find($"Hand{i}").transform);
         }
         cardAnchors.Add("Discard Anchor", GameObject.Find("_DiscardAnchor").transform);
+        cardAnchors.Add("Add Anchor", GameObject.Find("_AddAnchor").transform);
     }
 
-    private DeckList LoadDeckData(){
-        string path = Path.Combine(Application.streamingAssetsPath, deckFileName);
+    private DeckList LoadDeckData(string fileToLoad){
+        string path = Path.Combine(Application.streamingAssetsPath, fileToLoad);
         
         if(File.Exists(path)){
             string data = File.ReadAllText(path);
@@ -739,6 +740,7 @@ public class Board : MonoBehaviour {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
+        actionButton = GameObject.Find("ActionButtonTop");
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
@@ -750,7 +752,8 @@ public class Board : MonoBehaviour {
         elementsToTween.Add(GameObject.Find("_DiscardAnchor"));
         elementsToTween.Add(GameObject.Find("_DeckAnchor"));
 
-        List<CardData> deckList = LoadDeckData().deckList;
+        List<CardData> deckList = LoadDeckData("deck.json").deckList;
+        List<CardData> addList = LoadDeckData("add_deck.json").deckList;
         GetAnchors(); // get anchor positions
 
         // initialize phase variables
@@ -773,7 +776,7 @@ public class Board : MonoBehaviour {
             // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
             try {
                 curCard.AddComponent(Type.GetType(card.superclass, true));
-            } catch(Exception e) {
+            } catch {
                 curCard.AddComponent<Card>();
             }
 
@@ -784,6 +787,31 @@ public class Board : MonoBehaviour {
             cardScript.cardProps = card.cardProps;
             cardScript.cardArt = cardArtDict[cardScript.cardName];
             pool.Add(curCard);
+        }
+
+        foreach(CardData card in addList){
+            // load card art into dictionary
+            string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
+            LoadCardArt(path, card.cardName);
+
+            // create card gameobject and populate its properties
+            GameObject curCard = Instantiate(cardPrefab, cardAnchors["Add Anchor"].position, Quaternion.identity);
+            curCard.transform.parent = cardAnchors["Add Anchor"];
+
+            // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
+            try {
+                curCard.AddComponent(Type.GetType(card.superclass, true));
+            } catch {
+                curCard.AddComponent<Card>();
+            }
+
+            Card cardScript = curCard.GetComponent<Card>();
+            cardScript.cardName = card.cardName;
+            cardScript.cost = card.cost;
+            cardScript.desc = card.desc;
+            cardScript.cardProps = card.cardProps;
+            cardScript.cardArt = cardArtDict[cardScript.cardName];
+            addDeck.Add(curCard);
         }
         pool = FisherYatesShuffle(pool);
         
@@ -813,7 +841,6 @@ public class Board : MonoBehaviour {
         }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
 
         if(!displayingLoseScreen && player.GetComponent<Player>().health <= 0) {
             StopCoroutine(co);
@@ -837,7 +864,15 @@ public class Board : MonoBehaviour {
                     DrawCard();
                 }
 
-                if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseDown();
+                }
+
+                if(Input.GetKeyUp(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
+                }
+
+                if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
                     if(toMul.Count == 0) {
                         mulLimit = 0;
                     }
@@ -870,7 +905,15 @@ public class Board : MonoBehaviour {
                     punishing = true;
                 }
 
-                if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseDown();
+                }
+
+                if(Input.GetKeyUp(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
+                }
+
+                if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
                     curPhase = Phase.Resolution;
 
                     // FMOD Resolution Phase Transition Sound

@@ -13,10 +13,6 @@ public class RemoveCardEvent : Event {
         base.Start();
     }
 
-    void Update() {
-
-    }
-
     protected override void ResolveEvent() {
         board.Reshuffle();
         foreach(Transform container in board.eventContainers) {
@@ -26,7 +22,7 @@ public class RemoveCardEvent : Event {
             }
             container.GetComponentInChildren<BoxCollider2D>().enabled = false;
         }
-        deckDisplay.DeckToSelectScreen(board.deck);
+        deckDisplay.DeckToSelectScreen(board.deck, CardState.InSelectionRemove);
     }
 
     public void callBaseResolve() {

@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelection }; 
+public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelectionRemove, InSelectionAdd }; 
 
 [System.Serializable]
 public class Card : MonoBehaviour {
@@ -297,7 +297,7 @@ public class Card : MonoBehaviour {
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
             sm.PlaySound(sm.hoverSound);
-        } else if(curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
+        } else if(curState == CardState.InSelectionRemove || curState == CardState.InSelectionAdd || DeckDisplay.instance.isRendering) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 10;
             cardParts[4].sortingOrder = 9; // set glow below the rest
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 12;
@@ -316,7 +316,7 @@ public class Card : MonoBehaviour {
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = -1;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
-        } else if (curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
+        } else if (curState == CardState.InSelectionRemove || curState == CardState.InSelectionAdd  || DeckDisplay.instance.isRendering) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 6;
             cardParts[4].sortingOrder = -1;
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
@@ -446,7 +446,7 @@ public class Card : MonoBehaviour {
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
-        } else if(curState == CardState.InSelection) {
+        } else if(curState == CardState.InSelectionRemove) {
             RemoveCardEvent removeEvent = Object.FindObjectOfType<RemoveCardEvent>();
             if(!removeEvent.toRemove.Contains(this.gameObject)) {
                 removeEvent.toRemove.Add(this.gameObject);
@@ -466,6 +466,29 @@ public class Card : MonoBehaviour {
                     GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
                     Destroy(removeEvent.toRemove[i]);
                 }
+            }
+        } else if(curState == CardState.InSelectionAdd) {
+            AddCardEvent addEvent = Object.FindObjectOfType<AddCardEvent>();
+            if(!addEvent.toAdd.Contains(this.gameObject)) {
+                addEvent.toAdd.Add(this.gameObject);
+                cardParts[4].enabled = true;
+                cardParts[4].sortingLayerName = "Above Darkness";
+                cardParts[4].sortingOrder = -1;
+            } else {
+                addEvent.toAdd.Remove(this.gameObject);
+                cardParts[4].enabled = false;
+                cardParts[4].sortingLayerName = "UI Low";
+            }
+
+            if(addEvent.toAdd.Count == 2) {
+                addEvent.callBaseResolve();
+                GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
+
+                for(int i = addEvent.toAdd.Count - 1; i >= 0; i--) {
+                    board.deck.Add(addEvent.toAdd[i]);
+                    board.addDeck.Remove(addEvent.toAdd[i]);
+                }
+                board.FisherYatesShuffle(board.deck);
             }
         }
     }

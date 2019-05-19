@@ -56,10 +56,10 @@ public class DeckDisplay : MonoBehaviour
         foreach(GameObject go in curRender) {
             Card cardScript = go.GetComponent<Card>();
             go.transform.parent = oldParent;
-            go.GetComponent<TrailRenderer>().enabled = true;
+            if(cardScript.curState != CardState.InSelectionAdd) go.GetComponent<TrailRenderer>().enabled = true;
             StartCoroutine(cardScript.MulliganAnim(cardScript.transform));
             // for case of displaying during events, always goes back to deck afterwards
-            if(go.GetComponent<Card>().curState == CardState.InSelection) go.GetComponent<Card>().curState = CardState.InDeck;
+            if(cardScript.curState == CardState.InSelectionRemove || cardScript.curState == CardState.InSelectionAdd) go.GetComponent<Card>().curState = CardState.InDeck;
             
             for(int i = 0; i < 3; i++){
                 cardScript.textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
@@ -126,7 +126,7 @@ public class DeckDisplay : MonoBehaviour
         }
     }
 
-    public void DeckToSelectScreen(List<GameObject> toRender) {
+    public void DeckToSelectScreen(List<GameObject> toRender, CardState state) {
         screenOverlay.enabled = true;
         curRender = toRender;
         isRendering = true;
@@ -139,7 +139,7 @@ public class DeckDisplay : MonoBehaviour
             int col = i % 8;
             GameObject card = toRender[i];
             Card cardScript = card.GetComponent<Card>();
-            cardScript.curState = CardState.InSelection;
+            cardScript.curState = state;
             foreach(SpriteRenderer sr in cardScript.cardParts) {
                 if(sr != cardScript.cardParts[4]) sr.color = Color.white;
             }
