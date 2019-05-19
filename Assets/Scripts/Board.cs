@@ -543,7 +543,7 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().doBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
-        // FMOD Play Phase Transition Sound      
+        // FMOD Play Phase Transition Sound
         sm = SoundManager.me;
         sm.PlaySound(sm.toPlayPhaseSound);
         curPhase = Phase.Play;
