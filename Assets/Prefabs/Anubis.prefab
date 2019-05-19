@@ -15715,8 +15715,7 @@ MonoBehaviour:
   m_text: Anubis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20610,6 +20609,7 @@ GameObject:
   - component: {fileID: 7085614971991483139}
   - component: {fileID: 3619818236835500647}
   - component: {fileID: 6142704423013092558}
+  - component: {fileID: 291380252502198171}
   m_Layer: 8
   m_Name: Anubis
   m_TagString: Enemy
@@ -20723,6 +20723,25 @@ MonoBehaviour:
   maxHealth: 200
   addCount: 0
   add: {fileID: 8575789161732364871, guid: b34b056b3759c1347a6ead1f43e4dc0c, type: 3}
+--- !u!95 &291380252502198171
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547390648045039223}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebdc0e02599eef34d81307491906f737, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5965146978635588616
 GameObject:
   m_ObjectHideFlags: 0
