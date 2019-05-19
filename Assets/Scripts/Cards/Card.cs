@@ -491,8 +491,8 @@ public class Card : MonoBehaviour {
                     addEvent.toAdd[i].GetComponent<Card>().textParts[1].text = desc;
                     addEvent.toAdd[i].GetComponent<Card>().textParts[2].text = cost.ToString();
                     for (int j = 0; i < 3; i++ ) {
-                        addEvent.toAdd[i].GetComponent<Card>().textParts[i].sortingOrder = -1;
-                        addEvent.toAdd[i].GetComponent<Card>().textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
+                        addEvent.toAdd[i].GetComponent<Card>().textParts[j].sortingOrder = -1;
+                        addEvent.toAdd[i].GetComponent<Card>().textParts[j].sortingLayerID = SortingLayer.NameToID("UI High");
                     }
                     board.addDeck.Remove(addEvent.toAdd[i]);
                 }
