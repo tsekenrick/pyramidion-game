@@ -59,8 +59,10 @@ public class DeckDisplay : MonoBehaviour
             if(cardScript.curState != CardState.InSelectionAdd) go.GetComponent<TrailRenderer>().enabled = true;
             StartCoroutine(cardScript.MulliganAnim(cardScript.transform));
             // for case of displaying during events, always goes back to deck afterwards
-            if(cardScript.curState == CardState.InSelectionRemove || cardScript.curState == CardState.InSelectionAdd) go.GetComponent<Card>().curState = CardState.InDeck;
-            
+            if(cardScript.curState == CardState.InSelectionRemove || cardScript.curState == CardState.InSelectionAdd) {
+                cardScript.GetComponent<SpriteRenderer>().enabled = false;
+                cardScript.curState = CardState.InDeck;
+            }
             for(int i = 0; i < 3; i++){
                 cardScript.textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
                 cardScript.textParts[i].sortingOrder = -1;
@@ -104,6 +106,9 @@ public class DeckDisplay : MonoBehaviour
             Card cardScript = card.GetComponent<Card>();
             foreach(SpriteRenderer sr in cardScript.cardParts) {
                 if(sr != cardScript.cardParts[4]) sr.color = Color.white;
+                if(sr != cardScript.cardParts[5] && sr != cardScript.cardParts[3]) {
+                    sr.enabled = true;
+                }
             }
             card.GetComponent<TrailRenderer>().enabled = false;
             card.GetComponent<BoxCollider2D>().enabled = true;

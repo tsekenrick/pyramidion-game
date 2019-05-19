@@ -269,6 +269,7 @@ public class Board : MonoBehaviour {
     private IEnumerator ResetEnemySprites() {
         yield return new WaitForSeconds(.5f);
         foreach(GameObject enemy in enemies) {
+            enemy.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
             enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
             // enemy.transform.position = enemy.GetComponent<Target>().startPos;
         }
@@ -330,7 +331,7 @@ public class Board : MonoBehaviour {
                 case "EnemyAction":
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.ResolveAction();
-                    
+                    enemyAction.owner.GetComponent<SpriteRenderer>().sortingLayerName = "UI High";
                     // anims
                     playSequence.Remove(playSequence[0]);
                     perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 8), .5f);
