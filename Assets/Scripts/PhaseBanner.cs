@@ -23,17 +23,17 @@ public class PhaseBanner : MonoBehaviour {
         
     }
     
-    public void doBanner() {
+    public void DoBanner() {
         if (!canBanner) return;
         canBanner = false;
 
         // create new sequence and append desired movement behavior
         moveBanner = DOTween.Sequence();
         moveBanner.Append(transform.DOMoveX(0f, 1.15f).SetEase(Ease.OutExpo));
+        moveBanner.AppendInterval(1f);        
         moveBanner.Append(transform.DOMoveX(20f, .7f).SetEase(Ease.OutCubic));
         moveBanner.Append(transform.DOScale(Vector3.one * .01f, .01f));
         moveBanner.Append(transform.DOMoveX(-20f, .1f));
-        moveBanner.AppendInterval(.15f);
         moveBanner.Append(transform.DOScale(Vector3.one * .75f, .01f));
        
     }
@@ -41,7 +41,7 @@ public class PhaseBanner : MonoBehaviour {
     void Start() {
         DOTween.SetTweensCapacity(6250, 50);
         canBanner = true;
-        doBanner();
+        DoBanner();
         board = Board.instance;
         phaseName = GetComponentInChildren<TextMeshPro>();
         phaseName.text = "Mulligan Phase";
