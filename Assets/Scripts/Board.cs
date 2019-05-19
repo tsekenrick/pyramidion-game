@@ -873,7 +873,6 @@ public class Board : MonoBehaviour {
                 }
 
                 if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
-                    Debug.Log("hit");
                     if(toMul.Count == 0) {
                         mulLimit = 0;
                     }
@@ -915,7 +914,6 @@ public class Board : MonoBehaviour {
                 }
 
                 if(actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E) && actionButton.GetComponent<ActionButton>().canClick) {
-                    Debug.Log("hit");
                     curPhase = Phase.Resolution;
 
                     // FMOD Resolution Phase Transition Sound
