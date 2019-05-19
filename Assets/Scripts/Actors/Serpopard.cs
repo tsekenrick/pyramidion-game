@@ -17,7 +17,7 @@ public class Serpopard : Enemy {
         switch(board.curPhase) {
             case Phase.Mulligan:
                 if(curActions.Count == 0) {
-                    if(health < .2f * maxHealth && !isEnraged) {
+                    if(health < .3f * maxHealth && !isEnraged) {
                         isEnraged = true;
                         // FMOD Play Enrage Sound
                         sm = SoundManager.me;
@@ -29,8 +29,8 @@ public class Serpopard : Enemy {
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 3));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 5));
                         curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 5, 7));
-                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 11));
-                    } else if(health < .2f * maxHealth && isEnraged) {
+                        curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 12, 10));
+                    } else if(health < .3f * maxHealth && isEnraged) {
                         curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 1, 5));
                     } else {
                         int turnType = Random.Range(0, 4);
@@ -43,8 +43,8 @@ public class Serpopard : Enemy {
                                 curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 10, 5));
                                 break;
                             case 2:
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 5));
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 8, 7));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 9, 5));
+                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 9, 7));
                                 break;
                         }
                     }

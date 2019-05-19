@@ -19,23 +19,23 @@
         {
             "cardName": "Preparation",
             "cost": 3,
-            "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
+            "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
             "artPath": "Card_art/final_cardart_preparation_1.png",
-            "cardProps": ["Attack", "9"],
+            "cardProps": ["Attack", "12"],
             "superclass": "Preparation"
         },
         {
             "cardName": "Preparation",
             "cost": 3,
-            "desc": "Deal 9 unblockable damage. When you mulligan this card, gain 3 block.",
+            "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
             "artPath": "Card_art/final_cardart_preparation_1.png",
-            "cardProps": ["Attack", "9"],
+            "cardProps": ["Attack", "12"],
             "superclass": "Preparation"
         },
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 4 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/final_cardart_tempguard_1.png",
             "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
@@ -43,23 +43,7 @@
         {
             "cardName": "Tempered Guard",
             "cost": 1,
-            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/final_cardart_tempguard_1.png",
-            "cardProps": ["Defend", "2"],
-            "superclass": "TemperedGuard"
-        },
-        {
-            "cardName": "Tempered Guard",
-            "cost": 1,
-            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
-            "artPath": "Card_art/final_cardart_tempguard_1.png",
-            "cardProps": ["Defend", "2"],
-            "superclass": "TemperedGuard"
-        },
-        {
-            "cardName": "Tempered Guard",
-            "cost": 1,
-            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "desc": "Gain 2 block, gain an additional 4 block every time a copy of this card is played consecutively.",
             "artPath": "Card_art/final_cardart_tempguard_1.png",
             "cardProps": ["Defend", "2"],
             "superclass": "TemperedGuard"
@@ -139,106 +123,18 @@
         {
             "cardName": "Calculated Strike",
             "cost": 2,
-            "desc": "Deal 4 damage. Increase this card's damage by 6 when it is mulliganed. Resets on use.",
+            "desc": "Deal 3 damage. Increase this card's damage by 8 when it is mulliganed. Resets on use.",
             "artPath": "Card_art/final_cardart_calcstrike_1.png",
-            "cardProps": ["Attack", "4"],
+            "cardProps": ["Attack", "3"],
             "superclass": "CalculatedStrike"
         },
         {
             "cardName": "Calculated Strike",
             "cost": 2,
-            "desc": "Deal 4 damage. Increase this card's damage by 6 when it is mulliganed. Resets on use.",
+            "desc": "Deal 3 damage. Increase this card's damage by 8 when it is mulliganed. Resets on use.",
             "artPath": "Card_art/final_cardart_calcstrike_1.png",
-            "cardProps": ["Attack", "4"],
+            "cardProps": ["Attack", "3"],
             "superclass": "CalculatedStrike"
-        },
-        {
-            "cardName": "Calculated Strike",
-            "cost": 2,
-            "desc": "Deal 4 damage. Increase this card's damage by 6 when it is mulliganed. Resets on use.",
-            "artPath": "Card_art/final_cardart_calcstrike_1.png",
-            "cardProps": ["Attack", "4"],
-            "superclass": "CalculatedStrike"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
-            "artPath": "Card_art/final_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "10"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Focus Attack",
-            "cost": 4,
-            "desc": "Deal 10 damage. Deal 20 damage if the player made the previous action this turn.",
-            "artPath": "Card_art/final_cardart_focusattack_1.png",
-            "cardProps": ["Attack", "10"],
-            "superclass": "FocusAttack"
-        },
-        {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, it deals double damage.",
-            "artPath": "Card_art/final_cardart_recklessabandon_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "RecklessAbandon"
-        },
-        {
-            "cardName": "Reckless Abandon",
-            "cost": 1,
-            "desc": "If the next action you take this turn is an attack, it deals double damage.",
-            "artPath": "Card_art/final_cardart_recklessabandon_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "RecklessAbandon"
-        },
-        {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/final_cardart_solidarity_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "Solidarity"
-        },
-        {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/final_cardart_solidarity_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "Solidarity"
-        },
-        {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/final_cardart_solidarity_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "Solidarity"
-        },
-        {
-            "cardName": "Solidarity",
-            "cost": 2,
-            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
-            "artPath": "Card_art/final_cardart_solidarity_1.png",
-            "cardProps": ["Defend", "0"],
-            "superclass": "Solidarity"
-        },
-        {
-            "cardName": "Sand Cloak",
-            "cost": 3,
-            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
-            "artPath": "Card_art/final_cardart_sandcloak_1.png",
-            "cardProps": ["Defend", "18"],
-            "superclass": "SandCloak"
-        },
-        {
-            "cardName": "Sand Cloak",
-            "cost": 3,
-            "desc": "Gain 18 block. Decrease this card's block by 4 this combat.",
-            "artPath": "Card_art/final_cardart_sandcloak_1.png",
-            "cardProps": ["Defend", "18"],
-            "superclass": "SandCloak"
         }
         
     ]

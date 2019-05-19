@@ -124,6 +124,7 @@ MonoBehaviour:
   eventStates:
   - {fileID: 21300000, guid: fc4ff17dee21fa644bfa715fad983166, type: 3}
   - {fileID: 21300000, guid: 6f5a5a05590b8164d813ce66f39f89cc, type: 3}
+  toAdd: []
 --- !u!1 &2997023631105801813
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9.05}
+  m_AnchoredPosition: {x: 0, y: -9.45}
   m_SizeDelta: {x: 14.297, y: 2.412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5936641079772888262
@@ -443,7 +444,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Add a new card to your deck
+  m_text: Choose 2 cards to add to your deck
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: d31088e4deb508e479b8605a608abeae, type: 2}
@@ -512,12 +513,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2650401164132683580}
-    characterCount: 27
+    characterCount: 34
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

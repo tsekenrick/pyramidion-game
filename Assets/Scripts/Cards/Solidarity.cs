@@ -11,7 +11,7 @@ public class Solidarity : Card {
     public override void ResolveAction() {
         SoundManager sm = SoundManager.me;
         sm.PlayPlayerAttackSound();
-        int amount = charged ? 10 : 5;
+        int amount = charged ? 14 : 7;
         foreach(GameObject enemy in Board.instance.enemies) {
             Attack(5, enemy);
             int tmpBlock = enemy.GetComponent<Target>().block;
@@ -79,8 +79,8 @@ public class Solidarity : Card {
         }
 
         transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 0 ?
-            $"Deal 5 damage to ALL enemies. Gain 3 <color=#2bce43>({this.cardProps[1]})</color> block for each adjacent copy of Solidarity in your hand." :
-            $"Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.";
+            $"Deal 7 damage to ALL enemies. Gain 3 <color=#2bce43>({this.cardProps[1]})</color> block for each adjacent copy of Solidarity in your hand." :
+            $"Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.";
 
     }
 }
