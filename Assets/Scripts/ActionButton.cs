@@ -94,7 +94,7 @@ public class ActionButton : MonoBehaviour
 
     private IEnumerator SpamDisabler() {
         canClick = false;
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
         canClick = true;
     }
 }
