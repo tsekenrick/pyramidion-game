@@ -15,6 +15,38 @@
             "artPath": "Card_art/final_cardart_sandcloak_1.png",
             "cardProps": ["Defend", "18"],
             "superclass": "SandCloak"
+        },
+        {
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/final_cardart_solidarity_1.png",
+            "cardProps": ["Defend", "0"],
+            "superclass": "Solidarity"
+        },
+        {
+            "cardName": "Solidarity",
+            "cost": 2,
+            "desc": "Deal 5 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "artPath": "Card_art/final_cardart_solidarity_1.png",
+            "cardProps": ["Defend", "0"],
+            "superclass": "Solidarity"
+        },
+        {
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "artPath": "Card_art/final_cardart_tempguard_1.png",
+            "cardProps": ["Defend", "2"],
+            "superclass": "TemperedGuard"
+        },
+        {
+            "cardName": "Tempered Guard",
+            "cost": 1,
+            "desc": "Gain 2 block, gain an additional 3 block every time a copy of this card is played consecutively.",
+            "artPath": "Card_art/final_cardart_tempguard_1.png",
+            "cardProps": ["Defend", "2"],
+            "superclass": "TemperedGuard"
         }
         
     ]

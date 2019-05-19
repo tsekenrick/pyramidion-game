@@ -38,6 +38,4 @@ public class Player : Target {
             GetComponent<Animator>().enabled = true;
         }
     }
-
-
 }
