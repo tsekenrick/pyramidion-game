@@ -35,7 +35,6 @@ public class PhaseBanner : MonoBehaviour {
         moveBanner.Append(transform.DOScale(Vector3.one * .01f, .01f));
         moveBanner.Append(transform.DOMoveX(-20f, .1f));
         moveBanner.Append(transform.DOScale(Vector3.one * .75f, .01f));
-       
     }
   
     void Start() {
