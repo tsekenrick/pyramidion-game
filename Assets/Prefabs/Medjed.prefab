@@ -289,8 +289,7 @@ MonoBehaviour:
   m_text: Medjed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0270c85f2e7c78447b09ef4d214efc92, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10170,6 +10169,7 @@ GameObject:
   - component: {fileID: 4609263837508079394}
   - component: {fileID: 4609263837508079393}
   - component: {fileID: 7001996529935898720}
+  - component: {fileID: 7826156224626870769}
   m_Layer: 8
   m_Name: Medjed
   m_TagString: Enemy
@@ -10278,6 +10278,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eb4ef975d943b154890ca1890ff510e7, type: 3}
   healthText: []
   maxHealth: 80
+--- !u!95 &7826156224626870769
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609263837508079392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 147bab61b45f31b42adc582c65744f2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4609263837587671465
 GameObject:
   m_ObjectHideFlags: 0

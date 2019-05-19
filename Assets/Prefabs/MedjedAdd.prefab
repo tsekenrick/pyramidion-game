@@ -35135,6 +35135,7 @@ GameObject:
   - component: {fileID: 8461065528275030999}
   - component: {fileID: 2295281647529552417}
   - component: {fileID: 8415510767034515281}
+  - component: {fileID: 6535959744935596123}
   m_Layer: 8
   m_Name: MedjedAdd
   m_TagString: Enemy
@@ -35245,6 +35246,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eb4ef975d943b154890ca1890ff510e7, type: 3}
   healthText: []
   maxHealth: 30
+--- !u!95 &6535959744935596123
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575789161732364871}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 147bab61b45f31b42adc582c65744f2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8687076798753751187
 GameObject:
   m_ObjectHideFlags: 0
