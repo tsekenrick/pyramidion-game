@@ -848,7 +848,7 @@ public class Board : MonoBehaviour {
             StartCoroutine(DisplayLoseScreen());
         }
 
-        if(level < 4 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
+        if(level < 5 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);
             eventCo = DisplayEvents();
