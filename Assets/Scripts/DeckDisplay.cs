@@ -113,6 +113,7 @@ public class DeckDisplay : MonoBehaviour
                 if(sr != cardScript.cardParts[5] && sr != cardScript.cardParts[3]) {
                     sr.enabled = true;
                 }
+                if(sr != cardScript.cardParts[4] && sr != cardScript.cardParts[5]) sr.sortingOrder = 6;
             }
             card.GetComponent<TrailRenderer>().enabled = false;
             card.GetComponent<BoxCollider2D>().enabled = true;
@@ -154,6 +155,7 @@ public class DeckDisplay : MonoBehaviour
                 if(sr != cardScript.cardParts[5] && sr != cardScript.cardParts[3]) {
                     sr.enabled = true;
                 }
+                if(sr != cardScript.cardParts[4] && sr != cardScript.cardParts[5]) sr.sortingOrder = 6;
             }
             card.GetComponent<TrailRenderer>().enabled = false;
             card.GetComponent<BoxCollider2D>().enabled = true;

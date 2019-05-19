@@ -184,7 +184,7 @@ public class Card : MonoBehaviour {
                 if(sr != cardParts[5] && sr != cardParts[3]) {
                     sr.enabled = true;
                 }
-                if(sr != cardParts[4] && sr !=cardParts[5]) sr.sortingOrder = 6;
+                if(sr != cardParts[4] && sr != cardParts[5]) sr.sortingOrder = 6;
             }
             
             foreach(TextMeshPro tmp in textParts) {
@@ -486,15 +486,21 @@ public class Card : MonoBehaviour {
                 GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
 
                 for(int i = addEvent.toAdd.Count - 1; i >= 0; i--) {
+                    Debug.Log(i);
                     board.deck.Add(addEvent.toAdd[i]);
-                    addEvent.toAdd[i].GetComponent<Card>().textParts[0].text = cardName;
-                    addEvent.toAdd[i].GetComponent<Card>().textParts[1].text = desc;
-                    addEvent.toAdd[i].GetComponent<Card>().textParts[2].text = cost.ToString();
-                    for (int j = 0; i < 3; i++ ) {
-                        addEvent.toAdd[i].GetComponent<Card>().textParts[j].sortingOrder = -1;
-                        addEvent.toAdd[i].GetComponent<Card>().textParts[j].sortingLayerID = SortingLayer.NameToID("UI High");
+                    Card cardScript = addEvent.toAdd[i].GetComponent<Card>();
+                    cardScript.textParts[0].text = cardName;
+                    cardScript.textParts[1].text = desc;
+                    cardScript.textParts[2].text = cost.ToString();
+                    for (int j = 0; j < 3; j++ ) {
+                        cardScript.textParts[j].sortingOrder = -1;
+                        cardScript.textParts[j].sortingLayerID = SortingLayer.NameToID("UI High");
                     }
+                    cardScript.isSettled = false;
+                    cardScript.curState = CardState.InDeck;
+                    cardScript.transform.parent = board.cardAnchors["Deck Anchor"];
                     board.addDeck.Remove(addEvent.toAdd[i]);
+                    addEvent.toAdd.RemoveAt(i);
                 }
 
                 

@@ -22,6 +22,7 @@ public class Event : MonoBehaviour {
     }
 
     void OnMouseEnter() {
+        if(DeckDisplay.instance.isRendering) return;
         sr.sprite = eventStates[1];
 
         // FMOD Play Hover Event Sound
