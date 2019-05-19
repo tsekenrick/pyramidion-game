@@ -26,11 +26,11 @@ public class Ammit : Enemy {
                                 curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 2));
                                 curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 8));
                             } else {
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 4));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 2));
                             }
                             break;
                         case 1:
-                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 10));                
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 11));                
                             break;
                         case 2:
                             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 4));

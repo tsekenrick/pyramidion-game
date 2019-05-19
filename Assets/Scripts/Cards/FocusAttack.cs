@@ -7,12 +7,12 @@ public class FocusAttack : Card {
 
     public override void ResolveAction() {
         if(Board.instance.prevResolvedAction == "PlayerAction") {
-            this.cardProps[1] = "20";
+            this.cardProps[1] = "24";
         } else {
-            this.cardProps[1] = "10";
+            this.cardProps[1] = "12";
         }
         base.ResolveAction();
-        this.cardProps[1] = "10";
+        this.cardProps[1] = "12";
     }
 
     public override void Awake() {

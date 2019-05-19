@@ -169,7 +169,7 @@ public class Card : MonoBehaviour {
 
         GetComponent<BoxCollider2D>().enabled = false;
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
-        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
     }
 
     public virtual void Update(){
@@ -209,15 +209,16 @@ public class Card : MonoBehaviour {
                 if(!isSettled) {
                     GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(DrawAnim(tr));
-                    textParts[0].text = cardName;
-                    textParts[1].text = desc;
-                    textParts[2].text = cost.ToString();
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
                     }
 
-                    foreach(TextMeshPro tmp in textParts) {
+                    textParts[0].text = cardName;
+                    textParts[1].text = desc;
+                    textParts[2].text = cost.ToString();
+
+                    foreach (TextMeshPro tmp in textParts) {
                         tmp.sortingLayerID = SortingLayer.NameToID("UI High");
                     }
                     // FMOD Draw Event
@@ -486,8 +487,18 @@ public class Card : MonoBehaviour {
 
                 for(int i = addEvent.toAdd.Count - 1; i >= 0; i--) {
                     board.deck.Add(addEvent.toAdd[i]);
+                    addEvent.toAdd[i].GetComponent<Card>().textParts[0].text = cardName;
+                    addEvent.toAdd[i].GetComponent<Card>().textParts[1].text = desc;
+                    addEvent.toAdd[i].GetComponent<Card>().textParts[2].text = cost.ToString();
+                    for (int j = 0; i < 3; i++ ) {
+                        addEvent.toAdd[i].GetComponent<Card>().textParts[i].sortingOrder = -1;
+                        addEvent.toAdd[i].GetComponent<Card>().textParts[i].sortingLayerID = SortingLayer.NameToID("UI High");
+                    }
                     board.addDeck.Remove(addEvent.toAdd[i]);
                 }
+
+                
+
                 board.FisherYatesShuffle(board.deck);
             }
         }

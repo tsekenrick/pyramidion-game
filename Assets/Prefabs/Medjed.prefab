@@ -10277,7 +10277,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ff764035717219d4bb2aea445108218a, type: 3}
   - {fileID: 21300000, guid: eb4ef975d943b154890ca1890ff510e7, type: 3}
   healthText: []
-  maxHealth: 80
+  maxHealth: 45
 --- !u!95 &7826156224626870769
 Animator:
   serializedVersion: 3

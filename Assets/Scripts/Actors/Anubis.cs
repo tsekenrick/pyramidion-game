@@ -25,7 +25,7 @@ public class Anubis : Enemy {
                         switch(roundsSinceSpawn) {
                             case -1:
                                 // recovery turn
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 8, 5));
+                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 8, 3));
                                 break;
                             case 0:
                                 // base turn
@@ -56,7 +56,8 @@ public class Anubis : Enemy {
         if(board.enemies.Length >= 3) weights = new float[] {.5f, 1f, 1f};
 
         if(selector <= weights[0]) {
-            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 8));
+            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 15, 8));
+            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 15, 8));
         } else if (selector <= weights[1]) {
             curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 14, 3));
         } else {

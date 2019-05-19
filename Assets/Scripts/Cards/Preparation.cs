@@ -9,7 +9,7 @@ public class Preparation : Card {
 
     public override void ResolveAction() {
         Target t = target.GetComponentInParent<Target>();
-        int damage = charged ? 18 : 9;
+        int damage = charged ? 24 : 12;
         t.transform.Find("DamageText").GetComponent<TextMeshPro>().text = $"{damage}";
         t.GetComponentInChildren<DamageText>().FadeText();
         t.health -= damage;
@@ -22,7 +22,7 @@ public class Preparation : Card {
     
     public override void OnMulligan() {
         Debug.Log("called onmulligan for preparation");
-        Board.instance.player.GetComponent<Player>().block += 3;
+        Board.instance.player.GetComponent<Player>().block += 2;
         Board.instance.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
         SoundManager.me.PlayPlayerDefendSound();
     }
