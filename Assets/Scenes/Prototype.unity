@@ -5029,7 +5029,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1973838493
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ad687274ac8e6864cbf19c1a7300188a, type: 3}
   m_Color: {r: 0.5801887, g: 0.9840577, b: 1, a: 0.69803923}
   m_FlipX: 0
@@ -43935,7 +43935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694873655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.41, y: -9.53, z: 17.01}
+  m_LocalPosition: {x: -19.41, y: -10, z: 17.01}
   m_LocalScale: {x: 1.14, y: 1.14, z: 1.14}
   m_Children: []
   m_Father: {fileID: 1262111942}
@@ -54271,7 +54271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933162251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.41, y: -9.53, z: 17.01}
+  m_LocalPosition: {x: -19.41, y: -10, z: 17.01}
   m_LocalScale: {x: 1.14, y: 1.14, z: 1.14}
   m_Children: []
   m_Father: {fileID: 1420159443}
@@ -54513,6 +54513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1978727989}
   - component: {fileID: 1978727990}
+  - component: {fileID: 1978727993}
   - component: {fileID: 1978727991}
   - component: {fileID: 1978727992}
   m_Layer: 0
@@ -54599,6 +54600,8 @@ MonoBehaviour:
   mulliganButtons:
   - {fileID: 21300000, guid: 21107620a48484f47871f2787c505137, type: 3}
   - {fileID: 21300000, guid: a29a52d6bb49a7c4fad899f8b7d496dd, type: 3}
+  - {fileID: 21300000, guid: f70089371c9659b42ba14ba18979fc88, type: 3}
+  - {fileID: 21300000, guid: ff6cead1f8c9d02469d2b0b28441f41a, type: 3}
   executeButtons:
   - {fileID: 21300000, guid: 1db11ede5d15ce54da92168b6d88d2af, type: 3}
   - {fileID: 21300000, guid: b04c4f7010e01824d96a75704a3d7e8f, type: 3}
@@ -54622,6 +54625,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.9
+--- !u!114 &1978727993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978727988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ba2e8323d71924ca2f5827a5c6490c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 9006043690555886985, guid: 5f80c68b4d4115741ace86f841f89d63,
+    type: 3}
+  tooltipInstance: {fileID: 0}
 --- !u!1 &1981891904
 GameObject:
   m_ObjectHideFlags: 0

@@ -286,6 +286,18 @@ public class Board : MonoBehaviour {
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
     }
 
+    private void SetMulliganCamera() {
+        perspectiveCamera.transform.DOLocalMoveZ(-8f, .5f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, .5f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, .5f);
+    }
+
+    private void SetPlayCamera() {
+        perspectiveCamera.transform.DOLocalMoveZ(2f, .5f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, .5f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, .5f);
+    }
+
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         if(playSequence.Count == 0) {
             yield return new WaitForSeconds(1f);
@@ -541,6 +553,7 @@ public class Board : MonoBehaviour {
     }
     
     private void MulToPlayPhase() {  
+        SetPlayCamera();
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
         phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
@@ -559,13 +572,12 @@ public class Board : MonoBehaviour {
         Card.charged = false;
         round++;
 
-        // if(!displayingEvents && !displayingLoseScreen) {
-            phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-            phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-            phaseBanner.GetComponent<PhaseBanner>().DoBanner();
-        // }
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
-        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
+        // move rocks
+        SetMulliganCamera();
 
         // reset block values
         player.GetComponent<Target>().block = 0;
@@ -616,6 +628,7 @@ public class Board : MonoBehaviour {
         //     DOTween.To(() => daytimeSprites[i].color, x => daytimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
         //     DOTween.To(() => nighttimeSprites[i].color, x => nighttimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
         // }
+        SetMulliganCamera();
         yield return new WaitForSeconds(1.5f);
 
         // show mulligan banner
@@ -754,10 +767,7 @@ public class Board : MonoBehaviour {
         elementsToTween.Add(GameObject.Find("Playfield"));
         elementsToTween.Add(GameObject.Find("_DiscardAnchor"));
         elementsToTween.Add(GameObject.Find("_DeckAnchor"));
-
-        List<CardData> deckList = LoadDeckData("deck.json").deckList;
-        List<CardData> addList = LoadDeckData("add_deck.json").deckList;
-        GetAnchors(); // get anchor positions
+        SetMulliganCamera();
 
         // initialize phase variables
         curPhase = Phase.Mulligan;
@@ -767,6 +777,11 @@ public class Board : MonoBehaviour {
         round = 0;
         level = 1;
 
+        // load deck data from json and instantiate
+        List<CardData> deckList = LoadDeckData("deck.json").deckList;
+        List<CardData> addList = LoadDeckData("add_deck.json").deckList;
+        GetAnchors(); // get anchor positions
+        
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
@@ -834,7 +849,7 @@ public class Board : MonoBehaviour {
         }
         // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
 
-        if(Input.GetMouseButtonDown(1)) {
+        if(Input.GetMouseButtonDown(1) && !(curPhase == Phase.Resolution || curPhase == Phase.Event)) {
             for(int i = playSequence.Count - 1; i >= 0; i--) {
                 if(playSequence[i] is PlayerAction) {
                     playSequence.DequeuePlayerAction(playSequence[i]);
@@ -845,11 +860,13 @@ public class Board : MonoBehaviour {
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        // check for lose state
         if(!displayingLoseScreen && player.GetComponent<Player>().health <= 0) {
             StopCoroutine(co);
             StartCoroutine(DisplayLoseScreen());
         }
 
+        // check for win state
         if(level < 5 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);

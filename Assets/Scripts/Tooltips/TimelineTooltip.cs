@@ -10,6 +10,7 @@ public class TimelineTooltip : Tooltip {
     protected override void OnMouseEnter() {
         if(!transform.Find("TimelineGlow").GetComponent<SpriteRenderer>().enabled) return;
         base.OnMouseEnter();
+        tooltipInstance.GetComponent<TooltipBehavior>().yOffset = -1.2f;
 
         if(Board.instance.borrowedTime > 0) {
             tmp.text = $"Enemies are acting {Board.instance.borrowedTime} time units sooner than usual due to overplaying on the previous turn.";
@@ -19,5 +20,5 @@ public class TimelineTooltip : Tooltip {
             tmp.text = $"Enemies are acting at their regular time because you played equal to their actions on the previous turn.";
         }
     }
-    
+
 }
