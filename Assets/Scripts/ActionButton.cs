@@ -13,6 +13,7 @@ public class ActionButton : MonoBehaviour
     public bool buttonPressed;
     private bool renderPressed;
     public bool canClick;
+    private float glowAlpha;
 
     // FMOD variables
     [FMODUnity.EventRef]
@@ -34,6 +35,7 @@ public class ActionButton : MonoBehaviour
         buttonPressed = false;
         canClick = true;
         board = Board.instance;
+        glowAlpha = .55f;
         col = this.GetComponent<CircleCollider2D>();
         sr = this.GetComponent<SpriteRenderer>();
         glow = GameObject.Find("ActionBtnGlow").GetComponent<SpriteRenderer>();
@@ -44,10 +46,13 @@ public class ActionButton : MonoBehaviour
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-                sr.sprite = renderPressed ? mulliganButtons[1] : mulliganButtons[0];
+                int idxOffset = board.toMul.Count > 0 ? 0 : 2;
+                glow.color = board.toMul.Count > 0 ? new Color(0, .6f, 1f, glowAlpha) : new Color(0, .6f, .25f, glowAlpha);
+                sr.sprite = renderPressed ? mulliganButtons[1 + idxOffset] : mulliganButtons[0 + idxOffset];
                 break;
 
             case Phase.Play:
+                glow.color = new Color(0, .6f, .25f, glowAlpha);
                 sr.sprite = renderPressed ? executeButtons[1] : executeButtons[0];
                 break;
 
@@ -66,8 +71,17 @@ public class ActionButton : MonoBehaviour
         actionButtonDownSound.start();
     }
 
+    public void OnMouseEnter() {
+        if(board.overlayActive) return;
+        // FMOD Play Pile Hover Sound     
+        SoundManager sm = SoundManager.me;
+        sm.PlaySound(sm.pileHoverSound);
+        glowAlpha = 1f;
+    }
+
     public void OnMouseExit() {
         if(board.overlayActive) return;
+        glowAlpha = .55f;
 
         if(renderPressed) actionButtonUpSound.start();
         renderPressed &= false;

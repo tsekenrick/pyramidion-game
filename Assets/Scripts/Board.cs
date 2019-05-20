@@ -559,11 +559,10 @@ public class Board : MonoBehaviour {
         Card.charged = false;
         round++;
 
-        // if(!displayingEvents && !displayingLoseScreen) {
-            phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-            phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-            phaseBanner.GetComponent<PhaseBanner>().DoBanner();
-        // }
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
+
 
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
 
@@ -834,7 +833,7 @@ public class Board : MonoBehaviour {
         }
         // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
 
-        if(Input.GetMouseButtonDown(1)) {
+        if(Input.GetMouseButtonDown(1) && !(curPhase == Phase.Resolution || curPhase == Phase.Event)) {
             for(int i = playSequence.Count - 1; i >= 0; i--) {
                 if(playSequence[i] is PlayerAction) {
                     playSequence.DequeuePlayerAction(playSequence[i]);
