@@ -194,9 +194,7 @@ public class Card : MonoBehaviour {
             cardParts[4].sortingOrder = 3;
         }
 
-        // GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
-        cardParts[5].sortingLayerName = "UI High";
-        
+        cardParts[5].sortingLayerName = "UI High"; // mulligan X comes above all other card elements        
         if(curState != CardState.InQueue) {
             foreach(SpriteRenderer sr in cardParts){
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
@@ -253,6 +251,15 @@ public class Card : MonoBehaviour {
                 break;
             
             case CardState.InPlay:
+                // failsafe for if holding card when going from play to res
+                if(board.curPhase != Phase.Play) {
+                    tr.parent = prevParent;
+                    prevParent = null;
+                    foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
+                    curState = CardState.InHand;
+                    isSettled = false; // initiates tween back to hand pos
+                    tr.DOLocalMoveY(0f, .3f).SetDelay(.35f);
+                }
                 Vector3 mousePos = Input.mousePosition;
                 tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
                 tr.DOScale(.75f, .3f).SetId("PlayScale");

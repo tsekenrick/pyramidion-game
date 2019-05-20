@@ -47,7 +47,7 @@ public class ActionButton : MonoBehaviour
         switch(board.curPhase) {
             case Phase.Mulligan:
                 int idxOffset = board.toMul.Count > 0 ? 0 : 2;
-                glow.color = board.toMul.Count > 0 ? new Color(0, .6f, 1f, glowAlpha) : new Color(0, .6f, .25f, glowAlpha);
+                glow.color = board.toMul.Count > 0 ? new Color(0, .6f, .85f, glowAlpha) : new Color(0, .85f, .3f, glowAlpha);
                 sr.sprite = renderPressed ? mulliganButtons[1 + idxOffset] : mulliganButtons[0 + idxOffset];
                 break;
 
