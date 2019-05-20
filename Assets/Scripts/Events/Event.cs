@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
 
 public class Event : MonoBehaviour {
 
     public Sprite[] eventStates;
+    private TextMeshPro[] tmps;
     private SpriteRenderer sr;
     protected Board board;
 
@@ -18,7 +21,17 @@ public class Event : MonoBehaviour {
 
     protected virtual void Start() {
         sr = this.GetComponent<SpriteRenderer>();
+        tmps = this.GetComponentsInChildren<TextMeshPro>();
         board = Board.instance;
+        Color initColor = sr.color;
+        foreach(TextMeshPro tmp in tmps) {
+            Color tmpColor = tmp.color;
+            tmp.color = new Color(tmpColor.r, tmpColor.g, tmpColor.b, 0f);
+            tmp.DOColor(tmpColor, .5f);
+
+        }
+        sr.color = new Color(initColor.r, initColor.g, initColor.b, 0f);
+        sr.DOColor(initColor, .5f);
     }
 
     void OnMouseEnter() {

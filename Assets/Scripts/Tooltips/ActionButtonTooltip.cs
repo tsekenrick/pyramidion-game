@@ -11,6 +11,11 @@ public class ActionButtonTooltip : Tooltip {
         
     }
 
+    protected void Update() {
+        if(board.curPhase != Phase.Mulligan && board.curPhase != Phase.Play) {
+            base.OnDestroy();
+        }
+    }
     protected override void OnMouseEnter() {
         if(board.curPhase != Phase.Play && board.curPhase != Phase.Mulligan) return;
         base.OnMouseEnter();

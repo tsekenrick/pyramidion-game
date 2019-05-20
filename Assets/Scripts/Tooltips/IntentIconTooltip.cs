@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class IntentIconTooltip : Tooltip {
 
+    protected void Update() {
+        if(Board.instance.curPhase != Phase.Mulligan) {
+            base.OnDestroy();
+        }
+    }
+
     protected override void OnMouseEnter() {
         if(Board.instance.curPhase != Phase.Mulligan) return;
         base.OnMouseEnter();
@@ -30,7 +36,6 @@ public class IntentIconTooltip : Tooltip {
     protected override void OnMouseExit() {
         if(Board.instance.curPhase != Phase.Mulligan) return;
         base.OnMouseExit();
-        
     }
 
 

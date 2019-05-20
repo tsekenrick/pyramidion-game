@@ -287,15 +287,15 @@ public class Board : MonoBehaviour {
     }
 
     private void SetMulliganCamera() {
-        perspectiveCamera.transform.DOLocalMoveZ(-8f, .5f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, .5f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, .5f);
+        perspectiveCamera.transform.DOLocalMoveZ(-8f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, 1f);
     }
 
     private void SetPlayCamera() {
-        perspectiveCamera.transform.DOLocalMoveZ(2f, .5f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, .5f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, .5f);
+        perspectiveCamera.transform.DOLocalMoveZ(2f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, 1f);
     }
 
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
@@ -324,7 +324,7 @@ public class Board : MonoBehaviour {
                     // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 9), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -348,7 +348,7 @@ public class Board : MonoBehaviour {
                     enemyAction.owner.GetComponent<SpriteRenderer>().sortingLayerName = "UI High";
                     // anims
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 9), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -555,7 +555,7 @@ public class Board : MonoBehaviour {
     private void MulToPlayPhase() {  
         SetPlayCamera();
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
@@ -573,7 +573,7 @@ public class Board : MonoBehaviour {
         round++;
 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // move rocks
@@ -634,7 +634,7 @@ public class Board : MonoBehaviour {
         // show mulligan banner
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // reset state variables
@@ -892,7 +892,7 @@ public class Board : MonoBehaviour {
                     GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
                 }
 
-                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E)) && actionButton.GetComponent<ActionButton>().canClick) {
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E))) {
                     GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
                     if(toMul.Count == 0) {
                         mulLimit = 0;
@@ -908,7 +908,7 @@ public class Board : MonoBehaviour {
                 }
 
                 if(mulLimit == 0) {
-                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);
+                    if(!IsInvoking()) Invoke("MulToPlayPhase", .5f);
                 } 
                     
                 break;
@@ -934,7 +934,7 @@ public class Board : MonoBehaviour {
                     GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
                 }
 
-                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E)) && actionButton.GetComponent<ActionButton>().canClick) {
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E))) {
                     curPhase = Phase.Resolution;
                     GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
 

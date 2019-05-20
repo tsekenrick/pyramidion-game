@@ -73,10 +73,11 @@ public class ActionButton : MonoBehaviour
 
     public void OnMouseEnter() {
         if(board.overlayActive) return;
+        glowAlpha = 1f;
+
         // FMOD Play Pile Hover Sound     
         SoundManager sm = SoundManager.me;
         sm.PlaySound(sm.pileHoverSound);
-        glowAlpha = 1f;
     }
 
     public void OnMouseExit() {
@@ -89,7 +90,6 @@ public class ActionButton : MonoBehaviour
 
     public void OnMouseUpAsButton() {
         if(board.overlayActive || !canClick) return;
-        StartCoroutine(SpamDisabler());
         
         switch(board.curPhase){
             case Phase.Mulligan:
@@ -104,11 +104,13 @@ public class ActionButton : MonoBehaviour
         }
         // FMOD Action Button Up Sound Event
         actionButtonUpSound.start();
+        
+        StartCoroutine(SpamDisabler());
     }
 
     private IEnumerator SpamDisabler() {
         canClick = false;
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(.6f);
         canClick = true;
     }
 }
