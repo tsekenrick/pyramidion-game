@@ -25,16 +25,23 @@ public class PhaseBanner : MonoBehaviour {
     
     public void DoBanner() {
         if (!canBanner) return;
-        canBanner = false;
+        StartCoroutine(DisableBanner());
 
         // create new sequence and append desired movement behavior
         moveBanner = DOTween.Sequence();
         moveBanner.Append(transform.DOMoveX(0f, 1.15f).SetEase(Ease.OutExpo));
-        moveBanner.AppendInterval(1f);        
+        moveBanner.AppendInterval(.75f);        
         moveBanner.Append(transform.DOMoveX(20f, .7f).SetEase(Ease.OutCubic));
         moveBanner.Append(transform.DOScale(Vector3.one * .01f, .01f));
         moveBanner.Append(transform.DOMoveX(-20f, .1f));
         moveBanner.Append(transform.DOScale(Vector3.one * .75f, .01f));
+
+    }
+
+    private IEnumerator DisableBanner() {
+        canBanner = false;
+        yield return new WaitForSeconds(2.75f);
+        canBanner = true;
     }
   
     void Start() {

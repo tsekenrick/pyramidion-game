@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class Anubis : Enemy {
     private int roundsSinceSpawn;
-    public int addCount;
     public GameObject add;
 
     protected override void Start() {
@@ -68,14 +67,13 @@ public class Anubis : Enemy {
     }
 
     public void SummonMedjed() {
-        addCount++;
         GameObject newAdd = Instantiate(add, transform.parent, false);
         newAdd.GetComponent<Enemy>().health = newAdd.GetComponent<Enemy>().maxHealth;
+        newAdd.transform.DOLocalMoveX(-4.5f - (3.75f * board.enemies.Length - 1), .1f);
         SpriteRenderer sr = newAdd.GetComponent<SpriteRenderer>();
         Color initColor = sr.color;
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
         sr.DOColor(initColor, 2f);
-        newAdd.transform.DOLocalMoveX(-4.5f - (3.75f * addCount), .5f - (.05f * addCount));
     }
 
     public override IEnumerator Die() {

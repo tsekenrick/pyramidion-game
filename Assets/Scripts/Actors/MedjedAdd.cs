@@ -13,7 +13,6 @@ public class MedjedAdd : Medjed {
     }
 
     public override IEnumerator Die() {
-        GameObject.FindObjectOfType<Anubis>().addCount--;
         transform.Find("EnemyHealthBarBase").GetComponent<SpriteRenderer>().enabled = false;
         transform.Find("BasicShadow").GetComponent<SpriteRenderer>().enabled = false;
         transform.Find("MulliganIntent").GetComponent<SpriteRenderer>().enabled = false;
