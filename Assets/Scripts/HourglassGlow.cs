@@ -15,7 +15,7 @@ public class HourglassGlow : MonoBehaviour
     void Update() {
         if(isActive) {
             this.GetComponent<SpriteRenderer>().enabled = true;
-            this.GetComponent<SpriteRenderer>().color = board.borrowedTime < 0 ? new Color(.13f, .85f, .49f, .7f) : new Color(1, 0, 0, .7f);
+            this.GetComponent<SpriteRenderer>().color = board.borrowedTime < 0 ? new Color(.65f, .85f, .55f, .7f) : new Color(1, 0, 0, .7f);
         } else {
             this.GetComponent<SpriteRenderer>().enabled = false;
         }
