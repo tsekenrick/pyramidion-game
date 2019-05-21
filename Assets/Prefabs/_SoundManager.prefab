@@ -72,6 +72,9 @@ MonoBehaviour:
   menuButtonHoverSoundEvent: event:/UI/Menu UI/ButtonHover
   menuButtonClickSoundEvent: event:/UI/Menu UI/ButtonClick
   menuButtonReleaseSoundEvent: event:/UI/Menu UI/ButtonRelease
+  actionButtonDownSoundEvent: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
+  actionButtonUpSoundEvent: event:/UI/Gameplay UI/Board Actions/Action Button Up
+  actionButtonHoverSoundEvent: event:/UI/Gameplay UI/Board Actions/ActionButtonHover
   ambienceSoundEvent: event:/Environment/Ambiences/GenericWorldAtmos
   battleSnapshotEvent: snapshot:/BattleMix
   punishmentSnapshotEvent: snapshot:/OverplayMix
