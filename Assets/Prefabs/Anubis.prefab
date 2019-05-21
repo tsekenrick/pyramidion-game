@@ -10572,7 +10572,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1d2e927e98c740840a688a55ada86270, type: 3}
   - {fileID: 21300000, guid: b8bdea6b237841844ba0720ded509dbe, type: 3}
   - {fileID: 21300000, guid: f191628cdbd14014ebb7d683b79c834b, type: 3}
-  - {fileID: 21300000, guid: 41cf2096c9a2edb4ca7565ccb18707b1, type: 3}
+  - {fileID: 21300000, guid: ac15010d6c7107f498600326d982638b, type: 3}
   iconIndex: 0
 --- !u!61 &4334943017112978905
 BoxCollider2D:
@@ -20721,7 +20721,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 129fb5b25817ab849a81c8e1687cb7ca, type: 3}
   healthText: []
   maxHealth: 200
-  addCount: 0
   add: {fileID: 8575789161732364871, guid: b34b056b3759c1347a6ead1f43e4dc0c, type: 3}
 --- !u!95 &291380252502198171
 Animator:
