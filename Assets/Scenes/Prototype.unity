@@ -56444,6 +56444,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 629586ad1658c1943af89e2307c150fb, type: 3}
   - {fileID: 21300000, guid: f06a301606bf9b94ba64f15e5ed645e4, type: 3}
   - {fileID: 21300000, guid: 4893f5105da76aa4889761085aebbbe8, type: 3}
+  - {fileID: 21300000, guid: 234c38deb713f6a4aa24f7baba9b2e2c, type: 3}
+  - {fileID: 21300000, guid: ea39c383d57c22c47921029b7c6b18ea, type: 3}
   redrawGlows:
   - {fileID: 21300000, guid: 4ebbc2bd5c33d6c498da30b2804aadc5, type: 3}
   - {fileID: 21300000, guid: 402cef0618cfe3f418ce82fe605ce2bd, type: 3}
@@ -56451,6 +56453,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 22fd85fdded3def41a6de972b37f4846, type: 3}
   - {fileID: 21300000, guid: 7afd758e1a35949428faeac66feb2ce7, type: 3}
   - {fileID: 21300000, guid: 01b0d2b77f2a12446864c0a79ce85a2d, type: 3}
+  - {fileID: 21300000, guid: 1e1fa36c5e99094439cd4c8d9b823987, type: 3}
+  - {fileID: 21300000, guid: 28c9ddd7a64542f43b021cedde430057, type: 3}
   buttonPressed: 0
   canClick: 0
   sm: {fileID: 0}

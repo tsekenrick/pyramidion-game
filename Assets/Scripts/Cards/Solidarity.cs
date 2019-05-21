@@ -13,7 +13,7 @@ public class Solidarity : Card {
         sm.PlayPlayerAttackSound();
         int amount = charged ? 14 : 7;
         foreach(GameObject enemy in Board.instance.enemies) {
-            Attack(5, enemy);
+            Attack(amount, enemy);
             int tmpBlock = enemy.GetComponent<Target>().block;
             if(Mathf.Max(amount - tmpBlock, 0) > 0) {
                 enemy.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
