@@ -17,27 +17,23 @@ public class Ammit : Enemy {
                 if(curActions.Count == 0) {
                     switch(turnCounter) {
                         case 0:
-                            float selector = Random.Range(0f, 1f);
-                            if(selector <= .4f) {
-                                turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 16, 6));
-                            } else if(selector <= .8f) {
-                                turnCounter--;
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 5, 2));
-                                curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 8));
-                            } else {
-                                curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 2));
-                            }
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 16, 6));
+                            turnCounter++;
                             break;
                         case 1:
-                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 11));                
+                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 2));
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 14, 8));
+                            turnCounter++;
                             break;
                         case 2:
-                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 6, 4));
-                            turnCounter = -1; // goes back to case 0 next turn
+                            curActions.Add(new EnemyAction(ActionType.Defense, this.gameObject, this.gameObject, 25, 2));
+                            turnCounter++;
+                            break;
+                        case 3:
+                            curActions.Add(new EnemyAction(ActionType.Attack, board.player, this.gameObject, 25, 11));                
+                            turnCounter = 0; // goes back to case 0 next turn
                             break;
                     }
-                    turnCounter++;
                 }
                 curActions.Sort((a, b) => a.completeTime.CompareTo(b.completeTime));
                 break;
