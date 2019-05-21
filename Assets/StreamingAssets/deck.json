@@ -20,7 +20,7 @@
             "cardName": "Transcend",
             "cost": 3,
             "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
-            "artPath": "Card_art/ph_cardart_hiddenblades_1.png",
+            "artPath": "Card_art/final_cardart_transcend_1.png",
             "cardProps": ["Attack", "12"],
             "superclass": "Transcend"
         },
@@ -28,7 +28,7 @@
             "cardName": "Transcend",
             "cost": 3,
             "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
-            "artPath": "Card_art/ph_cardart_hiddenblades_1.png",
+            "artPath": "Card_art/final_cardart_transcend_1.png",
             "cardProps": ["Attack", "12"],
             "superclass": "Transcend"
         },

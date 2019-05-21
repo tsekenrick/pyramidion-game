@@ -51,8 +51,8 @@ public class ActionButton : MonoBehaviour {
         switch(board.curPhase) {
             case Phase.Mulligan:
                 int idxOffset = board.toMul.Count > 0 ? 0 : 2;
-                glow.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.2f, 0.8f, 0.2f, glowAlpha);
-                glow2.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.2f, 0.8f, 0.2f, glowAlpha);
+                glow.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.45f, 0.9f, 0.45f, glowAlpha);
+                glow2.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.45f, 0.9f, 0.45f, glowAlpha);
                 sr.sprite = renderPressed ? mulliganButtons[1 + idxOffset] : mulliganButtons[0 + idxOffset];
                 if(board.mulLimit > 5) {
                     Debug.Log(board.mulLimit);
