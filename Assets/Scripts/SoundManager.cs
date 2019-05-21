@@ -76,6 +76,14 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string menuButtonReleaseSoundEvent;
 
+    //located on ActionButton
+    [FMODUnity.EventRef]
+    public string actionButtonDownSoundEvent;
+    [FMODUnity.EventRef]
+    public string actionButtonUpSoundEvent;
+    [FMODUnity.EventRef]
+    public string actionButtonHoverSoundEvent;
+
     //located on sound manager
     [FMODUnity.EventRef]
     public string ambienceSoundEvent;
@@ -126,6 +134,11 @@ public class SoundManager : MonoBehaviour
     public FMOD.Studio.EventInstance menuButtonHoverSound;
     public FMOD.Studio.EventInstance menuButtonClickSound;
     public FMOD.Studio.EventInstance menuButtonReleaseSound;
+
+    //located on ActionButton
+    public FMOD.Studio.EventInstance actionButtonDownSound;
+    public FMOD.Studio.EventInstance actionButtonUpSound;
+    public FMOD.Studio.EventInstance actionButtonHoverSound;
 
     //located on sound manager
     public FMOD.Studio.EventInstance ambienceSound;
@@ -179,8 +192,13 @@ public class SoundManager : MonoBehaviour
         menuButtonClickSound = FMODUnity.RuntimeManager.CreateInstance(menuButtonClickSoundEvent);
         menuButtonReleaseSound = FMODUnity.RuntimeManager.CreateInstance(menuButtonReleaseSoundEvent);
 
-        //located on sound manager
-        ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
+        //located on ActionButton
+        actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
+        actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
+        actionButtonHoverSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonHoverSoundEvent);
+
+    //located on sound manager
+    ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
 
         //snapshots
         battleSnapshot = FMODUnity.RuntimeManager.CreateInstance(battleSnapshotEvent);

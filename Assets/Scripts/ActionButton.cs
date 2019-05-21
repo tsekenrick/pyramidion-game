@@ -23,20 +23,7 @@ public class ActionButton : MonoBehaviour {
     private bool renderPressed;
     public bool canClick;
 
-    // FMOD variables
-    [FMODUnity.EventRef]
-    public string actionButtonDownSoundEvent;
-    [FMODUnity.EventRef]
-    public string actionButtonUpSoundEvent;
-
-    FMOD.Studio.EventInstance actionButtonDownSound;
-    FMOD.Studio.EventInstance actionButtonUpSound;
-
-    private void Awake() {
-        // FMOD object init
-        actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
-        actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
-    }
+    public SoundManager sm = SoundManager.me;
 
     void Start() {
         buttonPressed = false;
@@ -95,23 +82,22 @@ public class ActionButton : MonoBehaviour {
         renderPressed = true;
 
         // FMOD Action Button Down Sound Event
-        actionButtonDownSound.start();
+        sm.PlaySound(sm.actionButtonDownSound);
     }
 
     public void OnMouseEnter() {
         if(board.overlayActive) return;
         glowAlpha = 1f;
 
-        // FMOD Play Pile Hover Sound     
-        SoundManager sm = SoundManager.me;
-        sm.PlaySound(sm.pileHoverSound);
+        // FMOD Action Button Hover Sound     
+        sm.PlaySound(sm.actionButtonHoverSound);
     }
 
     public void OnMouseExit() {
         if(board.overlayActive) return;
         glowAlpha = .55f;
 
-        if(renderPressed) actionButtonUpSound.start();
+        if(renderPressed) sm.PlaySound(sm.actionButtonUpSound);
         renderPressed &= false;
     }
 
@@ -130,7 +116,7 @@ public class ActionButton : MonoBehaviour {
                 break;
         }
         // FMOD Action Button Up Sound Event
-        actionButtonUpSound.start();
+        sm.PlaySound(sm.actionButtonUpSound);
 
         StartCoroutine(SpamDisabler());
     }
