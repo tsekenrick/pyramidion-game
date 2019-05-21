@@ -17,12 +17,12 @@ public class MulliganIntentRenderer : MonoBehaviour {
                 hitAttack = true;
             } else if(action.actionType == ActionType.Defense && !hitDefend) {
                 hitDefend = true;
+            } else if(action.actionType == ActionType.Summon) {
+                return 3;
             }
         }
 
-        if(!hitAttack && !hitDefend) {
-            return 3;
-        } else if(hitAttack && hitDefend) {
+        if(hitAttack && hitDefend) {
             return 2;
         } else if (hitDefend) {
             return 1;

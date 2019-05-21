@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5702956235700590158}
   - component: {fileID: 5043844241308867554}
   - component: {fileID: 649851608769419756}
+  - component: {fileID: 5676153488982399047}
   m_Layer: 0
   m_Name: EnemyAction
   m_TagString: Untagged
@@ -121,6 +122,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.13, y: 1.26}
   m_EdgeRadius: 0
+--- !u!114 &5676153488982399047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877192346789300867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb9e6b694ffb24b97400f35b1a27f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 8122444253358650273, guid: 80db18637de2ba44fa67d850455d2b08,
+    type: 3}
+  tooltipInstance: {fileID: 0}
 --- !u!1 &7887612795843898901
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,8 +252,7 @@ MonoBehaviour:
   m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e1176af3f7a4864497b96e1fac6eac5, type: 2}
-  m_sharedMaterial: {fileID: 21522584300854276, guid: 3e1176af3f7a4864497b96e1fac6eac5,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: b062ba788a06cb94bb0c5bbd0945f0f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

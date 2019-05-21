@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelection }; 
+public enum CardState {InDeck, InHand, InDiscard, InPlay, InQueue, InSelectionRemove, InSelectionAdd }; 
 
 [System.Serializable]
 public class Card : MonoBehaviour {
@@ -26,6 +26,7 @@ public class Card : MonoBehaviour {
     private Transform prevParent;
     public bool isSettled = true;
     private bool playingMul = false;
+    protected bool shake = true;
 
     // fields read from json
     public string cardName;
@@ -38,6 +39,7 @@ public class Card : MonoBehaviour {
     public PlayerAction action; // also null before card is played
 
     private IEnumerator DrawAnim(Transform tr) {
+        GetComponent<BoxCollider2D>().enabled = true;
         foreach(SpriteRenderer sr in cardParts) sr.sortingLayerName = "UI Low";
         cardParts[5].sortingLayerName = "UI High";
         cardParts[4].sortingOrder = 3;
@@ -99,10 +101,10 @@ public class Card : MonoBehaviour {
 
         if(Mathf.Max(amount - tmpBlock, 0) > 0) {
             t.transform.Find("TakingDamagePS").GetComponent<ParticleSystem>().Play();
-            Camera.main.transform.DOShakePosition(.5f);
+            if(shake) Camera.main.transform.DOShakePosition(.5f);
         } else {
             t.transform.Find("DamagedShieldPS").GetComponent<ParticleSystem>().Play();
-            Camera.main.transform.DOShakePosition(.5f, .5f);
+            if(shake) Camera.main.transform.DOShakePosition(.5f, .5f);
         }
     }
 
@@ -119,6 +121,7 @@ public class Card : MonoBehaviour {
         t.block += amount;
     }
 
+    // utility functions to be implemented in superclasses
     public virtual void OnMulligan() {
         return;
     }
@@ -157,15 +160,16 @@ public class Card : MonoBehaviour {
         charged = false;
     }
 
-    public virtual void Awake(){
+    public virtual void Awake() {
         tweenSequence = DOTween.Sequence();
         cardParts = GetComponentsInChildren<SpriteRenderer>();
         textParts = GetComponentsInChildren<TextMeshPro>();
         tr = this.gameObject.transform;
         curState = CardState.InDeck;
 
+        GetComponent<BoxCollider2D>().enabled = false;
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
-        foreach(TextMeshPro tmp in textParts) tmp.text = "";
+        foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
     }
 
     public virtual void Update(){
@@ -180,7 +184,7 @@ public class Card : MonoBehaviour {
                 if(sr != cardParts[5] && sr != cardParts[3]) {
                     sr.enabled = true;
                 }
-                if(sr != cardParts[4] && sr !=cardParts[5]) sr.sortingOrder = 6;
+                if(sr != cardParts[4] && sr != cardParts[5]) sr.sortingOrder = 6;
             }
             
             foreach(TextMeshPro tmp in textParts) {
@@ -190,9 +194,7 @@ public class Card : MonoBehaviour {
             cardParts[4].sortingOrder = 3;
         }
 
-        // GetComponent<TrailRenderer>().enabled = !(curState == CardState.InQueue || board.curPhase == Phase.Resolution || board.curPhase == Phase.Event);
-        cardParts[5].sortingLayerName = "UI High";
-        
+        cardParts[5].sortingLayerName = "UI High"; // mulligan X comes above all other card elements        
         if(curState != CardState.InQueue) {
             foreach(SpriteRenderer sr in cardParts){
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
@@ -205,15 +207,16 @@ public class Card : MonoBehaviour {
                 if(!isSettled) {
                     GetComponent<TrailRenderer>().enabled = true;
                     StartCoroutine(DrawAnim(tr));
-                    textParts[0].text = cardName;
-                    textParts[1].text = desc;
-                    textParts[2].text = cost.ToString();
                     for(int i = 0; i < 3; i++){
                         cardParts[i].enabled = true;
                         cardParts[1].sprite = cardArt;
                     }
 
-                    foreach(TextMeshPro tmp in textParts) {
+                    textParts[0].text = cardName;
+                    textParts[1].text = desc;
+                    textParts[2].text = cost.ToString();
+
+                    foreach (TextMeshPro tmp in textParts) {
                         tmp.sortingLayerID = SortingLayer.NameToID("UI High");
                     }
                     // FMOD Draw Event
@@ -243,10 +246,20 @@ public class Card : MonoBehaviour {
                     sm.PlaySound(sm.shuffleSound);
                 } else if(!playingMul) {
                     GetComponent<TrailRenderer>().enabled = false;
+                    
                 }
                 break;
             
             case CardState.InPlay:
+                // failsafe for if holding card when going from play to res
+                if(board.curPhase != Phase.Play) {
+                    tr.parent = prevParent;
+                    prevParent = null;
+                    foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
+                    curState = CardState.InHand;
+                    isSettled = false; // initiates tween back to hand pos
+                    tr.DOLocalMoveY(0f, .3f).SetDelay(.35f);
+                }
                 Vector3 mousePos = Input.mousePosition;
                 tr.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
                 tr.DOScale(.75f, .3f).SetId("PlayScale");
@@ -292,7 +305,7 @@ public class Card : MonoBehaviour {
             //tweenSequence.Insert(0, tr.DOMoveZ(-1f, .5f).SetId("zoomIn"));
             // FMOD Hover Event
             sm.PlaySound(sm.hoverSound);
-        } else if(curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
+        } else if(curState == CardState.InSelectionRemove || curState == CardState.InSelectionAdd || DeckDisplay.instance.isRendering) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 10;
             cardParts[4].sortingOrder = 9; // set glow below the rest
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 12;
@@ -311,8 +324,7 @@ public class Card : MonoBehaviour {
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = -1;
             DOTween.Pause("zoomIn");
             tweenSequence.Append(tr.DOScale(Vector3.one, .1f));
-        } else if (curState == CardState.InSelection || DeckDisplay.instance.isRendering) {
-            Debug.Log($"hit, curState is {curState} and isRendering is {DeckDisplay.instance.isRendering}");
+        } else if (curState == CardState.InSelectionRemove || curState == CardState.InSelectionAdd  || DeckDisplay.instance.isRendering) {
             foreach(SpriteRenderer sr in cardParts) sr.sortingOrder = 6;
             cardParts[4].sortingOrder = -1;
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
@@ -442,7 +454,7 @@ public class Card : MonoBehaviour {
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
-        } else if(curState == CardState.InSelection) {
+        } else if(curState == CardState.InSelectionRemove) {
             RemoveCardEvent removeEvent = Object.FindObjectOfType<RemoveCardEvent>();
             if(!removeEvent.toRemove.Contains(this.gameObject)) {
                 removeEvent.toRemove.Add(this.gameObject);
@@ -462,6 +474,45 @@ public class Card : MonoBehaviour {
                     GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
                     Destroy(removeEvent.toRemove[i]);
                 }
+            }
+        } else if(curState == CardState.InSelectionAdd) {
+            AddCardEvent addEvent = Object.FindObjectOfType<AddCardEvent>();
+            if(!addEvent.toAdd.Contains(this.gameObject)) {
+                addEvent.toAdd.Add(this.gameObject);
+                cardParts[4].enabled = true;
+                cardParts[4].sortingLayerName = "Above Darkness";
+                cardParts[4].sortingOrder = -1;
+            } else {
+                addEvent.toAdd.Remove(this.gameObject);
+                cardParts[4].enabled = false;
+                cardParts[4].sortingLayerName = "UI Low";
+            }
+
+            if(addEvent.toAdd.Count == 2) {
+                addEvent.callBaseResolve();
+                GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
+
+                for(int i = addEvent.toAdd.Count - 1; i >= 0; i--) {
+                    Debug.Log(i);
+                    board.deck.Add(addEvent.toAdd[i]);
+                    Card cardScript = addEvent.toAdd[i].GetComponent<Card>();
+                    cardScript.textParts[0].text = cardName;
+                    cardScript.textParts[1].text = desc;
+                    cardScript.textParts[2].text = cost.ToString();
+                    for (int j = 0; j < 3; j++ ) {
+                        cardScript.textParts[j].sortingOrder = -1;
+                        cardScript.textParts[j].sortingLayerID = SortingLayer.NameToID("UI High");
+                    }
+                    cardScript.isSettled = false;
+                    cardScript.curState = CardState.InDeck;
+                    cardScript.transform.parent = board.cardAnchors["Deck Anchor"];
+                    board.addDeck.Remove(addEvent.toAdd[i]);
+                    addEvent.toAdd.RemoveAt(i);
+                }
+
+                
+
+                board.FisherYatesShuffle(board.deck);
             }
         }
     }

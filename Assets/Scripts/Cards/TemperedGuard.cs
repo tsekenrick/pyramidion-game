@@ -17,8 +17,8 @@ public class TemperedGuard : Card {
         } else {
             PlayerAction action = Board.instance.playSequence[thisIdx - 1] as PlayerAction;
             if(action.card.cardName == "Tempered Guard") {
-                this.cardProps[1] = (int.Parse(action.card.cardProps[1]) + 3).ToString();
-                Debug.Log($"tempered guard assigned for {int.Parse(action.card.cardProps[1]) + 3} block");
+                this.cardProps[1] = (int.Parse(action.card.cardProps[1]) + 4).ToString();
+                Debug.Log($"tempered guard assigned for {int.Parse(action.card.cardProps[1]) + 4} block");
             }
         }
     }

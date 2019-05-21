@@ -4,8 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Player : Target
-{
+public class Player : Target {
+
     public TextMeshPro[] healthText;
     public const int MAX_HEALTH = 100;
 
@@ -31,10 +31,11 @@ public class Player : Target
 
         healthText[0].text = health > 0 ? $"{health}/{MAX_HEALTH}" : $"0/{MAX_HEALTH}";
         healthText[1].text = block > 0 ? block.ToString() : " ";
-        // if(Board.me.curPhase == Phase.Mulligan) {
-        //     this.GetComponent<SpriteRenderer>().sprite = combatStates[0];
-        // }
+        
+        if(Board.instance.curPhase == Phase.Resolution) {
+            GetComponent<Animator>().enabled = false;
+        } else {
+            GetComponent<Animator>().enabled = true;
+        }
     }
-
-
 }

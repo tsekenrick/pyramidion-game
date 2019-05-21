@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 2719107635846428164}
   - component: {fileID: 4333860967310631052}
   - component: {fileID: 102746900732271274}
+  - component: {fileID: 6355608911681307998}
   m_Layer: 8
   m_Name: Ammit
   m_TagString: Enemy
@@ -258,7 +259,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 58e3cfaeeb8305841b8639941ca34fde, type: 3}
   - {fileID: 21300000, guid: 14d2df40c7293654db53d423e4ab1229, type: 3}
   healthText: []
-  maxHealth: 120
+  maxHealth: 100
+--- !u!95 &6355608911681307998
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789899014530690475}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 24c6106ae9fb2b4409f25ba53f720ffe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1345128191457239551
 GameObject:
   m_ObjectHideFlags: 0

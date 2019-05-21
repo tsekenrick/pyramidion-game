@@ -10,7 +10,6 @@ using TMPro;
 public enum Phase { Mulligan, Play, Resolution, Event };
 
 public class Board : MonoBehaviour {
-    private string deckFileName = "deck.json";
 
     // "STATE" FIELDS //
     public Phase curPhase;
@@ -33,7 +32,7 @@ public class Board : MonoBehaviour {
     public Transform[] eventContainers;
     public GameObject[] enemies;
     public GameObject perspectiveCamera;
-    public bool actionButtonPressed;
+    private GameObject actionButton;
     private SpriteRenderer[] daytimeSprites;
     private SpriteRenderer[] nighttimeSprites;
     public GameObject loseScreen;
@@ -48,10 +47,10 @@ public class Board : MonoBehaviour {
     public List<GameObject> deck = new List<GameObject>();
     public List<GameObject> discard = new List<GameObject>();
     public List<GameObject> hand = new List<GameObject>();
+    public List<GameObject> addDeck = new List<GameObject>();
     public int deckCount;
 
     // MULLIGAN PHASE VARIABLES //
-    public int turn; // number of mulligan "sets" completed
     public int mulLimit;
     public List<GameObject> toMul = new List<GameObject>(); // is a subset of `hand`
     public List<GameObject> lockedHand = new List<GameObject>(); // also subset of `hand`, union with `toMul` is equal to `hand`
@@ -270,6 +269,7 @@ public class Board : MonoBehaviour {
     private IEnumerator ResetEnemySprites() {
         yield return new WaitForSeconds(.5f);
         foreach(GameObject enemy in enemies) {
+            enemy.GetComponent<SpriteRenderer>().sortingLayerName = "Targets";
             enemy.GetComponent<SpriteRenderer>().sprite = enemy.GetComponent<Enemy>().combatStates[0];
             // enemy.transform.position = enemy.GetComponent<Target>().startPos;
         }
@@ -282,8 +282,20 @@ public class Board : MonoBehaviour {
     }
 
     private IEnumerator ResetActionCamera() {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.15f);
         perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
+    }
+
+    private void SetMulliganCamera() {
+        perspectiveCamera.transform.DOLocalMoveZ(-8f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, 1f);
+    }
+
+    private void SetPlayCamera() {
+        perspectiveCamera.transform.DOLocalMoveZ(2f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, 1f);
     }
 
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
@@ -297,9 +309,11 @@ public class Board : MonoBehaviour {
 
         // move actors closer together (resets at end of coroutine)
         player.transform.DOMoveX(-4.5f - (.85f * (enemies.Length - 1)), .5f);
+        StartCoroutine(ResetPlayerSprites());
         for(int i = enemies.Length - 1; i >= 0; i--) {
             enemies[i].transform.DOLocalMoveX(-4.5f - (3.7f * i), .5f - (.05f * i)); // DO IT BACK AT END
         }
+        StartCoroutine(ResetEnemySprites());
 
         while(playSequence.Count != 0) {
             switch(playSequence[0].GetType().ToString()) {
@@ -310,7 +324,7 @@ public class Board : MonoBehaviour {
                     // anims
                     TimelineResolutionPS.Play();
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(-2f, 0, 9), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -331,10 +345,10 @@ public class Board : MonoBehaviour {
                 case "EnemyAction":
                     EnemyAction enemyAction = playSequence[0] as EnemyAction;
                     enemyAction.ResolveAction();
-                    
+                    enemyAction.owner.GetComponent<SpriteRenderer>().sortingLayerName = "UI High";
                     // anims
                     playSequence.Remove(playSequence[0]);
-                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 8), .5f);
+                    perspectiveCamera.transform.DOLocalMove(new Vector3(2f, 0, 9), .5f);
                     
                     // player.transform.position = new Vector3(-3, player.transform.position.y, player.transform.position.z);
                     // enemies[0].transform.position = new Vector3(3, enemies[0].transform.position.y, enemies[0].transform.position.z);
@@ -449,6 +463,9 @@ public class Board : MonoBehaviour {
 
     private IEnumerator DisplayEvents() {
         displayingEvents = true;
+        for(int i = hand.Count - 1; i >= 0; i--) {
+            Mulligan(hand[i].GetComponent<Card>(), false);
+        }
         yield return new WaitForSeconds(1.5f);
 
         // FMOD set parameter for ambience to 1 (night)
@@ -487,10 +504,10 @@ public class Board : MonoBehaviour {
         StartCoroutine(ResetActionCamera());
         StartCoroutine(ResetPlayerSprites());
         player.transform.DOMoveX(-10, .5f);
-        yield return new WaitForSeconds(.5f);
         foreach(GameObject go in elementsToTween) {
             go.transform.DOMoveY(go.transform.position.y + 2f, .75f);
         }
+        yield return new WaitForSeconds(.5f);
 
         // reset playSequence
         foreach(Action action in playSequence) {
@@ -520,7 +537,7 @@ public class Board : MonoBehaviour {
         int doNotInclude = UnityEngine.Random.Range(0, possibleEvents.Count);
         int curEvent = 0;
         for(int i = 0; i < possibleEvents.Count; i++) {       
-            // if(i != doNotInclude) {
+            if(i != doNotInclude) {
                 Transform toAttach;
                 foreach(Transform container in eventContainers) {
                     if(container.childCount == 0) {
@@ -530,19 +547,19 @@ public class Board : MonoBehaviour {
                     }
                 }
                 curEvent++;
-            // } 
+            } 
         }
         displayingEvents = false;
     }
     
     private void MulToPlayPhase() {  
+        SetPlayCamera();
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
-        turn = 0;
-        // FMOD Play Phase Transition Sound      
+        // FMOD Play Phase Transition Sound
         sm = SoundManager.me;
         sm.PlaySound(sm.toPlayPhaseSound);
         curPhase = Phase.Play;
@@ -551,17 +568,16 @@ public class Board : MonoBehaviour {
     private void ResToMulPhase() {
         if(displayingEvents || displayingLoseScreen) return;
         prevResolvedAction = "";
-        mulLimit = 4;
+        mulLimit = 5;
         Card.charged = false;
         round++;
 
-        // if(!displayingEvents && !displayingLoseScreen) {
-            phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-            phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-            phaseBanner.GetComponent<PhaseBanner>().doBanner();
-        // }
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
-        perspectiveCamera.transform.DOLocalMove(new Vector3(0, 0, 2), .5f);
+        // move rocks
+        SetMulliganCamera();
 
         // reset block values
         player.GetComponent<Target>().block = 0;
@@ -612,19 +628,19 @@ public class Board : MonoBehaviour {
         //     DOTween.To(() => daytimeSprites[i].color, x => daytimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
         //     DOTween.To(() => nighttimeSprites[i].color, x => nighttimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
         // }
+        SetMulliganCamera();
         yield return new WaitForSeconds(1.5f);
 
         // show mulligan banner
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().doBanner();
+        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // reset state variables
         playSequence.totalTime = 0;
         player.GetComponent<Player>().block = 0;
-        mulLimit = 4;
-        turn = 0;
+        mulLimit = 5;
         borrowedTime = 0;
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
@@ -647,11 +663,14 @@ public class Board : MonoBehaviour {
                 spawner.SpawnEnemy(1, 1);
                 break;
             case 3:
+                spawner.SpawnEnemy(2, 0);
+                break;
+            case 4:
                 spawner.SpawnEnemy(1, 0);
                 spawner.SpawnEnemy(2, 1);
                 break;
             // boss
-            case 4:
+            case 5:
                 GameObject enemy = Instantiate(enemySpawner.GetComponent<EnemySpawner>().boss, enemySpawner.transform, false);
                 enemy.GetComponent<Enemy>().health = (int)(enemy.GetComponent<Enemy>().maxHealth * spawnEnemiesAtHealth);
                 break;
@@ -673,10 +692,11 @@ public class Board : MonoBehaviour {
             cardAnchors.Add($"Hand {i}", GameObject.Find($"Hand{i}").transform);
         }
         cardAnchors.Add("Discard Anchor", GameObject.Find("_DiscardAnchor").transform);
+        cardAnchors.Add("Add Anchor", GameObject.Find("_AddAnchor").transform);
     }
 
-    private DeckList LoadDeckData(){
-        string path = Path.Combine(Application.streamingAssetsPath, deckFileName);
+    private DeckList LoadDeckData(string fileToLoad){
+        string path = Path.Combine(Application.streamingAssetsPath, fileToLoad);
         
         if(File.Exists(path)){
             string data = File.ReadAllText(path);
@@ -736,6 +756,7 @@ public class Board : MonoBehaviour {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         phaseBanner = GameObject.Find("PhaseBanner");
         perspectiveCamera = GameObject.Find("Perspective Camera");
+        actionButton = GameObject.Find("ActionButtonTop");
         eventContainers = GameObject.Find("_EventManager").GetComponentsInChildren<Transform>();
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
@@ -746,19 +767,21 @@ public class Board : MonoBehaviour {
         elementsToTween.Add(GameObject.Find("Playfield"));
         elementsToTween.Add(GameObject.Find("_DiscardAnchor"));
         elementsToTween.Add(GameObject.Find("_DeckAnchor"));
-
-        List<CardData> deckList = LoadDeckData().deckList;
-        GetAnchors(); // get anchor positions
+        SetMulliganCamera();
 
         // initialize phase variables
         curPhase = Phase.Mulligan;
-        mulLimit = 4;
-        turn = 0;
+        mulLimit = 5;
 
-        if(turn == 0) borrowedTime = 0;
+        borrowedTime = 0;
         round = 0;
         level = 1;
 
+        // load deck data from json and instantiate
+        List<CardData> deckList = LoadDeckData("deck.json").deckList;
+        List<CardData> addList = LoadDeckData("add_deck.json").deckList;
+        GetAnchors(); // get anchor positions
+        
         foreach(CardData card in deckList){
             // load card art into dictionary
             string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
@@ -771,7 +794,7 @@ public class Board : MonoBehaviour {
             // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
             try {
                 curCard.AddComponent(Type.GetType(card.superclass, true));
-            } catch(Exception e) {
+            } catch {
                 curCard.AddComponent<Card>();
             }
 
@@ -783,6 +806,31 @@ public class Board : MonoBehaviour {
             cardScript.cardArt = cardArtDict[cardScript.cardName];
             pool.Add(curCard);
         }
+
+        foreach(CardData card in addList){
+            // load card art into dictionary
+            string path = "file://" + Path.Combine(Application.streamingAssetsPath, card.artPath);
+            LoadCardArt(path, card.cardName);
+
+            // create card gameobject and populate its properties
+            GameObject curCard = Instantiate(cardPrefab, cardAnchors["Add Anchor"].position, Quaternion.identity);
+            curCard.transform.parent = cardAnchors["Add Anchor"];
+
+            // if the string in `card.superclass` isn't a valid `Type`, add generic `Card` component to the card gameobject
+            try {
+                curCard.AddComponent(Type.GetType(card.superclass, true));
+            } catch {
+                curCard.AddComponent<Card>();
+            }
+
+            Card cardScript = curCard.GetComponent<Card>();
+            cardScript.cardName = card.cardName;
+            cardScript.cost = card.cost;
+            cardScript.desc = card.desc;
+            cardScript.cardProps = card.cardProps;
+            cardScript.cardArt = cardArtDict[cardScript.cardName];
+            addDeck.Add(curCard);
+        }
         pool = FisherYatesShuffle(pool);
         
         // now that all the preloading is done, actually put cards into the deck
@@ -792,23 +840,34 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
+        // debug shortcuts
         if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
         if(Input.GetKeyDown(KeyCode.T)) {
             foreach(GameObject enemy in enemies) {
                 enemy.GetComponent<Enemy>().health = 1;
             }
         }
-        if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
+        // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
+
+        if(Input.GetMouseButtonDown(1) && !(curPhase == Phase.Resolution || curPhase == Phase.Event)) {
+            for(int i = playSequence.Count - 1; i >= 0; i--) {
+                if(playSequence[i] is PlayerAction) {
+                    playSequence.DequeuePlayerAction(playSequence[i]);
+                    break;
+                }
+            }
+        }
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        actionButtonPressed = GameObject.FindObjectOfType<ActionButton>().buttonPressed;
 
+        // check for lose state
         if(!displayingLoseScreen && player.GetComponent<Player>().health <= 0) {
             StopCoroutine(co);
             StartCoroutine(DisplayLoseScreen());
         }
 
-        if(level < 4 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
+        // check for win state
+        if(level < 5 && (AllEnemiesDead()) && (curPhase != Phase.Event && curPhase != Phase.Mulligan) && !displayingEvents) {
             // stop any ongoing coroutines/actions
             StopCoroutine(co);
             eventCo = DisplayEvents();
@@ -817,35 +876,41 @@ public class Board : MonoBehaviour {
 
         switch(curPhase){
             case Phase.Mulligan:
+                GameObject.Find("MulCounter").GetComponent<TextMeshPro>().text = $"Redraws: {mulLimit}";
                 StartCoroutine(ResetEnemySprites());
                 StartCoroutine(ResetPlayerSprites());               
 
-                while(hand.Count < 5){
+                while(hand.Count < 5) {
                     DrawCard();
                 }
 
-                if(lockedHand.Count == 5 || mulLimit == 0) {
-                    if(!IsInvoking()) Invoke("MulToPlayPhase", .7f);
-                    
-                } else if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
-                    turn++;
-                    foreach(GameObject card in hand) {
-                        if(!toMul.Contains(card) && !lockedHand.Contains(card)) {
-                            lockedHand.Add(card);
-                            // FMOD Play Lock Sound
-                            sm = SoundManager.me;
-                            sm.PlaySound(sm.lockSound);
-                        }
-                    }
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseDown();
+                }
 
+                if(Input.GetKeyUp(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
+                }
+
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E))) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
+                    if(toMul.Count == 0) {
+                        mulLimit = 0;
+                    }
                     foreach(GameObject card in toMul) {
                         Mulligan(card.GetComponent<Card>(), true); 
+                        sm = SoundManager.me;
+                        sm.PlaySound(sm.lockSound);
+                        mulLimit--;
                     }
-                    mulLimit = Mathf.Min(4 - turn, 4 - lockedHand.Count);
-                    toMul.Clear();
                     GameObject.FindObjectOfType<ActionButton>().buttonPressed = false;
-                    
+                    toMul.Clear();
                 }
+
+                if(mulLimit == 0) {
+                    if(!IsInvoking()) Invoke("MulToPlayPhase", .5f);
+                } 
+                    
                 break;
             case Phase.Play:
                 // check for Punishment mechanic conditions
@@ -861,19 +926,17 @@ public class Board : MonoBehaviour {
                     punishing = true;
                 }
 
-                if(Input.GetKeyDown(KeyCode.E) || actionButtonPressed) {
-                    // discard the cards that were not enqueue'd
-                    foreach(GameObject card in hand) {
-                        if(card.GetComponent<Card>().curState != CardState.InQueue) {
-                            toMul.Add(card);
-                        }
-                    }
-                    foreach(GameObject card in toMul) {
-                        Mulligan(card.GetComponent<Card>(), false); 
-                    }
-                    toMul.Clear();
+                if(Input.GetKeyDown(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseDown();
+                }
 
+                if(Input.GetKeyUp(KeyCode.E)) {
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseExit();
+                }
+
+                if((actionButton.GetComponent<ActionButton>().buttonPressed || Input.GetKeyUp(KeyCode.E))) {
                     curPhase = Phase.Resolution;
+                    GameObject.FindObjectOfType<ActionButton>().OnMouseUpAsButton();
 
                     // FMOD Resolution Phase Transition Sound
                     sm = SoundManager.me;
