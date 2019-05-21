@@ -22,6 +22,7 @@ public class ActionRenderer : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         enemyAction.instance.transform.DOLocalMove(new Vector3((enemyAction.completeTime) * 1.14f, .98f, 0), .2f);
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+        GameObject.Find("HourglassGlow2").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
     }
 
