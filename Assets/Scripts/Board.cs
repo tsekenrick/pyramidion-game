@@ -378,6 +378,7 @@ public class Board : MonoBehaviour {
 
         if(borrowedTime != 0) {
             GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
+            GameObject.Find("HourglassGlow2").GetComponent<HourglassGlow>().isActive = true;
             GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = true;
         }
     }
@@ -555,7 +556,6 @@ public class Board : MonoBehaviour {
     private void MulToPlayPhase() {  
         SetPlayCamera();
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
@@ -573,7 +573,6 @@ public class Board : MonoBehaviour {
         round++;
 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // move rocks
@@ -634,7 +633,6 @@ public class Board : MonoBehaviour {
         // show mulligan banner
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // reset state variables
@@ -643,6 +641,7 @@ public class Board : MonoBehaviour {
         mulLimit = 5;
         borrowedTime = 0;
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+        GameObject.Find("HourglassGlow2").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
         round = 0;
         Reshuffle();

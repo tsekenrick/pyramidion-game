@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionButton : MonoBehaviour
-{
+public class ActionButton : MonoBehaviour {
+
     private Board board;
     public Sprite[] mulliganButtons;
     public Sprite[] executeButtons;
     private SpriteRenderer sr;
     private SpriteRenderer glow;
     private CircleCollider2D col;
+    private float glowAlpha;
+
     public bool buttonPressed;
     private bool renderPressed;
     public bool canClick;
-    private float glowAlpha;
 
     // FMOD variables
     [FMODUnity.EventRef]
@@ -24,8 +25,7 @@ public class ActionButton : MonoBehaviour
     FMOD.Studio.EventInstance actionButtonDownSound;
     FMOD.Studio.EventInstance actionButtonUpSound;
 
-    private void Awake()
-    {
+    private void Awake() {
         // FMOD object init
         actionButtonDownSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonDownSoundEvent);
         actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
@@ -39,11 +39,11 @@ public class ActionButton : MonoBehaviour
         col = this.GetComponent<CircleCollider2D>();
         sr = this.GetComponent<SpriteRenderer>();
         glow = GameObject.Find("ActionBtnGlow").GetComponent<SpriteRenderer>();
+        
     }
 
     void Update() {
         glow.enabled = (board.curPhase != Phase.Resolution);
-
         switch(board.curPhase) {
             case Phase.Mulligan:
                 int idxOffset = board.toMul.Count > 0 ? 0 : 2;
@@ -104,7 +104,7 @@ public class ActionButton : MonoBehaviour
         }
         // FMOD Action Button Up Sound Event
         actionButtonUpSound.start();
-        
+
         StartCoroutine(SpamDisabler());
     }
 
