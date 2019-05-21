@@ -875,7 +875,6 @@ public class Board : MonoBehaviour {
 
         switch(curPhase){
             case Phase.Mulligan:
-                GameObject.Find("MulCounter").GetComponent<TextMeshPro>().text = $"Redraws: {mulLimit}";
                 StartCoroutine(ResetEnemySprites());
                 StartCoroutine(ResetPlayerSprites());               
 
