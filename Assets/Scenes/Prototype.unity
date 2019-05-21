@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 143060304}
   - component: {fileID: 143060305}
   m_Layer: 8
-  m_Name: BackgroundGround (1)
+  m_Name: BackgroundGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44166,7 +44166,7 @@ GameObject:
   - component: {fileID: 1709742624}
   - component: {fileID: 1709742625}
   m_Layer: 8
-  m_Name: BackgroundSky (1)
+  m_Name: BackgroundSky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54810,7 +54810,6 @@ GameObject:
   - component: {fileID: 1978727993}
   - component: {fileID: 1978727991}
   - component: {fileID: 1978727992}
-  - component: {fileID: 1978727994}
   m_Layer: 0
   m_Name: ActionButtonTop
   m_TagString: Untagged
@@ -54935,25 +54934,6 @@ MonoBehaviour:
   tooltipPrefab: {fileID: 9006043690555886985, guid: 5f80c68b4d4115741ace86f841f89d63,
     type: 3}
   tooltipInstance: {fileID: 0}
---- !u!95 &1978727994
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978727988}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 890428f4c00be084eb5c6eaa9510e6e5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1981891904
 GameObject:
   m_ObjectHideFlags: 0

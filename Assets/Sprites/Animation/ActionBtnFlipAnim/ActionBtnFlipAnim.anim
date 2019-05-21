@@ -8,7 +8,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: ActionBtnFlipAnim
   serializedVersion: 6
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -34,25 +34,13 @@ AnimationClip:
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: 782e987eedc964d41a5bae268ff02685, type: 3}
-    - {fileID: 21300000, guid: 6e554a138775c0b48a4549b0fd16dfda, type: 3}
-    - {fileID: 21300000, guid: 172e4c82f5ded134cabf27afda0bee5f, type: 3}
-    - {fileID: 21300000, guid: 201fc958b89bad6429260c22f808f6f3, type: 3}
-    - {fileID: 21300000, guid: 2cf1c74faaf5d13408ff2bc06fcfa1f8, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
