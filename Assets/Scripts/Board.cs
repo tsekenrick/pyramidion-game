@@ -554,8 +554,14 @@ public class Board : MonoBehaviour {
 
     private void ResToMulPhase() {
         if(displayingEvents || displayingLoseScreen) return;
+
+        // reset block values
+        player.GetComponent<Target>().block = 0;
+        foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
+
         prevResolvedAction = "";
         mulLimit = 5;
+        StartCoroutine(Card.Prepare());
         Card.charged = false;
         round++;
 
@@ -563,11 +569,7 @@ public class Board : MonoBehaviour {
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // move rocks
-        SetMulliganCamera();
-
-        // reset block values
-        player.GetComponent<Target>().block = 0;
-        foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
+        SetMulliganCamera();  
 
         // FMOD Mulligan Phase Transition Sound
         sm = SoundManager.me;

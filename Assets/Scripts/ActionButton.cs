@@ -66,8 +66,15 @@ public class ActionButton : MonoBehaviour {
                 glow.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.2f, 0.8f, 0.2f, glowAlpha);
                 glow2.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.2f, 0.8f, 0.2f, glowAlpha);
                 sr.sprite = renderPressed ? mulliganButtons[1 + idxOffset] : mulliganButtons[0 + idxOffset];
-                counterGlow.sprite = redrawGlows[board.mulLimit];
-                counterNum.sprite = redrawNumbers[board.mulLimit];
+                if(board.mulLimit > 5) {
+                    Debug.Log(board.mulLimit);
+                    counterGlow.sprite = redrawGlows[0];
+                    counterNum.sprite = redrawNumbers[0];
+                } else {
+                    counterGlow.sprite = redrawGlows[board.mulLimit];
+                    counterNum.sprite = redrawNumbers[board.mulLimit];  
+                }
+                
                 break;
 
             case Phase.Play:
