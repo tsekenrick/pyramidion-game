@@ -28,7 +28,9 @@ public class IntentIconTooltip : Tooltip {
                 tmp.text = "The enemy intends to both attack and defend this turn.";
                 break;
             case 3:
-                tmp.text = "The enemy intends to summon a minion next turn.";
+                tmp.text = "The enemy intends to both attack and summon a minion next turn.";
+                tooltipInstance.transform.localScale = new Vector3(.25f, .2f, .25f);
+                tmp.transform.localScale = new Vector3(1f, 1.25f, 1f);
                 break;
         }
     }

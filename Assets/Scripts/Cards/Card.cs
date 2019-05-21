@@ -35,6 +35,7 @@ public class Card : MonoBehaviour {
     public Sprite cardArt;
     public string[] cardProps;
 
+    public string alias; // card's nickname for action instance, if needed
     public GameObject target; // null before card is "played"
     public PlayerAction action; // also null before card is played
 
