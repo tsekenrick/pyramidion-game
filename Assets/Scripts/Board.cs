@@ -473,32 +473,15 @@ public class Board : MonoBehaviour {
         sm = SoundManager.me;
         sm.SetSoundParameter(sm.ambienceSound, "DayNight", 1f);
 
-        // for some reason DOTween doesn't like my for loop so we have this monstrosity instead
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
-
-        // for(int i = 0; i < daytimeSprites.Length; i++) {
-        //     DOTween.To(()=> daytimeSprites[i].color, x=> daytimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        //     DOTween.To(()=> nighttimeSprites[i].color, x=> nighttimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        // }
+        // to night
+        for(int i = 0; i < daytimeSprites.Length; i++) {
+            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.75f);
+            daytimeSprites[i].sortingOrder--;
+        }
+        for(int i = 0; i < nighttimeSprites.Length; i++) {
+            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 1f), 2.0f);
+            nighttimeSprites[i].sortingOrder++;
+        }
 
         curPhase = Phase.Event;
         
@@ -600,33 +583,16 @@ public class Board : MonoBehaviour {
         // FMOD set parameter for ambience to 0 (day)
         sm = SoundManager.me;
         sm.SetSoundParameter(sm.ambienceSound, "DayNight", 0f);
-
-        // transition to day
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
         
-        // for(int i = 0; i < daytimeSprites.Length; i++) {
-        //     DOTween.To(() => daytimeSprites[i].color, x => daytimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        //     DOTween.To(() => nighttimeSprites[i].color, x => nighttimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        // }
+        // to day
+        for(int i = 0; i < daytimeSprites.Length; i++) {
+            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 1f), 2.0f);
+            daytimeSprites[i].sortingOrder++;
+        }
+        for(int i = 0; i < nighttimeSprites.Length; i++) {
+            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.75f);
+            nighttimeSprites[i].sortingOrder--;
+        }
         SetMulliganCamera();
         yield return new WaitForSeconds(1.5f);
 
@@ -839,6 +805,8 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
+        daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
+        nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
         // debug shortcuts
         if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
         if(Input.GetKeyDown(KeyCode.T)) {
