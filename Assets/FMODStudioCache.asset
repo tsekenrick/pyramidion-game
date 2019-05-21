@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 114468550114237870}
   StringsBanks:
   - {fileID: 114717941053638252}
-  stringsBankWriteTime: 636933968728291580
+  stringsBankWriteTime: 636939873470070020
   cacheVersion: 3
 --- !u!114 &114008820637833968
 MonoBehaviour:
@@ -387,6 +387,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 440
+--- !u!114 &114450387075735836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114468550114237870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636933968728271661
+  lastModified: 636939873470050277
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -608,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
-  lastModified: 636933968728291580
+  lastModified: 636939873470070020
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -706,6 +722,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1500
+--- !u!114 &114816433823645502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114872648062920928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +758,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114520730577673776}
+  - {fileID: 114450387075735836}
   MinDistance: 0
   MaxDistance: 0
   Length: 60799
@@ -819,7 +851,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114299866577577464}
+  - {fileID: 114816433823645502}
   MinDistance: 0
   MaxDistance: 0
   Length: 3500
