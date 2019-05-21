@@ -23,9 +23,10 @@ public class ActionButton : MonoBehaviour {
     private bool renderPressed;
     public bool canClick;
 
-    public SoundManager sm = SoundManager.me;
+    public SoundManager sm;
 
     void Start() {
+        sm = SoundManager.me;
         buttonPressed = false;
         canClick = true;
         board = Board.instance;
