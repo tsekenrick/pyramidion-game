@@ -16,6 +16,7 @@ public class CalculatedStrike : Card {
 
     public override void Awake() {
         base.Awake();
+        alias = "Calc. Strike";
     }
 
     public override void OnNewCombat() {

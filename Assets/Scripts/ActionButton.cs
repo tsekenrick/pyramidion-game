@@ -14,6 +14,8 @@ public class ActionButton : MonoBehaviour {
     private SpriteRenderer glow2;
     private SpriteRenderer counterNum;
     private SpriteRenderer counterGlow;
+    private SpriteRenderer redrawText;
+    private SpriteRenderer redrawIcon;
     private CircleCollider2D col;
     private float glowAlpha;
 
@@ -47,14 +49,17 @@ public class ActionButton : MonoBehaviour {
         glow2 = transform.parent.Find("ActionBtnGlow2").GetComponent<SpriteRenderer>();
         counterNum = transform.parent.Find("RedrawNumber").GetComponent<SpriteRenderer>();
         counterGlow = counterNum.transform.Find("RedrawGlow").GetComponent<SpriteRenderer>();
-        
+        redrawText = transform.parent.Find("RedrawText").GetComponent<SpriteRenderer>();
+        redrawIcon = transform.parent.Find("RedrawIcon").GetComponent<SpriteRenderer>();
     }
 
     void Update() {
         glow.enabled = (board.curPhase != Phase.Resolution);
-        counterGlow.enabled = (board.curPhase == Phase.Mulligan);
-        counterNum.enabled = (board.curPhase == Phase.Mulligan);
-
+        counterGlow.enabled = board.curPhase == Phase.Mulligan;
+        counterNum.enabled = board.curPhase == Phase.Mulligan;
+        redrawIcon.enabled = board.curPhase == Phase.Mulligan;
+        redrawText.enabled = board.curPhase == Phase.Mulligan;
+        
         switch(board.curPhase) {
             case Phase.Mulligan:
                 int idxOffset = board.toMul.Count > 0 ? 0 : 2;

@@ -75,7 +75,7 @@ public class ActionRenderer : MonoBehaviour
                     action.instance.GetComponent<SpriteRenderer>().size = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.GetComponent<BoxCollider2D>().size = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.GetComponent<BoxCollider2D>().offset = new Vector2(action.card.cost * .5f * OFFSET, 0f);
-                    action.instance.GetComponentInChildren<TextMeshPro>().text = $"{action.card.cost}: {action.card.cardName}";
+                    action.instance.GetComponentInChildren<TextMeshPro>().text = action.card.alias == null ? $"{action.card.cost}: {action.card.cardName}" : $"{action.card.cost}: {action.card.alias}";
                     action.instance.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(action.card.cost * OFFSET, .45f);
                     action.instance.transform.DOLocalMove(new Vector3((action.completeTime - action.card.cost) * 1.15f, 0, 0), .2f);
 

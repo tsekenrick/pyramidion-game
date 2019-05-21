@@ -287,20 +287,24 @@ public class Board : MonoBehaviour {
     }
 
     private void SetMulliganCamera() {
-        perspectiveCamera.transform.DOLocalMoveZ(-8f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, 1f);
+        perspectiveCamera.transform.DOLocalMoveZ(-5.5f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
     }
 
     private void SetPlayCamera() {
         perspectiveCamera.transform.DOLocalMoveZ(2f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
     }
 
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         if(playSequence.Count == 0) {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
         }
 
         foreach(GameObject go in elementsToTween) {
@@ -475,7 +479,7 @@ public class Board : MonoBehaviour {
 
         // to night
         for(int i = 0; i < daytimeSprites.Length; i++) {
-            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.75f);
+            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.85f);
             daytimeSprites[i].sortingOrder--;
         }
         for(int i = 0; i < nighttimeSprites.Length; i++) {
@@ -590,7 +594,7 @@ public class Board : MonoBehaviour {
             daytimeSprites[i].sortingOrder++;
         }
         for(int i = 0; i < nighttimeSprites.Length; i++) {
-            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.75f);
+            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.85f);
             nighttimeSprites[i].sortingOrder--;
         }
         SetMulliganCamera();

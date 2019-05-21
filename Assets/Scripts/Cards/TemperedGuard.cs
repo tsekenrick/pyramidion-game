@@ -29,6 +29,7 @@ public class TemperedGuard : Card {
 
     public override void Awake() {
         base.Awake();
+        alias = "T.G.";
     }
 
     public override void Update() {
