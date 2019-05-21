@@ -54,8 +54,8 @@ public class ActionButton : MonoBehaviour {
                 glow.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.45f, 0.9f, 0.45f, glowAlpha);
                 glow2.color = board.toMul.Count > 0 ? new Color(0.15f, .71f, .95f, glowAlpha) : new Color(0.45f, 0.9f, 0.45f, glowAlpha);
                 sr.sprite = renderPressed ? mulliganButtons[1 + idxOffset] : mulliganButtons[0 + idxOffset];
-                if(board.mulLimit > 5) {
-                    Debug.Log(board.mulLimit);
+                if(board.mulLimit > 7) {
+                    Debug.Log($"known mul limit exceeded at {board.mulLimit}");
                     counterGlow.sprite = redrawGlows[0];
                     counterNum.sprite = redrawNumbers[0];
                 } else {
