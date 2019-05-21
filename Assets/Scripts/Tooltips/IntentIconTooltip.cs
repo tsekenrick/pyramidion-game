@@ -6,7 +6,7 @@ public class IntentIconTooltip : Tooltip {
 
     protected void Update() {
         if(Board.instance.curPhase != Phase.Mulligan) {
-            base.OnDestroy();
+            base.OnMouseExit();
         }
     }
 

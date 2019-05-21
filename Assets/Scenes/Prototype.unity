@@ -54739,7 +54739,6 @@ MonoBehaviour:
   executeButtons:
   - {fileID: 21300000, guid: 1db11ede5d15ce54da92168b6d88d2af, type: 3}
   - {fileID: 21300000, guid: b04c4f7010e01824d96a75704a3d7e8f, type: 3}
-  anim: {fileID: 0}
   buttonPressed: 0
   canClick: 0
   actionButtonDownSoundEvent: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
