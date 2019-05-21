@@ -6,7 +6,7 @@ using UnityEngine;
 public class RecklessAbandon : Card {
     // connect to FMOD sound manager
     private SoundManager sm;
-
+    
     public override void ResolveAction() {
         // FMOD play player buff sound
         sm = SoundManager.me;
@@ -19,6 +19,7 @@ public class RecklessAbandon : Card {
 
     public override void Awake() {
         base.Awake();
+        alias = "R.A.";
     }
 
     public override void Update() {

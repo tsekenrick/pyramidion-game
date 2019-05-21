@@ -12,6 +12,7 @@ public class Card : MonoBehaviour {
 
     public CardState curState;
     public static bool charged;
+    public static int prepared; // gain 1 more mulligan next turn
     private Board board = Board.instance;
     private SoundManager sm = SoundManager.me;
 
@@ -35,6 +36,7 @@ public class Card : MonoBehaviour {
     public Sprite cardArt;
     public string[] cardProps;
 
+    public string alias; // card's nickname for action instance, if needed
     public GameObject target; // null before card is "played"
     public PlayerAction action; // also null before card is played
 
@@ -84,6 +86,18 @@ public class Card : MonoBehaviour {
         foreach(SpriteRenderer sr in cardParts) sr.enabled = false;
         foreach(TextMeshPro tmp in textParts) tmp.enabled = false;
         isSettled = true;
+    }
+
+    public static IEnumerator Prepare() {
+        while(prepared > 0) {
+            Board.instance.mulLimit++;
+            Board.instance.player.GetComponent<Player>().block += 4;
+            Board.instance.player.transform.Find("ShieldPS").GetComponent<ParticleSystem>().Play();
+            SoundManager.me.PlayPlayerDefendSound();
+            prepared--;
+            yield return new WaitForSeconds(.5f);
+        } 
+       
     }
 
     public void Attack(int amount, GameObject target) {

@@ -13,9 +13,10 @@ public class ActionButtonTooltip : Tooltip {
 
     protected void Update() {
         if(board.curPhase != Phase.Mulligan && board.curPhase != Phase.Play) {
-            base.OnDestroy();
+            base.OnMouseExit();
         }
     }
+
     protected override void OnMouseEnter() {
         if(board.curPhase != Phase.Play && board.curPhase != Phase.Mulligan) return;
         base.OnMouseEnter();
@@ -26,10 +27,10 @@ public class ActionButtonTooltip : Tooltip {
         sr.sortingOrder = 4;
         tmp.enableAutoSizing = false;
         tmp.fontSize = 5f;   
+        tooltipInstance.GetComponent<TooltipBehavior>().yOffset = 1.2f;
 
         switch(board.curPhase) {
             case Phase.Mulligan:
-
                 tooltipInstance.transform.localScale = new Vector3(.35f, .25f, .5f);
                 tmp.transform.localScale = new Vector3(1f, 1.4f, 1f);
                 if(board.toMul.Count == 0) {
@@ -40,10 +41,9 @@ public class ActionButtonTooltip : Tooltip {
                 
                 break;
             case Phase.Play:
-                tooltipInstance.GetComponent<TooltipBehavior>().yOffset = 1.2f;
-                tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(7.315f, 6.65f);
-                tooltipInstance.transform.localScale = new Vector3(.5f, .6f, .5f);
-                tmp.transform.localScale = new Vector3(1f, .5f/.6f, 1f);
+                tmp.GetComponent<RectTransform>().sizeDelta = new Vector2(7.315f, 4.835f);
+                tooltipInstance.transform.localScale = new Vector3(.35f, .45f, .5f);
+                tmp.transform.localScale = new Vector3(1f, .35f/.45f, 1f);
                 tmp.text = $"Stop playing cards and go to <b>Resolution Phase</b>, where actions in the timeline are executed one at a time.\n\nThe difference in time units between your last action and the enemy's last action is carried over to the next turn.";
                 break;
 

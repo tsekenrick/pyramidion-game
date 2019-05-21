@@ -287,20 +287,24 @@ public class Board : MonoBehaviour {
     }
 
     private void SetMulliganCamera() {
-        perspectiveCamera.transform.DOLocalMoveZ(-8f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 10f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 10f, 1f);
+        perspectiveCamera.transform.DOLocalMoveZ(-5.5f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
     }
 
     private void SetPlayCamera() {
         perspectiveCamera.transform.DOLocalMoveZ(2f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 10f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 10f, 1f);
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
     }
 
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
         if(playSequence.Count == 0) {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
         }
 
         foreach(GameObject go in elementsToTween) {
@@ -378,6 +382,7 @@ public class Board : MonoBehaviour {
 
         if(borrowedTime != 0) {
             GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = true;
+            GameObject.Find("HourglassGlow2").GetComponent<HourglassGlow>().isActive = true;
             GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = true;
         }
     }
@@ -472,32 +477,15 @@ public class Board : MonoBehaviour {
         sm = SoundManager.me;
         sm.SetSoundParameter(sm.ambienceSound, "DayNight", 1f);
 
-        // for some reason DOTween doesn't like my for loop so we have this monstrosity instead
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
-
-        // for(int i = 0; i < daytimeSprites.Length; i++) {
-        //     DOTween.To(()=> daytimeSprites[i].color, x=> daytimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        //     DOTween.To(()=> nighttimeSprites[i].color, x=> nighttimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        // }
+        // to night
+        for(int i = 0; i < daytimeSprites.Length; i++) {
+            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.85f);
+            daytimeSprites[i].sortingOrder--;
+        }
+        for(int i = 0; i < nighttimeSprites.Length; i++) {
+            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 1f), 2.0f);
+            nighttimeSprites[i].sortingOrder++;
+        }
 
         curPhase = Phase.Event;
         
@@ -555,7 +543,6 @@ public class Board : MonoBehaviour {
     private void MulToPlayPhase() {  
         SetPlayCamera();
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Play Phase";
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
         GameObject.Find("Actions").GetComponent<ActionRenderer>().adjusted = false;
         lockedHand.Clear();
@@ -567,21 +554,22 @@ public class Board : MonoBehaviour {
 
     private void ResToMulPhase() {
         if(displayingEvents || displayingLoseScreen) return;
-        prevResolvedAction = "";
-        mulLimit = 5;
-        Card.charged = false;
-        round++;
-
-        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
-        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
-
-        // move rocks
-        SetMulliganCamera();
 
         // reset block values
         player.GetComponent<Target>().block = 0;
         foreach(GameObject enemy in enemies) enemy.GetComponent<Target>().block = 0;
+
+        prevResolvedAction = "";
+        mulLimit = 5;
+        StartCoroutine(Card.Prepare());
+        Card.charged = false;
+        round++;
+
+        phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
+        phaseBanner.GetComponent<PhaseBanner>().DoBanner();
+
+        // move rocks
+        SetMulliganCamera();  
 
         // FMOD Mulligan Phase Transition Sound
         sm = SoundManager.me;
@@ -601,40 +589,22 @@ public class Board : MonoBehaviour {
         // FMOD set parameter for ambience to 0 (day)
         sm = SoundManager.me;
         sm.SetSoundParameter(sm.ambienceSound, "DayNight", 0f);
-
-        // transition to day
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[0].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[0].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[1].color, x=> daytimeSprites[1].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[1].color, x=> nighttimeSprites[1].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[2].color, x=> daytimeSprites[2].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[2].color, x=> nighttimeSprites[2].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[3].color, x=> daytimeSprites[3].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[3].color, x=> nighttimeSprites[3].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[4].color, x=> daytimeSprites[4].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[4].color, x=> nighttimeSprites[4].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[5].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[5].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[6].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[6].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[7].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[7].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[8].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[8].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        DOTween.To(()=> daytimeSprites[0].color, x=> daytimeSprites[9].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        DOTween.To(()=> nighttimeSprites[0].color, x=> nighttimeSprites[9].color = x, new Color32(255, 255, 255, 0), 2.00f);
         
-        // for(int i = 0; i < daytimeSprites.Length; i++) {
-        //     DOTween.To(() => daytimeSprites[i].color, x => daytimeSprites[i].color = x, new Color32(255, 255, 255, 255), 2.00f);
-        //     DOTween.To(() => nighttimeSprites[i].color, x => nighttimeSprites[i].color = x, new Color32(255, 255, 255, 0), 2.00f);
-        // }
+        // to day
+        for(int i = 0; i < daytimeSprites.Length; i++) {
+            daytimeSprites[i].DOColor(new Color(1f, 1f, 1f, 1f), 2.0f);
+            daytimeSprites[i].sortingOrder++;
+        }
+        for(int i = 0; i < nighttimeSprites.Length; i++) {
+            nighttimeSprites[i].DOColor(new Color(1f, 1f, 1f, 0f), 1.85f);
+            nighttimeSprites[i].sortingOrder--;
+        }
         SetMulliganCamera();
         yield return new WaitForSeconds(1.5f);
 
         // show mulligan banner
         GameObject phaseBanner = GameObject.Find("PhaseBanner"); 
         phaseBanner.GetComponent<PhaseBanner>().phaseName.text = "Mulligan Phase"; 
-        // phaseBanner.GetComponent<PhaseBanner>().canBanner = true;
         phaseBanner.GetComponent<PhaseBanner>().DoBanner();
 
         // reset state variables
@@ -643,6 +613,7 @@ public class Board : MonoBehaviour {
         mulLimit = 5;
         borrowedTime = 0;
         GameObject.Find("HourglassGlow").GetComponent<HourglassGlow>().isActive = false;
+        GameObject.Find("HourglassGlow2").GetComponent<HourglassGlow>().isActive = false;
         GameObject.Find("TimelineGlow").GetComponent<HourglassGlow>().isActive = false;
         round = 0;
         Reshuffle();
@@ -840,6 +811,8 @@ public class Board : MonoBehaviour {
     }
 
     void Update() {
+        daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
+        nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
         // debug shortcuts
         if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
         if(Input.GetKeyDown(KeyCode.T)) {
@@ -876,7 +849,6 @@ public class Board : MonoBehaviour {
 
         switch(curPhase){
             case Phase.Mulligan:
-                GameObject.Find("MulCounter").GetComponent<TextMeshPro>().text = $"Redraws: {mulLimit}";
                 StartCoroutine(ResetEnemySprites());
                 StartCoroutine(ResetPlayerSprites());               
 
