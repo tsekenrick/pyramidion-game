@@ -6198,7 +6198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284189130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -11124,7 +11124,7 @@ GameObject:
   - component: {fileID: 305233504}
   - component: {fileID: 305233505}
   m_Layer: 8
-  m_Name: SmallPyramid
+  m_Name: SmallPyramid1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11138,7 +11138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305233503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.21, y: -1.51, z: 2.34}
+  m_LocalPosition: {x: -6.211454, y: -1.47, z: 2.3400002}
   m_LocalScale: {x: 0.6080936, y: 0.6080936, z: 0.6080936}
   m_Children: []
   m_Father: {fileID: 1296327032}
@@ -16254,7 +16254,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1187399757
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 16724d6afe4e99a44ba36a8aeea81e1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -21926,7 +21926,7 @@ GameObject:
   - component: {fileID: 610309656}
   - component: {fileID: 610309657}
   m_Layer: 8
-  m_Name: SmallPyramid (2)
+  m_Name: SmallPyramid2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21940,8 +21940,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610309655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.230004, y: -1.0500005, z: 2.3400013}
-  m_LocalScale: {x: 0.76353085, y: 0.76353085, z: 0.76353085}
+  m_LocalPosition: {x: 9.23, y: -1.05, z: 2.34}
+  m_LocalScale: {x: 0.7635322, y: 0.7635322, z: 0.7635322}
   m_Children: []
   m_Father: {fileID: 2022566368}
   m_RootOrder: 1
@@ -22005,7 +22005,7 @@ GameObject:
   - component: {fileID: 613847185}
   - component: {fileID: 613847186}
   m_Layer: 8
-  m_Name: SmallPyramid (1)
+  m_Name: SmallPyramid2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22491,7 +22491,7 @@ GameObject:
   - component: {fileID: 777466937}
   - component: {fileID: 777466938}
   m_Layer: 8
-  m_Name: SmallPyramid
+  m_Name: SmallPyramid1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22505,8 +22505,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777466936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.21, y: -1.51, z: 2.34}
-  m_LocalScale: {x: 0.6080936, y: 0.6080936, z: 0.6080936}
+  m_LocalPosition: {x: -6.2114573, y: -1.4700007, z: 2.3399994}
+  m_LocalScale: {x: 0.608094, y: 0.608094, z: 0.608094}
   m_Children: []
   m_Father: {fileID: 2022566368}
   m_RootOrder: 0
@@ -61254,7 +61254,7 @@ GameObject:
   - component: {fileID: 2022566368}
   - component: {fileID: 2022566369}
   m_Layer: 8
-  m_Name: BackgroundPyramids (1)
+  m_Name: BackgroundPyramids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
