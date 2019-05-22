@@ -9,18 +9,18 @@ public class MenuButton : MonoBehaviour {
     [SerializeField]
     protected Sprite[] buttonStates;
 
-    void OnMouseEnter() {
+    protected virtual void OnMouseEnter() {
         // FMOD Play button hover sound
         sm = SoundManager.me;
         sm.PlaySound(sm.menuButtonHoverSound);
         GetComponent<SpriteRenderer>().sprite = buttonStates[1];
     }
 
-    void OnMouseExit() {
+    protected virtual void OnMouseExit() {
         GetComponent<SpriteRenderer>().sprite = buttonStates[0];
     }
 
-    void OnMouseDown() {
+    protected virtual void OnMouseDown() {
         // FMOD Play button click sound
         sm = SoundManager.me;
         sm.PlaySound(sm.menuButtonClickSound);
