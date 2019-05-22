@@ -19,6 +19,10 @@ public class Event : MonoBehaviour {
         StartCoroutine(board.EventToMulPhase());
     }
 
+    public virtual void ResolveConfirm() {
+        return;
+    }
+
     protected virtual void Start() {
         sr = this.GetComponent<SpriteRenderer>();
         tmps = this.GetComponentsInChildren<TextMeshPro>();
@@ -49,7 +53,6 @@ public class Event : MonoBehaviour {
     void OnMouseUpAsButton() {
         // FMOD Play Click Event Sound
         sm.PlaySound(sm.clickEventButtonSound);
-
         ResolveEvent();
     }
 }

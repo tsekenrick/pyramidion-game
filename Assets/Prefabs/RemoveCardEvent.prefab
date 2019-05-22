@@ -124,6 +124,8 @@ MonoBehaviour:
   eventStates:
   - {fileID: 21300000, guid: 36e97d8aa7b885641bfe1b9accb6967e, type: 3}
   - {fileID: 21300000, guid: d5db19994858e974b9f834350916b340, type: 3}
+  confirmPrefab: {fileID: 7597720714525492485, guid: 6e78ca514abcb4d4c8b73e87cbaf587b,
+    type: 3}
   toRemove: []
 --- !u!1 &3655467522716121670
 GameObject:

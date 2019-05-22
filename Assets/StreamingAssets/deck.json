@@ -20,7 +20,7 @@
             "cardName": "Transcend",
             "cost": 3,
             "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
-            "artPath": "Card_art/ph_cardart_hiddenblades_1.png",
+            "artPath": "Card_art/final_cardart_transcend_1.png",
             "cardProps": ["Attack", "12"],
             "superclass": "Transcend"
         },
@@ -28,7 +28,7 @@
             "cardName": "Transcend",
             "cost": 3,
             "desc": "Deal 12 unblockable damage. When you mulligan this card, gain 2 block.",
-            "artPath": "Card_art/ph_cardart_hiddenblades_1.png",
+            "artPath": "Card_art/final_cardart_transcend_1.png",
             "cardProps": ["Attack", "12"],
             "superclass": "Transcend"
         },
@@ -51,33 +51,33 @@
         {
             "cardName": "Slash",
             "cost": 1,
-            "desc": "Deal 3 damage",
+            "desc": "Deal 4 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
             "cost": 1,
-            "desc": "Deal 3 damage",
+            "desc": "Deal 4 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
             "cost": 1,
-            "desc": "Deal 3 damage",
+            "desc": "Deal 4 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": ""
         },
         {
             "cardName": "Slash",
             "cost": 1,
-            "desc": "Deal 3 damage",
+            "desc": "Deal 4 damage",
             "artPath": "Card_art/final_cardart_strike_1.png",
-            "cardProps": ["Attack", "3"],
+            "cardProps": ["Attack", "4"],
             "superclass": ""
         },
         {
@@ -138,7 +138,7 @@
         },
         {
             "cardName": "Preparation",
-            "cost": 2,
+            "cost": 1,
             "desc": "At the start of your next turn, you gain 4 block and can redraw one additional time.",
             "artPath": "Card_art/final_cardart_preparation_1.png",
             "cardProps": ["Defend", "0"],

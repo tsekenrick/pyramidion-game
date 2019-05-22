@@ -54,6 +54,7 @@ public class DeckDisplay : MonoBehaviour
         }
 
         foreach(GameObject go in curRender) {
+            if(go == null) continue;
             Card cardScript = go.GetComponent<Card>();
             go.transform.parent = oldParent;
             if(cardScript.curState != CardState.InSelectionAdd) go.GetComponent<TrailRenderer>().enabled = true;
