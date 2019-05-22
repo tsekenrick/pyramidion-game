@@ -61,6 +61,7 @@ public class InstructionsMenuButton : MenuButton {
             prevButton.SetActive(false);
             returnButton.SetActive(false);
             currentSlideIdx = 0;
+            slideContainer.sprite = instructionSlides[0];
             slideContainer.enabled = false;
             overlay.enabled = false;
         }
@@ -69,9 +70,9 @@ public class InstructionsMenuButton : MenuButton {
     public IEnumerator SwitchSlides(int incrementer) {
         currentSlideIdx += incrementer;
         Color initColor = slideContainer.color;
-        slideContainer.DOColor(new Color(initColor.r, initColor.g, initColor.b, 0f), .5f);
-        yield return new WaitForSeconds(.5f);
+        slideContainer.DOColor(new Color(initColor.r, initColor.g, initColor.b, 0f), .25f);
+        yield return new WaitForSeconds(.25f);
         slideContainer.sprite = instructionSlides[currentSlideIdx];
-        slideContainer.color = Color.white;
+        slideContainer.DOColor(Color.white, .25f);
     }
 }
