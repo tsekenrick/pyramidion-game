@@ -11,7 +11,7 @@ public class Solidarity : Card {
     public override void ResolveAction() {
         SoundManager sm = SoundManager.me;
         sm.PlayPlayerAttackSound();
-        int amount = charged ? 14 : 7;
+        int amount = 7;
         foreach(GameObject enemy in Board.instance.enemies) {
             Attack(amount, enemy);
             int tmpBlock = enemy.GetComponent<Target>().block;
@@ -55,23 +55,23 @@ public class Solidarity : Card {
         if(Board.instance.curPhase == Phase.Mulligan && Board.instance.hand.Count == 5) {
             if(handPos == 0) {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                    this.cardProps[1] = "3";
+                    this.cardProps[1] = "4";
                 } else {
                     this.cardProps[1] = "0";
                 }
             } else if(handPos == 4) {
                 if(GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                    this.cardProps[1] = "3";
+                    this.cardProps[1] = "4";
                 } else {
                     this.cardProps[1] = "0";
                 }
             } else {
                 if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" &&
                     GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                    this.cardProps[1] = "6";
+                    this.cardProps[1] = "8";
                 } else if(GameObject.Find($"Hand{handPos + 1}").GetComponentInChildren<Card>().cardName == "Solidarity" ||
                     GameObject.Find($"Hand{handPos - 1}").GetComponentInChildren<Card>().cardName == "Solidarity") {
-                    this.cardProps[1] = "3";
+                    this.cardProps[1] = "4";
                 } else {
                     this.cardProps[1] = "0";
                 }
@@ -79,8 +79,8 @@ public class Solidarity : Card {
         }
 
         transform.Find("CardDesc").GetComponent<TextMeshPro>().text =  int.Parse(this.cardProps[1]) > 0 ?
-            $"Deal 7 damage to ALL enemies. Gain 3 <color=#2bce43>({this.cardProps[1]})</color> block for each adjacent copy of Solidarity in your hand." :
-            $"Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.";
+            $"Deal 7 damage to ALL enemies. Gain 4 <color=#2bce43>({this.cardProps[1]})</color> block for each adjacent copy of Solidarity in your hand." :
+            $"Deal 7 damage to ALL enemies. Gain 4 block for each adjacent copy of Solidarity in your hand.";
 
     }
 }
