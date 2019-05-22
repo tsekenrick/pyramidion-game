@@ -25,12 +25,14 @@ public class RemoveCardEvent : Event {
 
     public override void ResolveConfirm() {
         CallBaseResolve();
-        GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
+        DeckDisplay displayer = GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>();
+        displayer.DeckOffScreen();
         for(int i = this.toRemove.Count - 1; i >= 0; i--) {
             board.deck.Remove(this.toRemove[i]);
+            this.toRemove.RemoveAt(i);
             Destroy(this.toRemove[i]);
         }
-        Destroy(confirmInstance);
+        
     }
 
     public void InstantiateConfirmBtn() {

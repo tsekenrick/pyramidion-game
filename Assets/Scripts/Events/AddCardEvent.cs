@@ -56,7 +56,6 @@ public class AddCardEvent : Event {
             this.toAdd.RemoveAt(i);
         }
         Board.instance.FisherYatesShuffle(Board.instance.deck);
-        Destroy(confirmInstance);
     }
 
     public void InstantiateConfirmBtn() {
