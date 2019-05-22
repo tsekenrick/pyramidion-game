@@ -411,6 +411,7 @@ public class Card : MonoBehaviour {
     }
 
     void OnMouseUpAsButton() {
+        // handles enqueueing cards into timeline (or tweening them back to the hand)
         if(curState == CardState.InPlay) {
             if(board.playSequence.totalTime + this.cost > 15) {
                 tr.parent = prevParent;
@@ -468,6 +469,8 @@ public class Card : MonoBehaviour {
             foreach(TextMeshPro tmp in textParts) tmp.sortingOrder = 7;
             curState = curState == CardState.InQueue ? CardState.InQueue : CardState.InHand;
             isSettled = false; // initiates tween back to hand pos
+        
+        // handle selection for add card event
         } else if(curState == CardState.InSelectionRemove) {
             RemoveCardEvent removeEvent = Object.FindObjectOfType<RemoveCardEvent>();
             if(!removeEvent.toRemove.Contains(this.gameObject)) {
@@ -480,15 +483,8 @@ public class Card : MonoBehaviour {
                 cardParts[4].enabled = false;
                 cardParts[4].sortingLayerName = "UI Low";
             }
-
-            if(removeEvent.toRemove.Count == 2) {
-                removeEvent.callBaseResolve();
-                for(int i = removeEvent.toRemove.Count - 1; i >= 0; i--) {
-                    board.deck.Remove(removeEvent.toRemove[i]);
-                    GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
-                    Destroy(removeEvent.toRemove[i]);
-                }
-            }
+        
+        // handle selection for add card event
         } else if(curState == CardState.InSelectionAdd) {
             AddCardEvent addEvent = Object.FindObjectOfType<AddCardEvent>();
             if(!addEvent.toAdd.Contains(this.gameObject)) {
@@ -500,33 +496,6 @@ public class Card : MonoBehaviour {
                 addEvent.toAdd.Remove(this.gameObject);
                 cardParts[4].enabled = false;
                 cardParts[4].sortingLayerName = "UI Low";
-            }
-
-            if(addEvent.toAdd.Count == 2) {
-                addEvent.callBaseResolve();
-                GameObject.Find("_DeckRenderer").GetComponent<DeckDisplay>().DeckOffScreen();
-
-                for(int i = addEvent.toAdd.Count - 1; i >= 0; i--) {
-                    Debug.Log(i);
-                    board.deck.Add(addEvent.toAdd[i]);
-                    Card cardScript = addEvent.toAdd[i].GetComponent<Card>();
-                    cardScript.textParts[0].text = cardName;
-                    cardScript.textParts[1].text = desc;
-                    cardScript.textParts[2].text = cost.ToString();
-                    for (int j = 0; j < 3; j++ ) {
-                        cardScript.textParts[j].sortingOrder = -1;
-                        cardScript.textParts[j].sortingLayerID = SortingLayer.NameToID("UI High");
-                    }
-                    cardScript.isSettled = false;
-                    cardScript.curState = CardState.InDeck;
-                    cardScript.transform.parent = board.cardAnchors["Deck Anchor"];
-                    board.addDeck.Remove(addEvent.toAdd[i]);
-                    addEvent.toAdd.RemoveAt(i);
-                }
-
-                
-
-                board.FisherYatesShuffle(board.deck);
             }
         }
     }

@@ -14,6 +14,7 @@ public class Preparation : Card {
 
     public override void Awake() {
         base.Awake();
+        alias = "Prep.";
     }
 
     public override void Update() {

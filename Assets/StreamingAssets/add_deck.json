@@ -10,7 +10,7 @@
         },
         {
             "cardName": "Preparation",
-            "cost": 2,
+            "cost": 1,
             "desc": "At the start of your next turn, you gain 4 block and can redraw one additional time.",
             "artPath": "Card_art/final_cardart_preparation_1.png",
             "cardProps": ["Defend", "0"],
@@ -19,7 +19,7 @@
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 7 damage to ALL enemies. Gain 4 block for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "Solidarity"
@@ -27,7 +27,7 @@
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 7 damage to ALL enemies. Gain 4 block for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "Solidarity"
@@ -35,7 +35,7 @@
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 7 damage to ALL enemies. Gain 4 block for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "Solidarity"
@@ -43,7 +43,7 @@
         {
             "cardName": "Solidarity",
             "cost": 2,
-            "desc": "Deal 7 damage to ALL enemies. Gain 3 block for each adjacent copy of Solidarity in your hand.",
+            "desc": "Deal 7 damage to ALL enemies. Gain 4 block for each adjacent copy of Solidarity in your hand.",
             "artPath": "Card_art/final_cardart_solidarity_1.png",
             "cardProps": ["Defend", "0"],
             "superclass": "Solidarity"
