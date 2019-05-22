@@ -197,8 +197,8 @@ public class SoundManager : MonoBehaviour
         actionButtonUpSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonUpSoundEvent);
         actionButtonHoverSound = FMODUnity.RuntimeManager.CreateInstance(actionButtonHoverSoundEvent);
 
-    //located on sound manager
-    ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
+        //located on sound manager
+        ambienceSound = FMODUnity.RuntimeManager.CreateInstance(ambienceSoundEvent);
 
         //snapshots
         battleSnapshot = FMODUnity.RuntimeManager.CreateInstance(battleSnapshotEvent);
@@ -207,6 +207,7 @@ public class SoundManager : MonoBehaviour
         //parameter init
         confirmCardSound.setParameterValue("overplay", 0f);
         ambienceSound.setParameterValue("DayNight", 0f);
+        ambienceSound.setParameterValue("InGamplayScene", 0f);
     }
 
     private void Start()
