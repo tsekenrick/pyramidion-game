@@ -712,10 +712,11 @@ public class Board : MonoBehaviour {
 
     void Awake() {
         // Spawn FMOD sound manager if it doesn't exist.
-        if (GameObject.Find("_SoundManager")) { }
+        if (GameObject.FindGameObjectWithTag("SoundManager")) { }
         else
             Instantiate(soundManagerPrefab);
         instance = this;
+        
     }
 
     void Start() {
@@ -808,6 +809,10 @@ public class Board : MonoBehaviour {
         foreach(GameObject card in pool) {
             deck.Add(card);
         }
+
+        // FMOD set parameter for ambience game state to 1
+        sm = SoundManager.me;
+        sm.SetSoundParameter(sm.ambienceSound, "InGamplayScene", 1f);
     }
 
     void Update() {
