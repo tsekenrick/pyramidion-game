@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 114468550114237870}
   StringsBanks:
   - {fileID: 114717941053638252}
-  stringsBankWriteTime: 636941231438979381
+  stringsBankWriteTime: 636941240758980998
   cacheVersion: 3
 --- !u!114 &114008820637833968
 MonoBehaviour:
@@ -250,6 +250,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1440
+--- !u!114 &114194965337683082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: InGamplayScene
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114209769279049974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636941231438909389
+  lastModified: 636941240758910880
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -894,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
-  lastModified: 636941231438979381
+  lastModified: 636941240758980998
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -923,6 +939,22 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1800
+--- !u!114 &114763678878019412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Overplay
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114772753744402880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,6 +968,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: InGamplayScene
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114784743413142024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: DayNight
   Min: 0
   Max: 1
   Default: 0
@@ -1076,8 +1124,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114717280860584684}
-  - {fileID: 114020108326459832}
+  - {fileID: 114784743413142024}
+  - {fileID: 114194965337683082}
   MinDistance: 0
   MaxDistance: 0
   Length: 60799
@@ -1202,7 +1250,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114986490191729296}
+  - {fileID: 114763678878019412}
   MinDistance: 0
   MaxDistance: 0
   Length: 3500
