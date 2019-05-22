@@ -472,8 +472,10 @@ public class Card : MonoBehaviour {
         
         // handle selection for add card event
         } else if(curState == CardState.InSelectionRemove) {
+            
             RemoveCardEvent removeEvent = Object.FindObjectOfType<RemoveCardEvent>();
             if(!removeEvent.toRemove.Contains(this.gameObject)) {
+                if(removeEvent.toRemove.Count == 2) return;
                 removeEvent.toRemove.Add(this.gameObject);
                 cardParts[4].enabled = true;
                 cardParts[4].sortingLayerName = "Above Darkness";
@@ -488,6 +490,7 @@ public class Card : MonoBehaviour {
         } else if(curState == CardState.InSelectionAdd) {
             AddCardEvent addEvent = Object.FindObjectOfType<AddCardEvent>();
             if(!addEvent.toAdd.Contains(this.gameObject)) {
+                if(addEvent.toAdd.Count == 2) return;
                 addEvent.toAdd.Add(this.gameObject);
                 cardParts[4].enabled = true;
                 cardParts[4].sortingLayerName = "Above Darkness";
