@@ -819,13 +819,13 @@ public class Board : MonoBehaviour {
         daytimeSprites = GameObject.Find("DaytimeBackground").GetComponentsInChildren<SpriteRenderer>();
         nighttimeSprites = GameObject.Find("NighttimeBackground").GetComponentsInChildren<SpriteRenderer>();
         // debug shortcuts
-        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(2);
+        if(Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(0);
         if(Input.GetKeyDown(KeyCode.T)) {
             foreach(GameObject enemy in enemies) {
                 enemy.GetComponent<Enemy>().health = 1;
             }
         }
-        // if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
+        if(Input.GetKeyDown(KeyCode.F)) player.GetComponent<Player>().health = 1;
 
         if(Input.GetMouseButtonDown(1) && !(curPhase == Phase.Resolution || curPhase == Phase.Event)) {
             for(int i = playSequence.Count - 1; i >= 0; i--) {
