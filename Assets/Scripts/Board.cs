@@ -288,18 +288,20 @@ public class Board : MonoBehaviour {
 
     private void SetMulliganCamera() {
         perspectiveCamera.transform.DOLocalMoveZ(-5.5f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
-        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f);
-        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f);
+        DOTween.Kill("RockMove");
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f).SetId("RockMove");
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f).SetId("RockMove");
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z - 7.5f, 1f).SetId("RockMove");
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z - 7.5f, 1f).SetId("RockMove");
     }
 
     private void SetPlayCamera() {
         perspectiveCamera.transform.DOLocalMoveZ(2f, 1f);
-        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
-        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
-        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f);
-        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f);
+        DOTween.Kill("RockMove");
+        daytimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f).SetId("RockMove");;
+        daytimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f).SetId("RockMove");;
+        nighttimeSprites[2].transform.DOLocalMoveZ(daytimeSprites[2].transform.position.z + 7.5f, 1f).SetId("RockMove");;
+        nighttimeSprites[3].transform.DOLocalMoveZ(daytimeSprites[3].transform.position.z + 7.5f, 1f).SetId("RockMove");;
     }
 
     private IEnumerator ExecuteAction(PlaySequence<Action> playSequence) {
