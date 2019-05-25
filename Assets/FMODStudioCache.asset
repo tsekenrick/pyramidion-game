@@ -13,542 +13,50 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114717941053638252}
-  - {fileID: 114280738945647104}
+  - {fileID: 114947963154875180}
+  - {fileID: 114101554171357914}
   EditorEvents:
-  - {fileID: 114061855420278356}
-  - {fileID: 114902987946586438}
-  - {fileID: 114146020634746694}
-  - {fileID: 114813161714928676}
-  - {fileID: 114790554798845286}
-  - {fileID: 114444575448702590}
-  - {fileID: 114872648062920928}
-  - {fileID: 114712049660048056}
-  - {fileID: 114992177961759444}
-  - {fileID: 114598715915950746}
-  - {fileID: 114947912753226106}
-  - {fileID: 114345573474938052}
-  - {fileID: 114157838269289604}
-  - {fileID: 114910536854594452}
-  - {fileID: 114996497526684428}
-  - {fileID: 114376691965031458}
-  - {fileID: 114996389456140500}
-  - {fileID: 114691856219881132}
-  - {fileID: 114276201611152600}
-  - {fileID: 114963926280562744}
-  - {fileID: 114993433411481372}
-  - {fileID: 114472891668981902}
-  - {fileID: 114514132952013058}
-  - {fileID: 114247321637697170}
-  - {fileID: 114097199228923124}
-  - {fileID: 114878505209056778}
-  - {fileID: 114008820637833968}
-  - {fileID: 114175913191831636}
-  - {fileID: 114806207167822764}
-  - {fileID: 114209769279049974}
-  - {fileID: 114721288847600676}
-  - {fileID: 114050019961329178}
-  - {fileID: 114505715906628942}
-  - {fileID: 114498870160893444}
+  - {fileID: 114096628819176768}
+  - {fileID: 114891220851287542}
+  - {fileID: 114525125497750212}
+  - {fileID: 114532883941761216}
+  - {fileID: 114847249344410650}
+  - {fileID: 114084936676727588}
+  - {fileID: 114876780299510122}
+  - {fileID: 114511084673781016}
+  - {fileID: 114957757641180106}
+  - {fileID: 114608041323211942}
+  - {fileID: 114202117954450958}
+  - {fileID: 114604053378762834}
+  - {fileID: 114796249259609022}
+  - {fileID: 114259186547840512}
+  - {fileID: 114235616199372324}
+  - {fileID: 114415098804684864}
+  - {fileID: 114095665492195014}
+  - {fileID: 114621491671139454}
+  - {fileID: 114962140355733406}
+  - {fileID: 114512814407841900}
+  - {fileID: 114589956639540174}
+  - {fileID: 114263950962493286}
+  - {fileID: 114923635812702954}
+  - {fileID: 114143187929887418}
+  - {fileID: 114680988486551942}
+  - {fileID: 114769015216117636}
+  - {fileID: 114875654602540414}
+  - {fileID: 114678753602906006}
+  - {fileID: 114465287582870048}
+  - {fileID: 114608622821159346}
+  - {fileID: 114447647698248930}
+  - {fileID: 114359796622630048}
+  - {fileID: 114627345648332954}
+  - {fileID: 114570569468398580}
   MasterBanks:
-  - {fileID: 114634895700181422}
-  - {fileID: 114468550114237870}
+  - {fileID: 114101554171357914}
   StringsBanks:
-  - {fileID: 114717941053638252}
-<<<<<<< HEAD
-  stringsBankWriteTime: 636941240758980998
-=======
+  - {fileID: 114947963154875180}
   stringsBankWriteTime: 636941419518787893
->>>>>>> master
   cacheVersion: 3
---- !u!114 &114008820637833968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Interface/Overplay Punishment
-  guid: cf7ccd1b6853a1419b080dd620e1bceb
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 2000
---- !u!114 &114009045904950316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114020108326459832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: InGamplayScene
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114050019961329178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/SelectCard
-  guid: fd58c0f09c53a94782af5875257eaf5a
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 69
---- !u!114 &114052544515803912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: InGamplayScene
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114061855420278356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/DeselectCard
-  guid: 01a7b2be99bb0a448ede2f120cdbf6a6
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 90
---- !u!114 &114097199228923124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Player/Buff
-  guid: bd7dc556934ed04c98c5213aee76f722
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1646
---- !u!114 &114146020634746694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/HoverCard
-  guid: 04e74ed530d715498265bd0d9cf6327c
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 98
---- !u!114 &114157838269289604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: snapshot:/BattleMix
-  guid: 4de09abd5aae7c40990ba0806059c1ab
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &114175913191831636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Player/Generic Player Block
-  guid: d22dfffabdead147b483b70d741fcdbf
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1440
---- !u!114 &114194965337683082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: InGamplayScene
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114209769279049974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
-  guid: f881f9cc28a277448726a242dd2982a3
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 6000
---- !u!114 &114239853791963018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114247321637697170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
-  guid: bd286a6247448446a8cad704d20ff04a
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 6000
---- !u!114 &114258579994024012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114276201611152600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: snapshot:/OverplayMix
-  guid: 8b76432067d15c40a506760be6171273
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &114279164974289822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114280738945647104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636941419518758226
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 4948480
-  Exists: 1
---- !u!114 &114299866577577464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114327235737914554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114330306852112594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: InGamplayScene
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114345573474938052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/DrawCard
-  guid: 4b60242b0c28fe46855ab0e8888dee82
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 154
---- !u!114 &114362438916359394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114376691965031458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
-  guid: 7ddfa111613a4e449fe8bd5006747236
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 736
---- !u!114 &114443667674951714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114444575448702590
+--- !u!114 &114084936676727588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -563,7 +71,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Card Actions/LockCard
   guid: 221feecf6a51924988ea41ee23101046
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -571,7 +79,53 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 440
---- !u!114 &114448684155613144
+--- !u!114 &114095665492195014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/ShuffleDiscard
+  guid: 7ddfa111613a4e449fe8bd5006747236
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 736
+--- !u!114 &114096628819176768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/DeselectCard
+  guid: 01a7b2be99bb0a448ede2f120cdbf6a6
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 90
+--- !u!114 &114101554171357914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -584,133 +138,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636940071528836912
+  lastModified: 636941459692455027
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 2743200
+    Value: 4948480
   Exists: 1
---- !u!114 &114450387075735836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114463423515202656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114468550114237870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\Documents\NYU\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636939873470050277
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 2746688
-  Exists: 0
---- !u!114 &114472891668981902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Menu UI/ButtonClick
-  guid: b641392c4d82004f9ff6d1bc6d571110
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 209
---- !u!114 &114498870160893444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Board Actions/ActionButtonHover
-  guid: 6c095ca960d84143bedd8e2e8414c564
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 310
---- !u!114 &114505715906628942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Overlay Actions/HoverDeck
-  guid: fff0f0406cb81a46ba760e611c0d8f6d
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 200
---- !u!114 &114514132952013058
+--- !u!114 &114143187929887418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,7 +159,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/OpenDeck
   guid: b9d7dd173b87174db32dd46d506d1210
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -733,74 +167,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 150
---- !u!114 &114520730577673776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114570679719681220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114594433689777206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636941240758910880
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 4948480
-  Exists: 1
---- !u!114 &114596583998392812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114598715915950746
+--- !u!114 &114202117954450958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -812,69 +179,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Monster/Enrage
-  guid: 4708b80449260444a2f2e1a4ef19b36f
+  Path: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
+  guid: 49296243a838f4498d989167dc159739
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 114767889417266350}
   MinDistance: 0
   MaxDistance: 0
-  Length: 4000
---- !u!114 &114611364164814838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114634895700181422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636933844132877976
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 2745856
-  Exists: 0
---- !u!114 &114656090689205122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114691856219881132
+  Length: 3500
+--- !u!114 &114235616199372324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -886,18 +203,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Monster/Summon
-  guid: 89a27e893e63bb4da420c6d58bac187d
+  Path: event:/UI/Gameplay UI/Board Actions/ActionButtonHover
+  guid: 6c095ca960d84143bedd8e2e8414c564
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 2800
---- !u!114 &114712049660048056
+  Length: 310
+--- !u!114 &114259186547840512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -909,18 +226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/UI/Menu UI/ButtonHover
-  guid: 322292f6d8780c4aa68b5c097313b582
+  Path: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
+  guid: 59490f66c5569642be2034e570dad581
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 200
---- !u!114 &114714007136142906
+  Length: 6000
+--- !u!114 &114263950962493286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -929,53 +246,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114717280860584684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114717941053638252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
-<<<<<<< HEAD
-  lastModified: 636941240758980998
-=======
-  lastModified: 636941419518787893
->>>>>>> master
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 3240
-  Exists: 1
---- !u!114 &114721288847600676
+  Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
+  guid: b2bca5a4e126fe42b9650441d2341f03
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 145
+--- !u!114 &114359796622630048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -990,7 +275,7 @@ MonoBehaviour:
   Path: event:/FX & Animations/Attacks/Monster/Generic Monster Attack
   guid: fcf1e3ca419923499a7252a5549b3a0c
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -998,7 +283,76 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1800
---- !u!114 &114763678878019412
+--- !u!114 &114415098804684864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Overlay Actions/CloseDeck
+  guid: 757a23b88c225d439837348cb76c06c5
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 200
+--- !u!114 &114447647698248930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Phase Transitions/PlayToResolutionPhase
+  guid: f881f9cc28a277448726a242dd2982a3
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 6000
+--- !u!114 &114465287582870048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Player/Generic Player Block
+  guid: d22dfffabdead147b483b70d741fcdbf
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1440
+--- !u!114 &114483372729206148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1010,11 +364,310 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Overplay
+  Name: DayNight
   Min: 0
   Max: 1
   Default: 0
---- !u!114 &114772753744402880
+--- !u!114 &114511084673781016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Menu UI/ButtonHover
+  guid: 322292f6d8780c4aa68b5c097313b582
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 200
+--- !u!114 &114512814407841900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: snapshot:/OverplayMix
+  guid: 8b76432067d15c40a506760be6171273
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &114525125497750212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/HoverCard
+  guid: 04e74ed530d715498265bd0d9cf6327c
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 98
+--- !u!114 &114532883941761216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Player/Generic Player Attack
+  guid: 05986b0be9a2ac4cae6f984c1f37ee14
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1500
+--- !u!114 &114570569468398580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Overlay Actions/HoverDeck
+  guid: fff0f0406cb81a46ba760e611c0d8f6d
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 200
+--- !u!114 &114589956639540174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Monster/Generic Monster Block
+  guid: 8f3f0cfaafd1a345943c7a7b3fe30ddb
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1700
+--- !u!114 &114604053378762834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/DrawCard
+  guid: 4b60242b0c28fe46855ab0e8888dee82
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 154
+--- !u!114 &114608041323211942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Monster/Enrage
+  guid: 4708b80449260444a2f2e1a4ef19b36f
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 4000
+--- !u!114 &114608622821159346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Overlay Actions/HoverEventButtons
+  guid: f235b8a8ecc69344b209c7b70578476d
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 950
+--- !u!114 &114621491671139454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/DeQueueCard
+  guid: 8007154c74847940a382874656d7f549
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1200
+--- !u!114 &114627345648332954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Card Actions/SelectCard
+  guid: fd58c0f09c53a94782af5875257eaf5a
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 69
+--- !u!114 &114678753602906006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Interface/Overplay Punishment
+  guid: cf7ccd1b6853a1419b080dd620e1bceb
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2000
+--- !u!114 &114680988486551942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Gameplay UI/Phase Transitions/MullToPlayPhase
+  guid: bd286a6247448446a8cad704d20ff04a
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 6000
+--- !u!114 &114705504022008568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1030,7 +683,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
---- !u!114 &114784743413142024
+--- !u!114 &114767889417266350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1042,11 +695,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: DayNight
+  Name: Overplay
   Min: 0
   Max: 1
   Default: 0
---- !u!114 &114790554798845286
+--- !u!114 &114769015216117636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/FX & Animations/Attacks/Player/Buff
+  guid: bd7dc556934ed04c98c5213aee76f722
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1646
+--- !u!114 &114796249259609022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: snapshot:/BattleMix
+  guid: 4de09abd5aae7c40990ba0806059c1ab
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &114847249344410650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1061,7 +760,7 @@ MonoBehaviour:
   Path: event:/UI/Menu UI/ButtonRelease
   guid: 1e796bfd37a62d44b59e8f46664d2774
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1069,147 +768,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 136
---- !u!114 &114806207167822764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Overlay Actions/HoverEventButtons
-  guid: f235b8a8ecc69344b209c7b70578476d
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 950
---- !u!114 &114813161714928676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Player/Generic Player Attack
-  guid: 05986b0be9a2ac4cae6f984c1f37ee14
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1500
---- !u!114 &114816433823645502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114840772946212192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114865896306914110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114872648062920928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/Ambiences/GenericWorldAtmos
-  guid: 23c13dd9335e9b42b4d11ed832e971d7
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-<<<<<<< HEAD
-  - {fileID: 114784743413142024}
-  - {fileID: 114194965337683082}
-=======
-  - {fileID: 114656090689205122}
-  - {fileID: 114052544515803912}
->>>>>>> master
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 60799
---- !u!114 &114873148445381108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114878505209056778
+--- !u!114 &114875654602540414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1224,7 +783,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Overlay Actions/ClickEventButton
   guid: cae4ebfeb8e9fc4cb9504a900b2d5bae
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1232,7 +791,32 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3547
---- !u!114 &114902987946586438
+--- !u!114 &114876780299510122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/Ambiences/GenericWorldAtmos
+  guid: 23c13dd9335e9b42b4d11ed832e971d7
+  Banks:
+  - {fileID: 114101554171357914}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114483372729206148}
+  - {fileID: 114705504022008568}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 60799
+--- !u!114 &114891220851287542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1247,7 +831,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/Action Button Up
   guid: 0280f107de5c6d45a67cf4a321339b8c
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1255,7 +839,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 136
---- !u!114 &114910536854594452
+--- !u!114 &114923635812702954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1267,101 +851,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Phase Transitions/ResolutionToMullPhase
-  guid: 59490f66c5569642be2034e570dad581
+  Path: event:/UI/Menu UI/ButtonClick
+  guid: b641392c4d82004f9ff6d1bc6d571110
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 6000
---- !u!114 &114926080043893698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114947662075899316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: DayNight
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114947912753226106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/GenericQueueCard
-  guid: 49296243a838f4498d989167dc159739
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-<<<<<<< HEAD
-  - {fileID: 114763678878019412}
-=======
-  - {fileID: 114873148445381108}
->>>>>>> master
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 3500
---- !u!114 &114963926280562744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/FX & Animations/Attacks/Monster/Generic Monster Block
-  guid: 8f3f0cfaafd1a345943c7a7b3fe30ddb
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1700
---- !u!114 &114972045567777936
+  Length: 209
+--- !u!114 &114947963154875180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1373,30 +874,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: D:\Game Projects\Capstone\capstone_game\Assets\FMODBanks\Desktop\MasterBank.bank
-  lastModified: 636939949903507661
+  Path: Assets\FMODBanks\Desktop\MasterBank.strings.bank
+  lastModified: 636941419518787893
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 2743200
+    Value: 3240
   Exists: 1
---- !u!114 &114986490191729296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Overplay
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114992177961759444
+--- !u!114 &114957757641180106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1411,7 +896,7 @@ MonoBehaviour:
   Path: event:/UI/Gameplay UI/Board Actions/ActionButtonDown
   guid: 3e4dc47b455330459da48939d3a35a72
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1419,7 +904,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 209
---- !u!114 &114993433411481372
+--- !u!114 &114962140355733406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1431,60 +916,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/DiscardCard
-  guid: b2bca5a4e126fe42b9650441d2341f03
+  Path: event:/FX & Animations/Attacks/Monster/Summon
+  guid: 89a27e893e63bb4da420c6d58bac187d
   Banks:
-  - {fileID: 114280738945647104}
+  - {fileID: 114101554171357914}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 145
---- !u!114 &114996389456140500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Card Actions/DeQueueCard
-  guid: 8007154c74847940a382874656d7f549
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1200
---- !u!114 &114996497526684428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Gameplay UI/Overlay Actions/CloseDeck
-  guid: 757a23b88c225d439837348cb76c06c5
-  Banks:
-  - {fileID: 114280738945647104}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 200
+  Length: 2800
